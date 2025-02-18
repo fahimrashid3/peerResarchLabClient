@@ -3,7 +3,7 @@ import useAxiosPublic from "../../hooks/useAxiosPublic"; // Assuming this hook i
 import ShortCard from "../../components/shortCard"; // Assuming this component is already set up
 import SectionTitle from "../../components/SectionTitle";
 
-const PopularWorks = () => {
+const ResentWorks = () => {
   const [researchPapers, setResearchPapers] = useState([]);
   const axiosPublic = useAxiosPublic(); // Initialize axiosPublic instance
 
@@ -13,7 +13,7 @@ const PopularWorks = () => {
     const fetchData = async () => {
       try {
         // Get the top research papers
-        const res = await axiosPublic.get("/topResearchPapers");
+        const res = await axiosPublic.get("/resentResearchPapers");
         if (isMounted) setResearchPapers(res.data); // Set the response data to state
       } catch (error) {
         console.error("Error fetching research papers:", error);
@@ -30,7 +30,7 @@ const PopularWorks = () => {
   return (
     <div>
       <SectionTitle
-        heading={"Popular Work"}
+        heading={"Resent Work"}
         subHeading={"Have a look"}
       ></SectionTitle>
       <div className="md:grid lg:grid-cols-2 gap-5 max-w-[95%] md:max-w-[90%] lg:max-w-[85%] mx-auto">
@@ -43,4 +43,4 @@ const PopularWorks = () => {
   );
 };
 
-export default PopularWorks;
+export default ResentWorks;
