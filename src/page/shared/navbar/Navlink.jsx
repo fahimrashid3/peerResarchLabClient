@@ -1,6 +1,17 @@
-import { NavLink } from "react-router-dom";
+import React from "react";
+import { NavLink, useMatch } from "react-router-dom";
 
 const NavLinks = () => {
+  // Check if any of the dropdown routes are active
+  const isOverviewActive = useMatch("/overview");
+  const isMissionActive = useMatch("/mission");
+  const isVisionActive = useMatch("/vision");
+  const isHistoryActive = useMatch("/history");
+
+  // Determine if any dropdown item is active
+  const isDropdownActive =
+    isOverviewActive || isMissionActive || isVisionActive || isHistoryActive;
+
   return (
     <>
       <li>
@@ -38,15 +49,82 @@ const NavLinks = () => {
         <NavLink
           style={({ isActive, isTransitioning }) => {
             return {
-              background: isActive ? "transparent" : "",
-              fontWeight: isActive ? "bold" : "",
-              color: isActive ? "#004080" : "white",
+              background: isActive || isDropdownActive ? "transparent" : "",
+              fontWeight: isActive || isDropdownActive ? "bold" : "",
+              color: isActive || isDropdownActive ? "#004080" : "white",
               viewTransitionName: isTransitioning ? "slide" : "",
             };
           }}
           to="/about"
         >
-          About Us
+          <div className="dropdown dropdown-hover">
+            <div tabIndex={0}>About us</div>
+            <ul
+              tabIndex={0}
+              className="dropdown-content menu bg-primary-500 rounded-box z-[1] w-52 p-2 shadow"
+            >
+              <li>
+                <NavLink
+                  style={({ isActive, isTransitioning }) => {
+                    return {
+                      background: isActive ? "transparent" : "",
+                      fontWeight: isActive ? "bold" : "",
+                      color: isActive ? "#004080" : "white",
+                      viewTransitionName: isTransitioning ? "slide" : "",
+                    };
+                  }}
+                  to="/overview"
+                >
+                  Lab Overview
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  style={({ isActive, isTransitioning }) => {
+                    return {
+                      background: isActive ? "transparent" : "",
+                      fontWeight: isActive ? "bold" : "",
+                      color: isActive ? "#004080" : "white",
+                      viewTransitionName: isTransitioning ? "slide" : "",
+                    };
+                  }}
+                  to="/mission"
+                >
+                  Lab Mission
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  style={({ isActive, isTransitioning }) => {
+                    return {
+                      background: isActive ? "transparent" : "",
+                      fontWeight: isActive ? "bold" : "",
+                      color: isActive ? "#004080" : "white",
+                      viewTransitionName: isTransitioning ? "slide" : "",
+                    };
+                  }}
+                  to="/vision"
+                >
+                  Lab Vision
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  style={({ isActive, isTransitioning }) => {
+                    return {
+                      background: isActive ? "transparent" : "",
+                      fontWeight: isActive ? "bold" : "",
+                      color: isActive ? "#004080" : "white",
+                      viewTransitionName: isTransitioning ? "slide" : "",
+                    };
+                  }}
+                  to="/history"
+                >
+                  Lab History
+                </NavLink>
+              </li>
+            </ul>
+          </div>
         </NavLink>
       </li>
 

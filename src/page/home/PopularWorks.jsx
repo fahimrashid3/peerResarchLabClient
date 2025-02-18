@@ -33,11 +33,17 @@ const PopularWorks = () => {
         heading={"Popular Work"}
         subHeading={"Have a look"}
       ></SectionTitle>
-      <div className="md:grid lg:grid-cols-2 gap-5 max-w-[95%] md:max-w-[90%] lg:max-w-[85%] mx-auto">
+      <div className="md:grid lg:grid-cols-2 grid-cols-1  gap-5 max-w-[95%] md:max-w-[90%] lg:max-w-[85%] mx-auto">
         {/* Loop through research papers and render ShortCard for each */}
         {researchPapers.map((researchPaper) => (
           <ShortCard key={researchPaper._id} researchPaper={researchPaper} />
         ))}
+      </div>
+
+      <div className="flex items-center justify-center my-5 md:my-10">
+        <button className="btn border-b-8 font-semibold text-primary-900 hover:text-white hover:border-primary-600 border-primary-700 bg-primary-100 hover:bg-primary-500 transition-all duration-200">
+          Show more
+        </button>
       </div>
     </div>
   );
