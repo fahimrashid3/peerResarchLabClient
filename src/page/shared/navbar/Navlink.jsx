@@ -55,13 +55,13 @@ const NavLinks = () => {
               viewTransitionName: isTransitioning ? "slide" : "",
             };
           }}
-          to="/about"
+          to="/overview"
         >
           <div className="dropdown dropdown-hover">
             <div tabIndex={0}>About us</div>
             <ul
               tabIndex={0}
-              className="dropdown-content menu bg-primary-500 rounded-box z-[1] w-52 p-2 shadow"
+              className="dropdown-content menu bg-black bg-opacity-50 rounded-box z-[1] w-52 p-2 shadow"
             >
               <li>
                 <NavLink
