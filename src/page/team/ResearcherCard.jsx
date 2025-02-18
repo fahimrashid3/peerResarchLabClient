@@ -11,7 +11,7 @@ const ResearcherCard = ({ user = {} }) => {
 
   return (
     <div>
-      <div className="card card-compact bg-primary-100 w-96 shadow-xl">
+      <div className="card card-compact bg-primary-100  shadow-xl">
         <figure>
           <img className="p-3 " src={image} alt={name} />
         </figure>
