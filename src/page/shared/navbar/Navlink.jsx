@@ -33,22 +33,6 @@ const NavLinks = () => {
         <NavLink
           style={({ isActive, isTransitioning }) => {
             return {
-              background: isActive ? "transparent" : "",
-              fontWeight: isActive ? "bold" : "",
-              color: isActive ? "#004080" : "white",
-              viewTransitionName: isTransitioning ? "slide" : "",
-            };
-          }}
-          to="/researchAreas"
-        >
-          Research Areas
-        </NavLink>
-      </li>
-
-      <li>
-        <NavLink
-          style={({ isActive, isTransitioning }) => {
-            return {
               background: isActive || isDropdownActive ? "transparent" : "",
               fontWeight: isActive || isDropdownActive ? "bold" : "",
               color: isActive || isDropdownActive ? "#004080" : "white",
@@ -57,7 +41,7 @@ const NavLinks = () => {
           }}
           to="/overview"
         >
-          <div className="dropdown dropdown-hover">
+          <div className="dropdown md:dropdown-hover">
             <div tabIndex={0}>About us</div>
             <ul
               tabIndex={0}
@@ -125,6 +109,22 @@ const NavLinks = () => {
               </li>
             </ul>
           </div>
+        </NavLink>
+      </li>
+
+      <li>
+        <NavLink
+          style={({ isActive, isTransitioning }) => {
+            return {
+              background: isActive ? "transparent" : "",
+              fontWeight: isActive ? "bold" : "",
+              color: isActive ? "#004080" : "white",
+              viewTransitionName: isTransitioning ? "slide" : "",
+            };
+          }}
+          to="/researchAreas"
+        >
+          Research Areas
         </NavLink>
       </li>
 

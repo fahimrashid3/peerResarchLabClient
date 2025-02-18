@@ -5,6 +5,9 @@ import Overview from "../page/about/Overview";
 import Mission from "../page/about/Mission";
 import Vision from "../page/about/Vision";
 import History from "../page/about/History";
+import ResearchAries from "../page/researchAreas/ResearchAries";
+import Publications from "../page/publications/Publications";
+import Team from "../page/team/Team";
 
 export const router = createBrowserRouter([
   {
@@ -30,6 +33,18 @@ export const router = createBrowserRouter([
       {
         path: "/history",
         element: <History />,
+      },
+      {
+        path: "/researchAreas",
+        element: <ResearchAries />,
+      },
+      {
+        path: "/publications",
+        element: <Publications />,
+      },
+      {
+        path: "/team",
+        element: <Team />,
       },
     ],
   },
