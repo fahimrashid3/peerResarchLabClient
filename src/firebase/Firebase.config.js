@@ -5,12 +5,12 @@ import { initializeApp } from "firebase/app";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyBMUpUWbcZV6WMwLYv1PG7qJNfYyOtyCdU",
-  authDomain: "peer-research-lab.firebaseapp.com",
-  projectId: "peer-research-lab",
-  storageBucket: "peer-research-lab.firebasestorage.app",
-  messagingSenderId: "11243887378",
-  appId: "1:11243887378:web:3d74f9e201bf747cd6f1cb",
+  apiKey: import.meta.env.VITE_apiKey,
+  authDomain: import.meta.env.VITE_authDomain,
+  projectId: import.meta.env.VITE_projectId,
+  storageBucket: import.meta.env.VITE_storageBucket,
+  messagingSenderId: import.meta.env.VITE_messagingSenderId,
+  appId: import.meta.env.VITE_appId,
 };
 
 // Initialize Firebase

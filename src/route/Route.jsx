@@ -9,6 +9,7 @@ import ResearchAries from "../page/researchAreas/ResearchAries";
 import Publications from "../page/publications/Publications";
 import Team from "../page/team/Team";
 import Login from "../page/authentication/Login";
+import Registration from "../page/authentication/Registration";
 
 export const router = createBrowserRouter([
   {
@@ -46,6 +47,10 @@ export const router = createBrowserRouter([
       {
         path: "/team",
         element: <Team />,
+      },
+      {
+        path: "/registration",
+        element: <Registration />,
       },
       {
         path: "/login",
