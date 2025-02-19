@@ -36,7 +36,7 @@ const Team = () => {
       <div>
         <SectionTitle heading={"Research Director"} subHeading={"Direct by"} />
         {/* Render advisor cards */}
-        <div className="grid gap-5 grid-cols-[repeat(auto-fit,minmax(300px,1fr))]">
+        <div className="grid gap-5 grid-cols-[repeat(auto-fit,minmax(280px,1fr))]">
           {researchDirectors.map((director) => (
             <ResearcherCard key={director._id} user={director} />
           ))}
@@ -45,7 +45,7 @@ const Team = () => {
       <div>
         <SectionTitle heading={"researchers"} subHeading={"Research with"} />
         {/* Render researcher cards */}
-        <div className="grid gap-5 grid-cols-[repeat(auto-fit,minmax(300px,1fr))]">
+        <div className="grid gap-5 grid-cols-[repeat(auto-fit,minmax(280px,1fr))]">
           {researchers.map((researcher) => (
             <ResearcherCard key={researcher._id} user={researcher} />
           ))}

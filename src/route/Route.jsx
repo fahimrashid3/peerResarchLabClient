@@ -8,6 +8,7 @@ import History from "../page/about/History";
 import ResearchAries from "../page/researchAreas/ResearchAries";
 import Publications from "../page/publications/Publications";
 import Team from "../page/team/Team";
+import Login from "../page/authentication/Login";
 
 export const router = createBrowserRouter([
   {
@@ -45,6 +46,10 @@ export const router = createBrowserRouter([
       {
         path: "/team",
         element: <Team />,
+      },
+      {
+        path: "/login",
+        element: <Login />,
       },
     ],
   },

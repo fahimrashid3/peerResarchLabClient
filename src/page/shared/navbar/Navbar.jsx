@@ -66,13 +66,13 @@ const Navbar = () => {
                 className="dropdown-content menu bg-primary-900 text-white dark:bg-gray-400 dark:text-dark-900 rounded-box z-[1] w-64 p-2 shadow"
               >
                 <li>
-                  <Link to="/dashboard/adminHome">
+                  <Link to="/dashboard/profile">
                     <CgProfile /> Profile
                   </Link>
                 </li>
 
                 <li>
-                  <Link to="/dashboard/allUsers">
+                  <Link to="/login">
                     <IoMdLogIn />
                     Log In
                   </Link>
