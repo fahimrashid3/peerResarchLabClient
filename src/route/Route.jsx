@@ -11,6 +11,7 @@ import Team from "../page/team/Team";
 import Login from "../page/authentication/Login";
 import Registration from "../page/authentication/Registration";
 import PrivetRoute from "./privetRoute";
+import JoinUs from "../page/joinUs/JoinUs";
 
 export const router = createBrowserRouter([
   {
@@ -48,6 +49,22 @@ export const router = createBrowserRouter([
       {
         path: "/team",
         element: <Team />,
+      },
+      {
+        path: "/joinUs",
+        element: (
+          <PrivetRoute>
+            <JoinUs />
+          </PrivetRoute>
+        ),
+      },
+      {
+        path: "/contactUs",
+        element: (
+          <PrivetRoute>
+            <JoinUs />
+          </PrivetRoute>
+        ),
       },
       {
         path: "/registration",
