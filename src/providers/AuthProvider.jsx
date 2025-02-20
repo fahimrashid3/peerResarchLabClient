@@ -13,19 +13,21 @@ import { app } from "../firebase/firebase.config";
 export const authContext = createContext(null);
 
 const AuthProvider = ({ children }) => {
-  const googleProvider = new GoogleAuthProvider();
   const auth = getAuth(app);
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const googleProvider = new GoogleAuthProvider();
 
   const createUser = (email, password) => {
     setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
+
   const signIn = (email, password) => {
     setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
+
   const googleSignIn = () => {
     setLoading(true);
     return signInWithPopup(auth, googleProvider);
@@ -45,7 +47,7 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
-      console.log("user in on auth state change", currentUser);
+      // console.log("user in on auth state change", currentUser);
       setLoading(false);
     });
     return () => {

@@ -8,7 +8,7 @@ import Swal from "sweetalert2";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
-  console.log("user in navbar ", user);
+  // console.log("user in navbar ", user);
   const handelLogout = () => {
     Swal.fire({
       title: "Are you sure?",
