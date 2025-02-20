@@ -12,6 +12,7 @@ import Login from "../page/authentication/Login";
 import Registration from "../page/authentication/Registration";
 import PrivetRoute from "./privetRoute";
 import JoinUs from "../page/joinUs/JoinUs";
+import ContactUs from "../page/contactUs/ContactUs";
 
 export const router = createBrowserRouter([
   {
@@ -62,7 +63,7 @@ export const router = createBrowserRouter([
         path: "/contactUs",
         element: (
           <PrivetRoute>
-            <JoinUs />
+            <ContactUs />
           </PrivetRoute>
         ),
       },
