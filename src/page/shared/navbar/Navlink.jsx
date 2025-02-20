@@ -159,21 +159,7 @@ const NavLinks = () => {
           Team
         </NavLink>
       </li>
-      <li>
-        <NavLink
-          style={({ isActive, isTransitioning }) => {
-            return {
-              background: isActive ? "transparent" : "",
-              fontWeight: isActive ? "bold" : "",
-              color: isActive ? "#004080" : "white",
-              viewTransitionName: isTransitioning ? "slide" : "",
-            };
-          }}
-          to="/news"
-        >
-          News and Updates
-        </NavLink>
-      </li>
+
       <li>
         <NavLink
           style={({ isActive, isTransitioning }) => {
@@ -202,6 +188,21 @@ const NavLinks = () => {
           to="/contact"
         >
           Contact Us
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
+          style={({ isActive, isTransitioning }) => {
+            return {
+              background: isActive ? "transparent" : "",
+              fontWeight: isActive ? "bold" : "",
+              color: isActive ? "#004080" : "white",
+              viewTransitionName: isTransitioning ? "slide" : "",
+            };
+          }}
+          to="/news"
+        >
+          News and Updates
         </NavLink>
       </li>
       <li>

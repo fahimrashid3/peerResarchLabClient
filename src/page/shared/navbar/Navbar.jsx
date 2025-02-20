@@ -89,6 +89,15 @@ const Navbar = () => {
                 className="pr-5 text-4xl dark:text-white dark:hover:text-gray-100 text-white hover:text-gray-300"
               >
                 <CgProfile />
+                {/* {users?.photoUrl ? (
+                  <div className="avatar">
+                    <div className="w-10 rounded-full ring-primary ring-offset-primary-500 ring ring-offset-1">
+                      <img src={users?.photoUrl} />
+                    </div>
+                  </div>
+                ) : (
+                  <CgProfile />
+                )} */}
               </div>
               <ul
                 tabIndex={0}

@@ -1,9 +1,8 @@
-import { Helmet } from "react-helmet";
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import SocialLogin from "./SocialLogin";
-import loginBg from "../../assets/others/authentication.png";
-import loginImg from "../../assets/others/authentication2.png";
+import loginBg from "../../assets/others/authenticationBg.png";
+import loginImg from "../../assets/others/authentication.png";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
 import { useState } from "react";

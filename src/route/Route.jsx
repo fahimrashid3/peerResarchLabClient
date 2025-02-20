@@ -39,11 +39,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/researchAreas",
-        element: (
-          <PrivetRoute>
-            <ResearchAries />
-          </PrivetRoute>
-        ),
+        element: <ResearchAries />,
       },
       {
         path: "/publications",

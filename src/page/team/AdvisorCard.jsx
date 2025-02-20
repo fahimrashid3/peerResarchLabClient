@@ -14,28 +14,32 @@ const AdvisorCard = ({ advisor = {} }) => {
     <div>
       <div className="hero bg-primary-100 border rounded-xl">
         <div className="hero-content flex-col lg:flex-row">
-          <div className="w-[35%]">
+          <div className="md:w-[35%]">
             <img src={image} className="max-w-sm rounded-lg shadow-2xl" />
-            <div className="card-body">
-              <h2 className="card-title">{name}</h2>
-              <div className="flex">
-                <div>
-                  <p>University </p>
-                  <p>Email </p>
-                  <p>Phone </p>
-                </div>
-                <div>
-                  <p> : {university}</p>
-                  <p> : {email}</p>
-                  <p> : {phone}</p>
+            <div>
+              <h2 className="card-title mt-5">{name}</h2>
+              <div>
+                <div className="">
+                  <div className="flex">
+                    <p className="w-[20%]">University </p>
+                    <p className="w-[80%]"> : {university}</p>
+                  </div>
+                  <div className="flex">
+                    <p className="w-[20%]">Email </p>
+                    <p className="w-[80%]"> : {email}</p>
+                  </div>
+                  <div className="flex">
+                    <p className="w-[20%]">Phone </p>
+                    <p className="w-[80%]"> : {phone}</p>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-          <div className="w-[65%]">
-            <div className="flex gap-5 items-center">
-              <p className="text-justify w-[90%]">{details}</p>
-              <div className="w-[10%] h-full space-y-5">
+          <div className="md:w-[65%]">
+            <div className="md:flex md:gap-5 items-center">
+              <p className="text-justify md:w-[90%]">{details}</p>
+              <div className="flex items-center justify-center md:block gap-5 md:w-[10%] h-full space-y-5">
                 <div>
                   {socialMedia?.linkedin && (
                     <a
@@ -44,7 +48,7 @@ const AdvisorCard = ({ advisor = {} }) => {
                       rel="noopener noreferrer"
                     >
                       <img
-                        className="w-8 h-8"
+                        className="w-8 h-8 flex items-center justify-center"
                         src="https://cdn-icons-png.flaticon.com/512/174/174857.png"
                         alt="LinkedIn"
                       />
@@ -59,7 +63,7 @@ const AdvisorCard = ({ advisor = {} }) => {
                       rel="noopener noreferrer"
                     >
                       <img
-                        className="w-8 h-8"
+                        className="w-8 h-8 flex items-center justify-center"
                         src="https://cdn-icons-png.flaticon.com/512/733/733579.png"
                         alt="Twitter"
                       />
@@ -74,7 +78,7 @@ const AdvisorCard = ({ advisor = {} }) => {
                       rel="noopener noreferrer"
                     >
                       <img
-                        className="w-8 h-8"
+                        className="w-8 h-8 flex items-center justify-center"
                         src="https://cdn-icons-png.flaticon.com/512/733/733547.png"
                         alt="Facebook"
                       />
@@ -89,7 +93,7 @@ const AdvisorCard = ({ advisor = {} }) => {
                       rel="noopener noreferrer"
                     >
                       <img
-                        className="w-8 h-8"
+                        className="w-8 h-8 flex items-center justify-center"
                         src="https://cdn-icons-png.flaticon.com/512/733/733553.png"
                         alt="GitHub"
                       />
