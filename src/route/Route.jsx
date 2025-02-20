@@ -10,6 +10,7 @@ import Publications from "../page/publications/Publications";
 import Team from "../page/team/Team";
 import Login from "../page/authentication/Login";
 import Registration from "../page/authentication/Registration";
+import PrivetRoute from "./privetRoute";
 
 export const router = createBrowserRouter([
   {
@@ -38,7 +39,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "/researchAreas",
-        element: <ResearchAries />,
+        element: (
+          <PrivetRoute>
+            <ResearchAries />
+          </PrivetRoute>
+        ),
       },
       {
         path: "/publications",

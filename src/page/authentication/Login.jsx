@@ -13,7 +13,7 @@ import { Typewriter } from "react-simple-typewriter";
 const Login = () => {
   const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState("");
-  const { signIn, logOut } = useAuth();
+  const { signIn } = useAuth();
   const location = useLocation();
   const [showPassword, setShowPassword] = useState(false);
 

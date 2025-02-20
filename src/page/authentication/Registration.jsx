@@ -5,7 +5,7 @@ import Swal from "sweetalert2";
 import { Helmet } from "react-helmet";
 import loginBg from "../../assets/others/authentication.png";
 import loginImg from "../../assets/others/authentication2.png";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import SocialLogin from "./SocialLogin";
 import axios from "axios";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
@@ -20,6 +20,10 @@ const Registration = () => {
   const { createUser, updateUserProfile } = useAuth();
   const axiosPublic = useAxiosPublic();
   const [showPassword, setShowPassword] = useState(false);
+  const location = useLocation();
+
+  // getting the path name when user navigate by privet route
+  const form = location.state?.form?.pathname || "/";
 
   // Show and hide password
   const handelShowPassword = () => {
@@ -100,7 +104,7 @@ const Registration = () => {
             showConfirmButton: false,
             timer: 1500,
           });
-          navigate("/");
+          navigate(form, { replace: true });
           scrollTo(0, 0);
         }
       } else {
