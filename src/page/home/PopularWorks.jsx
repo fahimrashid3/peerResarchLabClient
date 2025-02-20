@@ -23,9 +23,9 @@ const PopularWorks = () => {
     fetchData();
 
     return () => {
-      isMounted = false; // Cleanup function to prevent memory leaks
+      isMounted = false;
     };
-  }, []); // Empty dependency array to run once on mount
+  }, []);
 
   return (
     <div>

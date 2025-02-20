@@ -4,7 +4,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import SocialLogin from "./SocialLogin";
 import loginBg from "../../assets/others/authentication.png";
 import loginImg from "../../assets/others/authentication2.png";
-// import useAuth from "../../hooks/useAuth";
+import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
 import { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
@@ -13,7 +13,7 @@ import { Typewriter } from "react-simple-typewriter";
 const Login = () => {
   const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState("");
-  //   const { signIn } = useAuth();
+  const { signIn, logOut } = useAuth();
   const location = useLocation();
   const [showPassword, setShowPassword] = useState(false);
 
@@ -33,7 +33,7 @@ const Login = () => {
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
-    // console.log(data);
+    console.log(data);
     const { email, password } = data;
     signIn(email, password)
       .then((userCredential) => {
@@ -64,9 +64,6 @@ const Login = () => {
       className="hero min-h-screen"
       style={{ backgroundImage: `url(${loginBg})` }}
     >
-      <Helmet>
-        <title>Service | Login</title>
-      </Helmet>
       <div className="hero-content flex-col md:flex-row-reverse lg:gap-48 md:gap-16">
         <div className="text-center lg:text-left flex-1">
           <img src={loginImg} alt="Login" />
@@ -88,7 +85,6 @@ const Login = () => {
               <label className="label">
                 <span className="label-text">Email</span>
               </label>
-              {/*TODO: add show password using useState change */}
               <input
                 type="email"
                 placeholder="Email"

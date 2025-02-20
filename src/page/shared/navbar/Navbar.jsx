@@ -1,10 +1,39 @@
 import { Link } from "react-router-dom";
 import NavLinks from "./NavLink";
 import { CgProfile } from "react-icons/cg";
-import { FaUsers } from "react-icons/fa";
-import { IoMdLogIn } from "react-icons/io";
+import useAuth from "../../../hooks/useAuth";
+import { FiLogIn } from "react-icons/fi";
+import { CiLogout } from "react-icons/ci";
+import Swal from "sweetalert2";
 
 const Navbar = () => {
+  const { user, logOut } = useAuth();
+  console.log("user in navbar ", user);
+  const handelLogout = () => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Log out!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        logOut()
+          .then(() => {
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: "LogOut Successfully",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+          })
+          .catch((error) => console.log(error));
+      }
+    });
+  };
   return (
     <div className="bg-black bg-opacity-70 py-3 w-full z-[50] fixed">
       <div className="mx-auto">
@@ -63,20 +92,27 @@ const Navbar = () => {
               </div>
               <ul
                 tabIndex={0}
-                className="dropdown-content menu bg-primary-900 text-white dark:bg-gray-400 dark:text-dark-900 rounded-box z-[1] w-64 p-2 shadow"
+                className="dropdown-content menu bg-dark-900 text-white dark:bg-gray-400 dark:text-dark-900  rounded-box z-[1] w-64 p-2 shadow"
               >
-                <li>
-                  <Link to="/dashboard/profile">
-                    <CgProfile /> Profile
-                  </Link>
-                </li>
-
-                <li>
-                  <Link to="/login">
-                    <IoMdLogIn />
-                    Log In
-                  </Link>
-                </li>
+                <>
+                  <li>
+                    {user ? (
+                      <p onClick={handelLogout}>
+                        <span className="text-2xl font-semibold">
+                          <CiLogout />{" "}
+                        </span>
+                        logout
+                      </p>
+                    ) : (
+                      <Link to="/login">
+                        <span className="text-2xl">
+                          <FiLogIn />{" "}
+                        </span>
+                        Login
+                      </Link>
+                    )}
+                  </li>
+                </>
               </ul>
             </div>
           </div>
