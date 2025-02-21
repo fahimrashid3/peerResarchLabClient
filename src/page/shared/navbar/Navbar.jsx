@@ -1,13 +1,15 @@
-import { Link } from "react-router-dom";
-import NavLinks from "./NavLink";
+import { Link, NavLink } from "react-router-dom";
 import { CgProfile } from "react-icons/cg";
 import useAuth from "../../../hooks/useAuth";
 import { FiLogIn } from "react-icons/fi";
 import { CiLogout } from "react-icons/ci";
 import Swal from "sweetalert2";
+import NavLinks from "./Navlink";
+import { FaHome, FaUsers } from "react-icons/fa";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
+  const isAdmin = true;
   // console.log("user in navbar ", user);
   const handelLogout = () => {
     Swal.fire({
@@ -35,7 +37,7 @@ const Navbar = () => {
     });
   };
   return (
-    <div className="bg-black bg-opacity-70 py-3 w-full z-[50] fixed">
+    <div className="bg-primary-400 bg-opacity-80 py-3 w-full z-[50] fixed">
       <div className="mx-auto">
         <div className="navbar w-full">
           <div className="navbar-start">
@@ -99,10 +101,41 @@ const Navbar = () => {
                   <CgProfile />
                 )} */}
               </div>
+
               <ul
                 tabIndex={0}
                 className="dropdown-content menu bg-dark-900 text-white dark:bg-gray-400 dark:text-dark-900  rounded-box z-[1] w-64 p-2 shadow"
               >
+                {isAdmin ? (
+                  <>
+                    <li>
+                      <NavLink to="/dashboard/adminHome">
+                        <FaHome /> Admin Home
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink to="/dashboard/allUsers">
+                        <FaUsers /> All Users
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink to="/dashboard/applications">
+                        <FaUsers /> Manage Applications
+                      </NavLink>
+                    </li>
+                  </>
+                ) : (
+                  <>
+                    <li>
+                      <Link to="/dashboard/userProfile">
+                        <span className="text-2xl">
+                          <CgProfile />
+                        </span>
+                        Profile
+                      </Link>
+                    </li>
+                  </>
+                )}
                 <>
                   <li>
                     {user ? (

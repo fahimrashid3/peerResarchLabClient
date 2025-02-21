@@ -18,9 +18,9 @@ const NavLinks = () => {
         <NavLink
           style={({ isActive, isTransitioning }) => {
             return {
-              background: isActive ? "transparent" : "",
+              background: isActive ? "transparent" : "transparent",
               fontWeight: isActive ? "bold" : "",
-              color: isActive ? "#004080" : "white",
+              color: isActive ? "#00264D" : "white",
               viewTransitionName: isTransitioning ? "slide" : "",
             };
           }}
@@ -35,7 +35,7 @@ const NavLinks = () => {
             return {
               background: isActive || isDropdownActive ? "transparent" : "",
               fontWeight: isActive || isDropdownActive ? "bold" : "",
-              color: isActive || isDropdownActive ? "#004080" : "white",
+              color: isActive || isDropdownActive ? "#00264D" : "white",
               viewTransitionName: isTransitioning ? "slide" : "",
             };
           }}
@@ -51,9 +51,9 @@ const NavLinks = () => {
                 <NavLink
                   style={({ isActive, isTransitioning }) => {
                     return {
-                      background: isActive ? "transparent" : "",
+                      background: isActive ? "transparent" : "transparent",
                       fontWeight: isActive ? "bold" : "",
-                      color: isActive ? "#004080" : "white",
+                      color: isActive ? "#00264D" : "white",
                       viewTransitionName: isTransitioning ? "slide" : "",
                     };
                   }}
@@ -66,9 +66,9 @@ const NavLinks = () => {
                 <NavLink
                   style={({ isActive, isTransitioning }) => {
                     return {
-                      background: isActive ? "transparent" : "",
+                      background: isActive ? "transparent" : "transparent",
                       fontWeight: isActive ? "bold" : "",
-                      color: isActive ? "#004080" : "white",
+                      color: isActive ? "#00264D" : "white",
                       viewTransitionName: isTransitioning ? "slide" : "",
                     };
                   }}
@@ -81,9 +81,9 @@ const NavLinks = () => {
                 <NavLink
                   style={({ isActive, isTransitioning }) => {
                     return {
-                      background: isActive ? "transparent" : "",
+                      background: isActive ? "transparent" : "transparent",
                       fontWeight: isActive ? "bold" : "",
-                      color: isActive ? "#004080" : "white",
+                      color: isActive ? "#00264D" : "white",
                       viewTransitionName: isTransitioning ? "slide" : "",
                     };
                   }}
@@ -96,9 +96,9 @@ const NavLinks = () => {
                 <NavLink
                   style={({ isActive, isTransitioning }) => {
                     return {
-                      background: isActive ? "transparent" : "",
+                      background: isActive ? "transparent" : "transparent",
                       fontWeight: isActive ? "bold" : "",
-                      color: isActive ? "#004080" : "white",
+                      color: isActive ? "#00264D" : "white",
                       viewTransitionName: isTransitioning ? "slide" : "",
                     };
                   }}
@@ -116,9 +116,9 @@ const NavLinks = () => {
         <NavLink
           style={({ isActive, isTransitioning }) => {
             return {
-              background: isActive ? "transparent" : "",
+              background: isActive ? "transparent" : "transparent",
               fontWeight: isActive ? "bold" : "",
-              color: isActive ? "#004080" : "white",
+              color: isActive ? "#00264D" : "white",
               viewTransitionName: isTransitioning ? "slide" : "",
             };
           }}
@@ -132,9 +132,9 @@ const NavLinks = () => {
         <NavLink
           style={({ isActive, isTransitioning }) => {
             return {
-              background: isActive ? "transparent" : "",
+              background: isActive ? "transparent" : "transparent",
               fontWeight: isActive ? "bold" : "",
-              color: isActive ? "#004080" : "white",
+              color: isActive ? "#00264D" : "white",
               viewTransitionName: isTransitioning ? "slide" : "",
             };
           }}
@@ -148,9 +148,9 @@ const NavLinks = () => {
         <NavLink
           style={({ isActive, isTransitioning }) => {
             return {
-              background: isActive ? "transparent" : "",
+              background: isActive ? "transparent" : "transparent",
               fontWeight: isActive ? "bold" : "",
-              color: isActive ? "#004080" : "white",
+              color: isActive ? "#00264D" : "white",
               viewTransitionName: isTransitioning ? "slide" : "",
             };
           }}
@@ -164,9 +164,9 @@ const NavLinks = () => {
         <NavLink
           style={({ isActive, isTransitioning }) => {
             return {
-              background: isActive ? "transparent" : "",
+              background: isActive ? "transparent" : "transparent",
               fontWeight: isActive ? "bold" : "",
-              color: isActive ? "#004080" : "white",
+              color: isActive ? "#00264D" : "white",
               viewTransitionName: isTransitioning ? "slide" : "",
             };
           }}
@@ -179,9 +179,9 @@ const NavLinks = () => {
         <NavLink
           style={({ isActive, isTransitioning }) => {
             return {
-              background: isActive ? "transparent" : "",
+              background: isActive ? "transparent" : "transparent",
               fontWeight: isActive ? "bold" : "",
-              color: isActive ? "#004080" : "white",
+              color: isActive ? "#00264D" : "white",
               viewTransitionName: isTransitioning ? "slide" : "",
             };
           }}
@@ -194,9 +194,9 @@ const NavLinks = () => {
         <NavLink
           style={({ isActive, isTransitioning }) => {
             return {
-              background: isActive ? "transparent" : "",
+              background: isActive ? "transparent" : "transparent",
               fontWeight: isActive ? "bold" : "",
-              color: isActive ? "#004080" : "white",
+              color: isActive ? "#00264D" : "white",
               viewTransitionName: isTransitioning ? "slide" : "",
             };
           }}
@@ -209,9 +209,9 @@ const NavLinks = () => {
         <NavLink
           style={({ isActive, isTransitioning }) => {
             return {
-              background: isActive ? "transparent" : "",
+              background: isActive ? "transparent" : "transparent",
               fontWeight: isActive ? "bold" : "",
-              color: isActive ? "#004080" : "white",
+              color: isActive ? "#00264D" : "white",
               viewTransitionName: isTransitioning ? "slide" : "",
             };
           }}

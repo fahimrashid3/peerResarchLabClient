@@ -13,6 +13,13 @@ import Registration from "../page/authentication/Registration";
 import PrivetRoute from "./privetRoute";
 import JoinUs from "../page/joinUs/JoinUs";
 import ContactUs from "../page/contactUs/ContactUs";
+import DashBoard from "../layout/Dashboard";
+import AdminHome from "../page/dashboard/adminPages/AdminHome";
+import AllUsers from "../page/dashboard/adminPages/AllUsers";
+import UserProfile from "../page/dashboard/userPages/UserProfile";
+import ManageApplication from "../page/dashboard/adminPages/ManageApplication";
+import Blogs from "../page/blogs/Blogs";
+import News from "../page/news/News";
 
 export const router = createBrowserRouter([
   {
@@ -52,6 +59,14 @@ export const router = createBrowserRouter([
         element: <Team />,
       },
       {
+        path: "/news",
+        element: <News />,
+      },
+      {
+        path: "/blogs",
+        element: <Blogs />,
+      },
+      {
         path: "/joinUs",
         element: (
           <PrivetRoute>
@@ -74,6 +89,35 @@ export const router = createBrowserRouter([
       {
         path: "/login",
         element: <Login />,
+      },
+    ],
+  },
+  {
+    path: "dashboard",
+    element: (
+      <PrivetRoute>
+        <DashBoard />
+      </PrivetRoute>
+    ),
+    children: [
+      // user routs
+      {
+        path: "userProfile",
+        element: <UserProfile />,
+      },
+
+      // admin routs
+      {
+        path: "adminHome",
+        element: <AdminHome />,
+      },
+      {
+        path: "allUsers",
+        element: <AllUsers />,
+      },
+      {
+        path: "applications",
+        element: <ManageApplication />,
       },
     ],
   },
