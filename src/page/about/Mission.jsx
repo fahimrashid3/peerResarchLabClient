@@ -1,19 +1,16 @@
-import React from "react";
+import Loading from "../../components/Loading";
 import AboutPageDesign from "./AboutPageDesign";
+import useInfo from "../../hooks/useInfo";
 
 const Mission = () => {
-  const name = "Mission";
-  const img =
-    "https://res.cloudinary.com/dipwayvsu/image/upload/v1731424357/samples/animals/kitten-playing.gif";
-  const details =
-    "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.";
+  const [info, infoLoading] = useInfo();
+  if (infoLoading) {
+    return <Loading></Loading>;
+  }
+  const mission = info.labInformation.mission;
   return (
     <div>
-      <AboutPageDesign
-        details={details}
-        img={img}
-        name={name}
-      ></AboutPageDesign>
+      <AboutPageDesign data={mission}></AboutPageDesign>
     </div>
   );
 };
