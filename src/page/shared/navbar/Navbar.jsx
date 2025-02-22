@@ -6,10 +6,11 @@ import { CiLogout } from "react-icons/ci";
 import Swal from "sweetalert2";
 import NavLinks from "./Navlink";
 import { FaHome, FaUsers } from "react-icons/fa";
+import useAdmin from "../../../hooks/useAdmin";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
-  const isAdmin = true;
+  const [isAdmin] = useAdmin();
   // console.log("user in navbar ", user);
   const handelLogout = () => {
     Swal.fire({
@@ -64,7 +65,7 @@ const Navbar = () => {
               </div>
               <ul
                 tabIndex={0}
-                className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-black bg-opacity-50 rounded-box w-52"
+                className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-primary-400 bg-opacity-50 rounded-box w-52"
               >
                 <NavLinks></NavLinks>
               </ul>
@@ -73,7 +74,7 @@ const Navbar = () => {
               <div className="btn btn-ghost bg-transparent hover:bg-transparent flex flex-col md:flex-row">
                 {/* <img src={""} className="hidden md:block rounded-md bg-white" /> */}
                 <h1 className="text-lg md:text-3xl font-bold text-white text-center sm:text-left">
-                  Peer <span className="text-primary-400">Research</span> Lab
+                  Peer <span className="text-primary-600">Research</span> Lab
                 </h1>
               </div>
             </Link>
@@ -104,7 +105,7 @@ const Navbar = () => {
 
               <ul
                 tabIndex={0}
-                className="dropdown-content menu bg-dark-900 text-white dark:bg-gray-400 dark:text-dark-900  rounded-box z-[1] w-64 p-2 shadow"
+                className="dropdown-content menu bg-primary-400 bg-opacity-80 text-white dark:bg-gray-400 dark:text-dark-900  rounded-box z-[1] w-64 p-2 shadow"
               >
                 {isAdmin ? (
                   <>

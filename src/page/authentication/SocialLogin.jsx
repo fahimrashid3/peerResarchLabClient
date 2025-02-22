@@ -17,9 +17,7 @@ const SocialLogin = () => {
         name: result.user?.displayName,
         photoUrl: result.user?.photoURL,
       };
-      console.log(userInfo);
       axiosPublic.post("/users", userInfo).then((res) => {
-        console.log(res.data);
         // navigate(from, { replace: true });
         navigate("/");
       });
