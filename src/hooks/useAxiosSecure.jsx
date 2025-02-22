@@ -1,39 +1,37 @@
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 import useAuth from "./useAuth";
+import { useNavigate } from "react-router-dom";
 
 const axiosSecure = axios.create({
-  // baseURL: "https://service-provider-server-cyan.vercel.app",
   baseURL: "http://localhost:8000",
 });
 const useAxiosSecure = () => {
-  const navigate = useNavigate();
   const { logOut } = useAuth();
-  // request interceptors to add authorization header for ever secure call to the apis
+  const navigate = useNavigate();
+  // request interceptors to add authorization header
   axiosSecure.interceptors.request.use(
-    (config) => {
+    function (config) {
       const token = localStorage.getItem("access-token");
-      // console.log(`request stopped by interceptors`, token);
       config.headers.authorization = `Bearer ${token}`;
       return config;
     },
-    (error) => {
+    function (error) {
       return Promise.reject(error);
     }
   );
-  // intercepts 401 and 403 status
   axiosSecure.interceptors.response.use(
-    (response) => {
+    function (response) {
+      // Handle successful responses (2xx)
       return response;
     },
-    // log out user if status code is 401 and 403
-    async (error) => {
-      const status = error.status;
-      // console.log(status);
-
+    function (error) {
+      // Log the status code from the error response
+      console.log("Status error in the interceptors:", error.response.status);
+      const status = error.response.status;
       if (status === 401 || status === 403) {
-        await logOut();
+        logOut();
         navigate("/login");
+        console.log("cor dora porche");
       }
       return Promise.reject(error);
     }

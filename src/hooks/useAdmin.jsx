@@ -6,25 +6,16 @@ const useAdmin = () => {
   const { user, loading } = useAuth();
   const axiosSecure = useAxiosSecure();
 
-  const {
-    data: isAdmin,
-    isPending: isAdminLoading,
-    error: adminError,
-  } = useQuery({
+  const { data: isAdmin } = useQuery({
     queryKey: [user?.email, "isAdmin"],
     enabled: !loading && !!user?.email, // Ensure user.email is truthy
     queryFn: async () => {
-      try {
-        const res = await axiosSecure.get(`/user/admin/${user.email}`);
-        return res.data?.admin; // Ensure the response has the expected structure
-      } catch (error) {
-        console.error("Failed to fetch admin status:", error);
-        throw new Error("Failed to fetch admin status");
-      }
+      const res = await axiosSecure.get(`/user/admin/${user.email}`);
+      return res.data?.admin; // Ensure the response has the expected structure
     },
   });
 
-  return [isAdmin, isAdminLoading, adminError];
+  return [isAdmin];
 };
 
 export default useAdmin;
