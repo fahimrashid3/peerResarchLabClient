@@ -10,7 +10,6 @@ import Publications from "../page/publications/Publications";
 import Team from "../page/team/Team";
 import Login from "../page/authentication/Login";
 import Registration from "../page/authentication/Registration";
-import PrivetRoute from "./privetRoute";
 import JoinUs from "../page/joinUs/JoinUs";
 import ContactUs from "../page/contactUs/ContactUs";
 import DashBoard from "../layout/Dashboard";
@@ -20,6 +19,8 @@ import UserProfile from "../page/dashboard/userPages/UserProfile";
 import ManageApplication from "../page/dashboard/adminPages/ManageApplication";
 import Blogs from "../page/blogs/Blogs";
 import News from "../page/news/News";
+import PrivetRoute from "./PrivetRoute";
+import AdminRoute from "./AdminRoute";
 
 export const router = createBrowserRouter([
   {
@@ -109,15 +110,27 @@ export const router = createBrowserRouter([
       // admin routs
       {
         path: "adminHome",
-        element: <AdminHome />,
+        element: (
+          <AdminRoute>
+            <AdminHome />
+          </AdminRoute>
+        ),
       },
       {
         path: "allUsers",
-        element: <AllUsers />,
+        element: (
+          <AdminRoute>
+            <AllUsers />
+          </AdminRoute>
+        ),
       },
       {
         path: "applications",
-        element: <ManageApplication />,
+        element: (
+          <AdminRoute>
+            <ManageApplication />
+          </AdminRoute>
+        ),
       },
     ],
   },
