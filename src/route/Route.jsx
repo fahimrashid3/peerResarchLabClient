@@ -21,6 +21,7 @@ import Blogs from "../page/blogs/Blogs";
 import News from "../page/news/News";
 import PrivetRoute from "./PrivetRoute";
 import AdminRoute from "./AdminRoute";
+import PaperDetails from "../page/publications/PaperDetails";
 
 export const router = createBrowserRouter([
   {
@@ -54,6 +55,10 @@ export const router = createBrowserRouter([
       {
         path: "/publications",
         element: <Publications />,
+      },
+      {
+        path: "/paper/:_id",
+        element: <PaperDetails />,
       },
       {
         path: "/team",

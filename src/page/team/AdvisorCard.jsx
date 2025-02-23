@@ -2,7 +2,7 @@ import React from "react";
 
 const AdvisorCard = ({ advisor = {} }) => {
   const {
-    name = "Unknown",
+    name = "Name",
     image = "https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp",
     email = "Email not specified",
     phone = "Phone not specified",
@@ -15,7 +15,13 @@ const AdvisorCard = ({ advisor = {} }) => {
       <div className="hero bg-primary-100 border rounded-xl">
         <div className="hero-content flex-col lg:flex-row">
           <div className="md:w-[35%]">
-            <img src={image} className="max-w-sm rounded-lg shadow-2xl" />
+            <div className="max-w-sm w-full h-[500px] overflow-hidden flex justify-center items-center rounded-lg">
+              <img
+                src={image}
+                alt={name}
+                className="w-full h-auto object-cover  rounded-lg"
+              />
+            </div>
             <div>
               <h2 className="card-title mt-5">{name}</h2>
               <div>
