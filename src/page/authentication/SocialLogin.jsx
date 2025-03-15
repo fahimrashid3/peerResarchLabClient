@@ -1,11 +1,10 @@
-// import { useLocation, useNavigate } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import useAuth from "../../hooks/useAuth";
 
 const SocialLogin = () => {
-  // const location = useLocation();
-  // const from = location.state?.from?.pathname || "/";
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
   const { googleSignIn } = useAuth();
   const axiosPublic = useAxiosPublic();
   const navigate = useNavigate();
@@ -18,8 +17,7 @@ const SocialLogin = () => {
         photoUrl: result.user?.photoURL,
       };
       axiosPublic.post("/users", userInfo).then((res) => {
-        // navigate(from, { replace: true });
-        navigate("/");
+        navigate(from, { replace: true });
       });
     });
   };

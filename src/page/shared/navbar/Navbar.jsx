@@ -11,7 +11,7 @@ import useAdmin from "../../../hooks/useAdmin";
 const Navbar = () => {
   const { user, logOut } = useAuth();
   const [isAdmin] = useAdmin();
-  // console.log("user in navbar ", user);
+  console.log("user in navbar ", user);
   const handelLogout = () => {
     Swal.fire({
       title: "Are you sure?",
