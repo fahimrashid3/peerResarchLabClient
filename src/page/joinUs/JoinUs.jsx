@@ -11,7 +11,6 @@ const JoinUs = () => {
       setOpenPositionDetails(res.data);
     });
   }, [axiosPublic]);
-  console.log(openPositionDetails);
   return (
     <div className="pt-20">
       {openPositionDetails.map((position) => (
