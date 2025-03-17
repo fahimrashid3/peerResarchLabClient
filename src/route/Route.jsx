@@ -5,7 +5,6 @@ import Overview from "../page/about/Overview";
 import Mission from "../page/about/Mission";
 import Vision from "../page/about/Vision";
 import History from "../page/about/History";
-import ResearchAries from "../page/researchAreas/ResearchAries";
 import Publications from "../page/publications/Publications";
 import Team from "../page/team/Team";
 import Login from "../page/authentication/Login";
@@ -22,6 +21,8 @@ import News from "../page/news/News";
 import PrivetRoute from "./PrivetRoute";
 import AdminRoute from "./AdminRoute";
 import PaperDetails from "../page/publications/PaperDetails";
+import ResearchAres from "../page/researchAreas/ResearchAres";
+import ResearchAreasDetails from "../page/researchAreas/ResearchAreasDetails";
 
 export const router = createBrowserRouter([
   {
@@ -50,7 +51,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "/researchAreas",
-        element: <ResearchAries />,
+        element: <ResearchAres />,
+      },
+      {
+        path: "/researchAreaDetails/:_id",
+        element: <ResearchAreasDetails />,
       },
       {
         path: "/publications",
