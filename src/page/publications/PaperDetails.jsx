@@ -50,7 +50,7 @@ const PaperDetails = () => {
             hover:border-primary-600"
             >
               <IoMdArrowRoundBack />
-              Back to Blocks
+              Back to Papers
             </Link>
           </div>
         </div>

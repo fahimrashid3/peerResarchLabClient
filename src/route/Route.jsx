@@ -23,6 +23,7 @@ import AdminRoute from "./AdminRoute";
 import PaperDetails from "../page/publications/PaperDetails";
 import ResearchAres from "../page/researchAreas/ResearchAres";
 import ResearchAreasDetails from "../page/researchAreas/ResearchAreasDetails";
+import Application from "../page/joinUs/Application";
 
 export const router = createBrowserRouter([
   {
@@ -82,6 +83,14 @@ export const router = createBrowserRouter([
         element: (
           <PrivetRoute>
             <JoinUs />
+          </PrivetRoute>
+        ),
+      },
+      {
+        path: "/application/:role",
+        element: (
+          <PrivetRoute>
+            <Application />
           </PrivetRoute>
         ),
       },

@@ -30,86 +30,77 @@ const NavLinks = () => {
         </NavLink>
       </li>
       <li>
-        <NavLink
-          style={({ isActive, isTransitioning }) => {
-            return {
-              background: isActive || isDropdownActive ? "transparent" : "",
-              fontWeight: isActive || isDropdownActive ? "bold" : "",
-              color: isActive || isDropdownActive ? "#00264D" : "white",
-              viewTransitionName: isTransitioning ? "slide" : "",
-            };
-          }}
-          to="/overview"
-        >
-          <div className="dropdown md:dropdown-hover">
-            <div tabIndex={0}>About us</div>
-            <ul
-              tabIndex={0}
-              className="dropdown-content menu bg-primary-400 bg-opacity-80 rounded-box z-[1] w-52 p-2 shadow"
-            >
-              <li>
-                <NavLink
-                  style={({ isActive, isTransitioning }) => {
-                    return {
-                      background: isActive ? "transparent" : "transparent",
-                      fontWeight: isActive ? "bold" : "",
-                      color: isActive ? "#00264D" : "white",
-                      viewTransitionName: isTransitioning ? "slide" : "",
-                    };
-                  }}
-                  to="/overview"
-                >
-                  Lab Overview
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  style={({ isActive, isTransitioning }) => {
-                    return {
-                      background: isActive ? "transparent" : "transparent",
-                      fontWeight: isActive ? "bold" : "",
-                      color: isActive ? "#00264D" : "white",
-                      viewTransitionName: isTransitioning ? "slide" : "",
-                    };
-                  }}
-                  to="/mission"
-                >
-                  Lab Mission
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  style={({ isActive, isTransitioning }) => {
-                    return {
-                      background: isActive ? "transparent" : "transparent",
-                      fontWeight: isActive ? "bold" : "",
-                      color: isActive ? "#00264D" : "white",
-                      viewTransitionName: isTransitioning ? "slide" : "",
-                    };
-                  }}
-                  to="/vision"
-                >
-                  Lab Vision
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  style={({ isActive, isTransitioning }) => {
-                    return {
-                      background: isActive ? "transparent" : "transparent",
-                      fontWeight: isActive ? "bold" : "",
-                      color: isActive ? "#00264D" : "white",
-                      viewTransitionName: isTransitioning ? "slide" : "",
-                    };
-                  }}
-                  to="/history"
-                >
-                  Lab History
-                </NavLink>
-              </li>
-            </ul>
+        <div className="dropdown md:dropdown-hover">
+          {/* Remove NavLink from here and add it to the dropdown trigger */}
+          <div tabIndex={0} className="cursor-pointer">
+            About us
           </div>
-        </NavLink>
+          <ul
+            tabIndex={0}
+            className="dropdown-content menu bg-primary-400 bg-opacity-80 rounded-box z-[1] w-52 p-2 shadow"
+          >
+            <li>
+              <NavLink
+                style={({ isActive, isTransitioning }) => {
+                  return {
+                    background: isActive ? "transparent" : "transparent",
+                    fontWeight: isActive ? "bold" : "",
+                    color: isActive ? "#00264D" : "white",
+                    viewTransitionName: isTransitioning ? "slide" : "",
+                  };
+                }}
+                to="/overview"
+              >
+                Lab Overview
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                style={({ isActive, isTransitioning }) => {
+                  return {
+                    background: isActive ? "transparent" : "transparent",
+                    fontWeight: isActive ? "bold" : "",
+                    color: isActive ? "#00264D" : "white",
+                    viewTransitionName: isTransitioning ? "slide" : "",
+                  };
+                }}
+                to="/mission"
+              >
+                Lab Mission
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                style={({ isActive, isTransitioning }) => {
+                  return {
+                    background: isActive ? "transparent" : "transparent",
+                    fontWeight: isActive ? "bold" : "",
+                    color: isActive ? "#00264D" : "white",
+                    viewTransitionName: isTransitioning ? "slide" : "",
+                  };
+                }}
+                to="/vision"
+              >
+                Lab Vision
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                style={({ isActive, isTransitioning }) => {
+                  return {
+                    background: isActive ? "transparent" : "transparent",
+                    fontWeight: isActive ? "bold" : "",
+                    color: isActive ? "#00264D" : "white",
+                    viewTransitionName: isTransitioning ? "slide" : "",
+                  };
+                }}
+                to="/history"
+              >
+                Lab History
+              </NavLink>
+            </li>
+          </ul>
+        </div>
       </li>
 
       <li>

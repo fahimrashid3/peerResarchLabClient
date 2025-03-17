@@ -4,11 +4,11 @@ import { useEffect, useState } from "react";
 import Loading from "../../components/Loading";
 
 const ResearchAreasDetails = () => {
-  const { _id } = useParams(); // Extract `_id` from URL
+  const { _id } = useParams();
   const axiosPublic = useAxiosPublic();
-  const [researchAreaDetails, setResearchAreaDetails] = useState(null); // Initialize as null
-  const [loading, setLoading] = useState(true); // Loading state
-  const [error, setError] = useState(null); // Error state
+  const [researchAreaDetails, setResearchAreaDetails] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     // Fetch research area details
