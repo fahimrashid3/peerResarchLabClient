@@ -41,41 +41,34 @@ const ContactForm = () => {
   }
 
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className="bg-primary-100 dark:bg-dark-700 rounded-lg text-dark-900 dark:text-white py-5 md:py-14 lg:my-20 space-y-5"
-    >
-      <div className="md:flex gap-5 justify-center  lg:px-36 md:px-20 px-5 mx-auto">
-        <label className="form-control w-full">
-          <div className="label">
-            <span className="label-text">Name</span>
-          </div>
-          <input
-            {...register("name", { required: true })}
-            type="text"
-            placeholder="Name"
-            className="input input-bordered w-full "
-          />
-          {errors.name && (
-            <span className="text-red-500">Name is required</span>
-          )}
-        </label>
-        <label className="form-control w-full">
-          <div className="label">
-            <span className="label-text">Phone number</span>
-          </div>
-          <input
-            {...register("phone", { required: true })}
-            type="text"
-            placeholder="Phone number"
-            className="input input-bordered w-full "
-          />
-          {errors.phone && (
-            <span className="text-red-500">Phone number is required</span>
-          )}
-        </label>
-      </div>
-      <label className="form-control w-full lg:px-36 md:px-20 px-5 mx-auto">
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <label className="form-control w-full lg:px-16 md:px-10 px-5 mx-auto">
+        <div className="label">
+          <span className="label-text">Name</span>
+        </div>
+        <input
+          {...register("name", { required: true })}
+          type="text"
+          placeholder="Name"
+          className="input input-bordered w-full "
+        />
+        {errors.name && <span className="text-red-500">Name is required</span>}
+      </label>
+      <label className="form-control w-full lg:px-16 md:px-10 px-5 mx-auto">
+        <div className="label">
+          <span className="label-text">Phone number</span>
+        </div>
+        <input
+          {...register("phone", { required: true })}
+          type="text"
+          placeholder="Phone number"
+          className="input input-bordered w-full "
+        />
+        {errors.phone && (
+          <span className="text-red-500">Phone number is required</span>
+        )}
+      </label>
+      <label className="form-control w-full lg:px-16 md:px-10 px-5 mx-auto">
         <div className="label">
           <span className="label-text">Email address</span>
         </div>
@@ -91,7 +84,7 @@ const ContactForm = () => {
           <span className="text-red-500">Email address is required</span>
         )}
       </label>
-      <div className="lg:px-36 md:px-20 px-5 mx-auto">
+      <div className="lg:px-16 md:px-10 px-5 mx-auto">
         <label>
           <div className="label">
             <span className="label-text">Type Your Message</span>
@@ -106,7 +99,7 @@ const ContactForm = () => {
           )}
         </label>
       </div>
-      <div className="flex justify-center lg:px-36 md:px-20 px-5 mx-auto">
+      <div className="flex justify-center lg:px-16 md:px-10 px-5 mx-auto">
         <button
           type="submit"
           className="btn bg-transparent border-primary-600 text-primary-600 hover:bg-primary-600 hover:text-white hover:border-primary-600 flex gap-3 md:text-xl text-lg w-full"

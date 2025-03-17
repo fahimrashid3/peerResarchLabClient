@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import { useEffect, useState } from "react";
+import Loading from "../../components/Loading";
 
 const ResearchAreasDetails = () => {
   const { _id } = useParams(); // Extract `_id` from URL
@@ -24,7 +25,7 @@ const ResearchAreasDetails = () => {
       });
   }, [axiosPublic, _id]);
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <Loading></Loading>;
   if (error) return <p>Error: {error.message}</p>;
   if (!researchAreaDetails) return <p>No data found</p>;
 
