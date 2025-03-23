@@ -11,8 +11,7 @@ const JoinUsSectionDesign = ({ data }) => {
   const axiosPublic = useAxiosPublic();
   const [researchArea, setResearchArea] = useState([]);
   const [selectedArea, setSelectedArea] = useState("Select Research Area");
-  const { _id, name, phone, email, university, role, createdAt, details } =
-    data;
+  const { qualifications, role, experience, internationalExposure } = data;
 
   useEffect(() => {
     axiosPublic.get("/researchArea").then((res) => {
@@ -23,20 +22,25 @@ const JoinUsSectionDesign = ({ data }) => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (formData) => {
-    console.log({
-      ...formData,
-      _id,
-      university,
+  const onSubmit = async (formData) => {
+    console.log("Form Data Submitted:", formData);
+    console.log("Selected Research Area:", selectedArea);
+    console.log("Additional Data:", {
+      qualifications,
       role,
-      createdAt,
-      details,
-      researchArea: selectedArea,
+      experience,
+      internationalExposure,
     });
   };
+
+  const handleFormSubmit = handleSubmit((data) => {
+    console.log("handleSubmit called with data:", data);
+    onSubmit(data);
+  });
 
   return (
     <div className="border p-10 m-10 rounded-lg">
@@ -44,10 +48,15 @@ const JoinUsSectionDesign = ({ data }) => {
         <div>
           <p className="italic font-semibold">{role}</p>
           <p>
-            <span className="font-bold text-lg">University:</span> {university}
+            <span className="font-bold text-lg">Qualifications:</span>
+            {qualifications}
           </p>
           <p>
-            <span className="font-bold text-lg">Details:</span> {details}
+            <span className="font-bold text-lg">Experience:</span> {experience}
+          </p>
+          <p>
+            <span className="font-bold text-lg">International Exposure :</span>{" "}
+            {internationalExposure}
           </p>
         </div>
         <div>
@@ -61,7 +70,7 @@ const JoinUsSectionDesign = ({ data }) => {
           <dialog id="my_modal_4" className="modal">
             <div className="modal-box w-11/12 max-w-5xl">
               <h3 className="font-bold text-lg">Apply for {role}</h3>
-              <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+              <form onSubmit={handleFormSubmit} className="space-y-5">
                 {/* Name Field */}
                 <label className="form-control">
                   <span className="label-text">Name</span>
@@ -100,6 +109,7 @@ const JoinUsSectionDesign = ({ data }) => {
                     className="input input-bordered"
                   />
                 </label>
+
                 {/* University Name */}
                 <label className="form-control">
                   <span className="label-text">University Name</span>
@@ -133,19 +143,17 @@ const JoinUsSectionDesign = ({ data }) => {
                     ))}
                   </select>
                 </label>
+
                 {/* Description */}
                 <label className="form-control">
                   <span className="label-text">Description</span>
-
                   <textarea
                     className="textarea input-bordered"
                     {...register("description", { required: true })}
-                    name=""
-                    id=""
                   ></textarea>
-                  {errors.university && (
+                  {errors.description && (
                     <span className="text-red-500">
-                      description is required
+                      Description is required
                     </span>
                   )}
                 </label>

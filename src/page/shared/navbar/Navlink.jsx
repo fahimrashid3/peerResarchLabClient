@@ -30,9 +30,16 @@ const NavLinks = () => {
         </NavLink>
       </li>
       <li>
-        <div className="dropdown md:dropdown-hover">
-          {/* Remove NavLink from here and add it to the dropdown trigger */}
-          <div tabIndex={0} className="cursor-pointer">
+        <div className="dropdown md:dropdown-hover dropdown-bottom">
+          {/* Apply active styles to the dropdown trigger based on isDropdownActive */}
+          <div
+            tabIndex={0}
+            className="cursor-pointer"
+            style={{
+              color: isDropdownActive ? "#00264D" : "white",
+              fontWeight: isDropdownActive ? "bold" : "",
+            }}
+          >
             About us
           </div>
           <ul
@@ -103,6 +110,7 @@ const NavLinks = () => {
         </div>
       </li>
 
+      {/* Other NavLinks remain unchanged */}
       <li>
         <NavLink
           style={({ isActive, isTransitioning }) => {
