@@ -4,11 +4,13 @@ import { useEffect, useState } from "react";
 import useUsers from "../../hooks/useUser";
 import useAuth from "../../hooks/useAuth";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
+import useAxiosSecure from "../../hooks/useAxiosSecure"; // Import axiosSecure
 
 const JoinUsSectionDesign = ({ data }) => {
   const { user } = useAuth();
   const [users] = useUsers();
   const axiosPublic = useAxiosPublic();
+  const axiosSecure = useAxiosSecure(); // Initialize axiosSecure
   const [researchArea, setResearchArea] = useState([]);
   const [selectedArea, setSelectedArea] = useState("Select Research Area");
   const { qualifications, role, experience, internationalExposure } = data;
@@ -27,14 +29,38 @@ const JoinUsSectionDesign = ({ data }) => {
   } = useForm();
 
   const onSubmit = async (formData) => {
-    console.log("Form Data Submitted:", formData);
-    console.log("Selected Research Area:", selectedArea);
-    console.log("Additional Data:", {
-      qualifications,
-      role,
-      experience,
-      internationalExposure,
-    });
+    // Create a new FormData object
+    const formDataObj = new FormData();
+
+    // Append all form fields to the FormData object
+    for (const key in formData) {
+      if (key === "resume") {
+        // Append the file (resume) to FormData
+        formDataObj.append(key, formData[key][0]); // Assuming formData[key] is a FileList
+      } else {
+        // Append other fields to FormData
+        formDataObj.append(key, formData[key]);
+      }
+    }
+
+    // Append additional fields (email and selectedArea)
+    formDataObj.append("email", user.email);
+    formDataObj.append("researchArea", selectedArea);
+
+    console.log("FormData:", formDataObj);
+
+    try {
+      // Send the FormData object as multipart/form-data
+      const res = await axiosSecure.post("/submitApplication", formDataObj, {
+        headers: {
+          "Content-Type": "multipart/form-data", // Set the content type
+        },
+      });
+      console.log("Server Response:", res.data);
+      reset(); // Reset the form after successful submission
+    } catch (error) {
+      console.error("Error submitting application:", error);
+    }
   };
 
   const handleFormSubmit = handleSubmit((data) => {
