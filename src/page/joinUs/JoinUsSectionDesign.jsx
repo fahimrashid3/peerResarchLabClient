@@ -36,7 +36,7 @@ const JoinUsSectionDesign = ({ data }) => {
     for (const key in formData) {
       if (key === "resume") {
         // Append the file (resume) to FormData
-        formDataObj.append(key, formData[key][0]); // Assuming formData[key] is a FileList
+        formDataObj.append(key, formData[key][0]);
       } else {
         // Append other fields to FormData
         formDataObj.append(key, formData[key]);
@@ -46,18 +46,16 @@ const JoinUsSectionDesign = ({ data }) => {
     // Append additional fields (email and selectedArea)
     formDataObj.append("email", user.email);
     formDataObj.append("researchArea", selectedArea);
-
-    console.log("FormData:", formDataObj);
+    formDataObj.append("role", role);
 
     try {
       // Send the FormData object as multipart/form-data
       const res = await axiosSecure.post("/submitApplication", formDataObj, {
         headers: {
-          "Content-Type": "multipart/form-data", // Set the content type
+          "Content-Type": "multipart/form-data",
         },
       });
-      console.log("Server Response:", res.data);
-      reset(); // Reset the form after successful submission
+      reset();
     } catch (error) {
       console.error("Error submitting application:", error);
     }
@@ -67,6 +65,8 @@ const JoinUsSectionDesign = ({ data }) => {
     console.log("handleSubmit called with data:", data);
     onSubmit(data);
   });
+
+  // TODO:set limitation if required(only one application can be sent by a user)
 
   return (
     <div className="border p-10 m-10 rounded-lg">
