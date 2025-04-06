@@ -21,6 +21,8 @@ const ManageApplication = () => {
 
   const openPdfModal = async (pdfPath) => {
     try {
+      console.log("Fetching PDF from:", `http://localhost:8000/${pdfPath}`);
+
       // Fetch PDF as blob
       const response = await fetch(`http://localhost:8000/${pdfPath}`);
       const blob = await response.blob();
