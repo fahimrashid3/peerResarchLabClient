@@ -1,24 +1,22 @@
-import React from "react";
-
-const PDFViewer = ({ fileName, onClose }) => {
-  return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-      <div className="bg-white p-5 rounded-lg shadow-lg w-3/4 h-3/4 relative">
-        <button
-          className="absolute top-2 right-2 bg-red-500 text-white px-3 py-1 rounded"
-          onClick={onClose}
-        >
-          Close
-        </button>
-        <iframe
-          src={`http://localhost:8000/uploads/${fileName}`}
-          width="100%"
-          height="100%"
-          style={{ border: "none" }}
-        ></iframe>
-      </div>
-    </div>
-  );
+const openPdfModal = async (pdfPath) => {
+  try {
+    const response = await axiosSecure.get(
+      `/pdf-proxy?path=${encodeURIComponent(pdfPath)}`,
+      {
+        responseType: "blob",
+      }
+    );
+    const blob = new Blob([response.data], { type: "application/pdf" });
+    setPdfUrl(URL.createObjectURL(blob));
+    setIsModalOpen(true);
+  } catch (error) {
+    console.error("Error loading PDF:", error);
+  }
 };
 
-export default PDFViewer;
+// Then use this in your modal:
+<iframe
+  src={pdfUrl}
+  className="w-full h-full min-h-[70vh]"
+  frameBorder="0"
+></iframe>;

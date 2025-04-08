@@ -3,7 +3,7 @@ import React from "react";
 const AssistantCart = ({ researchAssistant }) => {
   const {
     name = "Unknown",
-    image = "https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp",
+    image = "https://res.cloudinary.com/dipwayvsu/image/upload/v1744132219/v0gfweuclqfywslynifb.jpg",
     email = "Email not specified",
     phone = "Phone not specified",
     details = "Details is not specified",

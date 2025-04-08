@@ -5,6 +5,7 @@ import useUsers from "../../hooks/useUser";
 import useAuth from "../../hooks/useAuth";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import Swal from "sweetalert2";
 
 const JoinUsSectionDesign = ({ data }) => {
   const { user } = useAuth();
@@ -55,11 +56,32 @@ const JoinUsSectionDesign = ({ data }) => {
     formDataObj.append("role", selectedRole);
 
     try {
-      await axiosSecure.post("/submitApplication", formDataObj, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      await axiosSecure
+        .post("/submitApplication", formDataObj, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        })
+        .then((res) => {
+          if (res.status === 200) {
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: "Your Application has been saved",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+          } else {
+            Swal.fire({
+              position: "top-end",
+              icon: "error",
+              title: "Something wrong",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+          }
+        });
+
       reset();
       closeModal();
     } catch (error) {
