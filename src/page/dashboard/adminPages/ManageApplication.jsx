@@ -16,33 +16,49 @@ const ManageApplication = () => {
 
   const downloadPdf = async (pdfPath) => {
     try {
-      const response = await axiosPublic.get(`/${pdfPath}`, {
+      const res = await axiosPublic.get(`/${pdfPath}`, {
         responseType: "blob",
       });
     } catch (error) {
       console.error("Error loading PDF:", error);
     }
   };
-  const handelAdd = (_id) => {
-    axiosSecure
-      .post(`/team/${_id}`)
-      .then((res) => {
+  const handelAdd = async (_id, role) => {
+    try {
+      const result = await Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: `Yes, Make ${role}`,
+      });
+
+      if (result.isConfirmed) {
+        const res = await axiosSecure.post(`/team/${_id}`);
         Swal.fire({
           position: "top-end",
           icon: "success",
-          title: "Member added successfully",
+          title: res.data.message,
           showConfirmButton: false,
-          timer: 1000,
+          timer: 1500,
         });
-      })
-      .catch((error) => {
-        console.error("Error adding member:", error);
-        Swal.fire({
-          icon: "error",
-          title: "Failed to add member",
-          text: error.response?.data?.message || "Something went wrong",
-        });
+      }
+    } catch (error) {
+      const errorMsg =
+        error.response?.data?.message ||
+        (error.response?.status === 404
+          ? "Endpoint not found - check server connection"
+          : "Failed to add member");
+
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: errorMsg,
       });
+      console.error("Full error:", error);
+    }
   };
 
   return (
@@ -82,7 +98,7 @@ const ManageApplication = () => {
                 </td>
                 <td>
                   <button
-                    onClick={() => handelAdd(app._id)}
+                    onClick={() => handelAdd(app._id, app.role)}
                     className="btn text-2xl border-b-4 font-semibold text-green-900 hover:text-white hover:border-green-600 border-green-700 bg-green-100 hover:bg-green-500 transition-all duration-200"
                   >
                     <IoMdPersonAdd />

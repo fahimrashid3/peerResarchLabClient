@@ -188,15 +188,13 @@ const JoinUsSectionDesign = ({ data }) => {
                   </label>
 
                   <label className="form-control">
-                    <span className="label-text">Description</span>
+                    <span className="label-text">Details</span>
                     <textarea
                       className="textarea input-bordered"
-                      {...register("description", { required: true })}
+                      {...register("details", { required: true })}
                     ></textarea>
-                    {errors.description && (
-                      <span className="text-red-500">
-                        Description is required
-                      </span>
+                    {errors.details && (
+                      <span className="text-red-500">Details is required</span>
                     )}
                   </label>
 
