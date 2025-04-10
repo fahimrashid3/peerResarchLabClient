@@ -61,6 +61,44 @@ const ManageApplication = () => {
     }
   };
 
+  const handelDelete = async (_id) => {
+    try {
+      const result = await Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it",
+      });
+
+      if (result.isConfirmed) {
+        const res = await axiosSecure.delete(`/application/${_id}`);
+        if (res.data.deletedCount === 1) {
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Application deleted successfully",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        } else {
+          throw new Error("Application not found or not deleted");
+        }
+      }
+    } catch (error) {
+      const errorMsg = "Failed to Delete";
+
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: errorMsg,
+      });
+      console.error("Full error:", error);
+    }
+  };
+
   return (
     <div className="p-5">
       <h2 className="text-2xl font-bold mb-4">Applications</h2>
@@ -105,7 +143,10 @@ const ManageApplication = () => {
                   </button>
                 </td>
                 <td>
-                  <button className="btn text-2xl border-b-4 font-semibold text-red-900 hover:text-white hover:border-red-600 border-red-700 bg-red-100 hover:bg-red-500 transition-all duration-200">
+                  <button
+                    onClick={() => handelDelete(app._id)}
+                    className="btn text-2xl border-b-4 font-semibold text-red-900 hover:text-white hover:border-red-600 border-red-700 bg-red-100 hover:bg-red-500 transition-all duration-200"
+                  >
                     <MdDeleteForever />
                   </button>
                 </td>
