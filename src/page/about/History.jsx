@@ -7,7 +7,11 @@ const History = () => {
   if (infoLoading) {
     return <Loading></Loading>;
   }
-  const history = info.labInformation.history;
+  const history = {
+    name: info.history.name,
+    details: info.history.details,
+    image: info.history.image,
+  };
   return (
     <div>
       <AboutPageDesign data={history}></AboutPageDesign>

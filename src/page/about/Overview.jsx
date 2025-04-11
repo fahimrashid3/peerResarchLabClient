@@ -7,7 +7,12 @@ const Overview = () => {
   if (infoLoading) {
     return <Loading></Loading>;
   }
-  const overview = info.labInformation.overview;
+  const overview = {
+    name: info.overView.name,
+    details: info.overView.details,
+    image: info.overView.image,
+  };
+
   return (
     <div>
       <AboutPageDesign data={overview}></AboutPageDesign>

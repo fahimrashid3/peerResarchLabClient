@@ -7,7 +7,11 @@ const Vision = () => {
   if (infoLoading) {
     return <Loading></Loading>;
   }
-  const vision = info.labInformation.vision;
+  const vision = {
+    name: info.vision.name,
+    details: info.vision.details,
+    image: info.vision.image,
+  };
   return (
     <div>
       <AboutPageDesign data={vision}></AboutPageDesign>

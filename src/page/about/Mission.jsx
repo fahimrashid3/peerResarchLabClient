@@ -7,7 +7,11 @@ const Mission = () => {
   if (infoLoading) {
     return <Loading></Loading>;
   }
-  const mission = info.labInformation.mission;
+  const mission = {
+    name: info.mission.name,
+    details: info.mission.details,
+    image: info.mission.image,
+  };
   return (
     <div>
       <AboutPageDesign data={mission}></AboutPageDesign>
