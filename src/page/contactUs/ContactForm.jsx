@@ -3,10 +3,11 @@ import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useForm } from "react-hook-form";
 import { FaPaperPlane } from "react-icons/fa";
+import Swal from "sweetalert2";
 
 const ContactForm = () => {
   const { user } = useAuth();
-  const AxiosSecure = useAxiosSecure();
+  const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
   const {
     register,
@@ -15,22 +16,45 @@ const ContactForm = () => {
     formState: { errors },
   } = useForm();
   // TODO: save the data in the data base
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     const contactSMSInfo = data;
     console.log(contactSMSInfo);
-    AxiosSecure.post("/contacts", contactSMSInfo).then((res) => {
-      if (res.data.insertedId) {
-        navigate("/");
-        scrollTo(0, 0);
-        Swal.fire({
-          position: "top-end",
-          icon: "success",
-          title: "Message sent successfully!",
-          showConfirmButton: false,
-          timer: 1000,
-        });
+    try {
+      const result = await Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, sent",
+      });
+
+      if (result.isConfirmed) {
+        const res = await axiosSecure.post("/contacts", contactSMSInfo);
+        if (res.data.insertedId) {
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Message sent successfully",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          navigate("/");
+        } else {
+          throw new Error("Something wrong");
+        }
       }
-    });
+    } catch (error) {
+      const errorMsg = "Failed to Sent message";
+
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: errorMsg,
+      });
+      console.error("Full error:", error);
+    }
   };
   if (!user) {
     return (

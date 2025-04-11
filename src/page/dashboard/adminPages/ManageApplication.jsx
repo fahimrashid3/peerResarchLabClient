@@ -131,7 +131,7 @@ const ManageApplication = () => {
                     onClick={() => downloadPdf(app.resume.path)}
                     className="btn border-b-4 font-semibold text-primary-900 hover:text-white hover:border-primary-600 border-primary-700 bg-primary-100 hover:bg-primary-500 transition-all duration-200"
                   >
-                    View PDF
+                    Download PDF
                   </button>
                 </td>
                 <td>

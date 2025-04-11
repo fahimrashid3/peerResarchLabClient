@@ -21,7 +21,10 @@ const ContactUs = () => {
     return <Loading />;
   }
 
-  const { contactDetails, phoneNumber, email, location } = info.labInformation;
+  const { contactDetails, phoneNumber, socialMedia, location } =
+    info.labInformation;
+  const { facebook, linkedIn, X, whatsApp } = socialMedia;
+  console.log(whatsApp);
 
   return (
     <div className="pt-10">
@@ -29,7 +32,7 @@ const ContactUs = () => {
         <SectionTitle heading="Contact Form" subHeading="Send Us a Message" />
         <div
           className="
-            bg-primary-100 dark:bg-dark-700 rounded-lg text-dark-900 dark:text-white py-5 md:py-14 lg:my-20 space-y-5
+            bg-primary-100 dark:bg-dark-700 rounded-lg text-dark-900 dark:text-white py-5 md:py-14 lg:py-20 space-y-5
             md:flex
           "
         >
@@ -47,7 +50,7 @@ const ContactUs = () => {
                 <div className="mt-3 space-y-2">
                   <a
                     className="flex items-center gap-2 text-blue-600 cursor-pointer hover:underline"
-                    href="https://www.facebook.com/fahimrashid.fb"
+                    href={`https://wa.me/${whatsApp}`}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -56,7 +59,7 @@ const ContactUs = () => {
                   </a>
                   <a
                     className="flex items-center gap-2 text-blue-600 cursor-pointer hover:underline"
-                    href="https://www.facebook.com/fahimrashid.fb"
+                    href={`${facebook}`}
                     target="_blank"
                   >
                     <FaFacebookF />
@@ -65,12 +68,20 @@ const ContactUs = () => {
                   </a>
                   <a
                     className="flex items-center gap-2 text-blue-600 cursor-pointer hover:underline"
-                    href="https://x.com/FahimRashid20"
+                    href={`${X}`}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
                     <FaXTwitter />
                     <span>Message us on X</span>
+                  </a>
+                  <a
+                    className="flex items-center gap-2 text-blue-600 cursor-pointer hover:underline"
+                    href={`${linkedIn}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <span>Message us on LinkedIn</span>
                   </a>
                 </div>
               </div>
