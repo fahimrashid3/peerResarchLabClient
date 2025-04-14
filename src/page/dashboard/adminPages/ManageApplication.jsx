@@ -12,17 +12,37 @@ const ManageApplication = () => {
 
   useEffect(() => {
     axiosSecure.get("/applications").then((res) => setApplications(res.data));
-  }, []);
+  }, [axiosSecure]);
 
   const downloadPdf = async (pdfPath) => {
     try {
       const res = await axiosPublic.get(`/${pdfPath}`, {
         responseType: "blob",
       });
+  
+      const blob = new Blob([res.data], { type: "application/pdf" });
+      const url = window.URL.createObjectURL(blob);
+  
+      const filename = pdfPath.split("/").pop();
+  
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", filename);
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      window.URL.revokeObjectURL(url);
     } catch (error) {
       console.error("Error loading PDF:", error);
+      Swal.fire({
+        icon: "error",
+        title: "Download Failed",
+        text: "Unable to download the PDF. Please try again later.",
+      });
     }
   };
+  
+
   const handelAdd = async (_id, role) => {
     try {
       const result = await Swal.fire({
@@ -83,6 +103,11 @@ const ManageApplication = () => {
             showConfirmButton: false,
             timer: 1500,
           });
+
+          // Update the local state
+          setApplications((prev) =>
+            prev.filter((app) => app._id !== _id)
+          );
         } else {
           throw new Error("Application not found or not deleted");
         }
@@ -105,7 +130,6 @@ const ManageApplication = () => {
 
       <div className="overflow-x-auto">
         <table className="table table-zebra">
-          {/* head */}
           <thead>
             <tr>
               <th>No.</th>

@@ -55,6 +55,7 @@ const JoinUsSectionDesign = ({ data }) => {
     formDataObj.append("researchArea", selectedArea);
     formDataObj.append("role", selectedRole);
 
+    // TODO: prevent user to apply more then one application
     try {
       await axiosSecure
         .post("/submitApplication", formDataObj, {
