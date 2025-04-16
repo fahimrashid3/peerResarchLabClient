@@ -7,9 +7,11 @@ import Swal from "sweetalert2";
 import NavLinks from "./Navlink";
 import { FaHome, FaUsers } from "react-icons/fa";
 import useAdmin from "../../../hooks/useAdmin";
+import useUsers from "../../../hooks/useUser";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
+  const [users] = useUsers();
   const [isAdmin] = useAdmin();
   const handelLogout = () => {
     Swal.fire({
@@ -90,8 +92,7 @@ const Navbar = () => {
                 role="button"
                 className="pr-5 text-4xl dark:text-white dark:hover:text-gray-100 text-white hover:text-gray-300"
               >
-                <CgProfile />
-                {/* {users?.photoUrl ? (
+                {users?.photoUrl ? (
                   <div className="avatar">
                     <div className="w-10 rounded-full ring-primary ring-offset-primary-500 ring ring-offset-1">
                       <img src={users?.photoUrl} />
@@ -99,7 +100,7 @@ const Navbar = () => {
                   </div>
                 ) : (
                   <CgProfile />
-                )} */}
+                )}
               </div>
 
               <ul
