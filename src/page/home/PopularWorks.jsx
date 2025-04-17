@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from "react";
-import useAxiosPublic from "../../hooks/useAxiosPublic"; // Assuming this hook is already set up
-import ShortCard from "../../components/shortCard"; // Assuming this component is already set up
+import useAxiosPublic from "../../hooks/useAxiosPublic";
+import ShortCard from "../../components/shortCard";
 import SectionTitle from "../../components/SectionTitle";
+import { Link } from "react-router-dom";
 
 const PopularWorks = () => {
   const [researchPapers, setResearchPapers] = useState([]);
-  const axiosPublic = useAxiosPublic(); // Initialize axiosPublic instance
+  const axiosPublic = useAxiosPublic();
 
   useEffect(() => {
-    let isMounted = true; // Prevents state updates on unmounted component
+    let isMounted = true;
 
     const fetchData = async () => {
       try {
-        // Get the top research papers
         const res = await axiosPublic.get("/topResearchPapers");
-        if (isMounted) setResearchPapers(res.data); // Set the response data to state
+        if (isMounted) setResearchPapers(res.data);
       } catch (error) {
         console.error("Error fetching research papers:", error);
       }
@@ -41,9 +41,12 @@ const PopularWorks = () => {
       </div>
 
       <div className="flex items-center justify-center my-5 md:my-10">
-        <button className="btn border-b-8 font-semibold text-primary-900 hover:text-white hover:border-primary-600 border-primary-700 bg-primary-100 hover:bg-primary-500 transition-all duration-200">
+        <Link
+          to={"/publications"}
+          className="btn border-b-8 font-semibold text-primary-900 hover:text-white hover:border-primary-600 border-primary-700 bg-primary-100 hover:bg-primary-500 transition-all duration-200"
+        >
           Show more
-        </button>
+        </Link>
       </div>
     </div>
   );
