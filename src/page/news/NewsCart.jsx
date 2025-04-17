@@ -7,7 +7,7 @@ const NewsCart = ({ singleNews }) => {
     return <p>Loading...</p>;
   }
 
-  const { _id, authorEmail, createdAt, title, content, thumbnail } = singleNews;
+  const { _id, authorEmail, createdAt, title, details, imagez } = singleNews;
   const dateTime = new Date(createdAt);
 
   // Format the date (e.g., "February 15, 2025")
@@ -72,24 +72,24 @@ const NewsCart = ({ singleNews }) => {
         </div>
       </div>
 
-      {/* News Content Section */}
+      {/* News details Section */}
       <div className="space-y-5 mt-5 mb-5">
         <p className="font-bold text-2xl">{title}</p>
         <img
           className="h-80 mx-auto"
-          src={thumbnail}
-          alt={"thumbnail not available"}
+          src={imagez}
+          alt={"imagez not available"}
         />
         <p>
-          {content && content.length > 200 ? (
+          {details && details.length > 200 ? (
             <>
-              {content.slice(0, 200)}
+              {details.slice(0, 200)}
               <Link to={`/news/${_id}`} className="text-blue-600">
                 Read more...
               </Link>
             </>
           ) : (
-            content || "content not available"
+            details || "details not available"
           )}
         </p>
       </div>
