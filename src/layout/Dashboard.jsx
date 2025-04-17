@@ -5,6 +5,7 @@ import {
   FaDollarSign,
   FaHome,
   FaPhone,
+  FaRegNewspaper,
   FaUsers,
 } from "react-icons/fa";
 import {
@@ -78,6 +79,12 @@ const DashBoard = () => {
                 <NavLink to="/dashboard/applications">
                   <IoMdPersonAdd />
                   Manage Applications
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/dashboard/addNews">
+                  <FaRegNewspaper />
+                  News and Update
                 </NavLink>
               </li>
             </>

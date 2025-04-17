@@ -1,11 +1,12 @@
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaPaperPlane } from "react-icons/fa";
-import { useEffect, useState } from "react";
-import useUsers from "../../hooks/useUser";
-import useAuth from "../../hooks/useAuth";
+import { useNavigate, useLocation } from "react-router-dom";
+import Swal from "sweetalert2";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
-import Swal from "sweetalert2";
+import useAuth from "../../hooks/useAuth";
+import useUsers from "../../hooks/useUser";
 
 const JoinUsSectionDesign = ({ data }) => {
   const { user } = useAuth();
@@ -17,6 +18,8 @@ const JoinUsSectionDesign = ({ data }) => {
   const [selectedRole, setSelectedRole] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { qualifications, role, experience, internationalExposure } = data;
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     axiosPublic.get("/researchArea").then((res) => {
@@ -76,7 +79,7 @@ const JoinUsSectionDesign = ({ data }) => {
             Swal.fire({
               position: "top-end",
               icon: "error",
-              title: "Something wrong",
+              title: "Something went wrong",
               showConfirmButton: false,
               timer: 1500,
             });
@@ -91,34 +94,45 @@ const JoinUsSectionDesign = ({ data }) => {
   };
 
   return (
-    <div className="border p-10 m-10 rounded-lg">
-      <div className="flex justify-between items-center">
-        <div>
-          <p className="italic font-semibold">{role}</p>
+    <div className="border p-10 m-10 rounded-lg shadow-md">
+      <div className="flex flex-col lg:flex-row justify-between gap-10 items-center">
+        <div className="space-y-4">
+          <p className="italic font-semibold text-lg text-primary-800">
+            {role}
+          </p>
           <p>
-            <span className="font-bold text-lg">Qualifications:</span>
+            <span className="font-bold text-lg">Qualifications:</span>{" "}
             {qualifications}
           </p>
           <p>
             <span className="font-bold text-lg">Experience:</span> {experience}
           </p>
           <p>
-            <span className="font-bold text-lg">International Exposure :</span>{" "}
+            <span className="font-bold text-lg">International Exposure:</span>{" "}
             {internationalExposure}
           </p>
         </div>
+
         <div>
           <button
             className="btn border-b-8 font-semibold text-primary-900 hover:text-white hover:border-primary-600 border-primary-700 bg-primary-100 hover:bg-primary-500 transition-all duration-200"
-            onClick={() => openModal(role)}
+            onClick={() => {
+              if (user) {
+                openModal(role);
+              } else {
+                navigate("/login", { state: { from: location } });
+              }
+            }}
           >
-            Apply to be {role}
+            {user ? `Apply to be ${role}` : "Login to apply"}
           </button>
 
           {isModalOpen && (
             <dialog open className="modal">
               <div className="modal-box w-11/12 max-w-5xl">
-                <h3 className="font-bold text-lg">Apply for {selectedRole}</h3>
+                <h3 className="font-bold text-lg mb-4">
+                  Apply for {selectedRole}
+                </h3>
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
                   <label className="form-control">
                     <span className="label-text">Name</span>
@@ -150,7 +164,7 @@ const JoinUsSectionDesign = ({ data }) => {
                     <span className="label-text">Email</span>
                     <input
                       type="email"
-                      defaultValue={user.email}
+                      value={user.email}
                       disabled
                       className="input input-bordered"
                     />
@@ -165,7 +179,7 @@ const JoinUsSectionDesign = ({ data }) => {
                     />
                     {errors.university && (
                       <span className="text-red-500">
-                        University name is required
+                        University is required
                       </span>
                     )}
                   </label>

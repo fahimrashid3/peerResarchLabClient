@@ -69,7 +69,8 @@ const AllUsers = () => {
                       <div className="mask mask-squircle h-12 w-12">
                         <img
                           src={user.image}
-                          alt="Avatar Tailwind CSS Component"
+                          alt={user.name}
+                          className="h-12 w-12 rounded-full object-cover"
                         />
                       </div>
                     </div>

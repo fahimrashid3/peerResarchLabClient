@@ -52,8 +52,6 @@ const PaperDetails = () => {
     <div className="lg:pt-24 lg:max-w-[90%] max-w-[95%] mx-auto min-h-screen">
       <div className="grid grid-cols-4 gap-5">
         <div className="col-span-3">
-          <h1 className="font-semibold text-xl mb-2">Paper Details</h1>
-
           <div className="border p-4 space-y-5">
             <img
               className="lg:h-96 mx-auto w-full object-cover rounded-md"
@@ -98,7 +96,7 @@ const PaperDetails = () => {
               className="btn bg-transparent border-1 border-b-4 mx-auto border-primary-600 text-primary-600 hover:bg-primary-600 hover:text-white hover:border-primary-600"
             >
               <IoMdArrowRoundBack />
-              Back to Papers
+              Back to Publication
             </Link>
           </div>
         </div>

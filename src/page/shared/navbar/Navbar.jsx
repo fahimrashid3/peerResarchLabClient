@@ -5,7 +5,7 @@ import { FiLogIn } from "react-icons/fi";
 import { CiLogout } from "react-icons/ci";
 import Swal from "sweetalert2";
 import NavLinks from "./Navlink";
-import { FaHome, FaUsers } from "react-icons/fa";
+import { FaHome, FaRegNewspaper, FaUsers } from "react-icons/fa";
 import useAdmin from "../../../hooks/useAdmin";
 import useUsers from "../../../hooks/useUser";
 
@@ -122,6 +122,13 @@ const Navbar = () => {
                     <li>
                       <NavLink to="/dashboard/applications">
                         <FaUsers /> Manage Applications
+                      </NavLink>
+                    </li>
+
+                    <li>
+                      <NavLink to="/dashboard/addNews">
+                        <FaRegNewspaper />
+                        News and Update
                       </NavLink>
                     </li>
                   </>
