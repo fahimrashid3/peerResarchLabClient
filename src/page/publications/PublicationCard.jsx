@@ -29,7 +29,7 @@ const PublicationsCard = ({ paper }) => {
   useEffect(() => {
     if (authorEmail) {
       axiosPublic
-        .get(`/paperAuthor/${authorEmail}`)
+        .get(`/post/${authorEmail}`)
         .then((res) => setAuthor(res.data))
         .catch((err) => console.error("Error fetching author:", err));
     }

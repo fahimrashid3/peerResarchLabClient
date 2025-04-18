@@ -146,7 +146,7 @@ const Login = () => {
                 type="submit"
                 className="btn btn-warning btn-outline border-1 border-b-8"
               >
-                Register Now
+                Login Now
               </button>
             </div>
           </form>

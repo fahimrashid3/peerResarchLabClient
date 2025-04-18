@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
+import { Link } from "react-router-dom";
 
 const NewsCart = ({ singleNews }) => {
   // If singleNews is undefined or null, return null (or a skeleton loader)
@@ -7,7 +8,7 @@ const NewsCart = ({ singleNews }) => {
     return <p>Loading...</p>;
   }
 
-  const { _id, authorEmail, createdAt, title, details, imagez } = singleNews;
+  const { _id, authorEmail, createdAt, title, details, image } = singleNews;
   const dateTime = new Date(createdAt);
 
   // Format the date (e.g., "February 15, 2025")
@@ -32,7 +33,7 @@ const NewsCart = ({ singleNews }) => {
   useEffect(() => {
     if (authorEmail) {
       axiosPublic
-        .get(`/paperAuthor/${authorEmail}`)
+        .get(`/post/${authorEmail}`)
         .then((res) => setAuthor(res.data))
         .catch((err) => console.error("Error fetching author:", err));
     }
@@ -75,11 +76,7 @@ const NewsCart = ({ singleNews }) => {
       {/* News details Section */}
       <div className="space-y-5 mt-5 mb-5">
         <p className="font-bold text-2xl">{title}</p>
-        <img
-          className="h-80 mx-auto"
-          src={imagez}
-          alt={"imagez not available"}
-        />
+        <img className="h-80 mx-auto" src={image} alt={"image not available"} />
         <p>
           {details && details.length > 200 ? (
             <>
