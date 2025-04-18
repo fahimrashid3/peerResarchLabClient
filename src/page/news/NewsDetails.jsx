@@ -4,54 +4,48 @@ import { useEffect, useState } from "react";
 import Loading from "../../components/Loading";
 import { IoMdArrowRoundBack } from "react-icons/io";
 
-const PaperDetails = () => {
+const NewsDetails = () => {
   const { _id } = useParams();
   const axiosPublic = useAxiosPublic();
-  const [paper, setPaper] = useState(null);
+  const [news, setNews] = useState(null);
   const [loading, setLoading] = useState(true);
   const [author, setAuthor] = useState(null);
 
   useEffect(() => {
     if (_id) {
       axiosPublic
-        .get(`/researchPaper/${_id}`)
-        .then((res) => setPaper(res.data))
-        .catch((error) => console.error("Error fetching paper:", error))
+        .get(`/news/${_id}`)
+        .then((res) => {
+          console.log(res.data);
+          setNews(res.data);
+        })
+        .catch((error) => {
+          console.error("Error fetching news:", error);
+          alert("Failed to load news. Please try again.");
+        })
         .finally(() => setLoading(false));
     }
   }, [_id, axiosPublic]);
 
   useEffect(() => {
-    if (paper?.authorEmail) {
+    if (news?.authorEmail) {
       axiosPublic
-        .get(`/post/${paper.authorEmail}`)
+        .get(`/post/${news.authorEmail}`)
         .then((res) => setAuthor(res.data))
         .catch((err) => console.error("Error fetching author:", err));
     }
-  }, [paper?.authorEmail, axiosPublic]);
+  }, [news?.authorEmail, axiosPublic]);
 
   if (loading) return <Loading />;
-  if (!paper) return <p>Paper not found</p>;
+  if (!news) return <p className="text-center text-red-600">News not found.</p>;
 
-  const { authorEmail, createdAt, title, details, rating, image } = paper;
-
-  const dateTime = new Date(createdAt);
-  const date = dateTime.toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
-  const time = dateTime.toLocaleTimeString("en-US", {
-    hour: "2-digit",
-    minute: "2-digit",
-    second: "2-digit",
-    hour12: true,
-  });
+  const { authorEmail, createdAt, title, details, image } = news;
 
   return (
     <div className="lg:pt-24 lg:max-w-[90%] max-w-[95%] mx-auto min-h-screen">
       <div className="grid grid-cols-4 gap-5">
-        <div className="col-span-3">
+        {/* News Content */}
+        <div className="col-span-4 lg:col-span-3">
           <div className="border p-4 space-y-5">
             <img
               className="lg:h-96 mx-auto w-full object-cover rounded-md"
@@ -69,7 +63,6 @@ const PaperDetails = () => {
                   />
                   <div>
                     <p className="font-semibold text-xl">{author.name}</p>
-
                     <div className="flex gap-5 font-semibold text-gray-600">
                       <p>{authorEmail}</p>
                     </div>
@@ -101,7 +94,8 @@ const PaperDetails = () => {
           </div>
         </div>
 
-        <div className="col-span-1">
+        {/* Right Side Panel */}
+        <div className="col-span-4 lg:col-span-1">
           <h1 className="font-semibold text-xl mb-2">Additional Content</h1>
           <p>Any additional content can be displayed here.</p>
         </div>
@@ -110,4 +104,4 @@ const PaperDetails = () => {
   );
 };
 
-export default PaperDetails;
+export default NewsDetails;

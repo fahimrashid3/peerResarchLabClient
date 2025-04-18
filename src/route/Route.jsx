@@ -22,6 +22,7 @@ import ResearchAres from "../page/researchAreas/ResearchAres";
 import ResearchAreasDetails from "../page/researchAreas/ResearchAreasDetails";
 import Application from "../page/joinUs/Application";
 import AddNews from "../page/dashboard/adminPages/AddNews";
+import NewsDetails from "../page/news/NewsDetails";
 
 export const router = createBrowserRouter([
   {
@@ -51,6 +52,10 @@ export const router = createBrowserRouter([
       {
         path: "/paper/:_id",
         element: <PaperDetails />,
+      },
+      {
+        path: "/news/:_id",
+        element: <NewsDetails />,
       },
       {
         path: "/team",
