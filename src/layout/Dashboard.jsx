@@ -84,7 +84,13 @@ const DashBoard = () => {
               <li>
                 <NavLink to="/dashboard/addNews">
                   <FaRegNewspaper />
-                  News and Update
+                  Add New News and Update
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/dashboard/writeResearch">
+                  <FaRegNewspaper />
+                  Add New News and Update
                 </NavLink>
               </li>
             </>

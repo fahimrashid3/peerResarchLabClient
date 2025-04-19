@@ -5,7 +5,7 @@ import { FiLogIn } from "react-icons/fi";
 import { CiLogout } from "react-icons/ci";
 import Swal from "sweetalert2";
 import NavLinks from "./Navlink";
-import { FaHome, FaRegNewspaper, FaUsers } from "react-icons/fa";
+import { FaEdit, FaHome, FaRegNewspaper, FaUsers } from "react-icons/fa";
 import useAdmin from "../../../hooks/useAdmin";
 import useUsers from "../../../hooks/useUser";
 
@@ -145,23 +145,31 @@ const Navbar = () => {
                   </>
                 )}
                 <>
-                  <li>
-                    {user ? (
-                      <p onClick={handelLogout}>
-                        <span className="text-2xl font-semibold">
-                          <CiLogout />{" "}
-                        </span>
-                        logout
-                      </p>
-                    ) : (
-                      <Link to="/login">
-                        <span className="text-2xl">
-                          <FiLogIn />{" "}
-                        </span>
-                        Login
-                      </Link>
-                    )}
-                  </li>
+                  {user ? (
+                    <>
+                      <li>
+                        <NavLink to="/dashboard/writeResearch">
+                          <FaEdit />
+                          Write New Research Paper
+                        </NavLink>
+                      </li>
+                      <li onClick={handelLogout}>
+                        <p>
+                          <span className="text-2xl font-semibold">
+                            <CiLogout />
+                          </span>
+                          logout
+                        </p>
+                      </li>
+                    </>
+                  ) : (
+                    <Link to="/login">
+                      <span className="text-2xl">
+                        <FiLogIn />
+                      </span>
+                      Login
+                    </Link>
+                  )}
                 </>
               </ul>
             </div>

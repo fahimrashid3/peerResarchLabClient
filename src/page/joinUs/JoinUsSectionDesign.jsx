@@ -101,14 +101,14 @@ const JoinUsSectionDesign = ({ data }) => {
             {role}
           </p>
           <p>
-            <span className="font-bold text-lg">Qualifications:</span>{" "}
+            <span className="font-bold text-lg">Qualifications:</span>
             {qualifications}
           </p>
           <p>
             <span className="font-bold text-lg">Experience:</span> {experience}
           </p>
           <p>
-            <span className="font-bold text-lg">International Exposure:</span>{" "}
+            <span className="font-bold text-lg">International Exposure:</span>
             {internationalExposure}
           </p>
         </div>

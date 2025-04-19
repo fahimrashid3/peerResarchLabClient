@@ -21,17 +21,10 @@ const News = () => {
   }
 
   return (
-    <div className="pt-16">
+    <div className="pt-16 max-w-7xl mx-auto border">
       <div className="grid md:grid-cols-4 grid-cols-1 gap-6 mt-10">
-        {/* Filter Section */}
-        <div className="md:col-span-1 h-[80vh] overflow-y-auto sticky top-16">
-          <div className="pt-10">
-            <p>Filter functionalities will be added in this side</p>
-          </div>
-        </div>
-
         {/* Blog Section */}
-        <div className="md:col-span-2 h-[80vh] overflow-y-auto min-h-screen px-5 space-y-5">
+        <div className="md:col-span-3 h-[80vh] overflow-y-auto min-h-screen px-5 space-y-5">
           {news.map((singleNews) => (
             <NewsCart key={singleNews._id} singleNews={singleNews} />
           ))}

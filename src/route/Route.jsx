@@ -23,6 +23,7 @@ import ResearchAreasDetails from "../page/researchAreas/ResearchAreasDetails";
 import Application from "../page/joinUs/Application";
 import AddNews from "../page/dashboard/adminPages/AddNews";
 import NewsDetails from "../page/news/NewsDetails";
+import WriteResearchPaper from "../page/dashboard/userPages/WriteResearchPaper";
 
 export const router = createBrowserRouter([
   {
@@ -110,7 +111,19 @@ export const router = createBrowserRouter([
       // user routs
       {
         path: "userProfile",
-        element: <UserProfile />,
+        element: (
+          <PrivetRoute>
+            <UserProfile />
+          </PrivetRoute>
+        ),
+      },
+      {
+        path: "writeResearch",
+        element: (
+          <PrivetRoute>
+            <WriteResearchPaper />
+          </PrivetRoute>
+        ),
       },
 
       // admin routs
