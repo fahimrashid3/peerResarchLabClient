@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
 import useUsers from "../../../hooks/useUser";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useNavigate } from "react-router-dom";
@@ -6,10 +6,12 @@ import { useForm } from "react-hook-form";
 import Resizer from "react-image-file-resizer";
 import axios from "axios";
 import Loading from "../../../components/Loading";
+import useAxiosPublic from "../../../hooks/useAxiosPublic";
 
 const WriteResearchPaper = () => {
   const [users, loading] = useUsers();
   const axiosSecure = useAxiosSecure();
+  const axiosPublic = useAxiosPublic();
   const navigate = useNavigate();
   const cloud_name = import.meta.env.VITE_CLOUD_NAME;
   const preset_key = import.meta.env.VITE_PRESET_KEY;
@@ -21,6 +23,13 @@ const WriteResearchPaper = () => {
   } = useForm();
   const [image, setImage] = useState(null);
   const [error, setError] = useState(null);
+  const [researchArea, setResearchArea] = useState([]);
+
+  useEffect(() => {
+    axiosPublic.get("/researchArea").then((res) => {
+      setResearchArea(res.data);
+    });
+  }, [axiosPublic]);
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -48,6 +57,7 @@ const WriteResearchPaper = () => {
     });
 
   const onSubmit = async (data) => {
+    console.log(data);
     if (!cloud_name || !preset_key) {
       throw new Error("Cloudinary configuration is missing");
     }
@@ -70,6 +80,7 @@ const WriteResearchPaper = () => {
           title: data.title,
           details: data.details,
           authorEmail: users.email,
+          category: data.category,
           image: photoUrl, // Save the Cloudinary image URL
         };
         // post Research to database
@@ -86,7 +97,6 @@ const WriteResearchPaper = () => {
             });
           }
         });
-        console.log("New News Object:", newNews);
       } catch (error) {
         setError("Error uploading image to Cloudinary.");
         console.error("Error uploading image:", error);
@@ -120,6 +130,25 @@ const WriteResearchPaper = () => {
           {errors.title && (
             <span className="text-red-500">{errors.title.message}</span>
           )}
+        </div>
+        <div className="flex-1">
+          <label className="label">
+            <span className="label-text">researchArea</span>
+          </label>
+          <select
+            defaultValue="default"
+            {...register("category", { required: true })}
+            className="select select-bordered w-full"
+          >
+            <option disabled value="default">
+              Select an item
+            </option>
+            {researchArea.map((Area, index) => (
+              <option key={index} value={Area.departmentName}>
+                {Area.departmentName}
+              </option>
+            ))}
+          </select>
         </div>
         <div className="mb-4">
           <label className="block font-semibold text-lg" htmlFor="details">
