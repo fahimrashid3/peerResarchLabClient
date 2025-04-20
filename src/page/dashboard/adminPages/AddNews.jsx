@@ -70,7 +70,6 @@ const AddNews = () => {
         const newNews = {
           title: data.title,
           details: data.details,
-          authorEmail: users.email,
           image: photoUrl, // Save the Cloudinary image URL
         };
         // post News to database

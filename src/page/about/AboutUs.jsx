@@ -3,6 +3,7 @@ import useInfo from "../../hooks/useInfo";
 import Loading from "../../components/Loading";
 import AboutPageDesign from "./AboutPageDesign";
 import AboutPageDesignRevers from "./AboutPageDesignRevers";
+import ScrollToTop from "../../components/ScroolToTop";
 
 const AboutUs = () => {
   const [info, infoLoading] = useInfo();
@@ -38,6 +39,7 @@ const AboutUs = () => {
       <AboutPageDesign data={history}></AboutPageDesign>
       <div className="divider divider-neutral font-bold">// \\</div>
       <AboutPageDesignRevers data={vision}></AboutPageDesignRevers>
+      <ScrollToTop />
     </div>
   );
 };

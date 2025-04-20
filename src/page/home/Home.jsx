@@ -1,3 +1,4 @@
+import ScrollToTop from "../../components/ScroolToTop";
 import Carousel from "./Carousel";
 import ResentWorks from "./ResentWorks";
 
@@ -6,6 +7,7 @@ const Home = () => {
     <div>
       <Carousel></Carousel>
       <ResentWorks></ResentWorks>
+      <ScrollToTop />
     </div>
   );
 };

@@ -1,6 +1,7 @@
 import React from "react";
 import useNews from "../../hooks/useNews";
 import NewsCart from "./NewsCart";
+import ScrollToTop from "../../components/ScroolToTop";
 
 const News = () => {
   // Use the useNews hook
@@ -21,21 +22,13 @@ const News = () => {
   }
 
   return (
-    <div className="pt-16 max-w-7xl mx-auto border">
-      <div className="grid md:grid-cols-4 grid-cols-1 gap-6 mt-10">
-        {/* Blog Section */}
-        <div className="md:col-span-3 h-[80vh] overflow-y-auto min-h-screen px-5 space-y-5">
-          {news.map((singleNews) => (
-            <NewsCart key={singleNews._id} singleNews={singleNews} />
-          ))}
-        </div>
-
-        {/* Additional Content Section */}
-        <div className="md:col-span-1 h-[80vh] overflow-y-auto sticky top-16">
-          <h1 className="font-semibold text-xl mb-2">Additional content</h1>
-          <h1>We can show anything in this section</h1>
-        </div>
+    <div className="md:pt-24 max-w-7xl mx-auto">
+      <div className="px-5 space-y-5">
+        {news.map((singleNews) => (
+          <NewsCart key={singleNews._id} singleNews={singleNews} />
+        ))}
       </div>
+      <ScrollToTop />
     </div>
   );
 };

@@ -79,7 +79,6 @@ const WriteResearchPaper = () => {
         const newResearch = {
           title: data.title,
           details: data.details,
-          authorEmail: users.email,
           category: data.category,
           image: photoUrl, // Save the Cloudinary image URL
         };

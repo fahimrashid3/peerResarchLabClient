@@ -2,6 +2,7 @@ import React from "react";
 import useResearchPapers from "../../hooks/useResearchPapers";
 import Loading from "../../components/Loading";
 import PublicationsCard from "./PublicationCard";
+import ScrollToTop from "../../components/ScroolToTop";
 
 const Publications = () => {
   const [researchPaper, researchPaperLoading] = useResearchPapers();
@@ -21,6 +22,7 @@ const Publications = () => {
           <p>No blogs found in this category</p>
         )}
       </div>
+      <ScrollToTop />
     </div>
   );
 };

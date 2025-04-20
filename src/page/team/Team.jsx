@@ -5,6 +5,7 @@ import SectionTitle from "../../components/SectionTitle";
 import AdvisorCard from "./AdvisorCard";
 import ResearcherCard from "./ResearcherCard";
 import AssistantCart from "./AssistantCart";
+import ScrollToTop from "../../components/ScroolToTop";
 
 const Team = () => {
   const [team, teamLoading] = useTeam();
@@ -66,6 +67,7 @@ const Team = () => {
           ))}
         </div>
       </div>
+      <ScrollToTop />
     </div>
   );
 };

@@ -4,6 +4,7 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import SectionTitle from "../../../components/SectionTitle";
 import { FaEdit } from "react-icons/fa";
 import Swal from "sweetalert2";
+import ScrollToTop from "../../../components/ScroolToTop";
 
 const AllUsers = () => {
   const axiosSecure = useAxiosSecure();
@@ -95,6 +96,7 @@ const AllUsers = () => {
           </tbody>
         </table>
       </div>
+      <ScrollToTop />
     </div>
   );
 };

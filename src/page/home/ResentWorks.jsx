@@ -26,6 +26,12 @@ const ResentWorks = () => {
       isMounted = false;
     };
   }, []);
+  const handleShowMore = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
 
   return (
     <div>
@@ -41,6 +47,7 @@ const ResentWorks = () => {
       </div>
       <div className="flex items-center justify-center my-5 md:my-10">
         <Link
+          onClick={handleShowMore}
           to={"/publications"}
           className="btn border-b-8 font-semibold text-primary-900 hover:text-white hover:border-primary-600 border-primary-700 bg-primary-100 hover:bg-primary-500 transition-all duration-200"
         >
