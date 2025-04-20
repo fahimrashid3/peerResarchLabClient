@@ -6,8 +6,9 @@ import PublicationsCard from "./PublicationCard";
 const Publications = () => {
   const [researchPaper, researchPaperLoading] = useResearchPapers();
 
-  // Log the fetched data
-  console.log("Research Papers in Publications:", researchPaper);
+  if (researchPaperLoading) {
+    return <Loading />;
+  }
 
   return (
     <div className="pt-24 max-w-7xl mx-auto bg-dark-200">

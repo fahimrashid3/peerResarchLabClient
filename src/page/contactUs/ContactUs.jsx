@@ -1,5 +1,5 @@
 import React from "react";
-import SectionTitle from "../../components/SectionTitle";
+// import SectionTitle from "../../components/SectionTitle";
 import ContactForm from "./ContactForm";
 import { FaFacebookF, FaMapMarkerAlt, FaPhone } from "react-icons/fa";
 import { FaLinkedinIn, FaXTwitter } from "react-icons/fa6";
@@ -37,15 +37,10 @@ const ContactUs = () => {
   };
 
   return (
-    <div className="pt-10">
+    <div className="pt-10  bg-primary-100 dark:bg-dark-700 rounded-lg text-dark-900 dark:text-white">
       <div className="mt-6 md:mt-10">
-        <SectionTitle heading="Contact Form" subHeading="Send Us a Message" />
-        <div
-          className="
-            bg-primary-100 dark:bg-dark-700 rounded-lg text-dark-900 dark:text-white py-5 md:py-14 lg:py-20 space-y-5
-            md:flex
-          "
-        >
+        {/* <SectionTitle heading="Contact Form" subHeading="Send Us a Message" /> */}
+        <div className="py-5 md:py-14 lg:py-20 space-y-5 md:flex">
           <div className="flex-1">
             <ContactForm />
           </div>

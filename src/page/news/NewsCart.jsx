@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import { Link } from "react-router-dom";
+import Loading from "../../components/Loading";
 
 const NewsCart = ({ singleNews }) => {
   // If singleNews is undefined or null, return null (or a skeleton loader)
   if (!singleNews) {
-    return <p>Loading...</p>;
+    return <Loading />;
   }
 
   const { _id, authorEmail, createdAt, title, details, image } = singleNews;

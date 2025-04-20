@@ -33,7 +33,7 @@ const PaperDetails = () => {
   if (loading) return <Loading />;
   if (!paper) return <p>Paper not found</p>;
 
-  const { authorEmail, createdAt, title, details, rating, image } = paper;
+  const { authorEmail, createdAt, title, details, image } = paper;
 
   const dateTime = new Date(createdAt);
   const date = dateTime.toLocaleDateString("en-US", {
@@ -57,6 +57,11 @@ const PaperDetails = () => {
               className="lg:h-96 mx-auto w-full object-cover rounded-md"
               src={image}
               alt={title}
+              onError={(e) => {
+                e.target.onerror = null;
+                e.target.src =
+                  "https://res.cloudinary.com/dipwayvsu/image/upload/w_1000,ar_16:9,c_fill,g_auto,e_sharpen/v1745146763/uauic3zxcvxvdepwl3dk.webp";
+              }}
             />
 
             <div className="flex items-start">

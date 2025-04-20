@@ -38,8 +38,17 @@ const PublicationsCard = ({ paper }) => {
   return (
     <Link to={`/paper/${_id}`} className="block">
       <div className="mb-10 border space-y-5 p-5 rounded-lg w-96 h-[500px] card bg-base-100 shadow-sm hover:shadow-xl transition duration-300 cursor-pointer overflow-hidden">
-        <figure className="h-72">
-          <img className="w-full h-full object-cover" src={image} alt={title} />
+        <figure className="h-72 w-[345px]">
+          <img
+            className="w-full h-full object-cover"
+            src={image}
+            alt={title}
+            onError={(e) => {
+              e.target.onerror = null;
+              e.target.src =
+                "https://res.cloudinary.com/dipwayvsu/image/upload/w_1000,ar_16:9,c_fill,g_auto,e_sharpen/v1745146763/uauic3zxcvxvdepwl3dk.webp";
+            }}
+          />
         </figure>
 
         <div className="flex bg-gray-50 text-black justify-between rounded-t-lg">
