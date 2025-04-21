@@ -80,8 +80,13 @@ const ShortCard = ({ researchPaper }) => {
               </div>
             )}
           </div>
-          <h2 className="lg:text-xl text-lg font-bold line-clamp-2">{title}</h2>
-          <p className="mt-2 text-sm line-clamp-3">{details}</p>
+          <h2
+            className="lg:text-xl text-lg font-bold line-clamp-1 text-justify"
+            title={title}
+          >
+            {title}
+          </h2>
+          <p className="mt-2 text-sm line-clamp-3 text-justify">{details}</p>
         </div>
       </div>
     </Link>

@@ -13,9 +13,11 @@ import { FaSchoolCircleExclamation } from "react-icons/fa6";
 import { IoMdPersonAdd } from "react-icons/io";
 import { VscOpenPreview } from "react-icons/vsc";
 import useAdmin from "../hooks/useAdmin";
+import useRole from "../hooks/useRole";
 
 const DashBoard = () => {
   const [isAdmin] = useAdmin();
+  const [role] = useRole();
   return (
     <div className="drawer lg:drawer-open">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />

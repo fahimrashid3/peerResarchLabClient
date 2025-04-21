@@ -144,17 +144,28 @@ const Navbar = () => {
                 ) : role ? (
                   <>
                     <li>
-                      <NavLink to="/dashboard/writeResearch">
-                        <FaEdit />
-                        Write New Research Paper
-                      </NavLink>
+                      <Link to="/dashboard/userProfile">
+                        <span className="text-xl">
+                          <CgProfile />
+                        </span>
+                        Profile
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to="/dashboard/writeResearch">
+                        <span className="text-xl">
+                          <FaEdit />
+                        </span>
+                        Write Research Paper
+                      </Link>
                     </li>
                   </>
                 ) : (
                   <>
+                    {/* TODO:change the profile links  */}
                     <li>
                       <Link to="/dashboard/userProfile">
-                        <span className="text-2xl">
+                        <span className="text-xl">
                           <CgProfile />
                         </span>
                         Profile
@@ -167,7 +178,7 @@ const Navbar = () => {
                     <>
                       <li onClick={handelLogout}>
                         <p>
-                          <span className="text-2xl font-semibold">
+                          <span className="text-xl font-semibold">
                             <CiLogout />
                           </span>
                           logout
@@ -178,7 +189,7 @@ const Navbar = () => {
                     <Link to="/login">
                       <li>
                         <p className="flex">
-                          <span className="text-2xl">
+                          <span className="text-xl">
                             <FiLogIn />
                           </span>
                           Login

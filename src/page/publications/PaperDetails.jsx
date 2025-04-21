@@ -10,7 +10,12 @@ const PaperDetails = () => {
   const [paper, setPaper] = useState(null);
   const [loading, setLoading] = useState(true);
   const [author, setAuthor] = useState(null);
-
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
   useEffect(() => {
     if (_id) {
       axiosPublic
@@ -98,6 +103,7 @@ const PaperDetails = () => {
 
             <Link
               to={"/publications"}
+              onClick={scrollToTop}
               className="btn bg-transparent border-1 border-b-4 mx-auto border-primary-600 text-primary-600 hover:bg-primary-600 hover:text-white hover:border-primary-600"
             >
               <IoMdArrowRoundBack />
