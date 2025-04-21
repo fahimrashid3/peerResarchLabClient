@@ -2,6 +2,7 @@ import React from "react";
 import useNews from "../../hooks/useNews";
 import NewsCart from "./NewsCart";
 import ScrollToTop from "../../components/ScroolToTop";
+import Loading from "../../components/Loading";
 
 const News = () => {
   // Use the useNews hook
@@ -9,7 +10,7 @@ const News = () => {
 
   // Show loading message while data is being fetched
   if (newsLoading) {
-    return <div className="text-center pt-20 text-xl">Loading News...</div>;
+    return <Loading />;
   }
 
   // Show a message if no news is found

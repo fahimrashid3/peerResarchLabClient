@@ -1,13 +1,5 @@
 import { NavLink, Outlet } from "react-router-dom";
-import {
-  FaCalendar,
-  FaCalendarCheck,
-  FaDollarSign,
-  FaHome,
-  FaPhone,
-  FaRegNewspaper,
-  FaUsers,
-} from "react-icons/fa";
+import { FaHome, FaPhone, FaRegNewspaper, FaUsers } from "react-icons/fa";
 import {
   MdOutlineGroupAdd,
   MdOutlineMenuOpen,
@@ -19,6 +11,7 @@ import { HiMiniUserGroup } from "react-icons/hi2";
 import { BsEnvelopePaper } from "react-icons/bs";
 import { FaSchoolCircleExclamation } from "react-icons/fa6";
 import { IoMdPersonAdd } from "react-icons/io";
+import { VscOpenPreview } from "react-icons/vsc";
 import useAdmin from "../hooks/useAdmin";
 
 const DashBoard = () => {
@@ -79,6 +72,12 @@ const DashBoard = () => {
                 <NavLink to="/dashboard/applications">
                   <IoMdPersonAdd />
                   Manage Applications
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/dashboard/reviewResearch">
+                  <VscOpenPreview />
+                  Review Research Paper
                 </NavLink>
               </li>
               <li>

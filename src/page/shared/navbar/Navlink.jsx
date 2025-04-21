@@ -2,10 +2,17 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 
 const NavLinks = () => {
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
   return (
     <>
       <li>
         <NavLink
+          onClick={scrollToTop}
           style={({ isActive, isTransitioning }) => {
             return {
               background: isActive ? "transparent" : "transparent",
@@ -21,6 +28,7 @@ const NavLinks = () => {
       </li>
       <li>
         <NavLink
+          onClick={scrollToTop}
           style={({ isActive, isTransitioning }) => {
             return {
               background: isActive ? "transparent" : "transparent",
@@ -38,6 +46,7 @@ const NavLinks = () => {
       {/* Other NavLinks remain unchanged */}
       <li>
         <NavLink
+          onClick={scrollToTop}
           style={({ isActive, isTransitioning }) => {
             return {
               background: isActive ? "transparent" : "transparent",
@@ -54,6 +63,7 @@ const NavLinks = () => {
 
       <li>
         <NavLink
+          onClick={scrollToTop}
           style={({ isActive, isTransitioning }) => {
             return {
               background: isActive ? "transparent" : "transparent",
@@ -70,6 +80,7 @@ const NavLinks = () => {
 
       <li>
         <NavLink
+          onClick={scrollToTop}
           style={({ isActive, isTransitioning }) => {
             return {
               background: isActive ? "transparent" : "transparent",
@@ -86,6 +97,7 @@ const NavLinks = () => {
 
       <li>
         <NavLink
+          onClick={scrollToTop}
           style={({ isActive, isTransitioning }) => {
             return {
               background: isActive ? "transparent" : "transparent",
@@ -101,6 +113,7 @@ const NavLinks = () => {
       </li>
       <li>
         <NavLink
+          onClick={scrollToTop}
           style={({ isActive, isTransitioning }) => {
             return {
               background: isActive ? "transparent" : "transparent",
@@ -116,6 +129,7 @@ const NavLinks = () => {
       </li>
       <li>
         <NavLink
+          onClick={scrollToTop}
           style={({ isActive, isTransitioning }) => {
             return {
               background: isActive ? "transparent" : "transparent",
@@ -131,6 +145,7 @@ const NavLinks = () => {
       </li>
       <li>
         <NavLink
+          onClick={scrollToTop}
           style={({ isActive, isTransitioning }) => {
             return {
               background: isActive ? "transparent" : "transparent",

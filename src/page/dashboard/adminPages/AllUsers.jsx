@@ -79,7 +79,7 @@ const AllUsers = () => {
                 </td>
                 <td className="font-bold">{user.name}</td>
                 <td>{user.email}</td>
-                <th>
+                <td>
                   {user.role ? (
                     <p>{user.role}</p>
                   ) : (
@@ -90,7 +90,7 @@ const AllUsers = () => {
                       <FaEdit />
                     </button>
                   )}
-                </th>
+                </td>
               </tr>
             ))}
           </tbody>

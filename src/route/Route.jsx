@@ -24,6 +24,7 @@ import Application from "../page/joinUs/Application";
 import AddNews from "../page/dashboard/adminPages/AddNews";
 import NewsDetails from "../page/news/NewsDetails";
 import WriteResearchPaper from "../page/dashboard/userPages/WriteResearchPaper";
+import ReviewResearch from "../page/dashboard/adminPages/ReviewResearch";
 
 export const router = createBrowserRouter([
   {
@@ -148,6 +149,14 @@ export const router = createBrowserRouter([
         element: (
           <AdminRoute>
             <ManageApplication />
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "reviewResearch",
+        element: (
+          <AdminRoute>
+            <ReviewResearch />
           </AdminRoute>
         ),
       },

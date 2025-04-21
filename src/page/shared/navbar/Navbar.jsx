@@ -5,6 +5,7 @@ import { FiLogIn } from "react-icons/fi";
 import { CiLogout } from "react-icons/ci";
 import Swal from "sweetalert2";
 import NavLinks from "./Navlink";
+import { VscOpenPreview } from "react-icons/vsc";
 import { FaEdit, FaHome, FaRegNewspaper, FaUsers } from "react-icons/fa";
 import useAdmin from "../../../hooks/useAdmin";
 import useUsers from "../../../hooks/useUser";
@@ -124,6 +125,12 @@ const Navbar = () => {
                         <FaUsers /> Manage Applications
                       </NavLink>
                     </li>
+                    <li>
+                      <NavLink to="/dashboard/reviewResearch">
+                        <VscOpenPreview />
+                        Review Research Paper
+                      </NavLink>
+                    </li>
 
                     <li>
                       <NavLink to="/dashboard/addNews">
@@ -164,10 +171,14 @@ const Navbar = () => {
                     </>
                   ) : (
                     <Link to="/login">
-                      <span className="text-2xl">
-                        <FiLogIn />
-                      </span>
-                      Login
+                      <li>
+                        <p className="flex">
+                          <span className="text-2xl">
+                            <FiLogIn />
+                          </span>
+                          Login
+                        </p>
+                      </li>
                     </Link>
                   )}
                 </>
