@@ -9,11 +9,13 @@ import { VscOpenPreview } from "react-icons/vsc";
 import { FaEdit, FaHome, FaRegNewspaper, FaUsers } from "react-icons/fa";
 import useAdmin from "../../../hooks/useAdmin";
 import useUsers from "../../../hooks/useUser";
+import useRole from "../../../hooks/useRole";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
   const [users] = useUsers();
   const [isAdmin] = useAdmin();
+  const [role] = useRole();
   const handelLogout = () => {
     Swal.fire({
       title: "Are you sure?",
@@ -139,6 +141,15 @@ const Navbar = () => {
                       </NavLink>
                     </li>
                   </>
+                ) : role ? (
+                  <>
+                    <li>
+                      <NavLink to="/dashboard/writeResearch">
+                        <FaEdit />
+                        Write New Research Paper
+                      </NavLink>
+                    </li>
+                  </>
                 ) : (
                   <>
                     <li>
@@ -154,12 +165,6 @@ const Navbar = () => {
                 <>
                   {user ? (
                     <>
-                      <li>
-                        <NavLink to="/dashboard/writeResearch">
-                          <FaEdit />
-                          Write New Research Paper
-                        </NavLink>
-                      </li>
                       <li onClick={handelLogout}>
                         <p>
                           <span className="text-2xl font-semibold">

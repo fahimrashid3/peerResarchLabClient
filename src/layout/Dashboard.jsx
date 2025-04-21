@@ -86,10 +86,13 @@ const DashBoard = () => {
                   Add New News and Update
                 </NavLink>
               </li>
+            </>
+          ) : role ? (
+            <>
               <li>
                 <NavLink to="/dashboard/writeResearch">
                   <FaRegNewspaper />
-                  Add New News and Update
+                  Write new Research Paper
                 </NavLink>
               </li>
             </>
