@@ -8,6 +8,7 @@ const PaperDetails = () => {
   const { _id } = useParams();
   const axiosPublic = useAxiosPublic();
   const [paper, setPaper] = useState(null);
+  const [morePapers, setMorePapers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [author, setAuthor] = useState(null);
   const scrollToTop = () => {
@@ -31,6 +32,15 @@ const PaperDetails = () => {
       axiosPublic
         .get(`/post/${paper.authorEmail}`)
         .then((res) => setAuthor(res.data))
+        .catch((err) => console.error("Error fetching author:", err));
+    }
+  }, [paper?.authorEmail, axiosPublic]);
+
+  useEffect(() => {
+    if (paper?.authorEmail) {
+      axiosPublic
+        .get(`/morePaper/${paper._id}`)
+        .then((res) => setMorePapers(res.data))
         .catch((err) => console.error("Error fetching author:", err));
     }
   }, [paper?.authorEmail, axiosPublic]);
@@ -99,7 +109,9 @@ const PaperDetails = () => {
             </div>
 
             <h2 className="text-2xl font-bold">{title}</h2>
-            <p className="text-lg text-justify">{details}</p>
+            <p className="text-lg text-justify whitespace-pre-line">
+              {details}
+            </p>
 
             <Link
               to={"/publications"}
@@ -112,9 +124,47 @@ const PaperDetails = () => {
           </div>
         </div>
 
-        <div className="col-span-1">
-          <h1 className="font-semibold text-xl mb-2">Additional Content</h1>
-          <p>Any additional content can be displayed here.</p>
+        <div className="col-span-1 mt-5 space-y-5">
+          <h1 className="font-semibold text-xl mb-2">
+            More Research from {author?.name || "Author"}
+          </h1>
+
+          <div className="space-y-3">
+            {morePapers.map((morePaper) => (
+              <Link to={`/paper/${morePaper._id}`} className="block">
+                <div
+                  className="flex items-center p-3 bg-dark-200 text-dark-900 dark:bg-dark-800 dark:text-white shadow-xl rounded-lg 
+                
+                border border-dark-500"
+                >
+                  {/* Fixed height */}
+                  <figure className="flex-shrink-0 border-2 rounded-lg">
+                    <img
+                      className="h-32 w-24 rounded-lg object-cover"
+                      src={morePaper.image}
+                      alt={morePaper.title}
+                      onError={(e) => {
+                        e.target.onerror = null;
+                        e.target.src =
+                          "https://res.cloudinary.com/dipwayvsu/image/upload/v1745146763/uauic3zxcvxvdepwl3dk.webp";
+                      }}
+                    />
+                  </figure>
+                  <div className="ml-4 flex flex-col justify-center">
+                    <h2
+                      className="lg:text-xl text-lg font-bold line-clamp-2"
+                      title={morePaper.title}
+                    >
+                      {morePaper.title}
+                    </h2>
+                    <p className="mt-2 text-sm line-clamp-3 text-justify">
+                      {morePaper.details}
+                    </p>
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
         </div>
       </div>
     </div>

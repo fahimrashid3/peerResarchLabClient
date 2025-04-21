@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import SectionTitle from "../../components/SectionTitle";
 import { Link } from "react-router-dom";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
-import ShortCard from "../../components/shortCard";
+import ShortCard from "../../components/ShortCard";
 
 const ResentWorks = () => {
   const [researchPapers, setResearchPapers] = useState([]);

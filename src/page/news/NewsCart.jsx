@@ -43,7 +43,7 @@ const NewsCart = ({ singleNews }) => {
   return (
     <div className="mb-24 border p-5 rounded-lg">
       {/* Author Section */}
-      <div className="flex bg-gray-50 text-black justify-between rounded-t-lg">
+      <div className="flex bg-gray-50 text-dark-900 justify-between rounded-t-lg">
         <div className="flex">
           {author ? (
             <>

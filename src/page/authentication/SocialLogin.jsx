@@ -25,7 +25,7 @@ const SocialLogin = () => {
     <div className="flex justify-center items-center gap-5 font-bold">
       <button
         onClick={handleGoogleSignIn}
-        className="btn bg-white text-black border-[#e5e5e5] w-full"
+        className="btn bg-white text-dark-900 border-[#e5e5e5] w-full"
       >
         <svg
           aria-label="Google logo"

@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import { Link } from "react-router-dom";
+import Loading from "../../components/Loading";
 
 const PublicationsCard = ({ paper }) => {
   if (!paper) {
-    return <p>fahim</p>;
+    return <Loading />;
   }
 
-  const { _id, authorEmail, createdAt, title, details, rating, image } = paper;
+  const { _id, authorEmail, createdAt, title, details, image } = paper;
   const dateTime = new Date(createdAt);
 
   const date = dateTime.toLocaleDateString("en-US", {
@@ -51,7 +52,7 @@ const PublicationsCard = ({ paper }) => {
           />
         </figure>
 
-        <div className="flex bg-gray-50 text-black justify-between rounded-t-lg">
+        <div className="flex bg-gray-50 text-dark-900 justify-between rounded-t-lg">
           <div className="flex">
             {author ? (
               <>
@@ -82,7 +83,12 @@ const PublicationsCard = ({ paper }) => {
           </div>
         </div>
         <div className="mt-2 space-y-2">
-          <h2 className="card-title text-lg">{title}</h2>
+          <h2
+            className="card-title text-lg line-clamp-2 text-dark-900"
+            title={title}
+          >
+            {title}
+          </h2>
           <p className="text-sm text-gray-700">
             {details.length > 200 ? `${details.slice(0, 200)}...` : details}
           </p>
