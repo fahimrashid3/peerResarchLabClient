@@ -2,10 +2,8 @@ import { NavLink, Outlet } from "react-router-dom";
 import { FaHome, FaPhone, FaRegNewspaper, FaUsers } from "react-icons/fa";
 import {
   MdOutlineGroupAdd,
-  MdOutlineMenuOpen,
   MdSubject,
 } from "react-icons/md";
-import { CgProfile } from "react-icons/cg";
 import { IoNewspaperOutline } from "react-icons/io5";
 import { HiMiniUserGroup } from "react-icons/hi2";
 import { BsEnvelopePaper } from "react-icons/bs";
@@ -99,16 +97,7 @@ const DashBoard = () => {
               </li>
             </>
           ) : (
-            <>
-              <li>
-                <NavLink to="/dashboard/userProfile">
-                  <span className="text-2xl">
-                    <CgProfile />
-                  </span>
-                  Profile
-                </NavLink>
-              </li>
-            </>
+            <></>
           )}
 
           <div className="divider"></div>
@@ -153,11 +142,6 @@ const DashBoard = () => {
           <li>
             <NavLink to="/news">
               <BsEnvelopePaper /> News and Updates
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="/blogs">
-              <MdOutlineMenuOpen /> Blogs
             </NavLink>
           </li>
         </ul>

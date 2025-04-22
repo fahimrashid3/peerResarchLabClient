@@ -13,7 +13,6 @@ import AdminHome from "../page/dashboard/adminPages/AdminHome";
 import AllUsers from "../page/dashboard/adminPages/AllUsers";
 import UserProfile from "../page/dashboard/userPages/UserProfile";
 import ManageApplication from "../page/dashboard/adminPages/ManageApplication";
-import Blogs from "../page/blogs/Blogs";
 import News from "../page/news/News";
 import PrivetRoute from "./PrivetRoute";
 import AdminRoute from "./AdminRoute";
@@ -66,10 +65,6 @@ export const router = createBrowserRouter([
       {
         path: "/news",
         element: <News />,
-      },
-      {
-        path: "/blogs",
-        element: <Blogs />,
       },
       {
         path: "/joinUs",

@@ -1,21 +1,22 @@
 import { Link, NavLink } from "react-router-dom";
 import { CgProfile } from "react-icons/cg";
-import useAuth from "../../../hooks/useAuth";
 import { FiLogIn } from "react-icons/fi";
 import { CiLogout } from "react-icons/ci";
-import Swal from "sweetalert2";
-import NavLinks from "./Navlink";
 import { VscOpenPreview } from "react-icons/vsc";
 import { FaEdit, FaHome, FaRegNewspaper, FaUsers } from "react-icons/fa";
+import Swal from "sweetalert2";
+import useAuth from "../../../hooks/useAuth";
 import useAdmin from "../../../hooks/useAdmin";
-import useUsers from "../../../hooks/useUser";
 import useRole from "../../../hooks/useRole";
+import useUsers from "../../../hooks/useUser";
+import NavLinks from "./Navlink";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
   const [users] = useUsers();
-  const [isAdmin] = useAdmin();
-  const [role] = useRole();
+  const [isAdmin, isAdminLoading] = useAdmin();
+  const [role, isRoleLoading] = useRole();
+
   const handelLogout = () => {
     Swal.fire({
       title: "Are you sure?",
@@ -41,6 +42,7 @@ const Navbar = () => {
       }
     });
   };
+
   return (
     <div className="bg-primary-400 bg-opacity-80 py-3 w-full z-[50] fixed">
       <div className="mx-auto">
@@ -71,12 +73,11 @@ const Navbar = () => {
                 tabIndex={0}
                 className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-primary-400 bg-opacity-50 rounded-box w-52"
               >
-                <NavLinks></NavLinks>
+                <NavLinks />
               </ul>
             </div>
             <Link to="/">
               <div className="btn btn-ghost bg-transparent hover:bg-transparent flex flex-col md:flex-row">
-                {/* <img src={""} className="hidden md:block rounded-md bg-white" /> */}
                 <h1 className="text-lg md:text-3xl font-bold text-white text-center sm:text-left">
                   Peer <span className="text-primary-600">Research</span> Lab
                 </h1>
@@ -85,7 +86,7 @@ const Navbar = () => {
           </div>
           <div className="navbar-center hidden lg:flex">
             <ul className="menu menu-horizontal px-1 text-base">
-              <NavLinks></NavLinks>
+              <NavLinks />
             </ul>
           </div>
           <div className="navbar-end">
@@ -108,40 +109,10 @@ const Navbar = () => {
 
               <ul
                 tabIndex={0}
-                className="dropdown-content menu bg-primary-400 bg-opacity-80 text-white dark:bg-gray-400 dark:text-dark-900  rounded-box z-[1] w-64 p-2 shadow"
+                className="dropdown-content menu bg-primary-400 bg-opacity-80 text-white dark:bg-gray-400 dark:text-dark-900 rounded-box z-[1] w-64 p-2 shadow"
               >
-                {isAdmin ? (
-                  <>
-                    <li>
-                      <NavLink to="/dashboard/adminHome">
-                        <FaHome /> Admin Home
-                      </NavLink>
-                    </li>
-                    <li>
-                      <NavLink to="/dashboard/allUsers">
-                        <FaUsers /> All Users
-                      </NavLink>
-                    </li>
-                    <li>
-                      <NavLink to="/dashboard/applications">
-                        <FaUsers /> Manage Applications
-                      </NavLink>
-                    </li>
-                    <li>
-                      <NavLink to="/dashboard/reviewResearch">
-                        <VscOpenPreview />
-                        Review Research Paper
-                      </NavLink>
-                    </li>
-
-                    <li>
-                      <NavLink to="/dashboard/addNews">
-                        <FaRegNewspaper />
-                        News and Update
-                      </NavLink>
-                    </li>
-                  </>
-                ) : role ? (
+                {/* Common Role-Based Links */}
+                {!isRoleLoading && role && (
                   <>
                     <li>
                       <Link to="/dashboard/userProfile">
@@ -160,44 +131,61 @@ const Navbar = () => {
                       </Link>
                     </li>
                   </>
-                ) : (
+                )}
+
+                {/* Admin Specific Links */}
+                {!isAdminLoading && isAdmin && (
                   <>
-                    {/* TODO:change the profile links  */}
                     <li>
-                      <Link to="/dashboard/userProfile">
-                        <span className="text-xl">
-                          <CgProfile />
-                        </span>
-                        Profile
-                      </Link>
+                      <NavLink to="/dashboard/adminHome">
+                        <FaHome /> Admin Home
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink to="/dashboard/allUsers">
+                        <FaUsers /> All Users
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink to="/dashboard/applications">
+                        <FaUsers /> Manage Applications
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink to="/dashboard/reviewResearch">
+                        <VscOpenPreview /> Review Research Paper
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink to="/dashboard/addNews">
+                        <FaRegNewspaper /> News and Update
+                      </NavLink>
                     </li>
                   </>
                 )}
-                <>
-                  {user ? (
-                    <>
-                      <li onClick={handelLogout}>
-                        <p>
-                          <span className="text-xl font-semibold">
-                            <CiLogout />
-                          </span>
-                          logout
-                        </p>
-                      </li>
-                    </>
-                  ) : (
-                    <Link to="/login">
-                      <li>
-                        <p className="flex">
-                          <span className="text-xl">
-                            <FiLogIn />
-                          </span>
-                          Login
-                        </p>
-                      </li>
-                    </Link>
-                  )}
-                </>
+
+                {/* Auth Buttons */}
+                {user ? (
+                  <li onClick={handelLogout}>
+                    <p>
+                      <span className="text-xl font-semibold">
+                        <CiLogout />
+                      </span>
+                      Logout
+                    </p>
+                  </li>
+                ) : (
+                  <Link to="/login">
+                    <li>
+                      <p className="flex">
+                        <span className="text-xl">
+                          <FiLogIn />
+                        </span>
+                        Login
+                      </p>
+                    </li>
+                  </Link>
+                )}
               </ul>
             </div>
           </div>

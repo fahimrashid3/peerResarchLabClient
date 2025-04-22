@@ -143,22 +143,6 @@ const NavLinks = () => {
           News and Updates
         </NavLink>
       </li>
-      <li>
-        <NavLink
-          onClick={scrollToTop}
-          style={({ isActive, isTransitioning }) => {
-            return {
-              background: isActive ? "transparent" : "transparent",
-              fontWeight: isActive ? "bold" : "",
-              color: isActive ? "#00264D" : "white",
-              viewTransitionName: isTransitioning ? "slide" : "",
-            };
-          }}
-          to="/blogs"
-        >
-          Blogs
-        </NavLink>
-      </li>
     </>
   );
 };
