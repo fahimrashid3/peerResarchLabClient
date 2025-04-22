@@ -128,43 +128,46 @@ const PaperDetails = () => {
           <h1 className="font-semibold text-xl mb-2">
             More Research from {author?.name || "Author"}
           </h1>
-
-          <div className="space-y-3">
-            {morePapers.map((morePaper) => (
-              <Link to={`/paper/${morePaper._id}`} className="block">
-                <div
-                  className="flex items-center p-3 bg-dark-200 text-dark-900 dark:bg-dark-800 dark:text-white shadow-xl rounded-lg 
+          {morePapers.length > 0 ? (
+            <div className="space-y-3">
+              {morePapers.map((morePaper) => (
+                <Link to={`/paper/${morePaper._id}`} className="block">
+                  <div
+                    className="flex items-center p-3 bg-dark-200 text-dark-900 dark:bg-dark-800 dark:text-white shadow-xl rounded-lg 
                 
                 border border-dark-500"
-                >
-                  {/* Fixed height */}
-                  <figure className="flex-shrink-0 border-2 rounded-lg">
-                    <img
-                      className="h-32 w-24 rounded-lg object-cover"
-                      src={morePaper.image}
-                      alt={morePaper.title}
-                      onError={(e) => {
-                        e.target.onerror = null;
-                        e.target.src =
-                          "https://res.cloudinary.com/dipwayvsu/image/upload/v1745146763/uauic3zxcvxvdepwl3dk.webp";
-                      }}
-                    />
-                  </figure>
-                  <div className="ml-4 flex flex-col justify-center">
-                    <h2
-                      className="lg:text-xl text-lg font-bold line-clamp-2"
-                      title={morePaper.title}
-                    >
-                      {morePaper.title}
-                    </h2>
-                    <p className="mt-2 text-sm line-clamp-3 text-justify">
-                      {morePaper.details}
-                    </p>
+                  >
+                    {/* Fixed height */}
+                    <figure className="flex-shrink-0 border-2 rounded-lg">
+                      <img
+                        className="h-32 w-24 rounded-lg object-cover"
+                        src={morePaper.image}
+                        alt={morePaper.title}
+                        onError={(e) => {
+                          e.target.onerror = null;
+                          e.target.src =
+                            "https://res.cloudinary.com/dipwayvsu/image/upload/v1745146763/uauic3zxcvxvdepwl3dk.webp";
+                        }}
+                      />
+                    </figure>
+                    <div className="ml-4 flex flex-col justify-center">
+                      <h2
+                        className="lg:text-xl text-lg font-bold line-clamp-2"
+                        title={morePaper.title}
+                      >
+                        {morePaper.title}
+                      </h2>
+                      <p className="mt-2 text-sm line-clamp-3 text-justify">
+                        {morePaper.details}
+                      </p>
+                    </div>
                   </div>
-                </div>
-              </Link>
-            ))}
-          </div>
+                </Link>
+              ))}
+            </div>
+          ) : (
+            <p>No More Paper published by {author?.name || "Author"}</p>
+          )}
         </div>
       </div>
     </div>

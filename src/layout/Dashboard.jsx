@@ -1,9 +1,12 @@
 import { NavLink, Outlet } from "react-router-dom";
-import { FaHome, FaPhone, FaRegNewspaper, FaUsers } from "react-icons/fa";
 import {
-  MdOutlineGroupAdd,
-  MdSubject,
-} from "react-icons/md";
+  FaEdit,
+  FaHome,
+  FaPhone,
+  FaRegNewspaper,
+  FaUsers,
+} from "react-icons/fa";
+import { MdOutlineGroupAdd, MdSubject } from "react-icons/md";
 import { IoNewspaperOutline } from "react-icons/io5";
 import { HiMiniUserGroup } from "react-icons/hi2";
 import { BsEnvelopePaper } from "react-icons/bs";
@@ -12,10 +15,11 @@ import { IoMdPersonAdd } from "react-icons/io";
 import { VscOpenPreview } from "react-icons/vsc";
 import useAdmin from "../hooks/useAdmin";
 import useRole from "../hooks/useRole";
+import { CgProfile } from "react-icons/cg";
 
 const DashBoard = () => {
-  const [isAdmin] = useAdmin();
-  const [role] = useRole();
+  const [isAdmin, isAdminLoading] = useAdmin();
+  const [role, isRoleLoading] = useRole();
   return (
     <div className="drawer lg:drawer-open">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
@@ -56,32 +60,32 @@ const DashBoard = () => {
         ></label>
         <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
           {/* Conditional Navigation */}
-          {isAdmin ? (
+          {/* {isAdmin ? (
             <>
               <li>
-                <NavLink to="/dashboard/adminHome">
+                <NavLink to="adminHome">
                   <FaHome /> Admin Home
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/dashboard/allUsers">
+                <NavLink to="allUsers">
                   <FaUsers /> All Users
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/dashboard/applications">
+                <NavLink to="applications">
                   <IoMdPersonAdd />
                   Manage Applications
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/dashboard/reviewResearch">
+                <NavLink to="reviewResearch">
                   <VscOpenPreview />
                   Review Research Paper
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/dashboard/addNews">
+                <NavLink to="addNews">
                   <FaRegNewspaper />
                   Add New News and Update
                 </NavLink>
@@ -90,7 +94,7 @@ const DashBoard = () => {
           ) : role ? (
             <>
               <li>
-                <NavLink to="/dashboard/writeResearch">
+                <NavLink to="writeResearch">
                   <FaRegNewspaper />
                   Write new Research Paper
                 </NavLink>
@@ -98,6 +102,56 @@ const DashBoard = () => {
             </>
           ) : (
             <></>
+          )} */}
+
+          {!isAdminLoading && isAdmin && (
+            <>
+              <li>
+                <NavLink to="adminHome">
+                  <FaHome /> Admin Home
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="allUsers">
+                  <FaUsers /> All Users
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="applications">
+                  <FaUsers /> Manage Applications
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="reviewResearch">
+                  <VscOpenPreview /> Review Research Paper
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="addNews">
+                  <FaRegNewspaper /> News and Update
+                </NavLink>
+              </li>
+            </>
+          )}
+          {!isRoleLoading && role && (
+            <>
+              <li>
+                <NavLink to="writeResearch">
+                  <span className="text-xl">
+                    <FaEdit />
+                  </span>
+                  Write Research Paper
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="userProfile">
+                  <span className="text-xl">
+                    <CgProfile />
+                  </span>
+                  Profile
+                </NavLink>
+              </li>
+            </>
           )}
 
           <div className="divider"></div>
