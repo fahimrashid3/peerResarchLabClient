@@ -11,14 +11,17 @@ const PaperDetails = () => {
   const [morePapers, setMorePapers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [author, setAuthor] = useState(null);
+
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
       behavior: "smooth",
     });
   };
+
   useEffect(() => {
     if (_id) {
+      setLoading(true);
       axiosPublic
         .get(`/researchPaper/${_id}`)
         .then((res) => setPaper(res.data))
@@ -33,17 +36,13 @@ const PaperDetails = () => {
         .get(`/post/${paper.authorEmail}`)
         .then((res) => setAuthor(res.data))
         .catch((err) => console.error("Error fetching author:", err));
-    }
-  }, [paper?.authorEmail, axiosPublic]);
 
-  useEffect(() => {
-    if (paper?.authorEmail) {
       axiosPublic
         .get(`/morePaper/${paper._id}`)
         .then((res) => setMorePapers(res.data))
-        .catch((err) => console.error("Error fetching author:", err));
+        .catch((err) => console.error("Error fetching more papers:", err));
     }
-  }, [paper?.authorEmail, axiosPublic]);
+  }, [paper?.authorEmail, paper?._id, axiosPublic]);
 
   if (loading) return <Loading />;
   if (!paper) return <p>Paper not found</p>;
@@ -89,7 +88,6 @@ const PaperDetails = () => {
                   />
                   <div>
                     <p className="font-semibold text-xl">{author.name}</p>
-
                     <div className="flex gap-5 font-semibold text-gray-600">
                       <p>{authorEmail}</p>
                     </div>
@@ -131,13 +129,13 @@ const PaperDetails = () => {
           {morePapers.length > 0 ? (
             <div className="space-y-3">
               {morePapers.map((morePaper) => (
-                <Link to={`/paper/${morePaper._id}`} className="block">
-                  <div
-                    className="flex items-center p-3 bg-dark-200 text-dark-900 dark:bg-dark-800 dark:text-white shadow-xl rounded-lg 
-                
-                border border-dark-500"
-                  >
-                    {/* Fixed height */}
+                <Link
+                  to={`/paper/${morePaper._id}`}
+                  className="block"
+                  key={morePaper._id}
+                  onClick={scrollToTop}
+                >
+                  <div className="flex items-center p-3 bg-dark-200 text-dark-900 dark:bg-dark-800 dark:text-white shadow-xl rounded-lg border border-dark-500">
                     <figure className="flex-shrink-0 border-2 rounded-lg">
                       <img
                         className="h-32 w-24 rounded-lg object-cover"

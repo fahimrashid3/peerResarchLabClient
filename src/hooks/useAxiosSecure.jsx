@@ -1,41 +1,57 @@
 import axios from "axios";
-import useAuth from "./useAuth";
 import { useNavigate } from "react-router-dom";
+import useAuth from "./useAuth";
 
+// Create one axios instance globally
 const axiosSecure = axios.create({
-  baseURL: "http://localhost:8000",
+  baseURL: "http://localhost:8000", // Change this if using production URL
 });
-const useAxiosSecure = () => {
-  const { logOut } = useAuth();
-  const navigate = useNavigate();
-  // request interceptors to add authorization header
+
+// Add interceptors ONCE at the module level
+const setupInterceptors = (logOut, navigate) => {
+  // Prevent setting up interceptors multiple times
+  if (axiosSecure.interceptors.request.handlers.length > 0) return;
+
+  // Request interceptor to add JWT token
   axiosSecure.interceptors.request.use(
-    function (config) {
+    (config) => {
       const token = localStorage.getItem("access-token");
-      config.headers.authorization = `Bearer ${token}`;
+      if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
+      }
       return config;
     },
-    function (error) {
+    (error) => {
       return Promise.reject(error);
     }
   );
+
   axiosSecure.interceptors.response.use(
-    function (response) {
-      // Handle successful responses (2xx)
-      return response;
-    },
-    function (error) {
-      // Log the status code from the error response
-      console.log("Status error in the interceptors:", error.response.status);
-      const status = error.response.status;
+    (response) => response,
+    (error) => {
+      const status = error.response?.status;
+      console.log("Interceptor caught error with status:", status);
       if (status === 401 || status === 403) {
-        logOut();
-        navigate("/login");
-        console.log("cor dora porche");
+        logOut()
+          .then(() => {
+            localStorage.removeItem("access-token");
+            navigate("/login");
+          })
+          .catch((err) => {
+            console.error("Logout failed:", err);
+          });
       }
       return Promise.reject(error);
     }
   );
+};
+
+const useAxiosSecure = () => {
+  const { logOut } = useAuth();
+  const navigate = useNavigate();
+
+  setupInterceptors(logOut, navigate);
+
   return axiosSecure;
 };
 

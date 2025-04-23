@@ -73,7 +73,9 @@ const Publications = () => {
               <PublicationsCard key={paper._id} paper={paper} />
             ))
           ) : (
-            <p>No more research papers found.</p>
+            <p className="min-h-screen flex justify-center items-center">
+              No more research papers found.
+            </p>
           )}
         </div>
 

@@ -112,7 +112,8 @@ const Navbar = () => {
                 className="dropdown-content menu bg-primary-400 bg-opacity-80 text-white dark:bg-gray-400 dark:text-dark-900 rounded-box z-[1] w-64 p-2 shadow"
               >
                 {/* Common Role-Based Links */}
-                {!isRoleLoading && role && (
+
+                {!isRoleLoading && role && !isAdmin && (
                   <>
                     <li>
                       <Link to="/dashboard/userProfile">
@@ -120,14 +121,6 @@ const Navbar = () => {
                           <CgProfile />
                         </span>
                         Profile
-                      </Link>
-                    </li>
-                    <li>
-                      <Link to="/dashboard/writeResearch">
-                        <span className="text-xl">
-                          <FaEdit />
-                        </span>
-                        Write Research Paper
                       </Link>
                     </li>
                   </>
@@ -160,6 +153,18 @@ const Navbar = () => {
                       <NavLink to="/dashboard/addNews">
                         <FaRegNewspaper /> News and Update
                       </NavLink>
+                    </li>
+                  </>
+                )}
+                {!isRoleLoading && role && (
+                  <>
+                    <li>
+                      <Link to="/dashboard/writeResearch">
+                        <span className="text-xl">
+                          <FaEdit />
+                        </span>
+                        Write Research Paper
+                      </Link>
                     </li>
                   </>
                 )}

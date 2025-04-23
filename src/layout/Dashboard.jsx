@@ -60,49 +60,6 @@ const DashBoard = () => {
         ></label>
         <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
           {/* Conditional Navigation */}
-          {/* {isAdmin ? (
-            <>
-              <li>
-                <NavLink to="adminHome">
-                  <FaHome /> Admin Home
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="allUsers">
-                  <FaUsers /> All Users
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="applications">
-                  <IoMdPersonAdd />
-                  Manage Applications
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="reviewResearch">
-                  <VscOpenPreview />
-                  Review Research Paper
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="addNews">
-                  <FaRegNewspaper />
-                  Add New News and Update
-                </NavLink>
-              </li>
-            </>
-          ) : role ? (
-            <>
-              <li>
-                <NavLink to="writeResearch">
-                  <FaRegNewspaper />
-                  Write new Research Paper
-                </NavLink>
-              </li>
-            </>
-          ) : (
-            <></>
-          )} */}
 
           {!isAdminLoading && isAdmin && (
             <>
@@ -143,6 +100,10 @@ const DashBoard = () => {
                   Write Research Paper
                 </NavLink>
               </li>
+            </>
+          )}
+          {!isRoleLoading && role && !isAdmin && (
+            <>
               <li>
                 <NavLink to="userProfile">
                   <span className="text-xl">
