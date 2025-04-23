@@ -19,6 +19,12 @@ const ShortCard = ({ researchPaper }) => {
     month: "long",
     day: "numeric",
   });
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
 
   // Format the time (e.g., "11:23:58 AM")
   const time = dateTime.toLocaleTimeString("en-US", {
@@ -36,7 +42,11 @@ const ShortCard = ({ researchPaper }) => {
     }
   }, [authorEmail, axiosPublic]);
   return (
-    <Link to={`/paper/${researchPaper._id}`} className="block">
+    <Link
+      to={`/paper/${researchPaper._id}`}
+      onClick={scrollToTop}
+      className="block"
+    >
       <div className="flex items-center md:p-5 p-3 my-3 md:my-0 bg-dark-200 text-dark-900 dark:bg-dark-800 dark:text-white shadow-xl rounded-lg h-48 border border-dark-500">
         {/* Fixed height */}
         <figure className="flex-shrink-0 border-2 rounded-lg">

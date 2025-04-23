@@ -17,8 +17,7 @@ const ContactForm = () => {
   } = useForm();
   // TODO: save the data in the data base
   const onSubmit = async (data) => {
-    const contactSMSInfo = data;
-    console.log(contactSMSInfo);
+    const contactSMSInfo = { data };
     try {
       const result = await Swal.fire({
         title: "Are you sure?",
@@ -92,7 +91,7 @@ const ContactForm = () => {
           <span className="text-red-500">Phone number is required</span>
         )}
       </label>
-      <label className="form-control w-full lg:px-16 md:px-10 px-5 mx-auto">
+      {/* <label className="form-control w-full lg:px-16 md:px-10 px-5 mx-auto">
         <div className="label">
           <span className="label-text">Email address</span>
         </div>
@@ -107,7 +106,7 @@ const ContactForm = () => {
         {errors.email && (
           <span className="text-red-500">Email address is required</span>
         )}
-      </label>
+      </label> */}
       <div className="lg:px-16 md:px-10 px-5 mx-auto">
         <label>
           <div className="label">

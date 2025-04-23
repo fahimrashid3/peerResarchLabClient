@@ -10,6 +10,7 @@ import useAdmin from "../../../hooks/useAdmin";
 import useRole from "../../../hooks/useRole";
 import useUsers from "../../../hooks/useUser";
 import NavLinks from "./Navlink";
+import { TbEyeEdit } from "react-icons/tb";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
@@ -132,6 +133,12 @@ const Navbar = () => {
                     <li>
                       <NavLink to="/dashboard/adminHome">
                         <FaHome /> Admin Home
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink to="/dashboard/updateInfo">
+                        <TbEyeEdit />
+                        Update info
                       </NavLink>
                     </li>
                     <li>

@@ -11,7 +11,7 @@ import { IoNewspaperOutline } from "react-icons/io5";
 import { HiMiniUserGroup } from "react-icons/hi2";
 import { BsEnvelopePaper } from "react-icons/bs";
 import { FaSchoolCircleExclamation } from "react-icons/fa6";
-import { IoMdPersonAdd } from "react-icons/io";
+import { TbEyeEdit } from "react-icons/tb";
 import { VscOpenPreview } from "react-icons/vsc";
 import useAdmin from "../hooks/useAdmin";
 import useRole from "../hooks/useRole";
@@ -66,6 +66,12 @@ const DashBoard = () => {
               <li>
                 <NavLink to="adminHome">
                   <FaHome /> Admin Home
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/dashboard/updateInfo">
+                  <TbEyeEdit />
+                  Update info
                 </NavLink>
               </li>
               <li>

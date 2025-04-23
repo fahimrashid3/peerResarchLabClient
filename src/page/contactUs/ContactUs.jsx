@@ -16,7 +16,7 @@ const ContactUs = () => {
     return <Loading />;
   }
 
-  const { phoneNumber, socialMedia, location } = info;
+  const { phone, socialMedia, location } = info;
   const { facebook, linkedIn, X, whatsApp } = socialMedia;
   const handleCopy = (text) => {
     navigator.clipboard
@@ -101,10 +101,10 @@ const ContactUs = () => {
                 <p className="text-sm text-gray-600">
                   Call our team Mon-Fri from 8am to 5pm.
                 </p>
-                <div onClick={() => handleCopy(phoneNumber)} className="mt-3">
+                <div onClick={() => handleCopy(phone)} className="mt-3">
                   <div className="flex items-center gap-2 text-blue-600 cursor-pointer hover:underline">
                     <FaPhone />
-                    <span>{phoneNumber}</span>
+                    <span>{phone}</span>
                   </div>
                 </div>
               </div>

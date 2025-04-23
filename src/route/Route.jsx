@@ -24,6 +24,7 @@ import AddNews from "../page/dashboard/adminPages/AddNews";
 import NewsDetails from "../page/news/NewsDetails";
 import WriteResearchPaper from "../page/dashboard/userPages/WriteResearchPaper";
 import ReviewResearch from "../page/dashboard/adminPages/ReviewResearch";
+import UpdateInfo from "../page/dashboard/adminPages/UpdateInfo";
 
 export const router = createBrowserRouter([
   {
@@ -128,6 +129,14 @@ export const router = createBrowserRouter([
         element: (
           <AdminRoute>
             <AdminHome />
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "updateInfo",
+        element: (
+          <AdminRoute>
+            <UpdateInfo />
           </AdminRoute>
         ),
       },

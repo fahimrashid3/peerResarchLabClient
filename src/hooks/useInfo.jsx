@@ -1,17 +1,22 @@
-import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "./useAxiosPublic";
 
 const useInfo = () => {
-  const [info, setInfo] = useState([]);
-  const [infoLoading, setInfoLoading] = useState(true);
   const axiosPublic = useAxiosPublic();
-  useEffect(() => {
-    axiosPublic.get("/labInfo").then((res) => {
-      setInfo(res.data);
-      setInfoLoading(false);
-    });
-  }, [axiosPublic]);
-  return [info, infoLoading];
+
+  const {
+    data: info = {},
+    isLoading: infoLoading,
+    refetch,
+  } = useQuery({
+    queryKey: ["labInfo"],
+    queryFn: async () => {
+      const res = await axiosPublic.get("/labInfo");
+      return res.data;
+    },
+  });
+
+  return [info, infoLoading, refetch];
 };
 
 export default useInfo;
