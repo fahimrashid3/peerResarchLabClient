@@ -8,6 +8,7 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure.jsx";
 import Resizer from "react-image-file-resizer";
 import useAxiosPublic from "../../../hooks/useAxiosPublic.jsx";
 import { useQuery } from "@tanstack/react-query";
+import { format } from "date-fns";
 
 const UserProfile = () => {
   const [user] = useUsers();
@@ -18,7 +19,11 @@ const UserProfile = () => {
   const axiosPublic = useAxiosPublic();
   const { logOut } = useAuth();
 
-  const { data: teamInfo, isLoading: isTeamLoading } = useQuery({
+  const {
+    data: teamInfo,
+    refetch,
+    isLoading: isTeamLoading,
+  } = useQuery({
     queryKey: ["teamInfo", user?.email],
     queryFn: async () => {
       const res = await axiosSecure.get("/userInfoInTeam");
@@ -37,19 +42,29 @@ const UserProfile = () => {
   } = useForm();
 
   useEffect(() => {
-    if (user || teamInfo) {
-      const initialData = {
-        name: user?.name || "",
-        phone: user?.phone || teamInfo?.phone || "",
-        university: teamInfo?.university || "",
-        linkedin: teamInfo?.socialMedia?.linkedin || "",
-        twitter: teamInfo?.socialMedia?.twitter || "",
-        facebook: teamInfo?.socialMedia?.facebook || "",
-        github: teamInfo?.socialMedia?.github || "",
-      };
-      reset(initialData);
-      setPreviewImage(user?.photoUrl || teamInfo?.image || "");
-    }
+    if (!user || !teamInfo) return;
+
+    const dateTime = new Date(teamInfo.createdAt);
+
+    const date = dateTime.toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+
+    const initialData = {
+      name: user?.name || "",
+      phone: user?.phone || teamInfo?.phone || "",
+      university: teamInfo?.university || "",
+      linkedin: teamInfo?.socialMedia?.linkedin || "",
+      twitter: teamInfo?.socialMedia?.twitter || "",
+      facebook: teamInfo?.socialMedia?.facebook || "",
+      github: teamInfo?.socialMedia?.github || "",
+      joinedOn: date || "",
+    };
+
+    reset(initialData);
+    setPreviewImage(user?.photoUrl || teamInfo?.image || "");
   }, [user, teamInfo, reset]);
 
   const cloud_name = import.meta.env.VITE_CLOUD_NAME;
@@ -70,7 +85,6 @@ const UserProfile = () => {
     });
 
   const onSubmit = async (data) => {
-    console.log("submitted");
     try {
       let photoUrl = user?.photoUrl;
       if (selectedFile) {
@@ -96,6 +110,7 @@ const UserProfile = () => {
           facebook: data.facebook,
           github: data.github,
         },
+        details: data.details,
       };
       const res = await axiosSecure.patch("/updateUserAndTeam", updateInfo);
       if (res.data.modifiedCount > 0 || res.data.acknowledged) {
@@ -108,6 +123,7 @@ const UserProfile = () => {
         });
       }
       if (res.status === 200) {
+        refetch();
         setIsEditing(false);
         setPreviewImage(photoUrl);
       }
@@ -172,7 +188,6 @@ const UserProfile = () => {
 
   if (!user || isTeamLoading) return <Loading />;
 
-  // Calculate display data directly without useMemo
   const displayData = {
     name: user?.name || teamInfo?.name,
     email: user?.email || teamInfo?.email,
@@ -181,8 +196,9 @@ const UserProfile = () => {
     university: teamInfo?.university,
     photoUrl: user?.photoUrl || teamInfo?.image,
     socialMedia: teamInfo?.socialMedia || {},
+    joinedOn: teamInfo?.createdAt,
+    details: teamInfo?.details,
   };
-
   return (
     <div className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-md">
       <h1 className="text-2xl font-bold text-center mb-6">
@@ -216,7 +232,12 @@ const UserProfile = () => {
           )}
         </div>
       </div>
-
+      <p className="text-center text-gray-600 mt-4 ">
+        Joined on:{" "}
+        {displayData.joinedOn
+          ? format(new Date(displayData.joinedOn), "MMMM dd, yyyy")
+          : "Date not available"}
+      </p>
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         <ProfileField
           label="Name"
@@ -289,8 +310,28 @@ const UserProfile = () => {
             isEditing={isEditing}
             value={displayData.socialMedia.github}
           />
+          <div className="border-b pb-2">
+            <div className="flex justify-between items-center text-justify">
+              <span className="font-semibold pr-5">Details</span>
+              {isEditing && register ? (
+                <textarea
+                  className="flex-1 textarea textarea-xl w-full h-64 textarea-bordered" // Full width and 5 lines height
+                  {...register("details")}
+                  defaultValue={displayData.details}
+                ></textarea>
+              ) : (
+                <span className={!displayData.details ? "text-gray-500" : ""}>
+                  {displayData.details || `No details provided`}
+                </span>
+              )}
+            </div>
+            {errors && errors.details && (
+              <p className="text-red-500 text-sm text-right mt-1">
+                {errors.details.message}
+              </p>
+            )}
+          </div>
         </div>
-
         <div className="flex justify-center gap-4 pt-6">
           {isEditing && (
             <>
@@ -308,6 +349,7 @@ const UserProfile = () => {
           )}
         </div>
       </form>
+
       <div className="flex justify-center gap-4 pt-6">
         {!isEditing && (
           <>
@@ -328,16 +370,23 @@ const UserProfile = () => {
           </>
         )}
       </div>
+
+      {!isEditing && displayData.joinedOn && (
+        <p className="text-center text-gray-500 mt-4 text-sm">
+          Joined on: {format(new Date(displayData.joinedOn), "MMMM dd, yyyy")}
+        </p>
+      )}
     </div>
   );
 };
 
 const ProfileField = ({ label, name, register, errors, isEditing, value }) => (
   <div className="border-b pb-2">
-    <div className="flex justify-between items-center">
-      <span className="font-semibold">{label}</span>
+    <div className="flex justify-between items-center  text-justify">
+      <span className="font-semibold pr-5">{label}</span>
       {isEditing && register ? (
         <input
+          type={name === "joinedOn" ? "date" : "text"}
           {...register(name)}
           className="flex-1 max-w-xs input input-bordered ml-4"
           defaultValue={value}
