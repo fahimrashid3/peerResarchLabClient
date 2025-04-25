@@ -16,10 +16,13 @@ import { VscOpenPreview } from "react-icons/vsc";
 import useAdmin from "../hooks/useAdmin";
 import useRole from "../hooks/useRole";
 import { CgProfile } from "react-icons/cg";
+import useAuth from "../hooks/useAuth";
 
 const DashBoard = () => {
   const [isAdmin, isAdminLoading] = useAdmin();
   const [role, isRoleLoading] = useRole();
+  const { user, logOut } = useAuth();
+
   return (
     <div className="drawer lg:drawer-open">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
@@ -60,7 +63,18 @@ const DashBoard = () => {
         ></label>
         <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
           {/* Conditional Navigation */}
-
+          {user && (
+            <>
+              <li>
+                <NavLink to="userProfile">
+                  <span className="text-xl">
+                    <CgProfile />
+                  </span>
+                  Profile
+                </NavLink>
+              </li>
+            </>
+          )}
           {!isAdminLoading && isAdmin && (
             <>
               <li>
@@ -108,18 +122,6 @@ const DashBoard = () => {
               </li>
             </>
           )}
-          {!isRoleLoading && role && !isAdmin && (
-            <>
-              <li>
-                <NavLink to="userProfile">
-                  <span className="text-xl">
-                    <CgProfile />
-                  </span>
-                  Profile
-                </NavLink>
-              </li>
-            </>
-          )}
 
           <div className="divider"></div>
 
@@ -130,7 +132,7 @@ const DashBoard = () => {
             </NavLink>
           </li>
           <li>
-            <NavLink to="/overview">
+            <NavLink to="/aboutUs">
               <FaSchoolCircleExclamation /> About us
             </NavLink>
           </li>

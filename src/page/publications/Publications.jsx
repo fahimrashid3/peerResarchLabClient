@@ -26,7 +26,7 @@ const Publications = () => {
             {/* Left - Text Content */}
             <div className="max-w-xl space-y-6">
               <h1 className="text-4xl lg:text-6xl font-bold leading-tight">
-                The latest research from{" "}
+                What’s New at{" "}
                 <span className=" text-primary-500">{info.name}</span>
               </h1>
               <div className="space-x-4">

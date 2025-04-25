@@ -114,7 +114,7 @@ const Navbar = () => {
               >
                 {/* Common Role-Based Links */}
 
-                {!isRoleLoading && role && !isAdmin && (
+                {user && (
                   <>
                     <li>
                       <Link to="/dashboard/userProfile">
