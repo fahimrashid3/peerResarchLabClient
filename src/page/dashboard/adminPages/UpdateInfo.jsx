@@ -53,7 +53,7 @@ const UpdateInfo = () => {
   };
 
   return (
-    <div className="bg-primary-100 space-y-10 md:space-y-24 pt-10 min-h-screen">
+    <div className="border rounded-lg max-w-4xl mx-auto space-y-10 md:space-y-24 pt-10 min-h-screen">
       {/* Basic Info */}
       <div className="text-center space-y-2 md:space-y-3">
         <form onSubmit={handleSubmit(handleBasicInfoEdit)}>

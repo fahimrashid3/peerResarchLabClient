@@ -11,17 +11,48 @@ const ResearchAres = () => {
       setResearchArea(res.data);
     });
   }, [axiosPublic]);
+
   return (
-    <div className="pt-24 max-w-7xl mx-auto">
-      <div className="grid md:grid-cols-2 grid-cols-1">
+    <div className="pt-24 mx-auto">
+      <div className="grid md:grid-cols-2 grid-cols-1 gap-5 rounded-lg max-w-[95%] md:max-w-[90%] lg:max-w-[85%] mx-auto">
         {researchArea.map((researchArea) => (
-          <Link
-            to={`/researchAreaDetails/${researchArea._id}`}
-            className="
-          bg-primary-300 cursor-pointer hover:bg-primary-500 transition-all duration-300 p-8  md:m-6 m-4 text-dark-200 hover:text-white rounded-lg  border-r-4 hover:border-r-8 border-yellow-400"
-          >
-            <p className="font-bold text-xl">{researchArea.departmentName}</p>
-          </Link>
+          <div key={researchArea._id} className="hero bg-base-200">
+            <div className="hero-content flex-col lg:flex-row">
+              <img
+                src={researchArea.image}
+                alt={researchArea.departmentName}
+                className="max-w-xs rounded-lg shadow-2xl"
+              />
+
+              <div className="space-y-3">
+                <h1
+                  className="text-2xl md:text-3xl font-bold line-clamp-1 cursor-default"
+                  title={researchArea.departmentName}
+                >
+                  {researchArea.departmentName}
+                </h1>
+
+                <p className="font-semibold">
+                  Total Member : {researchArea.totalMembers}
+                </p>
+
+                <p
+                  className="text-justify line-clamp-3 cursor-default"
+                  title={researchArea.details}
+                >
+                  {researchArea.details}
+                </p>
+
+                <Link
+                  to={`/researchAreaDetails/${researchArea._id}`}
+                  state={{ researchArea }}
+                  className="btn border-b-8 font-semibold text-primary-900 hover:text-white hover:border-primary-600 border-primary-700 bg-primary-100 hover:bg-primary-500 transition-all duration-200"
+                >
+                  Details
+                </Link>
+              </div>
+            </div>
+          </div>
         ))}
       </div>
     </div>

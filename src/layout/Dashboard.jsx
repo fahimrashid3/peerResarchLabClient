@@ -78,11 +78,6 @@ const DashBoard = () => {
           {!isAdminLoading && isAdmin && (
             <>
               <li>
-                <NavLink to="adminHome">
-                  <FaHome /> Admin Home
-                </NavLink>
-              </li>
-              <li>
                 <NavLink to="/dashboard/updateInfo">
                   <TbEyeEdit />
                   Update info

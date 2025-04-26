@@ -9,7 +9,6 @@ import Registration from "../page/authentication/Registration";
 import JoinUs from "../page/joinUs/JoinUs";
 import ContactUs from "../page/contactUs/ContactUs";
 import DashBoard from "../layout/Dashboard";
-import AdminHome from "../page/dashboard/adminPages/AdminHome";
 import AllUsers from "../page/dashboard/adminPages/AllUsers";
 import UserProfile from "../page/dashboard/userPages/UserProfile";
 import ManageApplication from "../page/dashboard/adminPages/ManageApplication";
@@ -124,14 +123,6 @@ export const router = createBrowserRouter([
       },
 
       // admin routs
-      {
-        path: "adminHome",
-        element: (
-          <AdminRoute>
-            <AdminHome />
-          </AdminRoute>
-        ),
-      },
       {
         path: "updateInfo",
         element: (

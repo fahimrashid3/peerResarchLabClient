@@ -131,11 +131,6 @@ const Navbar = () => {
                 {!isAdminLoading && isAdmin && (
                   <>
                     <li>
-                      <NavLink to="/dashboard/adminHome">
-                        <FaHome /> Admin Home
-                      </NavLink>
-                    </li>
-                    <li>
                       <NavLink to="/dashboard/updateInfo">
                         <TbEyeEdit />
                         Update info
