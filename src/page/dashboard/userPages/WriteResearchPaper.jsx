@@ -118,7 +118,7 @@ const WriteResearchPaper = () => {
           showConfirmButton: false,
           timer: 1500,
         });
-        // navigate("/");
+        navigate("/");
       }
     } catch (error) {
       console.error("Submission error:", error);

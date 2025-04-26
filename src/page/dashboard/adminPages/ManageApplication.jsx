@@ -19,12 +19,12 @@ const ManageApplication = () => {
       const res = await axiosPublic.get(`/${pdfPath}`, {
         responseType: "blob",
       });
-  
+
       const blob = new Blob([res.data], { type: "application/pdf" });
       const url = window.URL.createObjectURL(blob);
-  
+
       const filename = pdfPath.split("/").pop();
-  
+
       const link = document.createElement("a");
       link.href = url;
       link.setAttribute("download", filename);
@@ -41,7 +41,6 @@ const ManageApplication = () => {
       });
     }
   };
-  
 
   const handelAdd = async (_id, role) => {
     try {
@@ -55,6 +54,7 @@ const ManageApplication = () => {
         confirmButtonText: `Yes, Make ${role}`,
       });
 
+      // TODO:update research area total number of member when accept a user
       if (result.isConfirmed) {
         const res = await axiosSecure.post(`/team/${_id}`);
         Swal.fire({
@@ -105,9 +105,7 @@ const ManageApplication = () => {
           });
 
           // Update the local state
-          setApplications((prev) =>
-            prev.filter((app) => app._id !== _id)
-          );
+          setApplications((prev) => prev.filter((app) => app._id !== _id));
         } else {
           throw new Error("Application not found or not deleted");
         }

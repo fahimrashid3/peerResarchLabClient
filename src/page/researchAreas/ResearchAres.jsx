@@ -14,17 +14,17 @@ const ResearchAres = () => {
 
   return (
     <div className="pt-24 mx-auto">
-      <div className="grid md:grid-cols-2 grid-cols-1 gap-5 rounded-lg max-w-[95%] md:max-w-[90%] lg:max-w-[85%] mx-auto">
+      <div className="grid lg:grid-cols-2 grid-cols-1 gap-5 rounded-lg max-w-[95%] md:max-w-[90%] lg:max-w-[85%] mx-auto">
         {researchArea.map((researchArea) => (
           <div key={researchArea._id} className="hero bg-base-200">
-            <div className="hero-content flex-col lg:flex-row">
+            <div className="hero-content flex-col md:flex-row">
               <img
                 src={researchArea.image}
                 alt={researchArea.departmentName}
-                className="max-w-xs rounded-lg shadow-2xl"
+                className="md:max-w-[40%] rounded-lg shadow-2xl "
               />
 
-              <div className="space-y-3">
+              <div className="space-y-3 md:max-w-[60%]">
                 <h1
                   className="text-2xl md:text-3xl font-bold line-clamp-1 cursor-default"
                   title={researchArea.departmentName}

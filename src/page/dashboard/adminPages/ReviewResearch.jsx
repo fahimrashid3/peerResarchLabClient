@@ -46,6 +46,7 @@ const ReviewResearch = () => {
       denyButtonText: `Reject and delete paper`,
     }).then((result) => {
       if (result.isConfirmed) {
+        // TODO: update the latest research id in research area
         axiosSecure.post(`/researchPaper/${paper._id}`).then((res) => {
           if (res.data.insertedId && res.data.deletedCount === 1) {
             Swal.fire({

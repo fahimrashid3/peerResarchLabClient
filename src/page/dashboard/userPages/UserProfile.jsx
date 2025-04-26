@@ -370,12 +370,6 @@ const UserProfile = () => {
           </>
         )}
       </div>
-
-      {!isEditing && displayData.joinedOn && (
-        <p className="text-center text-gray-500 mt-4 text-sm">
-          Joined on: {format(new Date(displayData.joinedOn), "MMMM dd, yyyy")}
-        </p>
-      )}
     </div>
   );
 };

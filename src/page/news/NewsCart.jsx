@@ -9,7 +9,7 @@ const NewsCart = ({ singleNews }) => {
     return <Loading />;
   }
 
-  const { _id, authorEmail, createdAt, title, details, image } = singleNews;
+  const { _id, authorEmail, createdAt, title, summary, image } = singleNews;
   const dateTime = new Date(createdAt);
 
   // Format the date (e.g., "February 15, 2025")
@@ -29,7 +29,7 @@ const NewsCart = ({ singleNews }) => {
 
   // Fetch author details using authorEmail
   const [author, setAuthor] = useState(null);
-  const axiosPublic = useAxiosPublic(); // Ensure useAxiosPublic is correctly defined and imported
+  const axiosPublic = useAxiosPublic();
 
   useEffect(() => {
     if (authorEmail) {
@@ -77,19 +77,18 @@ const NewsCart = ({ singleNews }) => {
       {/* News details Section */}
       <div className="space-y-5 mt-5 mb-5">
         <p className="font-bold text-2xl">{title}</p>
-        <img className="h-80 mx-auto" src={image} alt={"image not available"} />
-        <p>
-          {details && details.length > 200 ? (
-            <>
-              {details.slice(0, 200)}
-              <Link to={`/news/${_id}`} className="text-blue-600">
-                Read more...
-              </Link>
-            </>
-          ) : (
-            details || "details not available"
-          )}
-        </p>
+        <img className="h-80 w-full object-cover" src={image} alt={title} />
+        <div className="relative">
+          <p className="text-justify mb-8">
+            {summary || "Details not available"}
+          </p>
+          <Link
+            to={`/news/${_id}`}
+            className="bottom-0 right-0 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition-colors"
+          >
+            Read more
+          </Link>
+        </div>
       </div>
     </div>
   );

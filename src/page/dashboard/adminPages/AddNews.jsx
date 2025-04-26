@@ -14,6 +14,7 @@ const AddNews = () => {
   const navigate = useNavigate();
   const cloud_name = import.meta.env.VITE_CLOUD_NAME;
   const preset_key = import.meta.env.VITE_PRESET_KEY;
+
   const {
     register,
     handleSubmit,
@@ -35,16 +36,16 @@ const AddNews = () => {
   const resizeFile = (file) =>
     new Promise((resolve) => {
       Resizer.imageFileResizer(
-        file, // File to resize
-        1080, // Max width
-        720, // Max height
-        "WEBP", // Output format
-        95, // Quality (0-100)
-        0, // Rotation
+        file,
+        1080,
+        720,
+        "WEBP",
+        95,
+        0,
         (uri) => {
           resolve(uri);
         },
-        "file" // Output type
+        "file"
       );
     });
 
@@ -55,34 +56,35 @@ const AddNews = () => {
 
     if (image) {
       try {
-        const resizedImage = await resizeFile(image); // Resize the image first
+        const resizedImage = await resizeFile(image);
         const formData = new FormData();
-        formData.append("file", resizedImage); // Upload the resized image
+        formData.append("file", resizedImage);
         formData.append("upload_preset", preset_key);
 
-        // Upload image to Cloudinary
         const res = await axios.post(
           `https://api.cloudinary.com/v1_1/${cloud_name}/image/upload`,
           formData
         );
-        const photoUrl = res.data.secure_url; // Cloudinary URL of the uploaded image
+        const photoUrl = res.data.secure_url;
 
         const newNews = {
           title: data.title,
+          summary: data.summary, // Added summary here
           details: data.details,
-          image: photoUrl, // Save the Cloudinary image URL
+          image: photoUrl,
+          createdAt: new Date(), // Optional: Automatically set createdAt time
+          authorEmail: users?.email || "unknown", // Optional: Save author email
         };
-        // post News to database
-        axiosSecure.post("/News", newNews).then((res) => {
-          console.log(res);
+
+        await axiosSecure.post("/News", newNews).then((res) => {
           if (res.data.insertedId) {
             navigate("/");
             Swal.fire({
               position: "top-end",
               icon: "success",
-              title: "News post successfully ",
+              title: "News posted successfully!",
               showConfirmButton: false,
-              timer: 1000,
+              timer: 1500,
             });
           }
         });
@@ -95,7 +97,7 @@ const AddNews = () => {
       setError("Please upload an image.");
     }
 
-    setError(null); // Reset error state after submission
+    setError(null);
   };
 
   if (loading) {
@@ -104,7 +106,7 @@ const AddNews = () => {
 
   return (
     <div className="mx-auto p-5">
-      <h2 className="text-2xl font-bold mb-4">New Updates or News</h2>
+      <h2 className="text-2xl font-bold mb-4">Post New Updates or News</h2>
       <form onSubmit={handleSubmit(onSubmit)} encType="multipart/form-data">
         <div className="mb-4">
           <label className="block font-semibold text-lg" htmlFor="title">
@@ -121,16 +123,17 @@ const AddNews = () => {
             <span className="text-red-500">{errors.title.message}</span>
           )}
         </div>
+
         <div className="mb-4">
-          <label className="block font-semibold text-lg" htmlFor="details">
+          <label className="block font-semibold text-lg" htmlFor="summary">
             News Summary
           </label>
           <textarea
-            id="details"
-            {...register("summary", { required: "summary is required" })}
-            rows="3"
+            id="summary"
+            {...register("summary", { required: "Summary is required" })}
+            rows="4"
             className="w-full p-2 mt-2 border rounded-md"
-            placeholder="Write your News summary here"
+            placeholder="Write news summary here"
           />
           {errors.summary && (
             <span className="text-red-500">{errors.summary.message}</span>
@@ -139,14 +142,14 @@ const AddNews = () => {
 
         <div className="mb-4">
           <label className="block font-semibold text-lg" htmlFor="details">
-            News details
+            News Details
           </label>
           <textarea
             id="details"
-            {...register("details", { required: "details is required" })}
+            {...register("details", { required: "Details are required" })}
             rows="7"
             className="w-full p-2 mt-2 border rounded-md"
-            placeholder="Write your News details here"
+            placeholder="Write detailed news here"
           />
           {errors.details && (
             <span className="text-red-500">{errors.details.message}</span>
@@ -165,6 +168,7 @@ const AddNews = () => {
             className="w-full mt-2"
           />
         </div>
+
         <button
           type="submit"
           className="btn bg-transparent border-primary-600 text-primary-600 hover:bg-primary-600 hover:text-white hover:border-primary-600 flex gap-3 md:text-xl text-lg w-full"
@@ -177,4 +181,5 @@ const AddNews = () => {
     </div>
   );
 };
+
 export default AddNews;
