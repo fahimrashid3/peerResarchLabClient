@@ -11,6 +11,7 @@ import useRole from "../../../hooks/useRole";
 import useUsers from "../../../hooks/useUser";
 import NavLinks from "./Navlink";
 import { TbEyeEdit } from "react-icons/tb";
+import logoWhitedPng from "../../../assets/logo/logoWhitePng.png";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
@@ -78,11 +79,16 @@ const Navbar = () => {
               </ul>
             </div>
             <Link to="/">
-              <div className="btn btn-ghost bg-transparent hover:bg-transparent flex flex-col md:flex-row">
+              {/* <div className="btn btn-ghost bg-transparent hover:bg-transparent flex flex-col md:flex-row">
                 <h1 className="text-lg md:text-3xl font-bold text-white text-center sm:text-left">
                   Peer <span className="text-primary-600">Research</span> Lab
                 </h1>
-              </div>
+              </div> */}
+              <img
+                src={logoWhitedPng}
+                alt="Peer Research Lab Logo"
+                className="h-12 text-primary-700" // or whatever size you need
+              />
             </Link>
           </div>
           <div className="navbar-center hidden lg:flex">
@@ -99,7 +105,7 @@ const Navbar = () => {
               >
                 {users?.photoUrl ? (
                   <div className="avatar">
-                    <div className="w-10 rounded-full ring-primary ring-offset-primary-500 ring ring-offset-1">
+                    <div className="w-10 rounded-full ring-error ring-offset-primary-500 ring ring-offset-1">
                       <img src={users?.photoUrl} />
                     </div>
                   </div>
