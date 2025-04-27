@@ -6,7 +6,7 @@ import ScrollToTop from "../../components/ScroolToTop";
 import useInfo from "../../hooks/useInfo";
 import { FaFacebookF } from "react-icons/fa6";
 import { FaLinkedinIn, FaXTwitter } from "react-icons/fa6";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 const Publications = () => {
   const [researchPaper, researchPaperLoading] = useResearchPapers();
@@ -36,21 +36,21 @@ const Publications = () => {
                 <div className="flex items-center gap-4 pt-2">
                   <a
                     href={info?.socialMedia?.facebook || "#"}
-                    className="text-blue-500 hover:text-blue-700 text-3xl"
+                    className="text-primary-500 hover:text-primary-700 text-3xl border-2 rounded-full p-2 border-primary-900 hover:border-primary-700"
                     target="_blank"
                   >
                     <FaFacebookF />
                   </a>
                   <a
                     href={info?.socialMedia?.linkedIn || "#"}
-                    className="text-blue-500 hover:text-blue-700 text-3xl"
+                    className="text-primary-500 hover:text-primary-700 text-3xl border-2 rounded-full p-2 border-primary-900 hover:border-primary-700"
                     target="_blank"
                   >
                     <FaLinkedinIn />
                   </a>
                   <a
                     href={info?.socialMedia?.X || "#"}
-                    className="text-blue-500 hover:text-blue-700 text-3xl"
+                    className="text-primary-500 hover:text-primary-700 text-3xl border-2 rounded-full p-2 border-primary-900 hover:border-primary-700"
                     target="_blank"
                   >
                     <FaXTwitter />

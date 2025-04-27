@@ -16,8 +16,8 @@ const ResearchAres = () => {
     <div className="pt-24 mx-auto">
       <div className="grid lg:grid-cols-2 grid-cols-1 gap-5 rounded-lg max-w-[95%] md:max-w-[90%] lg:max-w-[85%] mx-auto">
         {researchArea.map((researchArea) => (
-          <div key={researchArea._id} className="hero bg-base-200">
-            <div className="hero-content flex-col md:flex-row">
+          <div key={researchArea._id} className="hero bg-base-200 rounded-lg">
+            <div className="hero-content flex-col md:flex-row ">
               <img
                 src={researchArea.image}
                 alt={researchArea.departmentName}
@@ -31,10 +31,6 @@ const ResearchAres = () => {
                 >
                   {researchArea.departmentName}
                 </h1>
-
-                <p className="font-semibold">
-                  Total Member : {researchArea.totalMembers}
-                </p>
 
                 <p
                   className="text-justify line-clamp-3 cursor-default"

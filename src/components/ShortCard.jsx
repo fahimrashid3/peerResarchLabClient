@@ -33,14 +33,14 @@ const ShortCard = ({ researchPaper }) => {
     second: "2-digit",
     hour12: true, // Use 12-hour format
   });
-  useEffect(() => {
-    if (authorEmail) {
-      axiosPublic
-        .get(`/post/${authorEmail}`)
-        .then((res) => setAuthor(res.data))
-        .catch((err) => console.error("Error fetching author:", err));
-    }
-  }, [authorEmail, axiosPublic]);
+  // useEffect(() => {
+  //   if (authorEmail) {
+  //     axiosPublic
+  //       .get(`/post/${authorEmail}`)
+  //       .then((res) => setAuthor(res.data))
+  //       .catch((err) => console.error("Error fetching author:", err));
+  //   }
+  // }, [authorEmail, axiosPublic]);
   return (
     <Link
       to={`/paper/${researchPaper._id}`}
@@ -62,7 +62,7 @@ const ShortCard = ({ researchPaper }) => {
           />
         </figure>
         <div className="ml-4 flex flex-col justify-center">
-          <div className="flex">
+          {/* <div className="flex">
             {author ? (
               <>
                 <img
@@ -89,7 +89,7 @@ const ShortCard = ({ researchPaper }) => {
                 </div>
               </div>
             )}
-          </div>
+          </div> */}
           <h2
             className="lg:text-xl text-lg font-bold line-clamp-1 text-justify"
             title={title}

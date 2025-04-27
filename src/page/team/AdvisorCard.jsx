@@ -28,20 +28,20 @@ const AdvisorCard = ({ advisor = {} }) => {
               }}
             />
           </div>
-          <div className="mt-5 w-full text-center">
+          <div className="mt-5 w-full text-left">
             <h2 className="text-2xl font-bold">{name}</h2>
-            <div className="mt-3 space-y-2 text-sm text-gray-700">
-              <div className="flex justify-center">
-                <p className="font-semibold">University:</p>
-                <p className="ml-2">{university}</p>
+            <div className="mt-3 space-y-2 text-sm text-gray-700 ">
+              <div className="flex justify-start">
+                <p className="font-semibold">University</p>
+                <p className="ml-2"> : {university}</p>
               </div>
-              <div className="flex justify-center">
-                <p className="font-semibold">Email:</p>
-                <p className="ml-2">{email}</p>
+              <div className="flex justify-start">
+                <p className="font-semibold">Email</p>
+                <p className="ml-2"> : {email}</p>
               </div>
-              <div className="flex justify-center">
-                <p className="font-semibold">Phone:</p>
-                <p className="ml-2">{phone}</p>
+              <div className="flex justify-start">
+                <p className="font-semibold">Phone</p>
+                <p className="ml-2"> : {phone}</p>
               </div>
             </div>
           </div>

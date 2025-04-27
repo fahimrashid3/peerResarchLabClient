@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import useAxiosPublic from "../../hooks/useAxiosPublic";
+// import { useEffect, useState } from "react";
+// import useAxiosPublic from "../../hooks/useAxiosPublic";
 import { Link } from "react-router-dom";
 import Loading from "../../components/Loading";
 
@@ -24,17 +24,17 @@ const PublicationsCard = ({ paper }) => {
     hour12: true,
   });
 
-  const [author, setAuthor] = useState(null);
-  const axiosPublic = useAxiosPublic();
+  // const [author, setAuthor] = useState(null);
+  // const axiosPublic = useAxiosPublic();
 
-  useEffect(() => {
-    if (authorEmail) {
-      axiosPublic
-        .get(`/post/${authorEmail}`)
-        .then((res) => setAuthor(res.data))
-        .catch((err) => console.error("Error fetching author:", err));
-    }
-  }, [authorEmail, axiosPublic]);
+  // useEffect(() => {
+  //   if (authorEmail) {
+  //     axiosPublic
+  //       .get(`/post/${authorEmail}`)
+  //       .then((res) => setAuthor(res.data))
+  //       .catch((err) => console.error("Error fetching author:", err));
+  //   }
+  // }, [authorEmail, axiosPublic]);
 
   return (
     <Link to={`/paper/${_id}`} className="block">
@@ -53,7 +53,7 @@ const PublicationsCard = ({ paper }) => {
         </figure>
 
         <div className="flex bg-gray-50 text-dark-900 justify-between rounded-t-lg">
-          <div className="flex">
+          {/* <div className="flex">
             {author ? (
               <>
                 <img
@@ -80,7 +80,7 @@ const PublicationsCard = ({ paper }) => {
                 </div>
               </div>
             )}
-          </div>
+          </div> */}
         </div>
         <div className="mt-2 space-y-2">
           <h2

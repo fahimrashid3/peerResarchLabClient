@@ -30,19 +30,19 @@ const PaperDetails = () => {
     }
   }, [_id, axiosPublic]);
 
-  useEffect(() => {
-    if (paper?.authorEmail) {
-      axiosPublic
-        .get(`/post/${paper.authorEmail}`)
-        .then((res) => setAuthor(res.data))
-        .catch((err) => console.error("Error fetching author:", err));
+  // useEffect(() => {
+  //   if (paper?.authorEmail) {
+  //     axiosPublic
+  //       .get(`/post/${paper.authorEmail}`)
+  //       .then((res) => setAuthor(res.data))
+  //       .catch((err) => console.error("Error fetching author:", err));
 
-      axiosPublic
-        .get(`/morePaper/${paper._id}`)
-        .then((res) => setMorePapers(res.data))
-        .catch((err) => console.error("Error fetching more papers:", err));
-    }
-  }, [paper?.authorEmail, paper?._id, axiosPublic]);
+  //     axiosPublic
+  //       .get(`/morePaper/${paper._id}`)
+  //       .then((res) => setMorePapers(res.data))
+  //       .catch((err) => console.error("Error fetching more papers:", err));
+  //   }
+  // }, [paper?.authorEmail, paper?._id, axiosPublic]);
 
   if (loading) return <Loading />;
   if (!paper) return <p>Paper not found</p>;
@@ -77,7 +77,7 @@ const PaperDetails = () => {
                   "https://res.cloudinary.com/dipwayvsu/image/upload/w_1000,ar_16:9,c_fill,g_auto,e_sharpen/v1745146763/uauic3zxcvxvdepwl3dk.webp";
               }}
             />
-
+            {/* 
             <div className="flex items-start">
               {author ? (
                 <>
@@ -104,13 +104,14 @@ const PaperDetails = () => {
                   </div>
                 </div>
               )}
-            </div>
-
+            </div> */}
             <h2 className="text-2xl font-bold">{title}</h2>
+            <div className="flex gap-10 font-bold">
+              <p>{date}</p> <p>{time}</p>
+            </div>
             <p className="text-lg text-justify whitespace-pre-line">
               {details}
             </p>
-
             <Link
               to={"/publications"}
               onClick={scrollToTop}
@@ -122,7 +123,7 @@ const PaperDetails = () => {
           </div>
         </div>
 
-        <div className="col-span-1 mt-5 space-y-5">
+        {/* <div className="col-span-1 mt-5 space-y-5">
           <h1 className="font-semibold text-xl mb-2">
             More Research from {author?.name || "Author"}
           </h1>
@@ -166,7 +167,7 @@ const PaperDetails = () => {
           ) : (
             <p>No More Paper published by {author?.name || "Author"}</p>
           )}
-        </div>
+        </div> */}
       </div>
     </div>
   );

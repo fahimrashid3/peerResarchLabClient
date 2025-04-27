@@ -37,7 +37,7 @@ const ContactUs = () => {
   };
 
   return (
-    <div className="pt-10  bg-primary-100 dark:bg-dark-700 rounded-lg text-dark-900 dark:text-white">
+    <div className="pt-10  dark:bg-dark-700 rounded-lg text-dark-900 dark:text-white ">
       <div className="mt-6 md:mt-10">
         {/* <SectionTitle heading="Contact Form" subHeading="Send Us a Message" /> */}
         <div className="py-5 md:py-14 lg:py-20 space-y-5 md:flex">

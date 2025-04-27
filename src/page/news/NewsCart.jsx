@@ -44,7 +44,7 @@ const NewsCart = ({ singleNews }) => {
     <div className="mb-24 border p-5 rounded-lg">
       {/* Author Section */}
       <div className="flex bg-gray-50 text-dark-900 justify-between rounded-t-lg">
-        <div className="flex">
+        {/* <div className="flex">
           {author ? (
             <>
               <img
@@ -71,7 +71,7 @@ const NewsCart = ({ singleNews }) => {
               </div>
             </div>
           )}
-        </div>
+        </div> */}
       </div>
 
       {/* News details Section */}
@@ -84,7 +84,7 @@ const NewsCart = ({ singleNews }) => {
           </p>
           <Link
             to={`/news/${_id}`}
-            className="bottom-0 right-0 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition-colors"
+            className="bottom-0 right-0 bg-primary-500 hover:bg-primary-700 text-white px-4 py-2 rounded-lg transition-colors"
           >
             Read more
           </Link>

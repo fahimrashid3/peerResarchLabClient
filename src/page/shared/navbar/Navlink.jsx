@@ -16,8 +16,7 @@ const NavLinks = () => {
           style={({ isActive, isTransitioning }) => {
             return {
               background: "transparent",
-              textDecoration: isActive ? "underline 2px solid #7A2222" : "none",
-              textDecoration: isActive ? "underline 2px solid #7A2222" : "none",
+              // textDecoration: isActive ? "underline 2px solid #7A2222" : "none",
               fontWeight: isActive ? "bold" : "",
               color: isActive ? "#7A2222" : "white",
               viewTransitionName: isTransitioning ? "slide" : "",
@@ -34,7 +33,7 @@ const NavLinks = () => {
           style={({ isActive, isTransitioning }) => {
             return {
               background: isActive ? "transparent" : "transparent",
-              textDecoration: isActive ? "underline 2px solid #7A2222" : "none",
+              // textDecoration: isActive ? "underline 2px solid #7A2222" : "none",
               fontWeight: isActive ? "bold" : "",
               color: isActive ? "#7A2222" : "white",
               viewTransitionName: isTransitioning ? "slide" : "",
@@ -53,7 +52,7 @@ const NavLinks = () => {
           style={({ isActive, isTransitioning }) => {
             return {
               background: isActive ? "transparent" : "transparent",
-              textDecoration: isActive ? "underline 2px solid #7A2222" : "none",
+              // textDecoration: isActive ? "underline 2px solid #7A2222" : "none",
               fontWeight: isActive ? "bold" : "",
               color: isActive ? "#7A2222" : "white",
               viewTransitionName: isTransitioning ? "slide" : "",
@@ -71,7 +70,7 @@ const NavLinks = () => {
           style={({ isActive, isTransitioning }) => {
             return {
               background: isActive ? "transparent" : "transparent",
-              textDecoration: isActive ? "underline 2px solid #7A2222" : "none",
+              // textDecoration: isActive ? "underline 2px solid #7A2222" : "none",
               fontWeight: isActive ? "bold" : "",
               color: isActive ? "#7A2222" : "white",
               viewTransitionName: isTransitioning ? "slide" : "",
@@ -89,7 +88,7 @@ const NavLinks = () => {
           style={({ isActive, isTransitioning }) => {
             return {
               background: isActive ? "transparent" : "transparent",
-              textDecoration: isActive ? "underline 2px solid #7A2222" : "none",
+              // textDecoration: isActive ? "underline 2px solid #7A2222" : "none",
               fontWeight: isActive ? "bold" : "",
               color: isActive ? "#7A2222" : "white",
               viewTransitionName: isTransitioning ? "slide" : "",
@@ -107,7 +106,7 @@ const NavLinks = () => {
           style={({ isActive, isTransitioning }) => {
             return {
               background: isActive ? "transparent" : "transparent",
-              textDecoration: isActive ? "underline 2px solid #7A2222" : "none",
+              // textDecoration: isActive ? "underline 2px solid #7A2222" : "none",
               fontWeight: isActive ? "bold" : "",
               color: isActive ? "#7A2222" : "white",
               viewTransitionName: isTransitioning ? "slide" : "",
@@ -124,7 +123,7 @@ const NavLinks = () => {
           style={({ isActive, isTransitioning }) => {
             return {
               background: isActive ? "transparent" : "transparent",
-              textDecoration: isActive ? "underline 2px solid #7A2222" : "none",
+              // textDecoration: isActive ? "underline 2px solid #7A2222" : "none",
               fontWeight: isActive ? "bold" : "",
               color: isActive ? "#7A2222" : "white",
               viewTransitionName: isTransitioning ? "slide" : "",
@@ -141,7 +140,7 @@ const NavLinks = () => {
           style={({ isActive, isTransitioning }) => {
             return {
               background: isActive ? "transparent" : "transparent",
-              textDecoration: isActive ? "underline 2px solid #7A2222" : "none",
+              // textDecoration: isActive ? "underline 2px solid #7A2222" : "none",
               fontWeight: isActive ? "bold" : "",
               color: isActive ? "#7A2222" : "white",
               viewTransitionName: isTransitioning ? "slide" : "",
