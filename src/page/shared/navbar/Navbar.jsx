@@ -12,6 +12,7 @@ import useUsers from "../../../hooks/useUser";
 import NavLinks from "./Navlink";
 import { TbEyeEdit } from "react-icons/tb";
 import logoWhitedPng from "../../../assets/logo/logoWhitePng.png";
+import logoWhiteWithoutText from "../../../assets/logo/logoWhiteWithoutText.png";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
@@ -87,7 +88,12 @@ const Navbar = () => {
               <img
                 src={logoWhitedPng}
                 alt="Peer Research Lab Logo"
-                className="h-12 text-primary-700" // or whatever size you need
+                className="h-12 text-primary-700 hidden md:block" // or whatever size you need
+              />
+              <img
+                src={logoWhiteWithoutText}
+                alt="Peer Research Lab Logo"
+                className="h-12 text-primary-700 md:hidden" // or whatever size you need
               />
             </Link>
           </div>

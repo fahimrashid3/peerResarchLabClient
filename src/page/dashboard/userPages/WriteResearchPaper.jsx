@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import useUsers from "../../../hooks/useUser";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useNavigate } from "react-router-dom";
-import { useForm } from "react-hook-form";
+import { useFieldArray, useForm } from "react-hook-form";
 import Resizer from "react-image-file-resizer";
 import axios from "axios";
 import Loading from "../../../components/Loading";
@@ -16,23 +16,29 @@ const WriteResearchPaper = () => {
   const navigate = useNavigate();
   const cloud_name = import.meta.env.VITE_CLOUD_NAME;
   const preset_key = import.meta.env.VITE_PRESET_KEY;
+
   const {
     register,
     handleSubmit,
     setValue,
+    control,
     formState: { errors, isSubmitting },
   } = useForm();
+
   const [image, setImage] = useState(null);
   const [error, setError] = useState(null);
   const [researchArea, setResearchArea] = useState([]);
   const [isUploading, setIsUploading] = useState(false);
 
+  const { fields: AuthorFields, append: addAuthor } = useFieldArray({
+    control,
+    name: "author",
+  });
+
   useEffect(() => {
     axiosPublic
       .get("/researchArea")
-      .then((res) => {
-        setResearchArea(res.data);
-      })
+      .then((res) => setResearchArea(res.data))
       .catch((err) => {
         console.error("Error fetching research areas:", err);
         setError("Failed to load research areas");
@@ -43,7 +49,6 @@ const WriteResearchPaper = () => {
     const file = e.target.files[0];
     if (file) {
       if (file.size > 5 * 1024 * 1024) {
-        // 5MB limit
         setError("Image size should be less than 5MB");
         return;
       }
@@ -62,9 +67,7 @@ const WriteResearchPaper = () => {
         "WEBP",
         95,
         0,
-        (uri) => {
-          resolve(uri);
-        },
+        (uri) => resolve(uri),
         "file"
       );
     });
@@ -83,7 +86,7 @@ const WriteResearchPaper = () => {
       setIsUploading(true);
       setError(null);
 
-      // Step 1: Resize and upload image to Cloudinary
+      // Resize and upload image to Cloudinary
       const resizedImage = await resizeFile(image);
       const formData = new FormData();
       formData.append("file", resizedImage);
@@ -94,17 +97,21 @@ const WriteResearchPaper = () => {
         formData
       );
 
-      // Step 2: Prepare research data
+      // Create new research object
       const newResearch = {
         title: data.title,
-        details: data.details,
+        publisher: data.publisher,
+        doi: data.doi,
+        publicationDate: data.publicationDate,
         category: data.category,
+        authors: data.author?.filter((a) => a.trim() !== "") || [],
+        details: data.details,
         authorEmail: users?.email,
         image: cloudinaryRes.data.secure_url,
-        createdAt: new Date(),
+        createdAt: new Date().toISOString(),
       };
+      console.log(newResearch);
 
-      // Step 3: Submit research data to your backend
       const researchRes = await axiosSecure.post(
         "/ResearchRequest",
         newResearch
@@ -132,100 +139,151 @@ const WriteResearchPaper = () => {
     }
   };
 
-  if (loading) {
-    return <Loading />;
-  }
+  if (loading) return <Loading />;
 
   return (
     <div className="mx-auto p-5">
       <h2 className="text-2xl font-bold mb-4">Research Paper</h2>
       <form onSubmit={handleSubmit(onSubmit)} encType="multipart/form-data">
-        {/* Research Title */}
+        {/* Title */}
         <div className="mb-4">
-          <label className="block font-semibold text-lg" htmlFor="title">
-            Research Title
-          </label>
+          <label className="block font-semibold text-lg">Research Title</label>
           <input
             type="text"
-            id="title"
             {...register("title", { required: "Title is required" })}
             className="w-full p-2 mt-2 border rounded-md"
             placeholder="Enter Research title"
             disabled={isSubmitting || isUploading}
           />
           {errors.title && (
-            <span className="text-red-500">{errors.title.message}</span>
+            <p className="text-red-500">{errors.title.message}</p>
           )}
         </div>
 
-        {/* Research Area */}
-        <div className="flex-1 mb-4">
-          <label className="label">
-            <span className="label-text">researchArea</span>
-          </label>
-          <select
-            defaultValue="default"
-            {...register("category", { required: true })}
-            className="select select-bordered w-full"
-            disabled={isSubmitting || isUploading || researchArea.length === 0}
-          >
-            <option disabled value="default">
-              Select an item
-            </option>
-            {researchArea.map((Area, index) => (
-              <option key={index} value={Area.departmentName}>
-                {Area.departmentName}
+        {/* Publisher & DOI */}
+        <div className="md:flex gap-4">
+          <div className="mb-4 w-full">
+            <label className="block font-semibold text-lg">Publisher</label>
+            <input
+              type="text"
+              {...register("publisher", { required: "Publisher is required" })}
+              className="w-full p-2 mt-2 border rounded-md"
+              placeholder="Enter Publisher"
+              disabled={isSubmitting || isUploading}
+            />
+            {errors.publisher && (
+              <p className="text-red-500">{errors.publisher.message}</p>
+            )}
+          </div>
+
+          <div className="mb-4 w-full">
+            <label className="block font-semibold text-lg">DOI</label>
+            <input
+              type="text"
+              {...register("doi", { required: "DOI is required" })}
+              className="w-full p-2 mt-2 border rounded-md"
+              placeholder="Enter DOI"
+              disabled={isSubmitting || isUploading}
+            />
+            {errors.doi && <p className="text-red-500">{errors.doi.message}</p>}
+          </div>
+        </div>
+
+        {/* Publication Date & Category */}
+        <div className="md:flex gap-4">
+          <div className="mb-4 w-full">
+            <label className="block font-semibold text-lg">
+              Date of Publication
+            </label>
+            <input
+              type="date"
+              {...register("publicationDate", { required: "Date is required" })}
+              className="w-full p-2 mt-2 border rounded-md"
+              disabled={isSubmitting || isUploading}
+            />
+            {errors.publicationDate && (
+              <p className="text-red-500">{errors.publicationDate.message}</p>
+            )}
+          </div>
+
+          <div className="mb-4 w-full">
+            <label className="block font-semibold text-lg">Research Area</label>
+            <select
+              defaultValue="default"
+              {...register("category", { required: true })}
+              className="select select-bordered w-full"
+              disabled={isSubmitting || isUploading}
+            >
+              <option disabled value="default">
+                Select an item
               </option>
-            ))}
-          </select>
-          {errors.category && (
-            <span className="text-red-500">Please select a research area</span>
-          )}
+              {researchArea.map((area, index) => (
+                <option key={index} value={area.departmentName}>
+                  {area.departmentName}
+                </option>
+              ))}
+            </select>
+            {errors.category && (
+              <p className="text-red-500">Please select a research area</p>
+            )}
+          </div>
         </div>
 
-        {/* Research Details */}
+        {/* Authors */}
         <div className="mb-4">
-          <label className="block font-semibold text-lg" htmlFor="details">
-            Research details
+          <label className="block font-semibold text-lg">Author</label>
+          {AuthorFields.map((field, index) => (
+            <input
+              key={field.id}
+              className="input input-bordered w-full my-2"
+              placeholder="author"
+              {...register(`author.${index}`)}
+            />
+          ))}
+          <button
+            type="button"
+            onClick={() => addAuthor("")}
+            className="btn btn-sm btn-outline"
+          >
+            Add More
+          </button>
+        </div>
+
+        {/* Details */}
+        <div className="mb-4">
+          <label className="block font-semibold text-lg">
+            Research Details
           </label>
           <textarea
-            id="details"
-            {...register("details", { required: "details is required" })}
-            rows="7"
+            {...register("details", { required: "Details are required" })}
+            rows="6"
             className="w-full p-2 mt-2 border rounded-md"
-            placeholder="Write your Research details here"
+            placeholder="Describe your research"
             disabled={isSubmitting || isUploading}
           />
           {errors.details && (
-            <span className="text-red-500">{errors.details.message}</span>
+            <p className="text-red-500">{errors.details.message}</p>
           )}
         </div>
 
-        {/* Research Image */}
+        {/* Image Upload */}
         <div className="mb-4">
-          <label className="block font-semibold text-lg" htmlFor="image">
-            Research Image
-          </label>
+          <label className="block font-semibold text-lg">Research Image</label>
           <input
             type="file"
-            id="image"
             onChange={handleImageChange}
             accept="image/*"
             className="w-full mt-2"
             disabled={isSubmitting || isUploading}
           />
-          {error && !errors.image && (
-            <span className="text-red-500">{error}</span>
-          )}
+          {error && <p className="text-red-500">{error}</p>}
         </div>
 
-        {/* Submit Button */}
+        {/* Submit */}
         <button
           type="submit"
           disabled={isSubmitting || isUploading}
-          className={`btn bg-transparent border-primary-600 text-primary-600 hover:bg-primary-600 hover:text-white hover:border-primary-600 flex gap-3 md:text-xl text-lg w-full ${
-            isSubmitting || isUploading ? "opacity-50 cursor-not-allowed" : ""
-          }`}
+          className="btn w-full text-white bg-primary-600 hover:bg-primary-700"
         >
           {isSubmitting || isUploading ? (
             <>
