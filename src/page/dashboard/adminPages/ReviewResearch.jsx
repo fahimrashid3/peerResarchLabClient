@@ -36,7 +36,7 @@ const ReviewResearch = () => {
     queryKey: ["research-papers"],
     queryFn: () => fetchResearchPapers(axiosSecure, axiosPublic),
   });
-
+  console.log(papers);
   const handleResearchPaper = (paper) => {
     Swal.fire({
       title: "Do you want to save the changes?",
@@ -146,10 +146,10 @@ const ReviewResearch = () => {
                     <div className="modal-box w-11/12 max-w-5xl space-y-5">
                       <h3 className="font-bold text-lg">{paper.title}</h3>
                       <h3 className="font-semibold text-base">
-                        Category : {paper.category}
+                        Category: {paper.category}
                       </h3>
 
-                      <figure className="flex-shrink-0 flex justify-center rounded-lg">
+                      <figure className="flex justify-center rounded-lg">
                         <img
                           className="h-64 rounded-lg object-cover"
                           src={paper.image}
@@ -162,7 +162,33 @@ const ReviewResearch = () => {
                         />
                       </figure>
 
-                      <p className="py-4 text-justify">{paper.details}</p>
+                      {/* Additional Metadata */}
+                      <div className="space-y-1">
+                        <p>
+                          <strong>Publisher:</strong> {paper.publisher || "N/A"}
+                        </p>
+                        <p>
+                          <strong>DOI:</strong> {paper.doi || "N/A"}
+                        </p>
+                        <p>
+                          <strong>Date of Publication:</strong>{" "}
+                          {paper.publicationDate
+                            ? new Date(paper.publicationDate).toDateString()
+                            : "N/A"}
+                        </p>
+                        <p>
+                          <strong>Author(s):</strong>{" "}
+                          {paper.authors?.length > 0
+                            ? paper.authors.join(", ")
+                            : paper.authorName || "Unknown"}
+                        </p>
+                      </div>
+
+                      {/* Research Details */}
+                      <p className="py-2 text-justify whitespace-pre-line">
+                        {paper.details}
+                      </p>
+
                       <div className="modal-action">
                         <form method="dialog">
                           <button className="btn">Close</button>
