@@ -5,28 +5,25 @@ import { Link } from "react-router-dom";
 const ResearchAres = () => {
   const axiosPublic = useAxiosPublic();
   const [researchArea, setResearchArea] = useState([]);
-  const [loading, setLoading] = useState(true); // loading state added
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     axiosPublic.get("/researchArea").then((res) => {
       setResearchArea(res.data);
-      setLoading(false); // stop loading after data is fetched
+      setLoading(false);
     });
   }, [axiosPublic]);
 
-  // Skeleton loader component
   const renderSkeleton = () => (
     <div className="grid lg:grid-cols-2 grid-cols-1 gap-5 rounded-lg max-w-[95%] md:max-w-[90%] lg:max-w-[85%] mx-auto">
-      {[...Array(6)].map((_, index) => (
-        <div key={index} className="hero bg-base-200 rounded-lg animate-pulse">
+      {[...Array(8)].map((_, index) => (
+        <div key={index} className="hero bg-dark-200 rounded-lg animate-pulse">
           <div className="hero-content flex-col md:flex-row gap-4">
-            <div className="md:max-w-[40%] w-full h-52 bg-base-300 rounded-lg" />
-            <div className="space-y-3 md:max-w-[60%] w-full">
-              <div className="h-7 bg-base-300 rounded w-2/3" />
-              <div className="h-4 bg-base-300 rounded w-full" />
-              <div className="h-4 bg-base-300 rounded w-full" />
-              <div className="h-4 bg-base-300 rounded w-5/6" />
-              <div className="w-28 h-10 bg-primary-200 rounded border-b-8 border-primary-400" />
+            <div className="md:max-w-[35%]  h-52 bg-primary-300 rounded-lg" />
+            <div className="space-y-3 md:max-w-[65%] w-full">
+              <div className="h-7 w-full bg-dark-300 rounded" />
+              <div className="h-28 bg-dark-300 rounded w-full" />
+              <div className="w-20 h-10 bg-primary-200 rounded border-b-8 border-primary-400" />
             </div>
           </div>
         </div>
@@ -34,7 +31,6 @@ const ResearchAres = () => {
     </div>
   );
 
-  // Main render
   return (
     <div className="pt-24 mx-auto">
       {loading ? (

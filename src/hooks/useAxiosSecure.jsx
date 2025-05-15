@@ -4,7 +4,8 @@ import useAuth from "./useAuth";
 
 // Create one axios instance globally
 const axiosSecure = axios.create({
-  baseURL: "http://localhost:8000", // Change this if using production URL
+  baseURL: "https://peer-resarch-lab-server.vercel.app",
+  // baseURL: "http://localhost:8000", // Change this if using production URL
 });
 
 // Add interceptors ONCE at the module level
@@ -31,16 +32,6 @@ const setupInterceptors = (logOut, navigate) => {
     (error) => {
       const status = error.response?.status;
       console.log("Interceptor caught error with status:", status);
-      if (status === 401 || status === 403) {
-        logOut()
-          .then(() => {
-            localStorage.removeItem("access-token");
-            navigate("/login");
-          })
-          .catch((err) => {
-            console.error("Logout failed:", err);
-          });
-      }
       return Promise.reject(error);
     }
   );

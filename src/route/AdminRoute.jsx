@@ -4,7 +4,7 @@ import useAdmin from "../hooks/useAdmin";
 import useAuth from "../hooks/useAuth";
 
 const AdminRoute = ({ children }) => {
-  const { user, loading } = useAuth();
+  const { user, loading, logOut } = useAuth();
   const [isAdmin, isAdminLoading] = useAdmin();
   const location = useLocation();
 
@@ -13,6 +13,9 @@ const AdminRoute = ({ children }) => {
   }
   if (user && isAdmin) {
     return children;
+  }
+  if (user && !isAdmin) {
+    logOut();
   }
   return <Navigate to="/login" state={{ form: location }} replace />;
 };
