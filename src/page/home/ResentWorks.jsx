@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import ShortCard from "../../components/ShortCard";
 
-const ResentWorks = () => {
+const RecentWorks = () => {
   const [researchPapers, setResearchPapers] = useState([]);
   const axiosPublic = useAxiosPublic();
 
@@ -13,7 +13,7 @@ const ResentWorks = () => {
 
     const fetchData = async () => {
       try {
-        const res = await axiosPublic.get("/resentResearchPapers");
+        const res = await axiosPublic.get("/recentResearchPapers");
         if (isMounted) setResearchPapers(res.data);
       } catch (error) {
         console.error("Error fetching research papers:", error);
@@ -36,7 +36,7 @@ const ResentWorks = () => {
   return (
     <div>
       <SectionTitle
-        heading={"Resent Work"}
+        heading={"Recent Work"}
         subHeading={"Have a look"}
       ></SectionTitle>
       <div className="md:grid lg:grid-cols-2 gap-5 max-w-[95%] md:max-w-[90%] lg:max-w-[85%] mx-auto">
@@ -58,4 +58,4 @@ const ResentWorks = () => {
   );
 };
 
-export default ResentWorks;
+export default RecentWorks;
