@@ -4,29 +4,41 @@ import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import { FaEdit, FaEye } from "react-icons/fa";
 import Loading from "../../../components/Loading";
 import Swal from "sweetalert2";
-
-const fetchResearchPapers = async (axiosSecure, axiosPublic) => {
-  const res = await axiosSecure.get("/ResearchRequest");
-  const paperList = res.data;
-
-  const enrichedPapers = await Promise.all(
-    paperList.map(async (paper) => {
-      try {
-        const response = await axiosPublic.get(`/post/${paper.authorEmail}`);
-        return { ...paper, author: response.data };
-      } catch (err) {
-        console.error(`Error fetching author for ${paper.authorEmail}:`, err);
-        return { ...paper, author: null };
-      }
-    })
-  );
-
-  return enrichedPapers;
-};
+import { TiMessages } from "react-icons/ti";
+import { useForm } from "react-hook-form";
+import { useState } from "react";
 
 const ReviewResearch = () => {
   const axiosSecure = useAxiosSecure();
   const axiosPublic = useAxiosPublic();
+
+  const [selectedPaperId, setSelectedPaperId] = useState(null);
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
+
+  const fetchResearchPapers = async () => {
+    const res = await axiosSecure.get("/ResearchRequest");
+    const paperList = res.data;
+
+    const enrichedPapers = await Promise.all(
+      paperList.map(async (paper) => {
+        try {
+          const response = await axiosPublic.get(`/post/${paper.authorEmail}`);
+          return { ...paper, author: response.data };
+        } catch (err) {
+          console.error(`Error fetching author for ${paper.authorEmail}:`, err);
+          return { ...paper, author: null };
+        }
+      })
+    );
+
+    return enrichedPapers;
+  };
 
   const {
     data: papers = [],
@@ -34,9 +46,29 @@ const ReviewResearch = () => {
     refetch,
   } = useQuery({
     queryKey: ["research-papers"],
-    queryFn: () => fetchResearchPapers(axiosSecure, axiosPublic),
+    queryFn: fetchResearchPapers,
   });
-  console.log(papers);
+
+  const onSubmit = async (data) => {
+    if (!selectedPaperId) return;
+    try {
+      const res = await axiosSecure.patch(
+        `/ResearchRequest/feedback/${selectedPaperId}`,
+        {
+          message: data.message,
+        }
+      );
+      if (res.data.modifiedCount > 0) {
+        Swal.fire("Feedback submitted", "", "success");
+        reset();
+        refetch();
+      }
+    } catch (err) {
+      console.error("Error submitting feedback:", err);
+      Swal.fire("Error", "Could not submit feedback", "error");
+    }
+  };
+
   const handleResearchPaper = (paper) => {
     Swal.fire({
       title: "Do you want to save the changes?",
@@ -46,37 +78,16 @@ const ReviewResearch = () => {
       denyButtonText: `Reject and delete paper`,
     }).then((result) => {
       if (result.isConfirmed) {
-        // TODO: update the latest research id in research area
         axiosSecure.post(`/researchPaper/${paper._id}`).then((res) => {
           if (res.data.insertedId && res.data.deletedCount === 1) {
-            Swal.fire({
-              position: "top-end",
-              icon: "success",
-              title: "Paper has been published",
-              showConfirmButton: false,
-              timer: 1500,
-            });
+            Swal.fire("Published!", "Paper has been published.", "success");
             refetch();
-          } else {
-            Swal.fire({
-              position: "top-end",
-              icon: "error",
-              title: "Something went wrong",
-              showConfirmButton: false,
-              timer: 1500,
-            });
           }
         });
       } else if (result.isDenied) {
         axiosSecure.delete(`/ResearchRequest/${paper._id}`).then((res) => {
           if (res.data.deletedCount === 1) {
-            Swal.fire({
-              position: "top-end",
-              icon: "success",
-              title: "Research Paper deleted successfully",
-              showConfirmButton: false,
-              timer: 1500,
-            });
+            Swal.fire("Deleted!", "Research Paper deleted.", "success");
             refetch();
           }
         });
@@ -84,14 +95,11 @@ const ReviewResearch = () => {
     });
   };
 
-  if (isLoading) {
-    return <Loading />;
-  }
+  if (isLoading) return <Loading />;
 
   return (
     <div>
       <h1 className="text-2xl font-bold mb-4">This is the review page</h1>
-
       <div className="overflow-x-auto">
         <table className="table">
           <thead>
@@ -100,6 +108,7 @@ const ReviewResearch = () => {
               <th>Author</th>
               <th>Category</th>
               <th>Title</th>
+              <th>Comment</th>
               <th>View</th>
               <th>Action</th>
             </tr>
@@ -135,20 +144,74 @@ const ReviewResearch = () => {
                 <td>{paper.title}</td>
                 <td>
                   <button
+                    className="btn text-2xl btn-outline"
+                    onClick={() => {
+                      setSelectedPaperId(paper._id);
+                      document
+                        .getElementById(`feedback_${paper._id}`)
+                        .showModal();
+                    }}
+                  >
+                    <TiMessages />
+                  </button>
+
+                  <dialog id={`feedback_${paper._id}`} className="modal">
+                    <div className="modal-box">
+                      <form
+                        onSubmit={handleSubmit(onSubmit)}
+                        className="space-y-3"
+                      >
+                        <button
+                          type="button"
+                          onClick={() =>
+                            document
+                              .getElementById(`feedback_${paper._id}`)
+                              .close()
+                          }
+                          className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+                        >
+                          ✕
+                        </button>
+                        <h3 className="font-bold text-lg">Write a feedback</h3>
+                        <input
+                          {...register("message", {
+                            required: "Message is required",
+                          })}
+                          type="text"
+                          defaultValue={paper.message || ""}
+                          placeholder="Feedback message"
+                          className="input input-neutral w-full border-dark-600 border-2"
+                        />
+                        {errors.message && (
+                          <p className="text-red-500">
+                            {errors.message.message}
+                          </p>
+                        )}
+                        <div className="flex justify-end">
+                          <button className="btn btn-active btn-outline btn-accent">
+                            Submit
+                          </button>
+                        </div>
+                      </form>
+                    </div>
+                  </dialog>
+                </td>
+                <td>
+                  <button
                     onClick={() =>
-                      document.getElementById("my_modal_4").showModal()
+                      document.getElementById(`view_${paper._id}`).showModal()
                     }
                     className="btn btn-success text-white btn-outline text-xl"
                   >
                     <FaEye />
                   </button>
-                  <dialog id="my_modal_4" className="modal">
+
+                  <dialog id={`view_${paper._id}`} className="modal">
                     <div className="modal-box w-11/12 max-w-5xl space-y-5">
                       <h3 className="font-bold text-lg">{paper.title}</h3>
                       <h3 className="font-semibold text-base">
                         Category: {paper.category}
                       </h3>
-
                       <figure className="flex justify-center rounded-lg">
                         <img
                           className="h-64 rounded-lg object-cover"
@@ -161,8 +224,6 @@ const ReviewResearch = () => {
                           }}
                         />
                       </figure>
-
-                      {/* Additional Metadata */}
                       <div className="space-y-1">
                         <p>
                           <strong>Publisher:</strong> {paper.publisher || "N/A"}
@@ -183,12 +244,9 @@ const ReviewResearch = () => {
                             : paper.authorName || "Unknown"}
                         </p>
                       </div>
-
-                      {/* Research Details */}
                       <p className="py-2 text-justify whitespace-pre-line">
                         {paper.details}
                       </p>
-
                       <div className="modal-action">
                         <form method="dialog">
                           <button className="btn">Close</button>
