@@ -26,6 +26,8 @@ import ReviewResearch from "../page/dashboard/adminPages/ReviewResearch";
 import UpdateInfo from "../page/dashboard/adminPages/UpdateInfo";
 import PendingPaper from "../page/dashboard/userPages/PendingPaper";
 import EditPaper from "../page/dashboard/userPages/EditPaper";
+import AdvisorCard from "../page/team/AdvisorCard";
+import UserDetail from "../page/team/UserDetail";
 
 export const router = createBrowserRouter([
   {
@@ -63,6 +65,10 @@ export const router = createBrowserRouter([
       {
         path: "/team",
         element: <Team />,
+      },
+      {
+        path: "/userDetails/:id",
+        element: <UserDetail />,
       },
       {
         path: "/news",
