@@ -24,6 +24,8 @@ import NewsDetails from "../page/news/NewsDetails";
 import WriteResearchPaper from "../page/dashboard/userPages/WriteResearchPaper";
 import ReviewResearch from "../page/dashboard/adminPages/ReviewResearch";
 import UpdateInfo from "../page/dashboard/adminPages/UpdateInfo";
+import PendingPaper from "../page/dashboard/userPages/PendingPaper";
+import EditPaper from "../page/dashboard/userPages/EditPaper";
 
 export const router = createBrowserRouter([
   {
@@ -118,6 +120,22 @@ export const router = createBrowserRouter([
         element: (
           <PrivetRoute>
             <WriteResearchPaper />
+          </PrivetRoute>
+        ),
+      },
+      {
+        path: "editPaper/:_id",
+        element: (
+          <PrivetRoute>
+            <EditPaper />
+          </PrivetRoute>
+        ),
+      },
+      {
+        path: "pendingPaper",
+        element: (
+          <PrivetRoute>
+            <PendingPaper />
           </PrivetRoute>
         ),
       },

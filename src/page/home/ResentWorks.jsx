@@ -21,7 +21,6 @@ const RecentWorks = () => {
     };
 
     fetchData();
-
     return () => {
       isMounted = false;
     };

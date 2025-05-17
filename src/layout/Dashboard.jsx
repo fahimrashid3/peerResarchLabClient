@@ -6,7 +6,11 @@ import {
   FaRegNewspaper,
   FaUsers,
 } from "react-icons/fa";
-import { MdOutlineGroupAdd, MdSubject } from "react-icons/md";
+import {
+  MdOutlineGroupAdd,
+  MdOutlinePendingActions,
+  MdSubject,
+} from "react-icons/md";
 import { IoNewspaperOutline } from "react-icons/io5";
 import { HiMiniUserGroup } from "react-icons/hi2";
 import { BsEnvelopePaper } from "react-icons/bs";
@@ -71,6 +75,14 @@ const DashBoard = () => {
                     <CgProfile />
                   </span>
                   Profile
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/dashboard/pendingPaper">
+                  <span className="text-xl">
+                    <MdOutlinePendingActions />
+                  </span>
+                  My Pending Paper
                 </NavLink>
               </li>
             </>

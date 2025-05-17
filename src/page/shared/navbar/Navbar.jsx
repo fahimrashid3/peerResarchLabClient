@@ -13,6 +13,7 @@ import NavLinks from "./Navlink";
 import { TbEyeEdit } from "react-icons/tb";
 import logoWhitedPng from "../../../assets/logo/logoWhitePng.png";
 import logoWhiteWithoutText from "../../../assets/logo/logoWhiteWithoutText.png";
+import { MdOutlinePendingActions } from "react-icons/md";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
@@ -134,6 +135,14 @@ const Navbar = () => {
                           <CgProfile />
                         </span>
                         Profile
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to="/dashboard/pendingPaper">
+                        <span className="text-xl">
+                          <MdOutlinePendingActions />
+                        </span>
+                        My Pending Paper
                       </Link>
                     </li>
                   </>

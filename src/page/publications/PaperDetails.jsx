@@ -47,7 +47,7 @@ const PaperDetails = () => {
   if (loading) return <Loading />;
   if (!paper) return <p>Paper not found</p>;
 
-  const { authorEmail, createdAt, title, details, image } = paper;
+  const { createdAt, title, details, image } = paper;
 
   const dateTime = new Date(createdAt);
   const date = dateTime.toLocaleDateString("en-US", {
@@ -78,33 +78,6 @@ const PaperDetails = () => {
               }}
             />
 
-            {/* <div className="flex items-start">
-              {author ? (
-                <>
-                  <img
-                    className="rounded-full w-12 h-12 mr-3 object-cover object-center"
-                    src={author.photoUrl}
-                    alt={author.name}
-                  />
-                  <div>
-                    <p className="font-semibold text-xl">{author.name}</p>
-                    <div className="flex gap-5 font-semibold text-gray-600">
-                      <p>{authorEmail}</p>
-                    </div>
-                  </div>
-                </>
-              ) : (
-                <div className="flex w-52 flex-col gap-4">
-                  <div className="flex items-center gap-4">
-                    <div className="skeleton h-12 w-12 shrink-0 rounded-full"></div>
-                    <div className="flex flex-col gap-4">
-                      <div className="skeleton h-3 w-20"></div>
-                      <div className="skeleton h-3 w-28"></div>
-                    </div>
-                  </div>
-                </div>
-              )}
-            </div> */}
             <h2 className="text-2xl font-bold">{title}</h2>
             <div className="flex gap-5 font-bold">
               <p>{date}</p> <p>{time}</p>
