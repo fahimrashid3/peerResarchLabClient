@@ -10,7 +10,7 @@ import useAdmin from "../../../hooks/useAdmin";
 import useRole from "../../../hooks/useRole";
 import useUsers from "../../../hooks/useUser";
 import NavLinks from "./Navlink";
-import { TbEyeEdit } from "react-icons/tb";
+import { TbCategoryPlus, TbEyeEdit } from "react-icons/tb";
 import logoWhitedPng from "../../../assets/logo/logoWhitePng.png";
 import logoWhiteWithoutText from "../../../assets/logo/logoWhiteWithoutText.png";
 import { MdOutlinePendingActions } from "react-icons/md";
@@ -175,6 +175,12 @@ const Navbar = () => {
                     <li>
                       <NavLink to="/dashboard/addNews">
                         <FaRegNewspaper /> News and Update
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink to="/dashboard/addArea">
+                        <TbCategoryPlus />
+                        Add new Research Area
                       </NavLink>
                     </li>
                   </>

@@ -28,6 +28,7 @@ import PendingPaper from "../page/dashboard/userPages/PendingPaper";
 import EditPaper from "../page/dashboard/userPages/EditPaper";
 import AdvisorCard from "../page/team/AdvisorCard";
 import UserDetail from "../page/team/UserDetail";
+import AddArea from "../page/dashboard/adminPages/AddArea";
 
 export const router = createBrowserRouter([
   {
@@ -184,6 +185,14 @@ export const router = createBrowserRouter([
         element: (
           <AdminRoute>
             <AddNews />
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "addArea",
+        element: (
+          <AdminRoute>
+            <AddArea />
           </AdminRoute>
         ),
       },
