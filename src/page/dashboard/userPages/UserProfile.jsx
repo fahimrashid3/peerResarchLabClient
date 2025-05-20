@@ -10,11 +10,15 @@ import useAxiosPublic from "../../../hooks/useAxiosPublic.jsx";
 import { useQuery } from "@tanstack/react-query";
 import { format } from "date-fns";
 
+const MAX_DETAILS_LENGTH = 500;
+
 const UserProfile = () => {
   const [user] = useUsers();
   const [isEditing, setIsEditing] = useState(false);
   const [previewImage, setPreviewImage] = useState("");
   const [selectedFile, setSelectedFile] = useState(null);
+  const [detailsCount, setDetailsCount] = useState(0);
+
   const axiosSecure = useAxiosSecure();
   const axiosPublic = useAxiosPublic();
   const { logOut } = useAuth();
@@ -38,8 +42,16 @@ const UserProfile = () => {
     register,
     handleSubmit,
     reset,
+    watch,
     formState: { errors },
   } = useForm();
+
+  // Watch details field to update character count live
+  const watchedDetails = watch("details", "");
+
+  useEffect(() => {
+    setDetailsCount(watchedDetails.length);
+  }, [watchedDetails]);
 
   useEffect(() => {
     if (!user || !teamInfo) return;
@@ -61,10 +73,12 @@ const UserProfile = () => {
       facebook: teamInfo?.socialMedia?.facebook || "",
       github: teamInfo?.socialMedia?.github || "",
       joinedOn: date || "",
+      details: teamInfo?.details || "",
     };
 
     reset(initialData);
     setPreviewImage(user?.photoUrl || teamInfo?.image || "");
+    setDetailsCount(initialData.details.length);
   }, [user, teamInfo, reset]);
 
   const cloud_name = import.meta.env.VITE_CLOUD_NAME;
@@ -315,21 +329,20 @@ const UserProfile = () => {
               <span className="font-semibold pr-5">Details</span>
               {isEditing && register ? (
                 <textarea
-                  className="flex-1 textarea textarea-xl w-full h-64 textarea-bordered" // Full width and 5 lines height
+                  className="flex-1 textarea textarea-xl w-full h-64 textarea-bordered"
                   {...register("details")}
                   defaultValue={displayData.details}
-                ></textarea>
+                  maxLength={MAX_DETAILS_LENGTH}
+                />
               ) : (
                 <span className={!displayData.details ? "text-gray-500" : ""}>
                   {displayData.details || `No details provided`}
                 </span>
               )}
             </div>
-            {errors && errors.details && (
-              <p className="text-red-500 text-sm text-right mt-1">
-                {errors.details.message}
-              </p>
-            )}
+            <div className="text-right text-sm text-gray-500 mt-1">
+              {detailsCount} / {MAX_DETAILS_LENGTH} characters
+            </div>
           </div>
         </div>
         <div className="flex justify-center gap-4 pt-6">

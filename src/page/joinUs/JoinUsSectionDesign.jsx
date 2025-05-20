@@ -8,6 +8,8 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useAuth from "../../hooks/useAuth";
 import useUsers from "../../hooks/useUser";
 
+const MAX_DETAILS_LENGTH = 500;
+
 const JoinUsSectionDesign = ({ data }) => {
   const { user } = useAuth();
   const [users] = useUsers();
@@ -20,6 +22,10 @@ const JoinUsSectionDesign = ({ data }) => {
   const { qualifications, role, experience, internationalExposure } = data;
   const navigate = useNavigate();
   const location = useLocation();
+
+  // State for live character count of details
+  const [detailsText, setDetailsText] = useState("");
+  const [detailsError, setDetailsError] = useState("");
 
   useEffect(() => {
     axiosPublic.get("/researchArea").then((res) => {
@@ -41,9 +47,18 @@ const JoinUsSectionDesign = ({ data }) => {
 
   const closeModal = () => {
     setIsModalOpen(false);
+    setDetailsText(""); // reset character count on close
+    setDetailsError("");
   };
 
   const onSubmit = async (formData) => {
+    // Manual validation for details length
+    if (detailsText.length > MAX_DETAILS_LENGTH) {
+      setDetailsError(`Details cannot exceed ${MAX_DETAILS_LENGTH} characters`);
+      return;
+    }
+    setDetailsError("");
+
     const formDataObj = new FormData();
 
     for (const key in formData) {
@@ -58,34 +73,30 @@ const JoinUsSectionDesign = ({ data }) => {
     formDataObj.append("researchArea", selectedArea);
     formDataObj.append("role", selectedRole);
 
-    // TODO: prevent user to apply more then one application
     try {
-      await axiosSecure
-        .post("/submitApplication", formDataObj, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        })
-        .then((res) => {
-          if (res.status === 200) {
-            Swal.fire({
-              position: "top-end",
-              icon: "success",
-              title: "Your Application has been saved",
-              showConfirmButton: false,
-              timer: 1500,
-            });
-          } else {
-            Swal.fire({
-              position: "top-end",
-              icon: "error",
-              title: "Something went wrong",
-              showConfirmButton: false,
-              timer: 1500,
-            });
-          }
-        });
+      const res = await axiosSecure.post("/submitApplication", formDataObj, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
 
+      if (res.status === 200) {
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Your Application has been saved",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      } else {
+        Swal.fire({
+          position: "top-end",
+          icon: "error",
+          title: "Something went wrong",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
       reset();
       closeModal();
     } catch (error) {
@@ -101,14 +112,14 @@ const JoinUsSectionDesign = ({ data }) => {
             {role}
           </p>
           <p>
-            <span className="font-bold text-lg">Qualifications:</span>
+            <span className="font-bold text-lg">Qualifications:</span>{" "}
             {qualifications}
           </p>
           <p>
             <span className="font-bold text-lg">Experience:</span> {experience}
           </p>
           <p>
-            <span className="font-bold text-lg">International Exposure:</span>
+            <span className="font-bold text-lg">International Exposure:</span>{" "}
             {internationalExposure}
           </p>
         </div>
@@ -190,8 +201,9 @@ const JoinUsSectionDesign = ({ data }) => {
                       className="select select-bordered"
                       onChange={(e) => setSelectedArea(e.target.value)}
                       required
+                      defaultValue="Select Research Area"
                     >
-                      <option disabled selected>
+                      <option disabled value="Select Research Area">
                         Select Research Area
                       </option>
                       {researchArea.map((area, index) => (
@@ -206,11 +218,23 @@ const JoinUsSectionDesign = ({ data }) => {
                     <span className="label-text">Details</span>
                     <textarea
                       className="textarea input-bordered"
-                      {...register("details", { required: true })}
+                      {...register("details", {
+                        required: true,
+                        // no maxLength here
+                        onChange: (e) => setDetailsText(e.target.value),
+                      })}
+                      value={detailsText}
+                      maxLength={MAX_DETAILS_LENGTH}
                     ></textarea>
-                    {errors.details && (
+                    {errors.details?.type === "required" && (
                       <span className="text-red-500">Details is required</span>
                     )}
+                    {detailsError && (
+                      <span className="text-red-500">{detailsError}</span>
+                    )}
+                    <p className="text-sm text-gray-500">
+                      {detailsText.length}/{MAX_DETAILS_LENGTH} characters
+                    </p>
                   </label>
 
                   <label className="form-control">
