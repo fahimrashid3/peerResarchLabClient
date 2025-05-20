@@ -38,7 +38,7 @@ const RecentWorks = () => {
         heading={"Recent Work"}
         subHeading={"Have a look"}
       ></SectionTitle>
-      <div className="md:grid lg:grid-cols-2 gap-5 max-w-[95%] md:max-w-[90%] lg:max-w-[85%] mx-auto">
+      <div className="md:grid lg:grid-cols-2 gap-5 max-w-[95%] md:max-w-[90%] lg:max-w-[85%] mx-auto bg-dark-200 p-10 rounded-2xl">
         {/* Loop through research papers and render ShortCard for each */}
         {researchPapers.map((researchPaper) => (
           <ShortCard key={researchPaper._id} researchPaper={researchPaper} />

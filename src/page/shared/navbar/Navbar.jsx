@@ -3,7 +3,7 @@ import { CgProfile } from "react-icons/cg";
 import { FiLogIn } from "react-icons/fi";
 import { CiLogout } from "react-icons/ci";
 import { VscOpenPreview } from "react-icons/vsc";
-import { FaEdit, FaHome, FaRegNewspaper, FaUsers } from "react-icons/fa";
+import { FaEdit, FaRegNewspaper, FaUsers } from "react-icons/fa";
 import Swal from "sweetalert2";
 import useAuth from "../../../hooks/useAuth";
 import useAdmin from "../../../hooks/useAdmin";
@@ -48,7 +48,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="bg-primary-400 bg-opacity-80 py-3 w-full z-[50] fixed">
+    <div className="bg-primary-400 bg-opacity-80 md:py-3 w-full z-[50] fixed">
       <div className="mx-auto">
         <div className="navbar w-full">
           <div className="navbar-start">
@@ -75,7 +75,7 @@ const Navbar = () => {
               </div>
               <ul
                 tabIndex={0}
-                className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-primary-400 bg-opacity-50 rounded-box w-52"
+                className="menu menu-sm dropdown-content z-[1] shadow bg-primary-400 bg-opacity-50 rounded-box w-52"
               >
                 <NavLinks />
               </ul>
@@ -123,7 +123,7 @@ const Navbar = () => {
 
               <ul
                 tabIndex={0}
-                className="dropdown-content menu bg-primary-400 bg-opacity-80 text-white dark:bg-gray-400 dark:text-dark-900 rounded-box z-[1] w-64 p-2 shadow"
+                className="dropdown-content menu bg-primary-400 bg-opacity-80 text-white dark:bg-gray-400 dark:text-dark-900 rounded-box z-[1] w-64 shadow"
               >
                 {/* Common Role-Based Links */}
 
