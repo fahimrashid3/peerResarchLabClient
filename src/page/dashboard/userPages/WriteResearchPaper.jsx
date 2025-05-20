@@ -252,13 +252,13 @@ const WriteResearchPaper = () => {
         {/* Details */}
         <div className="mb-4">
           <label className="block font-semibold text-lg">
-            Research Details
+            Research Abstract
           </label>
           <textarea
             {...register("details", { required: "Details are required" })}
             rows="6"
             className="w-full p-2 mt-2 border rounded-md"
-            placeholder="Describe your research"
+            placeholder="Describe your research Abstract"
             disabled={isSubmitting || isUploading}
           />
           {errors.details && (

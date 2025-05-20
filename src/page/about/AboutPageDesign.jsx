@@ -4,7 +4,7 @@ const AboutPageDesign = ({ data }) => {
   const { image, name, details } = data;
 
   return (
-    <div className="flex flex-col md:flex-row justify-around items-center md:max-w-[90%] lg:max-w-[85%] mx-auto gap-5">
+    <div className="flex flex-col md:flex-row justify-around items-center md:max-w-[90%] lg:max-w-[85%] mx-auto gap-5 bg-dark-200 p-5 rounded-lg md:rounded-xl">
       <div className="w-full md:w-1/2">
         <img src={image} alt={name} className="w-full h-auto object-cover" />
       </div>
