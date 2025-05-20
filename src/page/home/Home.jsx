@@ -5,6 +5,7 @@ import useTeam from "../../hooks/useTeam";
 import Carousel from "./Carousel";
 import RecentWorks from "./ResentWorks";
 import UserCard from "./UserCard";
+import OurCollaboration from "./OurCollaboration";
 
 const Home = () => {
   const [team, teamLoading] = useTeam();
@@ -53,6 +54,7 @@ const Home = () => {
           Show more
         </Link>
       </div>
+      <OurCollaboration />
     </div>
   );
 };

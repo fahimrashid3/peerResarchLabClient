@@ -14,6 +14,7 @@ import { TbCategoryPlus, TbEyeEdit } from "react-icons/tb";
 import logoWhitedPng from "../../../assets/logo/logoWhitePng.png";
 import logoWhiteWithoutText from "../../../assets/logo/logoWhiteWithoutText.png";
 import { MdOutlinePendingActions } from "react-icons/md";
+import { FaUserGroup } from "react-icons/fa6";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
@@ -181,6 +182,12 @@ const Navbar = () => {
                       <NavLink to="/dashboard/addArea">
                         <TbCategoryPlus />
                         Add new Research Area
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink to="/dashboard/addCollaborators">
+                        <FaUserGroup />
+                        Add Collaborators
                       </NavLink>
                     </li>
                   </>

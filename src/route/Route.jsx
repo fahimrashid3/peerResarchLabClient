@@ -29,6 +29,7 @@ import EditPaper from "../page/dashboard/userPages/EditPaper";
 import AdvisorCard from "../page/team/AdvisorCard";
 import UserDetail from "../page/team/UserDetail";
 import AddArea from "../page/dashboard/adminPages/AddArea";
+import AddCollaborator from "../page/dashboard/adminPages/AddCollaborator";
 
 export const router = createBrowserRouter([
   {
@@ -193,6 +194,14 @@ export const router = createBrowserRouter([
         element: (
           <AdminRoute>
             <AddArea />
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "addCollaborators",
+        element: (
+          <AdminRoute>
+            <AddCollaborator />
           </AdminRoute>
         ),
       },

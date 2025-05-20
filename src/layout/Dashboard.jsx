@@ -14,7 +14,7 @@ import {
 import { IoNewspaperOutline } from "react-icons/io5";
 import { HiMiniUserGroup } from "react-icons/hi2";
 import { BsEnvelopePaper } from "react-icons/bs";
-import { FaSchoolCircleExclamation } from "react-icons/fa6";
+import { FaSchoolCircleExclamation, FaUserGroup } from "react-icons/fa6";
 import { TbCategoryPlus, TbEyeEdit } from "react-icons/tb";
 import { VscOpenPreview } from "react-icons/vsc";
 import useAdmin from "../hooks/useAdmin";
@@ -119,6 +119,12 @@ const DashBoard = () => {
                 <NavLink to="/dashboard/addArea">
                   <TbCategoryPlus />
                   Add new Research Area
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/dashboard/addCollaborators">
+                  <FaUserGroup />
+                  Add Collaborators
                 </NavLink>
               </li>
             </>
