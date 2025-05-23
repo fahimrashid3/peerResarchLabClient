@@ -3,6 +3,7 @@ import useAxiosPublic from "../../hooks/useAxiosPublic";
 import { useEffect, useState } from "react";
 import Loading from "../../components/Loading";
 import { IoMdArrowRoundBack } from "react-icons/io";
+import { SiRoamresearch } from "react-icons/si";
 
 const PaperDetails = () => {
   const { _id } = useParams();
@@ -102,10 +103,20 @@ const PaperDetails = () => {
                   ? paper.authors.join(", ")
                   : paper.authorName || "Unknown"}
               </p>
+              <a
+                className="flex items-center gap-2 text-primary-500 font-semibold underline cursor-pointer hover:underline"
+                href={`https://${paper.doi}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <SiRoamresearch />
+                <span>View full Paper</span>
+              </a>
             </div>
             <p className="text-lg text-justify whitespace-pre-line">
               {details}
             </p>
+
             <Link
               to={"/publications"}
               onClick={scrollToTop}

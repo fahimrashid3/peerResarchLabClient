@@ -7,6 +7,7 @@ import Swal from "sweetalert2";
 import { TiMessages } from "react-icons/ti";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
+import { IoMdNotificationsOutline } from "react-icons/io";
 
 const ReviewResearch = () => {
   const axiosSecure = useAxiosSecure();
@@ -51,21 +52,34 @@ const ReviewResearch = () => {
 
   const onSubmit = async (data) => {
     if (!selectedPaperId) return;
+    const message = { message: data.message };
+
     try {
       const res = await axiosSecure.patch(
-        `/ResearchRequest/feedback/${selectedPaperId}`,
-        {
-          message: data.message,
-        }
+        `/feedBack/${selectedPaperId}`,
+        message
       );
-      if (res.data.modifiedCount > 0) {
-        Swal.fire("Feedback submitted", "", "success");
+
+      if (res.data.result?.modifiedCount > 0 || res.data.result?.upsertedId) {
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Feedback sent successfully",
+          showConfirmButton: false,
+          timer: 1000,
+        });
         reset();
         refetch();
       }
     } catch (err) {
       console.error("Error submitting feedback:", err);
-      Swal.fire("Error", "Could not submit feedback", "error");
+      Swal.fire({
+        position: "top-end",
+        icon: "error",
+        title: "Something went wrong",
+        showConfirmButton: false,
+        timer: 1000,
+      });
     }
   };
 
@@ -108,6 +122,7 @@ const ReviewResearch = () => {
               <th>Author</th>
               <th>Category</th>
               <th>Title</th>
+              <th>Notification</th>
               <th>Comment</th>
               <th>View</th>
               <th>Action</th>
@@ -143,6 +158,11 @@ const ReviewResearch = () => {
                 <td>{paper.category}</td>
                 <td>{paper.title}</td>
                 <td>
+                  <button className="btn text-2xl btn-outline btn-error">
+                    <IoMdNotificationsOutline />
+                  </button>
+                </td>
+                <td>
                   <button
                     className="btn text-2xl btn-outline"
                     onClick={() => {
@@ -173,14 +193,13 @@ const ReviewResearch = () => {
                           ✕
                         </button>
                         <h3 className="font-bold text-lg">Write a feedback</h3>
-                        <input
+                        <textarea
                           {...register("message", {
                             required: "Message is required",
                           })}
-                          type="text"
                           defaultValue={paper.message || ""}
                           placeholder="Feedback message"
-                          className="input input-neutral w-full border-dark-600 border-2"
+                          className="textarea textarea-neutral w-full border-dark-600 border-2"
                         />
                         {errors.message && (
                           <p className="text-red-500">
@@ -188,7 +207,14 @@ const ReviewResearch = () => {
                           </p>
                         )}
                         <div className="flex justify-end">
-                          <button className="btn btn-active btn-outline btn-accent">
+                          <button
+                            onClick={() =>
+                              document
+                                .getElementById(`feedback_${paper._id}`)
+                                .close()
+                            }
+                            className="btn btn-active btn-outline btn-accent"
+                          >
                             Submit
                           </button>
                         </div>
