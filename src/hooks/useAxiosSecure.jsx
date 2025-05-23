@@ -4,8 +4,8 @@ import useAuth from "./useAuth";
 
 // Create one axios instance globally
 const axiosSecure = axios.create({
-  // baseURL: "https://peer-resarch-lab-server.vercel.app",
-  baseURL: "http://localhost:8000", // Change this if using production URL
+  baseURL: "https://peer-resarch-lab-server.vercel.app",
+  // baseURL: "http://localhost:8000", // Change this if using production URL
 });
 
 // Add interceptors ONCE at the module level
