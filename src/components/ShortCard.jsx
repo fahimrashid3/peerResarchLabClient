@@ -39,7 +39,7 @@ const ShortCard = ({ researchPaper }) => {
         </figure>
         <div className="ml-4 flex flex-col justify-center">
           <h2
-            className="lg:text-xl text-lg font-bold line-clamp-1 text-justify"
+            className="lg:text-xl text-lg  font-bold line-clamp-1 text-justify"
             title={title}
           >
             {title}

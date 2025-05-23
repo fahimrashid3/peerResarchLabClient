@@ -103,7 +103,7 @@ const AddCollaborator = () => {
           <input
             {...register("name", { required: "Name is required" })}
             className="input input-bordered w-full"
-            placeholder="e.g., Harvard University"
+            placeholder="e.g., Bangladesh University of Business and Technology"
           />
           {errors.name && (
             <p className="text-red-500 text-sm">{errors.name.message}</p>

@@ -11,7 +11,7 @@ import axios from "axios";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Typewriter } from "react-simple-typewriter";
-import Resizer from "react-image-file-resizer"; // Import Resizer
+import Resizer from "react-image-file-resizer"; 
 
 const Registration = () => {
   const navigate = useNavigate();
@@ -127,148 +127,149 @@ const Registration = () => {
 
   return (
     <div
-      className="hero min-h-screen"
-      style={{ backgroundImage: `url(${loginBg})` }}
-    >
-      <Helmet>
-        <title>Service | Registration</title>
-      </Helmet>
-      <div className="hero-content flex-col md:flex-row lg:gap-48 md:gap-16">
-        <div className="text-center lg:text-left flex-1">
-          <img src={loginImg} alt="Login" />
-        </div>
-        <div className="card flex-1 shrink-0">
-          <form onSubmit={handleSubmit(onSubmit)} className="card-body">
-            {/* Registration Form Fields */}
-            <p className="font-bold text-center lg:text-4xl md:text-3xl text-2xl md:mb-10 mb-5 text-dark-900 dark:text-white">
-              <Typewriter
-                words={[" Sign Up now"]}
-                loop={Infinity}
-                cursor
-                cursorStyle="_"
-                typeSpeed={100}
-                deleteSpeed={50}
-                delaySpeed={2000}
-              />
-            </p>
-            {/* Name Field */}
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Name</span>
-              </label>
-              <input
-                type="text"
-                placeholder="Name"
-                {...register("name", { required: true })}
-                className="input input-bordered"
-              />
-              {errors.name && (
-                <span className="text-red-500">Name is required</span>
-              )}
-            </div>
-            {/* Email Field */}
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Email</span>
-              </label>
-              <input
-                type="email"
-                placeholder="Email"
-                {...register("email", { required: true })}
-                className="input input-bordered bg-white text-dark-900"
-              />
-              {errors.email && (
-                <span className="text-red-500">This field is required</span>
-              )}
-            </div>
-            {/* Password Field */}
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Password</span>
-              </label>
-              <div className="flex items-center">
-                <input
-                  type={`${showPassword ? "text" : "password"}`}
-                  placeholder="Password"
-                  className="input input-bordered bg-white text-dark-900 w-full"
-                  {...register("password", {
-                    required: true,
-                    minLength: 6,
-                    maxLength: 16,
-                    pattern: /(?=.*[A-Z])(?=.*[!@#$&.*])(?=.*[0-9])(?=.*[a-z])/,
-                  })}
-                />
-                <div
-                  onClick={handelShowPassword}
-                  className="absolute right-12 text-xl cursor-pointer"
-                >
-                  {showPassword ? <FaEyeSlash /> : <FaEye />}
-                </div>
-              </div>
+  className="hero min-h-screen"
+  style={{ backgroundImage: `url(${loginBg})` }}
+>
+  <Helmet>
+    <title>Service | Registration</title>
+  </Helmet>
+  <div className="hero-content flex-col md:flex-row lg:gap-48 md:gap-16 w-full px-4">
+    {/* Left Image */}
+    <div className="text-center lg:text-left flex-1">
+      <img src={loginImg} alt="Login" />
+    </div>
 
-              {/* Error Messages */}
-              {errors.password?.type === "minLength" && (
-                <span className="text-red-500">
-                  Password must be at least 6 characters
-                </span>
-              )}
+    {/* Form Section */}
+    <div className="w-full md:max-w-md">
+      <form onSubmit={handleSubmit(onSubmit)} className="card-body w-full">
+        <p className="font-bold text-center lg:text-4xl md:text-3xl text-2xl md:mb-10 mb-5 text-dark-900 dark:text-white">
+          <Typewriter
+            words={[" Sign Up now"]}
+            loop={Infinity}
+            cursor
+            cursorStyle="_"
+            typeSpeed={100}
+            deleteSpeed={50}
+            delaySpeed={2000}
+          />
+        </p>
+
+        {/* Name */}
+        <div className="form-control w-full">
+          <label className="label">
+            <span className="label-text">Name</span>
+          </label>
+          <input
+            type="text"
+            placeholder="Name"
+            {...register("name", { required: true })}
+            className="input input-bordered w-full"
+          />
+          {errors.name && <span className="text-red-500">Name is required</span>}
+        </div>
+
+        {/* Email */}
+        <div className="form-control w-full">
+          <label className="label">
+            <span className="label-text">Email</span>
+          </label>
+          <input
+            type="email"
+            placeholder="Email"
+            {...register("email", { required: true })}
+            className="input input-bordered w-full"
+          />
+          {errors.email && <span className="text-red-500">This field is required</span>}
+        </div>
+
+        {/* Password */}
+        <div className="form-control w-full">
+          <label className="label">
+            <span className="label-text">Password</span>
+          </label>
+          <div className="relative">
+            <input
+              type={showPassword ? "text" : "password"}
+              placeholder="Password"
+              className="input input-bordered w-full"
+              {...register("password", {
+                required: true,
+                minLength: 6,
+                maxLength: 16,
+                pattern: /(?=.*[A-Z])(?=.*[!@#$&.*])(?=.*[0-9])(?=.*[a-z])/,
+              })}
+            />
+            <div
+              onClick={handelShowPassword}
+              className="absolute right-4 top-1/2 transform -translate-y-1/2 text-xl cursor-pointer"
+            >
+              {showPassword ? <FaEyeSlash /> : <FaEye />}
             </div>
-            {/* Confirm Password */}
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Confirm Password</span>
-              </label>
-              <div className="flex items-center">
-                <input
-                  type={`${showPassword ? "text" : "password"}`}
-                  placeholder="Confirm Password"
-                  className="input input-bordered bg-white text-dark-900 w-full"
-                  {...register("confirmPassword", { required: true })}
-                />
-                <div
-                  onClick={handelShowPassword}
-                  className="absolute right-12 text-xl cursor-pointer"
-                >
-                  {showPassword ? <FaEyeSlash /> : <FaEye />}
-                </div>
-              </div>
-            </div>
-            {/* Error Message */}
-            {errorMessage && <p className="text-red-500">{errorMessage}</p>}
-            {/* Image Upload */}
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Select Image</span>
-              </label>
-              <input type="file" {...register("image", { required: true })} />
-            </div>
-            {/* Submit Button */}
-            <div className="form-control mt-6">
-              <button
-                disabled={disabled}
-                type="submit"
-                className="btn btn-warning btn-outline border-1 border-b-8"
-              >
-                Register Now
-              </button>
-            </div>
-          </form>
-          {/* Additional Options */}
-          <div className="space-y-5">
-            <p className="text-[#D1A054] text-lg text-center">
-              Already registered?
-              <span className="font-semibold">
-                <Link to="/login">Go to log in</Link>
-              </span>
-            </p>
-            <p className="text-center text-lg">Or sign in with</p>
-            <div>
-              <SocialLogin></SocialLogin>
+          </div>
+          {errors.password?.type === "minLength" && (
+            <span className="text-red-500">Password must be at least 6 characters</span>
+          )}
+        </div>
+
+        {/* Confirm Password */}
+        <div className="form-control w-full">
+          <label className="label">
+            <span className="label-text">Confirm Password</span>
+          </label>
+          <div className="relative">
+            <input
+              type={showPassword ? "text" : "password"}
+              placeholder="Confirm Password"
+              className="input input-bordered w-full"
+              {...register("confirmPassword", { required: true })}
+            />
+            <div
+              onClick={handelShowPassword}
+              className="absolute right-4 top-1/2 transform -translate-y-1/2 text-xl cursor-pointer"
+            >
+              {showPassword ? <FaEyeSlash /> : <FaEye />}
             </div>
           </div>
         </div>
+
+        {/* Error message */}
+        {errorMessage && <p className="text-red-500">{errorMessage}</p>}
+
+        {/* Image Upload */}
+        <div className="form-control w-full">
+          <label className="label">
+            <span className="label-text">Select Image</span>
+          </label>
+          <input type="file" {...register("image", { required: true })} />
+        </div>
+
+        {/* Submit Button */}
+        <div className="form-control mt-6">
+          <button
+            disabled={disabled}
+            type="submit"
+            className="btn btn-warning btn-outline border-1 border-b-8 w-full"
+          >
+            Register Now
+          </button>
+        </div>
+      </form>
+
+      {/* Additional Options */}
+      <div className="space-y-5 mt-4">
+        <p className="text-[#D1A054] text-lg text-center">
+          Already registered?
+          <span className="font-semibold">
+            <Link to="/login">Go to log in</Link>
+          </span>
+        </p>
+        <p className="text-center text-lg">Or sign in with</p>
+        <SocialLogin />
       </div>
     </div>
+  </div>
+</div>
+
   );
 };
 

@@ -31,7 +31,7 @@ const PendingPaperCard = ({ researchPaper }) => {
       </figure>
       <div className="ml-4 flex flex-col justify-center flex-1">
         <h2
-          className="lg:text-xl text-lg font-bold line-clamp-1 text-justify"
+          className="lg:text-xl md:text-lg font-bold line-clamp-1 text-justify"
           title={title}
         >
           {title}

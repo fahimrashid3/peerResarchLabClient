@@ -9,7 +9,6 @@ const AssistantCart = ({ researchAssistant }) => {
     image = "https://res.cloudinary.com/dipwayvsu/image/upload/v1744132219/v0gfweuclqfywslynifb.jpg",
     email = "Email not specified",
     phone = "Phone not specified",
-    details = "Details is not specified",
     university = "University not specified",
     socialMedia = {},
   } = researchAssistant;
@@ -23,9 +22,9 @@ const AssistantCart = ({ researchAssistant }) => {
   return (
     <div
       onClick={viewDetails}
-      className="card card-side bg-base-100 border rounded-lg shadow-sm hover:shadow-primary-500 hover:shadow-2xl transition duration-300 p-3 gap-5 cursor-pointer"
+      className="card card-side bg-base-100 border rounded-lg shadow-sm hover:shadow-primary-500 hover:shadow-2xl transition duration-300 p-3 gap-5 cursor-pointer w-full max-w-md mx-auto"
     >
-      <figure className="h-28 w-32 max-w-[35%] overflow-hidden rounded-lg">
+      <figure className="h-28 w-32 flex-shrink-0 overflow-hidden rounded-lg">
         <img
           className="h-full w-full object-cover p-2"
           src={image}
@@ -38,7 +37,7 @@ const AssistantCart = ({ researchAssistant }) => {
         />
       </figure>
 
-      <div className="flex flex-col justify-between w-[55%] h-28">
+      <div className="flex flex-col justify-between w-full max-w-[60%] h-28">
         <h2 className="text-lg font-bold truncate" title={name}>
           {name}
         </h2>
@@ -53,7 +52,8 @@ const AssistantCart = ({ researchAssistant }) => {
         </p>
       </div>
 
-      <div className="flex flex-col justify-center items-center gap-3 w-[10%] h-full">
+      {/* Fixed width for social icons column to keep layout consistent */}
+      <div className="flex flex-col justify-center items-center gap-3 w-10 min-w-[40px]">
         {socialMedia?.linkedin && (
           <a
             href={socialMedia.linkedin}
@@ -61,7 +61,7 @@ const AssistantCart = ({ researchAssistant }) => {
             rel="noopener noreferrer"
           >
             <img
-              className="w-7 h-7"
+              className="w-6 h-6"
               src="https://cdn-icons-png.flaticon.com/512/174/174857.png"
               alt="LinkedIn"
             />
@@ -74,7 +74,7 @@ const AssistantCart = ({ researchAssistant }) => {
             rel="noopener noreferrer"
           >
             <img
-              className="w-7 h-7"
+              className="w-6 h-6"
               src="https://cdn-icons-png.flaticon.com/512/733/733579.png"
               alt="Twitter"
             />
@@ -87,7 +87,7 @@ const AssistantCart = ({ researchAssistant }) => {
             rel="noopener noreferrer"
           >
             <img
-              className="w-7 h-7"
+              className="w-6 h-6"
               src="https://cdn-icons-png.flaticon.com/512/733/733547.png"
               alt="Facebook"
             />
@@ -100,7 +100,7 @@ const AssistantCart = ({ researchAssistant }) => {
             rel="noopener noreferrer"
           >
             <img
-              className="w-7 h-7"
+              className="w-6 h-6"
               src="https://cdn-icons-png.flaticon.com/512/733/733553.png"
               alt="GitHub"
             />

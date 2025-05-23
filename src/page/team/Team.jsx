@@ -39,7 +39,7 @@ const Team = () => {
         {/* Render advisor cards */}
         <div className="grid gap-5 grid-cols-[repeat(auto-fit,minmax(280px,1fr))]">
           {researchDirectors.map((director) => (
-            <ResearcherCard key={director._id} user={director} />
+            <div className="mx-auto"><ResearcherCard key={director._id} user={director} /></div>
           ))}
         </div>
       </div>
@@ -48,7 +48,7 @@ const Team = () => {
         {/* Render researcher cards */}
         <div className="grid gap-5 grid-cols-[repeat(auto-fit,minmax(280px,1fr))]">
           {researchers.map((researcher) => (
-            <ResearcherCard key={researcher._id} user={researcher} />
+            <div className="mx-auto"><ResearcherCard key={researcher._id} user={researcher} /></div>
           ))}
         </div>
       </div>
@@ -60,10 +60,10 @@ const Team = () => {
         {/* Render researcher cards */}
         <div className="grid gap-10 lg:grid-cols-3 md:grid-cols-2 grid-cols-1">
           {researchAssistants.map((researchAssistant) => (
-            <AssistantCart
+            <div className="mx-auto"><AssistantCart
               key={researchAssistant._id}
               researchAssistant={researchAssistant}
-            />
+            /></div>
           ))}
         </div>
       </div>

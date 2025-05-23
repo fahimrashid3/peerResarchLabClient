@@ -173,7 +173,7 @@ const AddNews = () => {
           type="submit"
           className="btn bg-transparent border-primary-600 text-primary-600 hover:bg-primary-600 hover:text-white hover:border-primary-600 flex gap-3 md:text-xl text-lg w-full"
         >
-          Submit News
+          Publish News
         </button>
 
         {error && <p className="text-red-500 mt-2">{error}</p>}

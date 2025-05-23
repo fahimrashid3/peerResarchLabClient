@@ -29,11 +29,11 @@ const Publications = () => {
                 What’s New at{" "}
                 <span className=" text-primary-500">{info.name}</span>
               </h1>
-              <div className="space-x-4">
+              <div className="md:space-x-4">
                 <span className="text-sm font-semibold text-gray-400">
                   FOLLOW US
                 </span>
-                <div className="flex items-center gap-4 pt-2">
+                <div className="flex items-center md:gap-4 pt-2">
                   <a
                     href={info?.socialMedia?.facebook || "#"}
                     className="text-primary-500 hover:text-primary-700 text-3xl border-2 rounded-full p-2 border-primary-900 hover:border-primary-700"
@@ -65,12 +65,12 @@ const Publications = () => {
         </div>
       )}
 
-      <div className="max-w-7xl mx-auto bg-dark-200 px-5">
+      <div className="max-w-7xl mx-auto bg-dark-200 rounded-lg">
         {/* Other Papers */}
-        <div className="grid grid-cols-[repeat(auto-fit,minmax(400px,1fr))] gap-5">
+        <div className="grid grid-cols-[repeat(auto-fit,minmax(400px,1fr))] gap-5 pt-5">
           {otherPapers && otherPapers.length > 0 ? (
             otherPapers.map((paper) => (
-              <PublicationsCard key={paper._id} paper={paper} />
+              <div className="mx-auto"><PublicationsCard key={paper._id} paper={paper} /></div>
             ))
           ) : (
             <p className="min-h-screen flex justify-center items-center">

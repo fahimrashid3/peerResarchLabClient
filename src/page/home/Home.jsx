@@ -38,9 +38,9 @@ const Home = () => {
         ) : members.length === 0 ? (
           <p className="text-center mt-10 text-gray-500">No advisors found.</p>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 max-w-7xl mx-auto gap-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 max-w-7xl mx-auto gap-5 ">
             {members.map((member) => (
-              <UserCard key={member._id} member={member} />
+              <div className="mx-auto"><UserCard key={member._id} member={member} /></div>
             ))}
           </div>
         )}

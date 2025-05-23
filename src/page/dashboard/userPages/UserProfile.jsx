@@ -325,8 +325,8 @@ const UserProfile = () => {
             value={displayData.socialMedia.github}
           />
           <div className="border-b pb-2">
-            <div className="flex justify-between items-center text-justify">
-              <span className="font-semibold pr-5">Details</span>
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-center text-justify gap-2 md:gap-5">
+              <span className="font-semibold">Details</span>
               {isEditing && register ? (
                 <textarea
                   className="flex-1 textarea textarea-xl w-full h-64 textarea-bordered"

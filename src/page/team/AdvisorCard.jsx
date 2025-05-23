@@ -29,34 +29,8 @@ const AdvisorCard = ({ advisor = {} }) => {
         {/* Info + Details + Socials */}
         <div className="w-full flex flex-col justify-between gap-4">
           {/* Name and Contact Info */}
-          <div className="flex items-center">
-            <div className="space-y-5 w-[85%]">
-              <div>
-                <h2 className="text-2xl font-bold">{name}</h2>
-                <div className="mt-3 space-y-2 text-sm text-gray-700">
-                  <div className="flex">
-                    <p className="font-semibold w-24">University</p>
-                    <p>: {university}</p>
-                  </div>
-                  <div className="flex">
-                    <p className="font-semibold w-24">Email</p>
-                    <p>: {email}</p>
-                  </div>
-                  <div className="flex">
-                    <p className="font-semibold w-24">Phone</p>
-                    <p>: {phone}</p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Details Text */}
-              <div>
-                <p className="text-justify text-gray-800">{details}</p>
-              </div>
-            </div>
-
-            {/* Social Media Vertical */}
-            <div className="flex flex-col items-center gap-5 w-[15%]">
+          <div className="md:flex md:flex-row-reverse items-center">
+            <div className="flex md:flex-col items-center gap-5 md:w-[15%] justify-center">
               {socialMedia?.linkedin && (
                 <a
                   href={socialMedia.linkedin}
@@ -110,6 +84,33 @@ const AdvisorCard = ({ advisor = {} }) => {
                 </a>
               )}
             </div>
+            <div className="space-y-5 md:w-[85%]">
+              <div>
+                <h2 className="text-2xl font-bold">{name}</h2>
+                <div className="mt-3 space-y-2 text-sm text-gray-700">
+                  <div className="flex">
+                    <p className="font-semibold w-24">University</p>
+                    <p>: {university}</p>
+                  </div>
+                  <div className="flex">
+                    <p className="font-semibold w-24">Email</p>
+                    <p>: {email}</p>
+                  </div>
+                  <div className="flex">
+                    <p className="font-semibold w-24">Phone</p>
+                    <p>: {phone}</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Details Text */}
+              <div>
+                <p className="text-justify text-gray-800">{details}</p>
+              </div>
+            </div>
+
+            {/* Social Media Vertical */}
+            
           </div>
         </div>
       </div>

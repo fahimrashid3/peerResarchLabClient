@@ -40,11 +40,8 @@ const ContactUs = () => {
     <div className="pt-10  dark:bg-dark-700 rounded-lg text-dark-900 dark:text-white ">
       <div className="mt-6 md:mt-10">
         {/* <SectionTitle heading="Contact Form" subHeading="Send Us a Message" /> */}
-        <div className="py-5 md:py-14 lg:py-20 space-y-5 md:flex">
-          <div className="flex-1">
-            <ContactForm />
-          </div>
-          <div className="flex-1">
+        <div className="py-5 md:py-14 lg:py-20 space-y-5 md:flex md:flex-row-reverse">
+          <div className="flex-1 pl-10">
             <div className="max-w-md space-y-6 text-gray-800">
               {/* Chat Section */}
               <div>
@@ -130,6 +127,10 @@ const ContactUs = () => {
                 </div>
               </div>
             </div>
+          </div>
+          <div className="flex-1 bg-dark-200 rounded-lg p-5 md:bg-transparent md:rounded-none md:p-0">
+            <h1 className="font-semibold text-xl pl-5">Sent a message</h1>
+            <ContactForm />
           </div>
         </div>
       </div>
