@@ -122,8 +122,8 @@ const ReviewResearch = () => {
               <th>Author</th>
               <th>Category</th>
               <th>Title</th>
-              <th>Notification</th>
-              <th>Comment</th>
+              {/* <th>Notification</th>
+              <th>Comment</th> */}
               <th>View</th>
               <th>Action</th>
             </tr>
@@ -157,12 +157,12 @@ const ReviewResearch = () => {
                 </td>
                 <td>{paper.category}</td>
                 <td>{paper.title}</td>
-                <td>
+                {/* <td>
                   <button className="btn text-2xl btn-outline btn-error">
                     <IoMdNotificationsOutline />
                   </button>
-                </td>
-                <td>
+                </td> */}
+                {/* <td>
                   <button
                     className="btn text-2xl btn-outline"
                     onClick={() => {
@@ -221,7 +221,7 @@ const ReviewResearch = () => {
                       </form>
                     </div>
                   </dialog>
-                </td>
+                </td> */}
                 <td>
                   <button
                     onClick={() =>

@@ -90,7 +90,9 @@ const PublicationsCard = ({ paper }) => {
             {title}
           </h2>
           <p className="text-sm text-gray-700">
-            {details.length > 200 ? `${details.slice(0, 200)}...` : details}
+            {details?.length > 200
+              ? `${details.slice(0, 200)}...`
+              : details || "No description available"}
           </p>
         </div>
       </div>
