@@ -7,12 +7,10 @@ import Swal from "sweetalert2";
 import { TiMessages } from "react-icons/ti";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
-import { IoMdNotificationsOutline } from "react-icons/io";
 
 const ReviewResearch = () => {
   const axiosSecure = useAxiosSecure();
   const axiosPublic = useAxiosPublic();
-
   const [selectedPaperId, setSelectedPaperId] = useState(null);
 
   const {
@@ -52,6 +50,7 @@ const ReviewResearch = () => {
 
   const onSubmit = async (data) => {
     if (!selectedPaperId) return;
+
     const message = { message: data.message };
 
     try {
@@ -70,6 +69,7 @@ const ReviewResearch = () => {
         });
         reset();
         refetch();
+        document.getElementById(`feedback_${selectedPaperId}`).close();
       }
     } catch (err) {
       console.error("Error submitting feedback:", err);
@@ -122,9 +122,8 @@ const ReviewResearch = () => {
               <th>Author</th>
               <th>Category</th>
               <th>Title</th>
-              {/* <th>Notification</th>
-              <th>Comment</th> */}
               <th>View</th>
+              <th>Feedback</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -157,71 +156,7 @@ const ReviewResearch = () => {
                 </td>
                 <td>{paper.category}</td>
                 <td>{paper.title}</td>
-                {/* <td>
-                  <button className="btn text-2xl btn-outline btn-error">
-                    <IoMdNotificationsOutline />
-                  </button>
-                </td> */}
-                {/* <td>
-                  <button
-                    className="btn text-2xl btn-outline"
-                    onClick={() => {
-                      setSelectedPaperId(paper._id);
-                      document
-                        .getElementById(`feedback_${paper._id}`)
-                        .showModal();
-                    }}
-                  >
-                    <TiMessages />
-                  </button>
 
-                  <dialog id={`feedback_${paper._id}`} className="modal">
-                    <div className="modal-box">
-                      <form
-                        onSubmit={handleSubmit(onSubmit)}
-                        className="space-y-3"
-                      >
-                        <button
-                          type="button"
-                          onClick={() =>
-                            document
-                              .getElementById(`feedback_${paper._id}`)
-                              .close()
-                          }
-                          className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
-                        >
-                          ✕
-                        </button>
-                        <h3 className="font-bold text-lg">Write a feedback</h3>
-                        <textarea
-                          {...register("message", {
-                            required: "Message is required",
-                          })}
-                          defaultValue={paper.message || ""}
-                          placeholder="Feedback message"
-                          className="textarea textarea-neutral w-full border-dark-600 border-2"
-                        />
-                        {errors.message && (
-                          <p className="text-red-500">
-                            {errors.message.message}
-                          </p>
-                        )}
-                        <div className="flex justify-end">
-                          <button
-                            onClick={() =>
-                              document
-                                .getElementById(`feedback_${paper._id}`)
-                                .close()
-                            }
-                            className="btn btn-active btn-outline btn-accent"
-                          >
-                            Submit
-                          </button>
-                        </div>
-                      </form>
-                    </div>
-                  </dialog>
-                </td> */}
                 <td>
                   <button
                     onClick={() =>
@@ -232,12 +167,10 @@ const ReviewResearch = () => {
                     <FaEye />
                   </button>
 
+                  {/* VIEW MODAL */}
                   <dialog id={`view_${paper._id}`} className="modal">
                     <div className="modal-box w-11/12 max-w-5xl space-y-5">
                       <h3 className="font-bold text-lg">{paper.title}</h3>
-                      <h3 className="font-semibold text-base">
-                        Category: {paper.category}
-                      </h3>
                       <figure className="flex justify-center rounded-lg">
                         <img
                           className="h-64 rounded-lg object-cover"
@@ -258,19 +191,17 @@ const ReviewResearch = () => {
                           <strong>DOI:</strong> {paper.doi || "N/A"}
                         </p>
                         <p>
-                          <strong>Date of Publication:</strong>{" "}
+                          <strong>Date:</strong>{" "}
                           {paper.publicationDate
                             ? new Date(paper.publicationDate).toDateString()
                             : "N/A"}
                         </p>
                         <p>
-                          <strong>Author(s):</strong>{" "}
-                          {paper.authors?.length > 0
-                            ? paper.authors.join(", ")
-                            : paper.authorName || "Unknown"}
+                          <strong>Authors:</strong>{" "}
+                          {paper.authors?.join(", ") || paper.authorName}
                         </p>
                       </div>
-                      <p className="py-2 text-justify whitespace-pre-line">
+                      <p className="text-justify whitespace-pre-line">
                         {paper.details}
                       </p>
                       <div className="modal-action">
@@ -281,6 +212,65 @@ const ReviewResearch = () => {
                     </div>
                   </dialog>
                 </td>
+
+                <td>
+                  <button
+                    className="btn text-2xl btn-outline"
+                    onClick={() => {
+                      setSelectedPaperId(paper._id);
+                      document
+                        .getElementById(`feedback_${paper._id}`)
+                        .showModal();
+                    }}
+                  >
+                    <TiMessages />
+                  </button>
+
+                  {/* FEEDBACK MODAL */}
+                  <dialog id={`feedback_${paper._id}`} className="modal">
+                    <div className="modal-box">
+                      <form
+                        onSubmit={handleSubmit(onSubmit)}
+                        className="space-y-3"
+                      >
+                        <button
+                          type="button"
+                          onClick={() =>
+                            document
+                              .getElementById(`feedback_${paper._id}`)
+                              .close()
+                          }
+                          className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+                        >
+                          ✕
+                        </button>
+                        <h3 className="font-bold text-lg">Write Feedback</h3>
+                        <textarea
+                          {...register("message", {
+                            required: "Message is required",
+                          })}
+                          defaultValue={paper.message || ""}
+                          placeholder="Feedback message"
+                          className="textarea textarea-neutral w-full border-dark-600 border-2"
+                        />
+                        {errors.message && (
+                          <p className="text-red-500">
+                            {errors.message.message}
+                          </p>
+                        )}
+                        <div className="flex justify-end">
+                          <button
+                            type="submit"
+                            className="btn btn-accent text-white"
+                          >
+                            Submit
+                          </button>
+                        </div>
+                      </form>
+                    </div>
+                  </dialog>
+                </td>
+
                 <td>
                   <button
                     className="btn btn-warning text-white btn-outline text-xl"

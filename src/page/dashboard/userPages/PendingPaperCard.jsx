@@ -7,12 +7,22 @@ const PendingPaperCard = ({ researchPaper }) => {
     return <h1>Loading...</h1>;
   }
 
-  const { title, image, details, _id } = researchPaper;
+  // Destructure with fallback values
+  const {
+    title = "Untitled Paper",
+    image,
+    details = "No details available.",
+    _id,
+  } = researchPaper;
 
   const handleEditClick = () => {
-    navigate(`/dashboard/editPaper/${_id}`, {
-      state: { paper: researchPaper },
-    });
+    if (_id) {
+      navigate(`/dashboard/editPaper/${_id}`, {
+        state: { paper: researchPaper },
+      });
+    } else {
+      alert("Cannot edit this paper. Missing paper ID.");
+    }
   };
 
   return (
@@ -22,6 +32,7 @@ const PendingPaperCard = ({ researchPaper }) => {
           className="h-36 w-32 rounded-lg object-cover"
           src={image}
           alt={title}
+          loading="lazy"
           onError={(e) => {
             e.target.onerror = null;
             e.target.src =
@@ -29,6 +40,7 @@ const PendingPaperCard = ({ researchPaper }) => {
           }}
         />
       </figure>
+
       <div className="ml-4 flex flex-col justify-center flex-1">
         <h2
           className="lg:text-xl md:text-lg font-bold line-clamp-1 text-justify"

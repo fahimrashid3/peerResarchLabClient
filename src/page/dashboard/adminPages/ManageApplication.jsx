@@ -4,11 +4,17 @@ import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import { MdDeleteForever } from "react-icons/md";
 import { IoMdPersonAdd } from "react-icons/io";
 import Swal from "sweetalert2";
+import { TiMessages } from "react-icons/ti";
 
 const ManageApplication = () => {
   const [applications, setApplications] = useState([]);
   const [openPositionDetails, setOpenPositionDetails] = useState([]);
   const [selectedRoles, setSelectedRoles] = useState({}); // holds role changes
+
+  // For feedback modal
+  const [feedbackModalOpen, setFeedbackModalOpen] = useState(false);
+  const [currentAppId, setCurrentAppId] = useState(null);
+  const [feedbackText, setFeedbackText] = useState("");
 
   const axiosSecure = useAxiosSecure();
   const axiosPublic = useAxiosPublic();
@@ -163,6 +169,49 @@ const ManageApplication = () => {
     }
   };
 
+  // Open feedback modal
+  const openFeedbackModal = (appId) => {
+    setCurrentAppId(appId);
+    setFeedbackText("");
+    setFeedbackModalOpen(true);
+  };
+
+  // Close feedback modal
+  const closeFeedbackModal = () => {
+    setCurrentAppId(null);
+    setFeedbackText("");
+    setFeedbackModalOpen(false);
+  };
+
+  // Submit feedback
+  const submitFeedback = async () => {
+    if (!feedbackText.trim()) {
+      Swal.fire("Please enter feedback before submitting.");
+      return;
+    }
+    try {
+      await axiosSecure.post(`/applications/${currentAppId}/feedback`, {
+        feedback: feedbackText,
+      });
+
+      Swal.fire({
+        icon: "success",
+        title: "Feedback submitted successfully!",
+        timer: 1500,
+        showConfirmButton: false,
+        position: "top-end",
+      });
+
+      closeFeedbackModal();
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Failed to submit feedback.",
+      });
+      console.error("Submit feedback error:", error);
+    }
+  };
+
   return (
     <div className="p-5">
       <h2 className="text-2xl font-bold mb-4">Applications</h2>
@@ -179,6 +228,7 @@ const ManageApplication = () => {
               <th>Resume</th>
               <th>Accept</th>
               <th>Delete</th>
+              <th>Feedback</th>
             </tr>
           </thead>
           <tbody>
@@ -225,11 +275,19 @@ const ManageApplication = () => {
                     <MdDeleteForever />
                   </button>
                 </td>
+                <td>
+                  <button
+                    onClick={() => openFeedbackModal(app._id)}
+                    className="btn border-b-4 text-2xl font-semibold text-primary-900 hover:text-white hover:border-primary-600 border-primary-700 bg-primary-100 hover:bg-primary-500 transition-all duration-200"
+                  >
+                    <TiMessages />
+                  </button>
+                </td>
               </tr>
             ))}
             {applications.length === 0 && (
               <tr>
-                <td colSpan="8" className="text-center p-4">
+                <td colSpan="9" className="text-center p-4">
                   No applications found.
                 </td>
               </tr>
@@ -237,6 +295,36 @@ const ManageApplication = () => {
           </tbody>
         </table>
       </div>
+
+      {/* Feedback Modal */}
+      {feedbackModalOpen && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+          onClick={closeFeedbackModal}
+        >
+          <div
+            className="bg-white p-6 rounded shadow-lg w-full max-w-md"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <h3 className="text-xl font-semibold mb-4">Give Feedback</h3>
+            <textarea
+              rows={5}
+              className="w-full border border-gray-300 rounded p-2 mb-4 resize-none"
+              placeholder="Enter feedback here"
+              value={feedbackText}
+              onChange={(e) => setFeedbackText(e.target.value)}
+            />
+            <div className="flex justify-end space-x-2">
+              <button onClick={closeFeedbackModal} className="btn btn-outline">
+                Cancel
+              </button>
+              <button onClick={submitFeedback} className="btn btn-primary">
+                Submit
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
