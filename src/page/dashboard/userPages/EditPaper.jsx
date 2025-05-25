@@ -254,7 +254,7 @@ const EditPaper = () => {
         {/* Details */}
         <div className="mb-4">
           <label className="block font-semibold text-lg">
-            Research Details
+            Research Abstract
           </label>
           <textarea
             {...register("details", { required: "Details are required" })}

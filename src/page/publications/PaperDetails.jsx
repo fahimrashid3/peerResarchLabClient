@@ -105,7 +105,7 @@ const PaperDetails = () => {
               </p>
               <a
                 className="flex items-center gap-2 text-primary-500 font-semibold underline cursor-pointer hover:underline"
-                href={`https://${paper.doi}`}
+                href={`https://doi.org/${paper.doi}`}
                 target="_blank"
                 rel="noopener noreferrer"
               >

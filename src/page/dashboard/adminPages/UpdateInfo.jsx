@@ -122,7 +122,8 @@ const UpdateInfo = () => {
           {!socialMediaEdit ? (
             <div className="space-y-5">
               <a
-                href={`https://wa.me/${whatsApp}`}
+                // href={`https://wa.me/${whatsApp}`}
+                href={`${whatsApp}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex justify-center items-center gap-2 text-blue-600 hover:underline"
@@ -170,6 +171,7 @@ const UpdateInfo = () => {
                 <input
                   {...register("socialMedia.whatsApp")}
                   defaultValue={whatsApp}
+                  placeholder="https://wa.me/+8801405819175"
                   className="input w-[80%] md:w-[70%]"
                 />
               </div>

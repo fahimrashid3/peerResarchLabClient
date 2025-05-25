@@ -38,7 +38,7 @@ const OurCollaboration = () => {
 
       <Swiper
         spaceBetween={30}
-        slidesPerView={3}
+        slidesPerView={5}
         slidesPerGroup={1}
         autoplay={{
           delay: 3000,
@@ -56,6 +56,7 @@ const OurCollaboration = () => {
                 alt={item.name}
                 className="h-16 object-contain"
               />
+              {/* <p>{item.name}</p> */}
             </div>
           </SwiperSlide>
         ))}

@@ -55,7 +55,8 @@ const ContactUs = () => {
                 <div className="mt-3 space-y-2">
                   <a
                     className="flex items-center gap-2 text-blue-600 cursor-pointer hover:underline"
-                    href={`https://wa.me/${whatsApp}`}
+                    // href={`https://wa.me/${whatsApp}`}
+                    href={`${whatsApp}`}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
