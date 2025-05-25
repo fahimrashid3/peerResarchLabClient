@@ -55,7 +55,7 @@ const ReviewResearch = () => {
 
     try {
       const res = await axiosSecure.patch(
-        `/feedBack/${selectedPaperId}`,
+        `reviewResearch/feedBack/${selectedPaperId}`,
         message
       );
 

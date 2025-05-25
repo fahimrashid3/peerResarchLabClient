@@ -191,7 +191,7 @@ const ManageApplication = () => {
     }
 
     try {
-      await axiosSecure.patch(`/feedBack/${currentAppId}`, {
+      await axiosSecure.patch(`/application/feedBack/${currentAppId}`, {
         message: feedbackText,
       });
 
