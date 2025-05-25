@@ -1,4 +1,6 @@
+import { FaEdit } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { VscFeedback } from "react-icons/vsc";
 
 const PendingPaperCard = ({ researchPaper }) => {
   const navigate = useNavigate();
@@ -13,6 +15,7 @@ const PendingPaperCard = ({ researchPaper }) => {
     image,
     details = "No details available.",
     _id,
+    message,
   } = researchPaper;
 
   const handleEditClick = () => {
@@ -48,13 +51,46 @@ const PendingPaperCard = ({ researchPaper }) => {
         >
           {title}
         </h2>
-        <p className="mt-2 text-sm line-clamp-3 text-justify">{details}</p>
-        <button
-          onClick={handleEditClick}
-          className="mt-3 px-4 py-1 text-sm bg-blue-600 text-white rounded hover:bg-blue-700 w-fit"
-        >
-          Edit Paper
-        </button>
+        <div className="md:flex md:gap-5">
+          <p className="mt-2 text-sm line-clamp-3 text-justify">{details}</p>
+
+          <div className="flex md:flex-col gap-5 pt-2">
+            <button
+              onClick={handleEditClick}
+              className="btn w-16 text-xl border-b-4 font-semibold text-primary-900 hover:text-white hover:border-primary-600 border-primary-700 bg-primary-100 hover:bg-primary-500 transition-all duration-200"
+            >
+              <FaEdit />
+            </button>
+            {/* Open the modal using document.getElementById('ID').showModal() method */}
+            {message ? (
+              <button
+                className="btn w-16 text-xl border-b-4 font-semibold text-primary-900 hover:text-white hover:border-primary-600 border-primary-700 bg-primary-100 hover:bg-primary-500 transition-all duration-200"
+                onClick={() =>
+                  document.getElementById("my_modal_5").showModal()
+                }
+              >
+                <VscFeedback />
+              </button>
+            ) : (
+              <></>
+            )}
+            <dialog
+              id="my_modal_5"
+              className="modal modal-bottom sm:modal-middle"
+            >
+              <div className="modal-box">
+                <h3 className="font-bold text-lg">Feedback</h3>
+                <p className="py-4">{message}</p>
+                <div className="modal-action">
+                  <form method="dialog">
+                    {/* if there is a button in form, it will close the modal */}
+                    <button className="btn">Close</button>
+                  </form>
+                </div>
+              </div>
+            </dialog>
+          </div>
+        </div>
       </div>
     </div>
   );

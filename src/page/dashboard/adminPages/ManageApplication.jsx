@@ -189,9 +189,10 @@ const ManageApplication = () => {
       Swal.fire("Please enter feedback before submitting.");
       return;
     }
+
     try {
-      await axiosSecure.post(`/applications/${currentAppId}/feedback`, {
-        feedback: feedbackText,
+      await axiosSecure.patch(`/feedBack/${currentAppId}`, {
+        message: feedbackText,
       });
 
       Swal.fire({
