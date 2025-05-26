@@ -7,6 +7,7 @@ import {
   FaUsers,
 } from "react-icons/fa";
 import {
+  MdConnectWithoutContact,
   MdOutlineGroupAdd,
   MdOutlinePendingActions,
   MdSubject,
@@ -125,6 +126,12 @@ const DashBoard = () => {
                 <NavLink to="/dashboard/addCollaborators">
                   <FaUserGroup />
                   Add Collaborators
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/dashboard/manageContacts">
+                  <MdConnectWithoutContact />
+                  Manage Contacts
                 </NavLink>
               </li>
             </>

@@ -30,6 +30,7 @@ import AdvisorCard from "../page/team/AdvisorCard";
 import UserDetail from "../page/team/UserDetail";
 import AddArea from "../page/dashboard/adminPages/AddArea";
 import AddCollaborator from "../page/dashboard/adminPages/AddCollaborator";
+import ManageContacts from "../page/dashboard/adminPages/ManageContacts";
 
 export const router = createBrowserRouter([
   {
@@ -202,6 +203,14 @@ export const router = createBrowserRouter([
         element: (
           <AdminRoute>
             <AddCollaborator />
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "manageContacts",
+        element: (
+          <AdminRoute>
+            <ManageContacts />
           </AdminRoute>
         ),
       },

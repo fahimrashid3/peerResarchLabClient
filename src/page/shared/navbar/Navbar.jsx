@@ -13,7 +13,10 @@ import NavLinks from "./Navlink";
 import { TbCategoryPlus, TbEyeEdit } from "react-icons/tb";
 import logoWhitedPng from "../../../assets/logo/logoWhitePng.png";
 import logoWhiteWithoutText from "../../../assets/logo/logoWhiteWithoutText.png";
-import { MdOutlinePendingActions } from "react-icons/md";
+import {
+  MdConnectWithoutContact,
+  MdOutlinePendingActions,
+} from "react-icons/md";
 import { FaUserGroup } from "react-icons/fa6";
 
 const Navbar = () => {
@@ -188,6 +191,12 @@ const Navbar = () => {
                       <NavLink to="/dashboard/addCollaborators">
                         <FaUserGroup />
                         Add Collaborators
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink to="/dashboard/manageContacts">
+                        <MdConnectWithoutContact />
+                        Manage Contacts
                       </NavLink>
                     </li>
                   </>

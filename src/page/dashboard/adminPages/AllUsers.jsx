@@ -41,7 +41,7 @@ const AllUsers = () => {
       }
     });
   };
-  console.log(users)
+  console.log(users);
   return (
     <div className="-mt-24">
       <SectionTitle
@@ -69,17 +69,13 @@ const AllUsers = () => {
                   <div className="flex items-center gap-3">
                     <div className="avatar">
                       <div className="mask mask-squircle h-12 w-12">
-                       {
-                        user.image? <img
-                          src={user.image}
-                          alt={user.name}
-                          className="h-12 w-12 rounded-full object-cover"
-                        />: <img
-                          src="https://res.cloudinary.com/dipwayvsu/image/upload/v1744132219/v0gfweuclqfywslynifb.jpg"
-                          alt={user.name}
+                        <img
+                          src={user.photoUrl}
+                          alt={
+                            "https://res.cloudinary.com/dipwayvsu/image/upload/v1744132219/v0gfweuclqfywslynifb.jpg"
+                          }
                           className="h-12 w-12 rounded-full object-cover"
                         />
-                       }
                       </div>
                     </div>
                   </div>
