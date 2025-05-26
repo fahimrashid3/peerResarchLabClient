@@ -3,7 +3,7 @@ import { CgProfile } from "react-icons/cg";
 import { FiLogIn } from "react-icons/fi";
 import { CiLogout } from "react-icons/ci";
 import { VscOpenPreview } from "react-icons/vsc";
-import { FaEdit, FaRegNewspaper, FaUsers } from "react-icons/fa";
+import { FaEdit, FaEnvelope, FaRegNewspaper, FaUsers } from "react-icons/fa";
 import Swal from "sweetalert2";
 import useAuth from "../../../hooks/useAuth";
 import useAdmin from "../../../hooks/useAdmin";
@@ -148,6 +148,14 @@ const Navbar = () => {
                         </span>
                         My Pending Paper
                       </Link>
+                    </li>
+                    <li>
+                      <NavLink to="/dashboard/myContacts">
+                        <span className="text-xl">
+                          <FaEnvelope />
+                        </span>
+                        My Contacts
+                      </NavLink>
                     </li>
                   </>
                 )}

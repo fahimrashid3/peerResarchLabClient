@@ -1,6 +1,7 @@
 import { NavLink, Outlet } from "react-router-dom";
 import {
   FaEdit,
+  FaEnvelope,
   FaHome,
   FaPhone,
   FaRegNewspaper,
@@ -84,6 +85,14 @@ const DashBoard = () => {
                     <MdOutlinePendingActions />
                   </span>
                   My Pending Paper
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/dashboard/myContacts">
+                  <span className="text-xl">
+                    <FaEnvelope />
+                  </span>
+                  My Contacts
                 </NavLink>
               </li>
             </>
