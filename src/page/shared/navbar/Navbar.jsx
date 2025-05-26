@@ -13,6 +13,8 @@ import NavLinks from "./Navlink";
 import { TbCategoryPlus, TbEyeEdit } from "react-icons/tb";
 import logoWhitedPng from "../../../assets/logo/logoWhitePng.png";
 import logoWhiteWithoutText from "../../../assets/logo/logoWhiteWithoutText.png";
+import { GiStabbedNote } from "react-icons/gi";
+
 import {
   MdConnectWithoutContact,
   MdOutlinePendingActions,
@@ -156,6 +158,18 @@ const Navbar = () => {
                         </span>
                         My Contacts
                       </NavLink>
+                    </li>
+                  </>
+                )}
+                {user && !role && (
+                  <>
+                    <li>
+                      <Link to="/dashboard/myApplication">
+                        <span className="text-xl">
+                          <GiStabbedNote />
+                        </span>
+                        My applications
+                      </Link>
                     </li>
                   </>
                 )}

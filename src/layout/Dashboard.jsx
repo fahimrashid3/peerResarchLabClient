@@ -23,6 +23,7 @@ import useAdmin from "../hooks/useAdmin";
 import useRole from "../hooks/useRole";
 import { CgProfile } from "react-icons/cg";
 import useAuth from "../hooks/useAuth";
+import { GiStabbedNote } from "react-icons/gi";
 
 const DashBoard = () => {
   const [isAdmin, isAdminLoading] = useAdmin();
@@ -93,6 +94,19 @@ const DashBoard = () => {
                     <FaEnvelope />
                   </span>
                   My Contacts
+                </NavLink>
+              </li>
+            </>
+          )}
+
+          {user && !role && (
+            <>
+              <li>
+                <NavLink to="/dashboard/myApplication">
+                  <span className="text-xl">
+                    <GiStabbedNote />
+                  </span>
+                  My applications
                 </NavLink>
               </li>
             </>

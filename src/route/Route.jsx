@@ -32,6 +32,7 @@ import AddArea from "../page/dashboard/adminPages/AddArea";
 import AddCollaborator from "../page/dashboard/adminPages/AddCollaborator";
 import ManageContacts from "../page/dashboard/adminPages/ManageContacts";
 import MyContacts from "../page/dashboard/userPages/MyContacts";
+import MyApplications from "../page/dashboard/userPages/MyApplications";
 
 export const router = createBrowserRouter([
   {
@@ -154,6 +155,14 @@ export const router = createBrowserRouter([
         element: (
           <PrivetRoute>
             <MyContacts />
+          </PrivetRoute>
+        ),
+      },
+      {
+        path: "myApplication",
+        element: (
+          <PrivetRoute>
+            <MyApplications />
           </PrivetRoute>
         ),
       },

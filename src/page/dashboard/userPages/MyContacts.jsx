@@ -8,7 +8,7 @@ const MyContacts = () => {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
   const [contacts, setContacts] = useState([]);
-  const [loading, setLoading] = useState(true); // Add loading state
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (user?.email) {
@@ -16,11 +16,11 @@ const MyContacts = () => {
         .get(`/contacts/${user.email}`)
         .then((res) => {
           setContacts(res.data);
-          setLoading(false); // Set loading to false after data is fetched
+          setLoading(false);
         })
         .catch((error) => {
           console.error("Error fetching contacts:", error);
-          setLoading(false); // Set loading to false even if there's an error
+          setLoading(false);
         });
     }
   }, [axiosSecure, user?.email]);
