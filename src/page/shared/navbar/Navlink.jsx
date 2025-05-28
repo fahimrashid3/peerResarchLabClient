@@ -15,9 +15,9 @@ const NavLinks = () => {
           style={({ isActive, isTransitioning }) => {
             return {
               background: "transparent",
-              // textDecoration: isActive ? "underline 2px solid #00264D" : "none",
+              // textDecoration: isActive ? "underline 2px solid #B53333" : "none",
               fontWeight: isActive ? "bold" : "",
-              color: isActive ? "#00264D" : "white",
+              color: isActive ? "#B53333" : "white",
               viewTransitionName: isTransitioning ? "slide" : "",
             };
           }}
@@ -32,9 +32,9 @@ const NavLinks = () => {
           style={({ isActive, isTransitioning }) => {
             return {
               background: isActive ? "transparent" : "transparent",
-              // textDecoration: isActive ? "underline 2px solid #00264D" : "none",
+              // textDecoration: isActive ? "underline 2px solid #B53333" : "none",
               fontWeight: isActive ? "bold" : "",
-              color: isActive ? "#00264D" : "white",
+              color: isActive ? "#B53333" : "white",
               viewTransitionName: isTransitioning ? "slide" : "",
             };
           }}
@@ -51,9 +51,9 @@ const NavLinks = () => {
           style={({ isActive, isTransitioning }) => {
             return {
               background: isActive ? "transparent" : "transparent",
-              // textDecoration: isActive ? "underline 2px solid #00264D" : "none",
+              // textDecoration: isActive ? "underline 2px solid #B53333" : "none",
               fontWeight: isActive ? "bold" : "",
-              color: isActive ? "#00264D" : "white",
+              color: isActive ? "#B53333" : "white",
               viewTransitionName: isTransitioning ? "slide" : "",
             };
           }}
@@ -69,9 +69,9 @@ const NavLinks = () => {
           style={({ isActive, isTransitioning }) => {
             return {
               background: isActive ? "transparent" : "transparent",
-              // textDecoration: isActive ? "underline 2px solid #00264D" : "none",
+              // textDecoration: isActive ? "underline 2px solid #B53333" : "none",
               fontWeight: isActive ? "bold" : "",
-              color: isActive ? "#00264D" : "white",
+              color: isActive ? "#B53333" : "white",
               viewTransitionName: isTransitioning ? "slide" : "",
             };
           }}
@@ -87,9 +87,9 @@ const NavLinks = () => {
           style={({ isActive, isTransitioning }) => {
             return {
               background: isActive ? "transparent" : "transparent",
-              // textDecoration: isActive ? "underline 2px solid #00264D" : "none",
+              // textDecoration: isActive ? "underline 2px solid #B53333" : "none",
               fontWeight: isActive ? "bold" : "",
-              color: isActive ? "#00264D" : "white",
+              color: isActive ? "#B53333" : "white",
               viewTransitionName: isTransitioning ? "slide" : "",
             };
           }}
@@ -105,9 +105,9 @@ const NavLinks = () => {
           style={({ isActive, isTransitioning }) => {
             return {
               background: isActive ? "transparent" : "transparent",
-              // textDecoration: isActive ? "underline 2px solid #00264D" : "none",
+              // textDecoration: isActive ? "underline 2px solid #B53333" : "none",
               fontWeight: isActive ? "bold" : "",
-              color: isActive ? "#00264D" : "white",
+              color: isActive ? "#B53333" : "white",
               viewTransitionName: isTransitioning ? "slide" : "",
             };
           }}
@@ -122,9 +122,9 @@ const NavLinks = () => {
           style={({ isActive, isTransitioning }) => {
             return {
               background: isActive ? "transparent" : "transparent",
-              // textDecoration: isActive ? "underline 2px solid #00264D" : "none",
+              // textDecoration: isActive ? "underline 2px solid #B53333" : "none",
               fontWeight: isActive ? "bold" : "",
-              color: isActive ? "#00264D" : "white",
+              color: isActive ? "#B53333" : "white",
               viewTransitionName: isTransitioning ? "slide" : "",
             };
           }}
@@ -139,9 +139,9 @@ const NavLinks = () => {
           style={({ isActive, isTransitioning }) => {
             return {
               background: isActive ? "transparent" : "transparent",
-              // textDecoration: isActive ? "underline 2px solid #00264D" : "none",
+              // textDecoration: isActive ? "underline 2px solid #B53333" : "none",
               fontWeight: isActive ? "bold" : "",
-              color: isActive ? "#00264D" : "white",
+              color: isActive ? "#B53333" : "white",
               viewTransitionName: isTransitioning ? "slide" : "",
             };
           }}
