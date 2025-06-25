@@ -41,7 +41,7 @@ const MyApplications = () => {
         const res = await axiosSecure.delete(`/application/${_id}`);
         console.log(res);
 
-        if (res.data.deletedCount > 0) {
+        if (res.data.success) {
           refetch();
           Swal.fire({
             position: "top-end",
