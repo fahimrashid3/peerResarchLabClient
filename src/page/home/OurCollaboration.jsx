@@ -44,7 +44,7 @@ const OurCollaboration = () => {
           delay: 3000,
           disableOnInteraction: false,
         }}
-        loop={true}
+        loop={collaborators.length > 5}
         modules={[Autoplay]}
         className="px-4"
       >

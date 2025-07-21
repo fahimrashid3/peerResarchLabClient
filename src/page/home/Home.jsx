@@ -40,7 +40,9 @@ const Home = () => {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 max-w-7xl mx-auto gap-5 ">
             {members.map((member) => (
-              <div className="mx-auto"><UserCard key={member._id} member={member} /></div>
+              <div className="mx-auto" key={member._id}>
+                <UserCard member={member} />
+              </div>
             ))}
           </div>
         )}

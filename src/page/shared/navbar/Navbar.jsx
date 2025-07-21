@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { CgProfile } from "react-icons/cg";
 import { FiLogIn } from "react-icons/fi";
@@ -27,6 +28,26 @@ const Navbar = () => {
   const [isAdmin, isAdminLoading] = useAdmin();
   const [role, isRoleLoading] = useRole();
 
+  // Navbar show/hide state
+  const [showNavbar, setShowNavbar] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(window.scrollY);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      if (currentScrollY <= 0) {
+        setShowNavbar(true);
+      } else if (currentScrollY > lastScrollY) {
+        setShowNavbar(false); // scrolling down
+      } else {
+        setShowNavbar(true); // scrolling up
+      }
+      setLastScrollY(currentScrollY);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [lastScrollY]);
+
   const handelLogout = () => {
     Swal.fire({
       title: "Are you sure?",
@@ -54,7 +75,12 @@ const Navbar = () => {
   };
 
   return (
-    <div className="bg-primary-400 bg-opacity-80 md:py-3 w-full z-[50] fixed">
+    <div
+      className={`bg-primary-400 bg-opacity-80 md:py-3 w-full z-[50] fixed transition-transform duration-300 ${
+        showNavbar ? "translate-y-0" : "-translate-y-full"
+      }`}
+      style={{ willChange: "transform" }}
+    >
       <div className="mx-auto">
         <div className="navbar w-full">
           <div className="navbar-start">

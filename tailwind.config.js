@@ -13,27 +13,17 @@ export default {
           800: "#111827", // Darker shade for text or UI elements
           900: "#151515", // Almost black for backgrounds or text
         },
-        // primary: {
-        //   100: "#CCD9E5", // Soft blue (not too white)
-        //   200: "#99B3CC", // Light blue (balanced)
-        //   300: "#668CB2", // Medium blue (subtle and rich)
-        //   400: "#336699", // Vibrant blue (base primary color)
-        //   500: "#004080", // Deep blue (emphasis)
-        //   600: "#003366", // Rich blue (active/hover states)
-        //   700: "#004080", // Lighter dark blue (buttons/key UI elements)
-        //   800: "#003366", // Muted dark blue (shadows/accents)
-        //   900: "#00264D", // Deep navy blue (strong contrast, not too black)
-        // },
         primary: {
-          100: "#F8DADA", // Very light red (soft backgrounds)
-          200: "#F1AFAF", // Light pastel red
-          300: "#EA8585", // Light-medium red
-          400: "#E35A5A", // Vibrant soft red
-          500: "#D33C3C", // Base primary color
-          600: "#B53333", // Darker for hover states
-          700: "#992B2B", // Deep rich red
-          800: "#5E1515", // New: Much darker (almost burgundy)
-          900: "#3A0A0A", // New: Near-black red
+          50: "#FEF2F2", // very light, for backgrounds
+          100: "#FDE8E8", // lightest tint
+          200: "#FACDCD", // lighter tint
+          300: "#F29B9B", // light
+          400: "#EB6B6B", // soft
+          500: "#D33C3C", // main brand color
+          600: "#B32B2B", // dark hover
+          700: "#992323", // deeper
+          800: "#7A1B1B", // very deep
+          900: "#611313", // almost black
         },
       },
     },
