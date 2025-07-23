@@ -23,6 +23,7 @@ const UserProfile = () => {
   const axiosPublic = useAxiosPublic();
   const { logOut } = useAuth();
 
+  // Restore teamInfo useQuery
   const {
     data: teamInfo,
     refetch,
@@ -43,11 +44,20 @@ const UserProfile = () => {
     handleSubmit,
     reset,
     watch,
+    setValue,
     formState: { errors },
+    getValues,
   } = useForm();
 
   // Watch details field to update character count live
   const watchedDetails = watch("details", "");
+  const watchedName = watch("name", "");
+  const watchedPhone = watch("phone", "");
+  const watchedUniversity = watch("university", "");
+  const watchedLinkedin = watch("linkedin", "");
+  const watchedTwitter = watch("twitter", "");
+  const watchedFacebook = watch("facebook", "");
+  const watchedGithub = watch("github", "");
 
   useEffect(() => {
     setDetailsCount(watchedDetails.length);
@@ -208,6 +218,7 @@ const UserProfile = () => {
     role: teamInfo?.role,
     phone: teamInfo?.phone,
     university: teamInfo?.university,
+    // Always use user.photoUrl as main source, fallback to teamInfo.image
     photoUrl: user?.photoUrl || teamInfo?.image,
     socialMedia: teamInfo?.socialMedia || {},
     joinedOn: teamInfo?.createdAt,
@@ -259,7 +270,7 @@ const UserProfile = () => {
           register={register}
           errors={errors}
           isEditing={isEditing}
-          value={displayData.name}
+          value={isEditing ? watchedName : displayData.name}
         />
         <ProfileField
           label="Role"
@@ -279,7 +290,7 @@ const UserProfile = () => {
           register={register}
           errors={errors}
           isEditing={isEditing}
-          value={displayData.phone}
+          value={isEditing ? watchedPhone : displayData.phone}
         />
         <ProfileField
           label="University"
@@ -287,7 +298,7 @@ const UserProfile = () => {
           register={register}
           errors={errors}
           isEditing={isEditing}
-          value={displayData.university}
+          value={isEditing ? watchedUniversity : displayData.university}
         />
 
         <div className="space-y-4 pt-4">
@@ -298,7 +309,9 @@ const UserProfile = () => {
             register={register}
             errors={errors}
             isEditing={isEditing}
-            value={displayData.socialMedia.linkedin}
+            value={
+              isEditing ? watchedLinkedin : displayData.socialMedia.linkedin
+            }
           />
           <SocialMediaField
             label="Twitter"
@@ -306,7 +319,7 @@ const UserProfile = () => {
             register={register}
             errors={errors}
             isEditing={isEditing}
-            value={displayData.socialMedia.twitter}
+            value={isEditing ? watchedTwitter : displayData.socialMedia.twitter}
           />
           <SocialMediaField
             label="Facebook"
@@ -314,7 +327,9 @@ const UserProfile = () => {
             register={register}
             errors={errors}
             isEditing={isEditing}
-            value={displayData.socialMedia.facebook}
+            value={
+              isEditing ? watchedFacebook : displayData.socialMedia.facebook
+            }
           />
           <SocialMediaField
             label="GitHub"
@@ -322,7 +337,7 @@ const UserProfile = () => {
             register={register}
             errors={errors}
             isEditing={isEditing}
-            value={displayData.socialMedia.github}
+            value={isEditing ? watchedGithub : displayData.socialMedia.github}
           />
           <div className="border-b pb-2">
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center text-justify gap-2 md:gap-5">
@@ -331,7 +346,7 @@ const UserProfile = () => {
                 <textarea
                   className="flex-1 textarea textarea-xl w-full h-64 textarea-bordered"
                   {...register("details")}
-                  defaultValue={displayData.details}
+                  value={watchedDetails}
                   maxLength={MAX_DETAILS_LENGTH}
                 />
               ) : (
@@ -387,6 +402,7 @@ const UserProfile = () => {
   );
 };
 
+// ProfileField: controlled input for edit mode
 const ProfileField = ({ label, name, register, errors, isEditing, value }) => (
   <div className="border-b pb-2">
     <div className="flex justify-between items-center  text-justify">
@@ -396,7 +412,7 @@ const ProfileField = ({ label, name, register, errors, isEditing, value }) => (
           type={name === "joinedOn" ? "date" : "text"}
           {...register(name)}
           className="flex-1 max-w-xs input input-bordered ml-4"
-          defaultValue={value}
+          value={value}
         />
       ) : (
         <span className={!value ? "text-gray-500" : ""}>
@@ -412,7 +428,15 @@ const ProfileField = ({ label, name, register, errors, isEditing, value }) => (
   </div>
 );
 
-const SocialMediaField = ({ label, name, register, isEditing, value }) => (
+// SocialMediaField: controlled input for edit mode
+const SocialMediaField = ({
+  label,
+  name,
+  register,
+  errors,
+  isEditing,
+  value,
+}) => (
   <div className="flex items-center">
     <span className="w-24 font-medium">{label}</span>
     {isEditing ? (
@@ -420,7 +444,7 @@ const SocialMediaField = ({ label, name, register, isEditing, value }) => (
         {...register(name)}
         className="flex-1 input input-bordered"
         placeholder={`https://${label.toLowerCase()}.com/username`}
-        defaultValue={value}
+        value={value}
       />
     ) : value ? (
       <a
