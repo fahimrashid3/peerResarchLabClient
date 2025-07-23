@@ -33,6 +33,7 @@ import AddCollaborator from "../page/dashboard/adminPages/AddCollaborator";
 import ManageContacts from "../page/dashboard/adminPages/ManageContacts";
 import MyContacts from "../page/dashboard/userPages/MyContacts";
 import MyApplications from "../page/dashboard/userPages/MyApplications";
+import VerifyEmail from "../page/authentication/VerifyEmail";
 
 export const router = createBrowserRouter([
   {
@@ -106,6 +107,10 @@ export const router = createBrowserRouter([
       {
         path: "/login",
         element: <Login />,
+      },
+      {
+        path: "/verify-email",
+        element: <VerifyEmail />,
       },
     ],
   },
