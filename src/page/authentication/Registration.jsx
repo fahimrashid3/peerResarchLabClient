@@ -11,13 +11,14 @@ import axios from "axios";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Typewriter } from "react-simple-typewriter";
-import Resizer from "react-image-file-resizer"; 
+import Resizer from "react-image-file-resizer";
 
 const Registration = () => {
   const navigate = useNavigate();
   const [disabled, setDisabled] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  const { createUser, updateUserProfile } = useAuth();
+  const { createUser, updateUserProfile, sendVerificationEmail, logOut } =
+    useAuth();
   const axiosPublic = useAxiosPublic();
   const [showPassword, setShowPassword] = useState(false);
   const location = useLocation();
@@ -91,22 +92,26 @@ const Registration = () => {
         // Update user profile
         await updateUserProfile(name, photoUrl);
 
-        // Save user information in the database
-        const userInfo = { name, email: user.email, photoUrl };
-        const userRes = await axiosPublic.post("/users", userInfo);
+        // Send email verification
+        await sendVerificationEmail();
+        Swal.fire({
+          icon: "info",
+          title: "Verification Email Sent",
+          text: "Please check your email and verify your account before logging in.",
+          timer: 4000,
+        });
 
-        if (userRes.data.insertedId) {
-          reset();
-          Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: "Account created successfully",
-            showConfirmButton: false,
-            timer: 1500,
-          });
-          navigate(form, { replace: true });
-          scrollTo(0, 0);
-        }
+        // Immediately log out the user after registration
+        await logOut();
+
+        // Redirect to verify email page after successful sign up
+        reset();
+        navigate("/verify-email", { replace: true });
+        scrollTo(0, 0);
+
+        // Save user information in the database (optional, can be after redirect)
+        const userInfo = { name, email: user.email, photoUrl };
+        await axiosPublic.post("/users", userInfo);
       } else {
         setErrorMessage("Password and confirm password should match");
       }
@@ -127,149 +132,177 @@ const Registration = () => {
 
   return (
     <div
-  className="hero min-h-screen"
-  style={{ backgroundImage: `url(${loginBg})` }}
->
-  <Helmet>
-    <title>Service | Registration</title>
-  </Helmet>
-  <div className="hero-content flex-col md:flex-row lg:gap-48 md:gap-16 w-full px-4">
-    {/* Left Image */}
-    <div className="text-center lg:text-left flex-1">
-      <img src={loginImg} alt="Login" />
-    </div>
-
-    {/* Form Section */}
-    <div className="w-full md:max-w-md">
-      <form onSubmit={handleSubmit(onSubmit)} className="card-body w-full">
-        <p className="font-bold text-center lg:text-4xl md:text-3xl text-2xl md:mb-10 mb-5 text-dark-900 dark:text-white">
-          <Typewriter
-            words={[" Sign Up now"]}
-            loop={Infinity}
-            cursor
-            cursorStyle="_"
-            typeSpeed={100}
-            deleteSpeed={50}
-            delaySpeed={2000}
-          />
-        </p>
-
-        {/* Name */}
-        <div className="form-control w-full">
-          <label className="label">
-            <span className="label-text">Name</span>
-          </label>
-          <input
-            type="text"
-            placeholder="Name"
-            {...register("name", { required: true })}
-            className="input input-bordered w-full"
-          />
-          {errors.name && <span className="text-red-500">Name is required</span>}
+      className="hero min-h-screen"
+      style={{ backgroundImage: `url(${loginBg})` }}
+    >
+      <Helmet>
+        <title>Service | Registration</title>
+      </Helmet>
+      <div className="hero-content flex-col md:flex-row lg:gap-48 md:gap-16 w-full px-4">
+        {/* Left Image */}
+        <div className="text-center lg:text-left flex-1">
+          <img src={loginImg} alt="Login" />
         </div>
 
-        {/* Email */}
-        <div className="form-control w-full">
-          <label className="label">
-            <span className="label-text">Email</span>
-          </label>
-          <input
-            type="email"
-            placeholder="Email"
-            {...register("email", { required: true })}
-            className="input input-bordered w-full"
-          />
-          {errors.email && <span className="text-red-500">This field is required</span>}
-        </div>
+        {/* Form Section */}
+        <div className="w-full md:max-w-md">
+          <form onSubmit={handleSubmit(onSubmit)} className="card-body w-full">
+            <p className="font-bold text-center lg:text-4xl md:text-3xl text-2xl md:mb-10 mb-5 text-dark-900 dark:text-white">
+              <Typewriter
+                words={[" Sign Up now"]}
+                loop={Infinity}
+                cursor
+                cursorStyle="_"
+                typeSpeed={100}
+                deleteSpeed={50}
+                delaySpeed={2000}
+              />
+            </p>
 
-        {/* Password */}
-        <div className="form-control w-full">
-          <label className="label">
-            <span className="label-text">Password</span>
-          </label>
-          <div className="relative">
-            <input
-              type={showPassword ? "text" : "password"}
-              placeholder="Password"
-              className="input input-bordered w-full"
-              {...register("password", {
-                required: true,
-                minLength: 6,
-                maxLength: 16,
-                pattern: /(?=.*[A-Z])(?=.*[!@#$&.*])(?=.*[0-9])(?=.*[a-z])/,
-              })}
-            />
-            <div
-              onClick={handelShowPassword}
-              className="absolute right-4 top-1/2 transform -translate-y-1/2 text-xl cursor-pointer"
-            >
-              {showPassword ? <FaEyeSlash /> : <FaEye />}
+            {/* Name */}
+            <div className="form-control w-full">
+              <label className="label">
+                <span className="label-text">Name</span>
+              </label>
+              <input
+                type="text"
+                placeholder="Name"
+                {...register("name", { required: true })}
+                className="input input-bordered w-full"
+              />
+              {errors.name && (
+                <span className="text-red-500">Name is required</span>
+              )}
             </div>
-          </div>
-          {errors.password?.type === "minLength" && (
-            <span className="text-red-500">Password must be at least 6 characters</span>
-          )}
-        </div>
 
-        {/* Confirm Password */}
-        <div className="form-control w-full">
-          <label className="label">
-            <span className="label-text">Confirm Password</span>
-          </label>
-          <div className="relative">
-            <input
-              type={showPassword ? "text" : "password"}
-              placeholder="Confirm Password"
-              className="input input-bordered w-full"
-              {...register("confirmPassword", { required: true })}
-            />
-            <div
-              onClick={handelShowPassword}
-              className="absolute right-4 top-1/2 transform -translate-y-1/2 text-xl cursor-pointer"
-            >
-              {showPassword ? <FaEyeSlash /> : <FaEye />}
+            {/* Email */}
+            <div className="form-control w-full">
+              <label className="label">
+                <span className="label-text">Email</span>
+              </label>
+              <input
+                type="email"
+                placeholder="Email"
+                {...register("email", { required: true })}
+                className="input input-bordered w-full"
+              />
+              {errors.email && (
+                <span className="text-red-500">This field is required</span>
+              )}
             </div>
+
+            {/* Password */}
+            <div className="form-control w-full">
+              <label className="label">
+                <span className="label-text">Password</span>
+              </label>
+              <div className="relative">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Password"
+                  className="input input-bordered w-full"
+                  {...register("password", {
+                    required: true,
+                    minLength: 6,
+                    maxLength: 16,
+                    pattern: /(?=.*[A-Z])(?=.*[!@#$&.*])(?=.*[0-9])(?=.*[a-z])/, // At least one uppercase, one lowercase, one number, one special char
+                  })}
+                />
+                <div
+                  onClick={handelShowPassword}
+                  className="absolute right-4 top-1/2 transform -translate-y-1/2 text-xl cursor-pointer"
+                >
+                  {showPassword ? <FaEyeSlash /> : <FaEye />}
+                </div>
+              </div>
+              {errors.password?.type === "required" && (
+                <span className="text-red-500">Password is required</span>
+              )}
+              {errors.password?.type === "minLength" && (
+                <span className="text-red-500">
+                  Password must be at least 6 characters
+                </span>
+              )}
+              {errors.password?.type === "maxLength" && (
+                <span className="text-red-500">
+                  Password must be less than 16 characters
+                </span>
+              )}
+              {errors.password?.type === "pattern" && (
+                <span className="text-red-500">
+                  Password must include at least one uppercase letter, one
+                  lowercase letter, one number, and one special character
+                  (!@#$&.*)
+                </span>
+              )}
+            </div>
+
+            {/* Confirm Password */}
+            <div className="form-control w-full">
+              <label className="label">
+                <span className="label-text">Confirm Password</span>
+              </label>
+              <div className="relative">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Confirm Password"
+                  className="input input-bordered w-full"
+                  {...register("confirmPassword", { required: true })}
+                />
+                <div
+                  onClick={handelShowPassword}
+                  className="absolute right-4 top-1/2 transform -translate-y-1/2 text-xl cursor-pointer"
+                >
+                  {showPassword ? <FaEyeSlash /> : <FaEye />}
+                </div>
+              </div>
+              {errors.confirmPassword?.type === "required" && (
+                <span className="text-red-500">
+                  Confirm Password is required
+                </span>
+              )}
+              {errorMessage && (
+                <span className="text-red-500">{errorMessage}</span>
+              )}
+            </div>
+
+            {/* Error message */}
+            {errorMessage && <p className="text-red-500">{errorMessage}</p>}
+
+            {/* Image Upload */}
+            <div className="form-control w-full">
+              <label className="label">
+                <span className="label-text">Select Image</span>
+              </label>
+              <input type="file" {...register("image", { required: true })} />
+            </div>
+
+            {/* Submit Button */}
+            <div className="form-control mt-6">
+              <button
+                disabled={disabled}
+                type="submit"
+                className="btn btn-warning btn-outline border-1 border-b-8 w-full"
+              >
+                Register Now
+              </button>
+            </div>
+          </form>
+
+          {/* Additional Options */}
+          <div className="space-y-5 mt-4">
+            <p className="text-[#D1A054] text-lg text-center">
+              Already registered?
+              <span className="font-semibold">
+                <Link to="/login">Go to log in</Link>
+              </span>
+            </p>
+            <p className="text-center text-lg">Or sign in with</p>
+            <SocialLogin />
           </div>
         </div>
-
-        {/* Error message */}
-        {errorMessage && <p className="text-red-500">{errorMessage}</p>}
-
-        {/* Image Upload */}
-        <div className="form-control w-full">
-          <label className="label">
-            <span className="label-text">Select Image</span>
-          </label>
-          <input type="file" {...register("image", { required: true })} />
-        </div>
-
-        {/* Submit Button */}
-        <div className="form-control mt-6">
-          <button
-            disabled={disabled}
-            type="submit"
-            className="btn btn-warning btn-outline border-1 border-b-8 w-full"
-          >
-            Register Now
-          </button>
-        </div>
-      </form>
-
-      {/* Additional Options */}
-      <div className="space-y-5 mt-4">
-        <p className="text-[#D1A054] text-lg text-center">
-          Already registered?
-          <span className="font-semibold">
-            <Link to="/login">Go to log in</Link>
-          </span>
-        </p>
-        <p className="text-center text-lg">Or sign in with</p>
-        <SocialLogin />
       </div>
     </div>
-  </div>
-</div>
-
   );
 };
 
