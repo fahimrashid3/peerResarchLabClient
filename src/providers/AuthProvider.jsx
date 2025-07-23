@@ -8,6 +8,7 @@ import {
   signInWithPopup,
   signOut,
   updateProfile,
+  sendEmailVerification,
 } from "firebase/auth";
 import { app } from "../firebase/firebase.config";
 import useAxiosPublic from "../hooks/useAxiosPublic";
@@ -46,6 +47,14 @@ const AuthProvider = ({ children }) => {
     });
   };
 
+  // Add sendVerificationEmail function
+  const sendVerificationEmail = () => {
+    if (auth.currentUser) {
+      return sendEmailVerification(auth.currentUser);
+    }
+    return Promise.reject("No user is currently signed in.");
+  };
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
@@ -74,6 +83,7 @@ const AuthProvider = ({ children }) => {
     googleSignIn,
     logOut,
     updateUserProfile,
+    sendVerificationEmail,
   };
   return (
     <authContext.Provider value={authInfo}>{children}</authContext.Provider>
