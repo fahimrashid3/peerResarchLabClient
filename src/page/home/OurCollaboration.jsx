@@ -28,7 +28,6 @@ const OurCollaboration = () => {
     fetchData();
     return () => controller.abort();
   }, [axiosPublic]);
-
   return (
     <div className="my-12">
       <SectionTitle
