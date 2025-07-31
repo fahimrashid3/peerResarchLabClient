@@ -7,38 +7,47 @@ import ScrollToTop from "../../components/ScroolToTop";
 
 const AboutUs = () => {
   const [info, infoLoading] = useInfo();
+
   if (infoLoading) {
     return <Loading />;
   }
-  const history = {
-    name: info.history.name,
-    details: info.history.details,
-    image: info.history.image,
-  };
-  const mission = {
-    name: info.mission.name,
-    details: info.mission.details,
-    image: info.mission.image,
-  };
+
   const overview = {
-    name: info.overView.name,
-    details: info.overView.details,
-    image: info.overView.image,
+    name: info?.overView?.name || "Overview",
+    details: info?.overView?.details || "No details available.",
+    image: info?.overView?.image || "/default-image.jpg",
   };
+
+  const mission = {
+    name: info?.mission?.name || "Mission",
+    details: info?.mission?.details || "No mission details found.",
+    image: info?.mission?.image || "/default-image.jpg",
+  };
+
+  const history = {
+    name: info?.history?.name || "History",
+    details: info?.history?.details || "History information not available.",
+    image: info?.history?.image || "/default-image.jpg",
+  };
+
   const vision = {
-    name: info.vision.name,
-    details: info.vision.details,
-    image: info.vision.image,
+    name: info?.vision?.name || "Vision",
+    details: info?.vision?.details || "No vision statement provided.",
+    image: info?.vision?.image || "/default-image.jpg",
   };
+
   return (
     <div className="space-y-20 pt-24">
-      <AboutPageDesign data={overview}></AboutPageDesign>
+      <AboutPageDesign data={overview} />
       <div className="divider divider-neutral font-bold">// \\</div>
-      <AboutPageDesignRevers data={mission}></AboutPageDesignRevers>
+
+      <AboutPageDesignRevers data={mission} />
       <div className="divider divider-neutral font-bold">// \\</div>
-      <AboutPageDesign data={history}></AboutPageDesign>
+
+      <AboutPageDesign data={history} />
       <div className="divider divider-neutral font-bold">// \\</div>
-      <AboutPageDesignRevers data={vision}></AboutPageDesignRevers>
+
+      <AboutPageDesignRevers data={vision} />
       <ScrollToTop />
     </div>
   );
