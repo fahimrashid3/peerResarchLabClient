@@ -100,7 +100,7 @@ const ContactUs = () => {
                 <h3 className="font-semibold text-lg text-dark-900 dark:text-white">
                   Call us
                 </h3>
-                <p className="text-sm text-gray-600 text-dark-900 dark:text-white">
+                <p className="text-sm text-dark-900 dark:text-white">
                   Call our team Mon-Fri from 8am to 5pm.
                 </p>
                 <div onClick={() => handleCopy(phone)} className="mt-3">
@@ -116,7 +116,7 @@ const ContactUs = () => {
                 <h3 className="font-semibold text-lg text-dark-900 dark:text-white">
                   Visit us
                 </h3>
-                <p className="text-sm text-gray-600 text-dark-900 dark:text-white">
+                <p className="text-sm  text-dark-900 dark:text-white">
                   Chat to us in person at our office.
                 </p>
                 <div className="mt-3">

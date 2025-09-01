@@ -26,7 +26,6 @@ import ReviewResearch from "../page/dashboard/adminPages/ReviewResearch";
 import UpdateInfo from "../page/dashboard/adminPages/UpdateInfo";
 import PendingPaper from "../page/dashboard/userPages/PendingPaper";
 import EditPaper from "../page/dashboard/userPages/EditPaper";
-import AdvisorCard from "../page/team/AdvisorCard";
 import UserDetail from "../page/team/UserDetail";
 import AddArea from "../page/dashboard/adminPages/AddArea";
 import AddCollaborator from "../page/dashboard/adminPages/AddCollaborator";
@@ -34,11 +33,13 @@ import ManageContacts from "../page/dashboard/adminPages/ManageContacts";
 import MyContacts from "../page/dashboard/userPages/MyContacts";
 import MyApplications from "../page/dashboard/userPages/MyApplications";
 import VerifyEmail from "../page/authentication/VerifyEmail";
+import ErrorPage from "../components/ErrorPage";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <Main />,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: "/",
