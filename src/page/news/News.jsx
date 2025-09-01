@@ -1,7 +1,7 @@
 import React from "react";
 import useNews from "../../hooks/useNews";
 import NewsCart from "./NewsCart";
-import ScrollToTop from "../../components/ScroolToTop";
+import ScrollToTop from "../../components/ScrollToTop";
 import Loading from "../../components/Loading";
 
 const News = () => {

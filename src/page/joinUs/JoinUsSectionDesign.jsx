@@ -108,17 +108,15 @@ const JoinUsSectionDesign = ({ data }) => {
     <div className="border p-10 m-10 rounded-lg shadow-md">
       <div className="flex flex-col lg:flex-row justify-between gap-10 items-center">
         <div className="space-y-4">
-          <p className="italic font-semibold text-lg text-primary-800">
-            {role}
-          </p>
-          <p>
+          <p className="italic font-bold text-xl text-primary-700">{role}</p>
+          <p className=" text-dark-900 dark:text-white">
             <span className="font-bold text-lg">Qualifications:</span>{" "}
             {qualifications}
           </p>
-          <p>
-            <span className="font-bold text-lg">Experience:</span> {experience}
+          <p className=" text-dark-900 dark:text-white">
+            <span className="font-bold text-lg ">Experience:</span> {experience}
           </p>
-          <p>
+          <p className=" text-dark-900 dark:text-white">
             <span className="font-bold text-lg">International Exposure:</span>{" "}
             {internationalExposure}
           </p>
@@ -126,7 +124,11 @@ const JoinUsSectionDesign = ({ data }) => {
 
         <div>
           <button
-            className="btn border-b-8 font-semibold text-primary-900 hover:text-white hover:border-primary-600 border-primary-700 bg-primary-100 hover:bg-primary-500 transition-all duration-200"
+            className="btn border-b-8 font-semibold
+                     text-primary-900 hover:text-white dark:text-primary-900
+                     hover:border-primary-600 border-primary-700  dark:border-primary-900 dark:hover:border-primary-700 
+                     bg-primary-300 hover:bg-primary-500  dark:bg-primary-400 dark:hover:bg-primary-600 
+                     transition-all duration-200"
             onClick={() => {
               if (user) {
                 openModal(role);

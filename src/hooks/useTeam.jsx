@@ -1,18 +1,24 @@
-import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "./useAxiosPublic";
 
 const useTeam = () => {
-  const [team, setTeam] = useState([]);
-  const [teamLoading, setTeamLoading] = useState(true);
   const axiosPublic = useAxiosPublic();
-  useEffect(() => {
-    // TODO: check the url
-    axiosPublic.get("/team").then((res) => {
-      setTeam(res.data);
-      setTeamLoading(false);
-    });
-  }, [axiosPublic]);
-  return [team, teamLoading];
+
+  const {
+    data: team = [],
+    isLoading: teamLoading,
+    refetch,
+  } = useQuery({
+    queryKey: ["team"],
+    queryFn: async () => {
+      const res = await axiosPublic.get("/team");
+      return res.data;
+    },
+    staleTime: 5 * 60 * 1000, // Data is fresh for 5 minutes
+    cacheTime: 10 * 60 * 1000, // Data stays in cache for 10 minutes
+  });
+
+  return [team, teamLoading, refetch];
 };
 
 export default useTeam;

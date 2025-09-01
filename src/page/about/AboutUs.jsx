@@ -3,7 +3,7 @@ import useInfo from "../../hooks/useInfo";
 import Loading from "../../components/Loading";
 import AboutPageDesign from "./AboutPageDesign";
 import AboutPageDesignRevers from "./AboutPageDesignRevers";
-import ScrollToTop from "../../components/ScroolToTop";
+import ScrollToTop from "../../components/ScrollToTop";
 
 const AboutUs = () => {
   const [info, infoLoading] = useInfo();

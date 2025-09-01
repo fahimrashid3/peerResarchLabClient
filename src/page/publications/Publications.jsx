@@ -2,7 +2,7 @@ import React from "react";
 import useResearchPapers from "../../hooks/useResearchPapers";
 import Loading from "../../components/Loading";
 import PublicationsCard from "./PublicationCard";
-import ScrollToTop from "../../components/ScroolToTop";
+import ScrollToTop from "../../components/ScrollToTop";
 import useInfo from "../../hooks/useInfo";
 import { FaFacebookF } from "react-icons/fa6";
 import { FaLinkedinIn, FaXTwitter } from "react-icons/fa6";
@@ -65,12 +65,14 @@ const Publications = () => {
         </div>
       )}
 
-      <div className="max-w-7xl mx-auto bg-dark-200 rounded-lg">
+      <div className="max-w-7xl mx-auto bg-dark-200 rounded-lg dark:bg-dark-900">
         {/* Other Papers */}
         <div className="grid grid-cols-[repeat(auto-fit,minmax(400px,1fr))] gap-5 pt-5">
           {otherPapers && otherPapers.length > 0 ? (
             otherPapers.map((paper) => (
-              <div className="mx-auto"><PublicationsCard key={paper._id} paper={paper} /></div>
+              <div className="mx-auto">
+                <PublicationsCard key={paper._id} paper={paper} />
+              </div>
             ))
           ) : (
             <p className="min-h-screen flex justify-center items-center">

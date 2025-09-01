@@ -155,7 +155,7 @@ const Navbar = () => {
 
               <ul
                 tabIndex={0}
-                className="dropdown-content menu bg-primary-400 bg-opacity-80 text-white dark:bg-gray-400 dark:text-dark-900 rounded-box z-[1] w-64 shadow"
+                className="dropdown-content menu bg-primary-400 bg-opacity-80 text-white  dark:bg-primary-800 dark:bg-opacity-80 dark:text-white rounded-box z-[1] w-64 shadow"
               >
                 {/* Common Role-Based Links */}
 

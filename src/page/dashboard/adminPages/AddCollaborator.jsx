@@ -94,7 +94,7 @@ const AddCollaborator = () => {
   };
 
   return (
-    <div className="max-w-xl mx-auto p-6 bg-white rounded-xl shadow">
+    <div className="max-w-xl mx-auto p-6 bg-white dark:bg-dark-900 rounded-xl shadow">
       <h2 className="text-2xl font-semibold mb-6">Add Collaborator</h2>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
@@ -118,7 +118,12 @@ const AddCollaborator = () => {
 
         <button
           type="submit"
-          className="btn btn-warning btn-outline border-1 border-b-8"
+          className="
+          btn border-b-8 font-semibold
+           text-primary-900 hover:text-white dark:text-primary-900
+           hover:border-primary-600 border-primary-700  dark:border-primary-900 dark:hover:border-primary-700 
+           bg-primary-300 hover:bg-primary-500  dark:bg-primary-400 dark:hover:bg-primary-600 
+           transition-all duration-200"
           disabled={uploading}
         >
           {uploading ? "Uploading..." : "Add Collaborator"}

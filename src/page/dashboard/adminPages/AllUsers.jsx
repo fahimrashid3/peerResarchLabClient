@@ -4,7 +4,7 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import SectionTitle from "../../../components/SectionTitle";
 import { FaEdit } from "react-icons/fa";
 import Swal from "sweetalert2";
-import ScrollToTop from "../../../components/ScroolToTop";
+import ScrollToTop from "../../../components/ScrollToTop";
 
 const AllUsers = () => {
   const axiosSecure = useAxiosSecure();

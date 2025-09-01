@@ -4,30 +4,14 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import "swiper/css";
 import SectionTitle from "../../components/SectionTitle";
+import useFetchData from "../../hooks/useFetchData";
 
 const OurCollaboration = () => {
-  const [collaborators, setCollaborators] = useState([]);
-  const axiosPublic = useAxiosPublic();
+  const [collaborators, isLoading] = useFetchData(
+    "/collaborations",
+    "collaborations"
+  );
 
-  useEffect(() => {
-    const controller = new AbortController();
-
-    const fetchData = async () => {
-      try {
-        const res = await axiosPublic.get("/collaborations", {
-          signal: controller.signal,
-        });
-        setCollaborators(res.data);
-      } catch (error) {
-        if (error.name !== "CanceledError") {
-          console.error("Error fetching collaborations:", error);
-        }
-      }
-    };
-
-    fetchData();
-    return () => controller.abort();
-  }, [axiosPublic]);
   return (
     <div className="my-12">
       <SectionTitle
@@ -35,31 +19,47 @@ const OurCollaboration = () => {
         subHeading="Our Collaboration Partners"
       />
 
-      <Swiper
-        spaceBetween={30}
-        slidesPerView={5}
-        slidesPerGroup={1}
-        autoplay={{
-          delay: 3000,
-          disableOnInteraction: false,
-        }}
-        loop={collaborators.length > 5}
-        modules={[Autoplay]}
-        className="px-4"
-      >
-        {collaborators.map((item, index) => (
-          <SwiperSlide key={index}>
-            <div className="bg-dark-200 rounded-xl h-24 flex items-center justify-center p-4 shadow-md">
-              <img
-                src={item.logo}
-                alt={item.name}
-                className="h-16 object-contain"
-              />
-              {/* <p>{item.name}</p> */}
-            </div>
-          </SwiperSlide>
-        ))}
-      </Swiper>
+      <div className="bg-dark-200 dark:bg-dark-900 rounded-xl py-5 max-w-[95%] md:max-w-[90%] lg:max-w-[85%] mx-auto">
+        {isLoading ? (
+          <div className="flex justify-center items-center h-24">
+            <p className="text-gray-500">Loading collaborators...</p>
+          </div>
+        ) : collaborators?.length > 0 ? (
+          <Swiper
+            spaceBetween={30}
+            slidesPerView={4}
+            slidesPerGroup={1}
+            autoplay={{
+              delay: 3000,
+              disableOnInteraction: false,
+            }}
+            loop={collaborators.length > 5}
+            modules={[Autoplay]}
+            className="px-4"
+          >
+            {collaborators.map((item, index) => (
+              <SwiperSlide key={index}>
+                <div className="bg-dark-200 dark:bg-dark-800 rounded-xl h-24 flex items-center justify-center p-4 shadow-md">
+                  <img
+                    src={item.logo}
+                    alt={item.name}
+                    className="h-16 object-contain"
+                    onError={(e) => {
+                      e.target.onerror = null;
+                      e.target.src =
+                        "https://res.cloudinary.com/dipwayvsu/image/upload/w_1000,ar_16:9,c_fill,g_auto,e_sharpen/v1745146763/uauic3zxcvxvdepwl3dk.webp";
+                    }}
+                  />
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        ) : (
+          <div className="flex justify-center items-center h-24">
+            <p className="text-gray-500">No collaborators found.</p>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

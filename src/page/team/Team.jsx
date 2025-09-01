@@ -5,7 +5,7 @@ import SectionTitle from "../../components/SectionTitle";
 import AdvisorCard from "./AdvisorCard";
 import ResearcherCard from "./ResearcherCard";
 import AssistantCart from "./AssistantCart";
-import ScrollToTop from "../../components/ScroolToTop";
+import ScrollToTop from "../../components/ScrollToTop";
 
 const Team = () => {
   const [team, teamLoading] = useTeam();
@@ -39,7 +39,9 @@ const Team = () => {
         {/* Render advisor cards */}
         <div className="grid gap-5 grid-cols-[repeat(auto-fit,minmax(280px,1fr))]">
           {researchDirectors.map((director) => (
-            <div className="mx-auto"><ResearcherCard key={director._id} user={director} /></div>
+            <div className="mx-auto">
+              <ResearcherCard key={director._id} user={director} />
+            </div>
           ))}
         </div>
       </div>
@@ -48,7 +50,9 @@ const Team = () => {
         {/* Render researcher cards */}
         <div className="grid gap-5 grid-cols-[repeat(auto-fit,minmax(280px,1fr))]">
           {researchers.map((researcher) => (
-            <div className="mx-auto"><ResearcherCard key={researcher._id} user={researcher} /></div>
+            <div className="mx-auto">
+              <ResearcherCard key={researcher._id} user={researcher} />
+            </div>
           ))}
         </div>
       </div>
@@ -60,10 +64,12 @@ const Team = () => {
         {/* Render researcher cards */}
         <div className="grid gap-10 lg:grid-cols-3 md:grid-cols-2 grid-cols-1">
           {researchAssistants.map((researchAssistant) => (
-            <div className="mx-auto"><AssistantCart
-              key={researchAssistant._id}
-              researchAssistant={researchAssistant}
-            /></div>
+            <div className="mx-auto">
+              <AssistantCart
+                key={researchAssistant._id}
+                researchAssistant={researchAssistant}
+              />
+            </div>
           ))}
         </div>
       </div>

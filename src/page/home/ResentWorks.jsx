@@ -1,30 +1,10 @@
-import React, { useEffect, useState } from "react";
 import SectionTitle from "../../components/SectionTitle";
 import { Link } from "react-router-dom";
-import useAxiosPublic from "../../hooks/useAxiosPublic";
 import ShortCard from "../../components/ShortCard";
+import useFetchData from "../../hooks/useFetchData";
+import ScrollToTop from "../../components/ScrollToTop";
 
 const RecentWorks = () => {
-  const [researchPapers, setResearchPapers] = useState([]);
-  const axiosPublic = useAxiosPublic();
-
-  useEffect(() => {
-    let isMounted = true;
-
-    const fetchData = async () => {
-      try {
-        const res = await axiosPublic.get("/recentResearchPapers");
-        if (isMounted) setResearchPapers(res.data);
-      } catch (error) {
-        console.error("Error fetching research papers:", error);
-      }
-    };
-
-    fetchData();
-    return () => {
-      isMounted = false;
-    };
-  }, []);
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
@@ -32,15 +12,20 @@ const RecentWorks = () => {
     });
   };
 
+  const [researchPapers, isLoading] = useFetchData(
+    "/recentResearchPapers",
+    "recentResearchPapers"
+  );
+
   return (
     <div>
       <SectionTitle
         heading={"Recent Work"}
         subHeading={"Have a look"}
       ></SectionTitle>
-      <div className="md:grid lg:grid-cols-2 gap-5 max-w-[95%] md:max-w-[90%] lg:max-w-[85%] mx-auto bg-dark-200 p-10 rounded-2xl">
+      <div className="md:grid lg:grid-cols-2 gap-5 max-w-[95%] md:max-w-[90%] lg:max-w-[85%] mx-auto bg-dark-200 dark:bg-dark-900 p-10 rounded-2xl">
         {/* Loop through research papers and render ShortCard for each */}
-        {researchPapers.map((researchPaper) => (
+        {researchPapers?.map((researchPaper) => (
           <ShortCard key={researchPaper._id} researchPaper={researchPaper} />
         ))}
       </div>
@@ -48,7 +33,7 @@ const RecentWorks = () => {
         <Link
           onClick={scrollToTop}
           to={"/publications"}
-          className="btn border-b-8 font-semibold text-primary-900 hover:text-white hover:border-primary-600 border-primary-700 bg-primary-100 hover:bg-primary-500 transition-all duration-200"
+          className="btn border-b-8 font-semibold text-primary-900 hover:text-white hover:border-primary-600 border-primary-700 bg-primary-100 hover:bg-primary-500 dark:text-white dark:bg-primary-700 dark:border-primary-900 dark:hover:bg-primary-600 dark:hover:border-primary-700 transition-all duration-200"
         >
           Show more
         </Link>

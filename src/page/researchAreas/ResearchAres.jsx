@@ -1,29 +1,23 @@
-import { useEffect, useState } from "react";
-import useAxiosPublic from "../../hooks/useAxiosPublic";
 import { Link } from "react-router-dom";
+import useFetchData from "../../hooks/useFetchData";
 
 const ResearchAres = () => {
-  const axiosPublic = useAxiosPublic();
-  const [researchArea, setResearchArea] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    axiosPublic.get("/researchArea").then((res) => {
-      setResearchArea(res.data);
-      setLoading(false);
-    });
-  }, [axiosPublic]);
+  const [researchArea, isLoading] = useFetchData(
+    "/researchArea",
+    "researchArea"
+  );
+  console.log(researchArea);
 
   const renderSkeleton = () => (
     <div className="grid lg:grid-cols-2 grid-cols-1 gap-5 rounded-lg max-w-[95%] md:max-w-[90%] lg:max-w-[85%] mx-auto">
       {[...Array(8)].map((_, index) => (
-        <div key={index} className="hero bg-dark-200 rounded-lg animate-pulse">
-          <div className="hero-content flex-col md:flex-row gap-4">
-            <div className="md:max-w-[35%]  h-52 bg-primary-300 rounded-lg" />
-            <div className="space-y-3 md:max-w-[65%] w-full">
-              <div className="h-7 w-full bg-dark-300 rounded" />
-              <div className="h-28 bg-dark-300 rounded w-full" />
-              <div className="w-20 h-10 bg-primary-200 rounded border-b-8 border-primary-400" />
+        <div key={index} className="hero bg-base-200 rounded-lg animate-pulse">
+          <div className="hero-content flex-col md:flex-row gap-4 w-full">
+            <div className="w-full md:w-[40%] h-52 bg-base-300 rounded-lg" />
+            <div className="space-y-3 w-full md:w-[60%]">
+              <div className="h-6 w-3/4 md:w-4/5 bg-base-300 rounded" />
+              <div className="h-24 md:h-28 bg-base-300 rounded w-full" />
+              <div className="w-24 md:w-28 h-10 bg-primary-200 rounded border-b-8 border-primary-400" />
             </div>
           </div>
         </div>
@@ -33,7 +27,7 @@ const ResearchAres = () => {
 
   return (
     <div className="pt-24 mx-auto">
-      {loading ? (
+      {isLoading ? (
         renderSkeleton()
       ) : (
         <div className="grid lg:grid-cols-2 grid-cols-1 gap-5 rounded-lg max-w-[95%] md:max-w-[90%] lg:max-w-[85%] mx-auto">
@@ -61,7 +55,12 @@ const ResearchAres = () => {
                   <Link
                     to={`/researchAreaDetails/${area._id}`}
                     state={{ researchArea: area }}
-                    className="btn border-b-8 font-semibold text-primary-900 hover:text-white hover:border-primary-600 border-primary-700 bg-primary-100 hover:bg-primary-500 transition-all duration-200"
+                    className="
+                    btn border-b-8 font-semibold
+                     text-primary-900 hover:text-white dark:text-primary-900
+                     hover:border-primary-600 border-primary-700  dark:border-primary-900 dark:hover:border-primary-700 
+                     bg-primary-300 hover:bg-primary-500  dark:bg-primary-400 dark:hover:bg-primary-600 
+                     transition-all duration-200"
                   >
                     Details
                   </Link>

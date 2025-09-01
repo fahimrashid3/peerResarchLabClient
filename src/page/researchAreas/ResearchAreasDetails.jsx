@@ -10,7 +10,7 @@ const ResearchAreasDetails = () => {
   return (
     <div className="pt-24 max-w-7xl mx-auto min-h-screen space-y-8">
       {/* Department Name */}
-      <p className="font-bold text-3xl text-center text-primary-800">
+      <p className="font-bold text-3xl text-primary-800">
         {researchArea.departmentName}
       </p>
 
@@ -21,7 +21,7 @@ const ResearchAreasDetails = () => {
           alt={researchArea.departmentName}
           className="max-w-md rounded-lg shadow-2xl"
         />
-        <p className="text-justify text-lg leading-relaxed">
+        <p className="text-justify text-lg leading-relaxed text-dark-900 dark:text-white">
           {researchArea.details}
         </p>
       </div>
@@ -35,7 +35,7 @@ const ResearchAreasDetails = () => {
           {researchArea.subDepartments.map((subDept, index) => (
             <div
               key={index}
-              className="bg-primary-300 hover:bg-primary-500 transition-all duration-300 p-6 rounded-lg text-dark-200 hover:text-white border-l-4 hover:border-l-8 border-yellow-400"
+              className="bg-primary-400 hover:bg-primary-500 transition-all duration-300 p-6 rounded-lg text-dark-200 hover:text-white border-l-4 hover:border-l-8 border-yellow-400"
             >
               <p className="font-bold text-xl mb-2">{subDept.name}</p>
               <p className="text-base">{subDept.description}</p>

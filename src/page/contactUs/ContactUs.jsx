@@ -45,8 +45,10 @@ const ContactUs = () => {
             <div className="max-w-md space-y-6 text-gray-800">
               {/* Chat Section */}
               <div>
-                <h3 className="font-semibold text-lg">Chat with us</h3>
-                <p className="text-sm text-gray-600 text-justify">
+                <h3 className="font-semibold text-lg text-dark-900 dark:text-white">
+                  Chat with us
+                </h3>
+                <p className="text-sm text-gray-600 text-justify text-dark-900 dark:text-white">
                   Welcome to our contact page! We're delighted to connect with
                   you. Whether you have a question, feedback, or simply want to
                   say hello, this is the place to reach out. Our dedicated team
@@ -95,8 +97,10 @@ const ContactUs = () => {
 
               {/* Call Section */}
               <div>
-                <h3 className="font-semibold text-lg">Call us</h3>
-                <p className="text-sm text-gray-600">
+                <h3 className="font-semibold text-lg text-dark-900 dark:text-white">
+                  Call us
+                </h3>
+                <p className="text-sm text-gray-600 text-dark-900 dark:text-white">
                   Call our team Mon-Fri from 8am to 5pm.
                 </p>
                 <div onClick={() => handleCopy(phone)} className="mt-3">
@@ -109,8 +113,10 @@ const ContactUs = () => {
 
               {/* Visit Section */}
               <div>
-                <h3 className="font-semibold text-lg">Visit us</h3>
-                <p className="text-sm text-gray-600">
+                <h3 className="font-semibold text-lg text-dark-900 dark:text-white">
+                  Visit us
+                </h3>
+                <p className="text-sm text-gray-600 text-dark-900 dark:text-white">
                   Chat to us in person at our office.
                 </p>
                 <div className="mt-3">
@@ -130,7 +136,9 @@ const ContactUs = () => {
             </div>
           </div>
           <div className="flex-1 bg-dark-200 rounded-lg p-5 md:bg-transparent md:rounded-none md:p-0">
-            <h1 className="font-semibold text-xl pl-5">Sent a message</h1>
+            <h1 className="font-semibold text-xl pl-5 text-dark-900 dark:text-white">
+              Sent a message
+            </h1>
             <ContactForm />
           </div>
         </div>

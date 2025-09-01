@@ -22,7 +22,7 @@ const AssistantCart = ({ researchAssistant }) => {
   return (
     <div
       onClick={viewDetails}
-      className="card card-side bg-base-100 border rounded-lg shadow-sm hover:shadow-primary-500 hover:shadow-2xl transition duration-300 p-3 gap-5 cursor-pointer w-full max-w-md mx-auto"
+      className="card card-side bg-base-100 dark:bg-dark-800 border border-white dark:border-dark-700 rounded-lg shadow-sm hover:shadow-primary-500 dark:hover:shadow-primary-600 hover:shadow-2xl transition duration-300 p-3 gap-5 cursor-pointer w-full max-w-md mx-auto"
     >
       <figure className="h-28 w-32 flex-shrink-0 overflow-hidden rounded-lg">
         <img
@@ -38,16 +38,28 @@ const AssistantCart = ({ researchAssistant }) => {
       </figure>
 
       <div className="flex flex-col justify-between w-full max-w-[60%] h-28">
-        <h2 className="text-lg font-bold truncate" title={name}>
+        <h2
+          className="text-lg font-bold truncate text-dark-900 dark:text-white"
+          title={name}
+        >
           {name}
         </h2>
-        <p className="text-sm text-gray-700 truncate" title={university}>
+        <p
+          className="text-sm  truncate text-dark-900 dark:text-gray-300"
+          title={university}
+        >
           {university}
         </p>
-        <p className="text-sm text-gray-700 truncate" title={phone}>
+        <p
+          className="text-sm text-dark-900 dark:text-gray-300 truncate"
+          title={phone}
+        >
           {phone}
         </p>
-        <p className="text-sm text-gray-700 truncate" title={email}>
+        <p
+          className="text-sm text-dark-900 dark:text-gray-300 truncate"
+          title={email}
+        >
           {email}
         </p>
       </div>

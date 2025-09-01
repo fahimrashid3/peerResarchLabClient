@@ -22,7 +22,10 @@ const ResearcherCard = ({ user = {} }) => {
   return (
     <div
       onClick={viewDetails}
-      className="w-72 h-80 border rounded-lg overflow-hidden bg-base-100 shadow-sm hover:shadow-primary-500 hover:shadow-2xl transition duration-300 cursor-pointer"
+      className="w-72 h-80 rounded-lg overflow-hidden 
+      bg-base-100 dark:bg-dark-800 border border-white dark:border-dark-700 
+      shadow-sm hover:shadow-primary-500 dark:hover:shadow-primary-600 hover:shadow-2xl 
+      transition duration-300 cursor-pointer"
     >
       <div className="h-[55%] w-full relative group">
         <img
@@ -93,17 +96,20 @@ const ResearcherCard = ({ user = {} }) => {
       </div>
 
       <div className="p-4 space-y-2 text-dark-900">
-        <h2 className="text-xl font-bold truncate" title={name}>
+        <h2
+          className="text-xl font-bold truncate text-dark-900 dark:text-white"
+          title={name}
+        >
           {name}
         </h2>
         <div className="text-sm leading-5">
-          <p>
+          <p className="text-dark-900 dark:text-gray-300">
             <span className="font-semibold">University:</span> {university}
           </p>
-          <p>
+          <p className="text-dark-900 dark:text-gray-300">
             <span className="font-semibold">Email:</span> {email}
           </p>
-          <p>
+          <p className="text-dark-900 dark:text-gray-300" title={phone}>
             <span className="font-semibold">Phone:</span> {phone}
           </p>
         </div>

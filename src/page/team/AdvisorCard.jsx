@@ -10,7 +10,7 @@ const AdvisorCard = ({ advisor = {} }) => {
   } = advisor;
 
   return (
-    <div className="card bg-base-100 border rounded-xl shadow-sm hover:shadow-primary-500 hover:shadow-2xl transition duration-300 p-5">
+    <div className="card bg-base-100 dark:bg-dark-800 border border-white dark:border-dark-700 rounded-xl shadow-sm hover:shadow-primary-500 dark:hover:shadow-primary-600 hover:shadow-2xl transition duration-300 p-5">
       <div className="flex flex-col md:flex-row gap-6 items-center">
         {/* Advisor Image */}
         <div className="h-80 w-72 overflow-hidden rounded-lg">
@@ -86,31 +86,46 @@ const AdvisorCard = ({ advisor = {} }) => {
             </div>
             <div className="space-y-5 md:w-[85%]">
               <div>
-                <h2 className="text-2xl font-bold">{name}</h2>
+                <h2 className="text-2xl font-bold text-dark-900 dark:text-white">
+                  {name}
+                </h2>
                 <div className="mt-3 space-y-2 text-sm text-gray-700">
                   <div className="flex">
-                    <p className="font-semibold w-24">University</p>
-                    <p>: {university}</p>
+                    <p className="font-semibold w-24 text-dark-900 dark:text-white">
+                      University
+                    </p>
+                    <p className="text-dark-900 dark:text-gray-300">
+                      : {university}
+                    </p>
                   </div>
                   <div className="flex">
-                    <p className="font-semibold w-24">Email</p>
-                    <p>: {email}</p>
+                    <p className="font-semibold w-24 text-dark-900 dark:text-white">
+                      Email
+                    </p>
+                    <p className="text-dark-900 dark:text-gray-300">
+                      : {email}
+                    </p>
                   </div>
                   <div className="flex">
-                    <p className="font-semibold w-24">Phone</p>
-                    <p>: {phone}</p>
+                    <p className="font-semibold w-24 text-dark-900 dark:text-white">
+                      Phone
+                    </p>
+                    <p className="text-dark-900 dark:text-gray-300">
+                      : {phone}
+                    </p>
                   </div>
                 </div>
               </div>
 
               {/* Details Text */}
               <div>
-                <p className="text-justify text-gray-800">{details}</p>
+                <p className="text-justify text-gray-800 dark:text-gray-300">
+                  {details}
+                </p>
               </div>
             </div>
 
             {/* Social Media Vertical */}
-            
           </div>
         </div>
       </div>

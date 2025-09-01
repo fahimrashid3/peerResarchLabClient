@@ -225,8 +225,8 @@ const UserProfile = () => {
     details: teamInfo?.details,
   };
   return (
-    <div className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-md">
-      <h1 className="text-2xl font-bold text-center mb-6">
+    <div className="max-w-4xl mx-auto p-6 bg-white dark:bg-dark-900 rounded-lg shadow-md">
+      <h1 className="text-2xl font-bold text-center mb-6 text-dark-900 dark:text-white">
         Personal Information
       </h1>
 
@@ -257,7 +257,7 @@ const UserProfile = () => {
           )}
         </div>
       </div>
-      <p className="text-center text-gray-600 mt-4 ">
+      <p className="text-center mt-4 text-dark-900 dark:text-white">
         Joined on:{" "}
         {displayData.joinedOn
           ? format(new Date(displayData.joinedOn), "MMMM dd, yyyy")
@@ -302,7 +302,9 @@ const UserProfile = () => {
         />
 
         <div className="space-y-4 pt-4">
-          <h3 className="font-semibold text-lg border-b pb-2">Social Media</h3>
+          <h3 className="font-semibold text-lg border-b pb-2 text-dark-900 dark:text-white">
+            Social Media
+          </h3>
           <SocialMediaField
             label="LinkedIn"
             name="linkedin"
@@ -350,12 +352,18 @@ const UserProfile = () => {
                   maxLength={MAX_DETAILS_LENGTH}
                 />
               ) : (
-                <span className={!displayData.details ? "text-gray-500" : ""}>
+                <span
+                  className={
+                    !displayData.details
+                      ? "text-dark-900 dark:text-gray-500"
+                      : ""
+                  }
+                >
                   {displayData.details || `No details provided`}
                 </span>
               )}
             </div>
-            <div className="text-right text-sm text-gray-500 mt-1">
+            <div className="text-right text-sm text-dark-900 dark:text-gray-500 mt-1">
               {detailsCount} / {MAX_DETAILS_LENGTH} characters
             </div>
           </div>
@@ -363,7 +371,15 @@ const UserProfile = () => {
         <div className="flex justify-center gap-4 pt-6">
           {isEditing && (
             <>
-              <button type="submit" className="btn btn-primary">
+              <button
+                type="submit"
+                className="
+                    btn border-b-8 font-semibold
+                     text-primary-900 hover:text-white dark:text-primary-900
+                     hover:border-primary-600 border-primary-700  dark:border-primary-900 dark:hover:border-primary-700 
+                     bg-primary-300 hover:bg-primary-500  dark:bg-primary-400 dark:hover:bg-primary-600 
+                     transition-all duration-200"
+              >
                 Save Changes
               </button>
               <button
@@ -384,7 +400,12 @@ const UserProfile = () => {
             <button
               type="button"
               onClick={handleEditClick}
-              className="btn btn-primary"
+              className="
+              btn border-b-8 font-semibold
+               text-primary-900 hover:text-white dark:text-primary-900
+               hover:border-primary-600 border-primary-700  dark:border-primary-900 dark:hover:border-primary-700 
+               bg-primary-300 hover:bg-primary-500  dark:bg-primary-400 dark:hover:bg-primary-600 
+               transition-all duration-200"
             >
               Edit Profile
             </button>
@@ -415,7 +436,7 @@ const ProfileField = ({ label, name, register, errors, isEditing, value }) => (
           value={value}
         />
       ) : (
-        <span className={!value ? "text-gray-500" : ""}>
+        <span className={!value ? "text-dark-900 dark:text-gray-500" : ""}>
           {value || `No ${label.toLowerCase()} provided`}
         </span>
       )}
