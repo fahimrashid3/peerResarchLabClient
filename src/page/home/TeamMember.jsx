@@ -1,11 +1,11 @@
 import React from "react";
-import useTeam from "../../hooks/useTeam";
+import useFetchData from "../../hooks/useFetchData";
 import SectionTitle from "../../components/SectionTitle";
 import UserCard from "./UserCard";
 import { Link } from "react-router-dom";
 
 const TeamMember = () => {
-  const [team, teamLoading] = useTeam();
+  const [team, teamLoading] = useFetchData("/team", "team");
 
   const advisors = team.filter((member) => member.role === "Advisor");
   const directors = team.filter(

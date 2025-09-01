@@ -2,7 +2,6 @@ import SectionTitle from "../../components/SectionTitle";
 import { Link } from "react-router-dom";
 import ShortCard from "../../components/ShortCard";
 import useFetchData from "../../hooks/useFetchData";
-import ScrollToTop from "../../components/ScrollToTop";
 
 const RecentWorks = () => {
   const scrollToTop = () => {
@@ -12,23 +11,63 @@ const RecentWorks = () => {
     });
   };
 
-  const [researchPapers, isLoading] = useFetchData(
+  const [researchPapers, isLoading, refetch, isPending] = useFetchData(
     "/recentResearchPapers",
     "recentResearchPapers"
   );
 
+  // Debug logging to help troubleshoot
+  console.log("RecentWorks - researchPapers:", researchPapers);
+  console.log("RecentWorks - isLoading:", isLoading);
+  console.log("RecentWorks - isPending:", isPending);
+  console.log("RecentWorks - researchPapers length:", researchPapers?.length);
+
   return (
-    <div>
+    <div className="my-12">
       <SectionTitle
         heading={"Recent Work"}
         subHeading={"Have a look"}
       ></SectionTitle>
-      <div className="md:grid lg:grid-cols-2 gap-5 max-w-[95%] md:max-w-[90%] lg:max-w-[85%] mx-auto bg-dark-200 dark:bg-dark-900 p-10 rounded-2xl">
-        {/* Loop through research papers and render ShortCard for each */}
-        {researchPapers?.map((researchPaper) => (
-          <ShortCard key={researchPaper._id} researchPaper={researchPaper} />
-        ))}
-      </div>
+
+      {/* Loading State */}
+      {(isLoading || isPending) && (
+        <div className="text-center py-10">
+          <div className="loading loading-spinner loading-lg text-primary"></div>
+          <p className="text-gray-500 mt-4">Loading recent works...</p>
+        </div>
+      )}
+
+      {/* Data Display */}
+      {!isLoading &&
+        !isPending &&
+        researchPapers &&
+        researchPapers.length > 0 && (
+          <div className="md:grid lg:grid-cols-2 gap-5 max-w-[95%] md:max-w-[90%] lg:max-w-[85%] mx-auto bg-dark-200 dark:bg-dark-900 p-10 rounded-2xl">
+            {researchPapers.map((researchPaper) => (
+              <ShortCard
+                key={researchPaper._id}
+                researchPaper={researchPaper}
+              />
+            ))}
+          </div>
+        )}
+
+      {/* Empty State */}
+      {!isLoading &&
+        !isPending &&
+        (!researchPapers || researchPapers.length === 0) && (
+          <div className="text-center py-10">
+            <p className="text-gray-500 mb-4">No recent works found.</p>
+            <button
+              onClick={() => refetch()}
+              className="btn btn-sm btn-primary"
+            >
+              Retry
+            </button>
+          </div>
+        )}
+
+      {/* Show More Button - Always visible */}
       <div className="flex items-center justify-center my-5 md:my-10">
         <Link
           onClick={scrollToTop}
