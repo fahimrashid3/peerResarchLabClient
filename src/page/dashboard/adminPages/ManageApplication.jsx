@@ -31,6 +31,12 @@ const ManageApplication = () => {
     axiosSecure.get("/applications").then((res) => {
       setApplications(res.data);
 
+      // Debug: Log resume data structure
+      console.log("Applications data:", res.data);
+      res.data.forEach((app, index) => {
+        console.log(`App ${index + 1} resume data:`, app.resume);
+      });
+
       // Initialize selectedRoles with current roles
       const initialRoles = {};
       res.data.forEach((app) => {
@@ -45,29 +51,36 @@ const ManageApplication = () => {
     setSelectedRoles((prev) => ({ ...prev, [appId]: newRole }));
   };
 
-  // Download resume PDF
-  const downloadPdf = async (pdfPath) => {
-    try {
-      const res = await axiosPublic.get(`/${pdfPath}`, {
-        responseType: "blob",
-      });
-      const blob = new Blob([res.data], { type: "application/pdf" });
-      const url = window.URL.createObjectURL(blob);
-      const filename = pdfPath.split("/").pop();
+  // Check if resume data is valid
+  const isValidResume = (resumeData) => {
+    return resumeData && resumeData.url && typeof resumeData.url === "string";
+  };
 
-      const link = document.createElement("a");
-      link.href = url;
-      link.setAttribute("download", filename);
-      document.body.appendChild(link);
-      link.click();
-      link.remove();
-      window.URL.revokeObjectURL(url);
+  // View resume PDF in new tab
+  const viewPdf = (resumeData) => {
+    try {
+      console.log("Attempting to view PDF with data:", resumeData);
+
+      if (!resumeData?.url) {
+        Swal.fire({
+          icon: "error",
+          title: "View Failed",
+          text: "Resume URL not found.",
+        });
+        return;
+      }
+
+      // Use Google Docs viewer to display PDF in browser
+      const googleDocsUrl = `https://docs.google.com/viewer?url=${encodeURIComponent(
+        resumeData.url
+      )}&embedded=true`;
+      window.open(googleDocsUrl, "_blank");
     } catch (error) {
-      console.error("Error loading PDF:", error);
+      console.error("Error viewing PDF:", error);
       Swal.fire({
         icon: "error",
-        title: "Download Failed",
-        text: "Unable to download the PDF. Please try again later.",
+        title: "View Failed",
+        text: "Unable to view the PDF. Please try again later.",
       });
     }
   };
@@ -253,12 +266,16 @@ const ManageApplication = () => {
                 </td>
                 <td>{app.researchArea}</td>
                 <td>
-                  <button
-                    onClick={() => downloadPdf(app.resume.path)}
-                    className="btn border-b-4 font-semibold text-primary-900 hover:text-white hover:border-primary-600 border-primary-700 bg-primary-100 hover:bg-primary-500 transition-all duration-200"
-                  >
-                    Download PDF
-                  </button>
+                  {isValidResume(app.resume) ? (
+                    <button
+                      onClick={() => viewPdf(app.resume)}
+                      className="btn btn-sm border-b-4 font-semibold text-blue-900 hover:text-white hover:border-blue-600 border-blue-700 bg-blue-100 hover:bg-blue-500 transition-all duration-200"
+                    >
+                      View PDF
+                    </button>
+                  ) : (
+                    <span className="text-red-500 text-sm">No resume</span>
+                  )}
                 </td>
                 <td>
                   <button

@@ -85,33 +85,47 @@ const Registration = () => {
       const photoUrl = res.data.secure_url;
 
       if (password === confirmPassword) {
-        // Create user with Firebase
-        const userCredential = await createUser(email, password);
-        const user = userCredential.user;
+        try {
+          // Create user with Firebase
+          const userCredential = await createUser(email, password);
+          const user = userCredential.user;
 
-        // Update user profile
-        await updateUserProfile(name, photoUrl);
+          // Update user profile
+          await updateUserProfile(name, photoUrl);
 
-        // Send email verification
-        await sendVerificationEmail();
-        Swal.fire({
-          icon: "info",
-          title: "Verification Email Sent",
-          text: "Please check your email and verify your account before logging in.",
-          timer: 4000,
-        });
+          // Send email verification - add delay and better error handling
+          try {
+            await sendVerificationEmail();
+            console.log("Verification email sent successfully");
+          } catch (verificationError) {
+            console.error(
+              "Error sending verification email:",
+              verificationError
+            );
+            // Continue with the flow even if verification email fails
+          }
 
-        // Immediately log out the user after registration
-        await logOut();
+          Swal.fire({
+            icon: "info",
+            title: "Verification Email Sent",
+            text: "Please check your email and verify your account before logging in.",
+            timer: 4000,
+          });
 
-        // Redirect to verify email page after successful sign up
-        reset();
-        navigate("/verify-email", { replace: true });
-        scrollTo(0, 0);
+          // Add a small delay before logout to ensure email is sent
+          setTimeout(async () => {
+            await logOut();
+            reset();
+            navigate("/verify-email", { replace: true });
+            scrollTo(0, 0);
+          }, 1000);
 
-        // Save user information in the database (optional, can be after redirect)
-        const userInfo = { name, email: user.email, photoUrl };
-        await axiosPublic.post("/users", userInfo);
+          // Save user information in the database
+          const userInfo = { name, email: user.email, photoUrl };
+          await axiosPublic.post("/users", userInfo);
+        } catch (error) {
+          throw error;
+        }
       } else {
         setErrorMessage("Password and confirm password should match");
       }

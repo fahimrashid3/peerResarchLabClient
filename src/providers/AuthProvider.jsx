@@ -50,7 +50,10 @@ const AuthProvider = ({ children }) => {
   // Add sendVerificationEmail function
   const sendVerificationEmail = () => {
     if (auth.currentUser) {
-      return sendEmailVerification(auth.currentUser);
+      return sendEmailVerification(auth.currentUser, {
+        url: window.location.origin + "/verify-email", // Optional: redirect URL after verification
+        handleCodeInApp: false,
+      });
     }
     return Promise.reject("No user is currently signed in.");
   };
