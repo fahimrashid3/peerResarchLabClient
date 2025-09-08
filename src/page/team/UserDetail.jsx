@@ -19,7 +19,7 @@ const UserDetail = () => {
 
   return (
     <div className="flex items-center justify-center min-h-screen">
-      <div className="max-w-7xl mx-auto card bg-base-100 border rounded-xl shadow-sm p-5">
+      <div className="max-w-7xl mx-auto card bg-base-100 dark:bg-dark-800 border border-white dark:border-dark-700 rounded-xl shadow-sm hover:shadow-primary-500 dark:hover:shadow-primary-600 hover:shadow-2xl transition duration-300 p-5">
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Image + Basic Info */}
           <div className="lg:w-[35%] flex flex-col items-center">
@@ -36,19 +36,36 @@ const UserDetail = () => {
               />
             </div>
             <div className="mt-5 w-full text-left">
-              <h2 className="text-2xl font-bold">{name}</h2>
+              <h2 className="text-2xl font-bold text-dark-900 dark:text-white">
+                {name}
+              </h2>
               <div className="mt-3 space-y-2 text-sm text-gray-700">
                 <div className="flex justify-start">
-                  <p className="font-semibold">University</p>
-                  <p className="ml-2"> : {university}</p>
+                  <p className="font-semibold text-dark-900 dark:text-white">
+                    University
+                  </p>
+                  <p className="ml-2 text-dark-900 dark:text-gray-300">
+                    {" "}
+                    : {university}
+                  </p>
                 </div>
                 <div className="flex justify-start">
-                  <p className="font-semibold">Email</p>
-                  <p className="ml-2"> : {email}</p>
+                  <p className="font-semibold text-dark-900 dark:text-white">
+                    Email
+                  </p>
+                  <p className="ml-2 text-dark-900 dark:text-gray-300">
+                    {" "}
+                    : {email}
+                  </p>
                 </div>
                 <div className="flex justify-start">
-                  <p className="font-semibold">Phone</p>
-                  <p className="ml-2"> : {phone}</p>
+                  <p className="font-semibold text-dark-900 dark:text-white">
+                    Phone
+                  </p>
+                  <p className="ml-2 text-dark-900 dark:text-gray-300">
+                    {" "}
+                    : {phone}
+                  </p>
                 </div>
               </div>
             </div>
@@ -58,7 +75,9 @@ const UserDetail = () => {
           <div className="lg:w-[65%] flex items-center justify-between">
             {/* Details Text */}
             <div className="w-[85%]">
-              <p className="text-justify text-gray-800">{details}</p>
+              <p className="text-justify text-gray-800 dark:text-gray-300">
+                {details}
+              </p>
             </div>
 
             {/* Social Media Vertical */}
