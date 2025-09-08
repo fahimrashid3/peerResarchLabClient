@@ -1,4 +1,5 @@
 import React from "react";
+import { Helmet } from "react-helmet";
 import useResearchPapers from "../../hooks/useResearchPapers";
 import Loading from "../../components/Loading";
 import PublicationsCard from "./PublicationCard";
@@ -20,6 +21,29 @@ const Publications = () => {
 
   return (
     <div className="pt-24 ">
+      <Helmet>
+        <title>Publications - Peer Research Lab</title>
+        <meta
+          name="description"
+          content="Explore our latest research publications and academic papers. Discover cutting-edge research findings and scientific contributions from Peer Research Lab."
+        />
+        <meta
+          name="keywords"
+          content="research publications, academic papers, scientific research, peer research lab publications, research findings, academic journals"
+        />
+        <meta property="og:title" content="Publications - Peer Research Lab" />
+        <meta
+          property="og:description"
+          content="Explore our latest research publications and academic papers. Discover cutting-edge research findings and scientific contributions from Peer Research Lab."
+        />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Publications - Peer Research Lab" />
+        <meta
+          name="twitter:description"
+          content="Explore our latest research publications and academic papers. Discover cutting-edge research findings and scientific contributions from Peer Research Lab."
+        />
+      </Helmet>
       {firstPaper && (
         <div className="bg-primary-900">
           <div className=" text-white mb-16 px-4 py-16 flex flex-col lg:flex-row items-center justify-between gap-10 max-w-7xl mx-auto">

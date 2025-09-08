@@ -1,4 +1,5 @@
 import { NavLink, Outlet } from "react-router-dom";
+import { Helmet } from "react-helmet";
 import {
   FaEdit,
   FaEnvelope,
@@ -32,6 +33,29 @@ const DashBoard = () => {
 
   return (
     <div className="drawer lg:drawer-open">
+      <Helmet>
+        <title>Dashboard - Peer Research Lab</title>
+        <meta
+          name="description"
+          content="Access your Peer Research Lab dashboard. Manage your research papers, applications, contacts, and collaborate with our research community."
+        />
+        <meta
+          name="keywords"
+          content="peer research lab dashboard, research dashboard, academic research management, research paper management, research collaboration dashboard"
+        />
+        <meta property="og:title" content="Dashboard - Peer Research Lab" />
+        <meta
+          property="og:description"
+          content="Access your Peer Research Lab dashboard. Manage your research papers, applications, contacts, and collaborate with our research community."
+        />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Dashboard - Peer Research Lab" />
+        <meta
+          name="twitter:description"
+          content="Access your Peer Research Lab dashboard. Manage your research papers, applications, contacts, and collaborate with our research community."
+        />
+      </Helmet>
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content flex flex-col">
         {/* Button for small screens */}

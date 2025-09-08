@@ -1,8 +1,7 @@
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet";
 import SocialLogin from "./SocialLogin";
-import loginBg from "../../assets/others/authenticationBg.png";
-import loginImg from "../../assets/others/authentication.png";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
 import { useState } from "react";
@@ -86,6 +85,29 @@ const Login = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 flex items-center justify-center p-4 pt-24">
+      <Helmet>
+        <title>Login - Peer Research Lab</title>
+        <meta
+          name="description"
+          content="Sign in to your Peer Research Lab account. Access your research dashboard, continue collaborations, and stay updated with the latest research developments."
+        />
+        <meta
+          name="keywords"
+          content="peer research lab login, research lab sign in, academic research login, research dashboard access, peer research lab account"
+        />
+        <meta property="og:title" content="Login - Peer Research Lab" />
+        <meta
+          property="og:description"
+          content="Sign in to your Peer Research Lab account. Access your research dashboard, continue collaborations, and stay updated with the latest research developments."
+        />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Login - Peer Research Lab" />
+        <meta
+          name="twitter:description"
+          content="Sign in to your Peer Research Lab account. Access your research dashboard, continue collaborations, and stay updated with the latest research developments."
+        />
+      </Helmet>
       <div className="w-full max-w-6xl mx-auto">
         <div className="grid lg:grid-cols-2 gap-8 items-center">
           {/* Left Side - Branding & Info */}

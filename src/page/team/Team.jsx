@@ -1,4 +1,5 @@
 import React from "react";
+import { Helmet } from "react-helmet";
 import useTeam from "../../hooks/useTeam";
 import Loading from "../../components/Loading";
 import SectionTitle from "../../components/SectionTitle";
@@ -27,6 +28,29 @@ const Team = () => {
 
   return (
     <div className="pt-10 max-w-[95%] md:max-w-[90%] lg:max-w-[85%] mx-auto">
+      <Helmet>
+        <title>Our Team - Peer Research Lab</title>
+        <meta
+          name="description"
+          content="Meet our dedicated team of researchers, advisors, and research assistants at Peer Research Lab. Learn about our experts driving innovation and academic excellence."
+        />
+        <meta
+          name="keywords"
+          content="research team, academic researchers, research advisors, research assistants, peer research lab team, scientific experts"
+        />
+        <meta property="og:title" content="Our Team - Peer Research Lab" />
+        <meta
+          property="og:description"
+          content="Meet our dedicated team of researchers, advisors, and research assistants at Peer Research Lab. Learn about our experts driving innovation and academic excellence."
+        />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Our Team - Peer Research Lab" />
+        <meta
+          name="twitter:description"
+          content="Meet our dedicated team of researchers, advisors, and research assistants at Peer Research Lab. Learn about our experts driving innovation and academic excellence."
+        />
+      </Helmet>
       <div className=" space-y-5">
         <SectionTitle heading={"Advisor"} subHeading={"Guided by"} />
         {/* Render advisor cards */}

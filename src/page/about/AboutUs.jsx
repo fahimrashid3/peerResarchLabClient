@@ -1,4 +1,5 @@
 import React from "react";
+import { Helmet } from "react-helmet";
 import useInfo from "../../hooks/useInfo";
 import Loading from "../../components/Loading";
 import AboutPageDesign from "./AboutPageDesign";
@@ -38,6 +39,29 @@ const AboutUs = () => {
 
   return (
     <div className="space-y-20 pt-24">
+      <Helmet>
+        <title>About Us - Peer Research Lab</title>
+        <meta
+          name="description"
+          content="Learn about Peer Research Lab's mission, vision, history, and overview. Discover our commitment to advancing research and fostering academic collaboration."
+        />
+        <meta
+          name="keywords"
+          content="about peer research lab, research lab mission, research lab vision, academic research history, research collaboration"
+        />
+        <meta property="og:title" content="About Us - Peer Research Lab" />
+        <meta
+          property="og:description"
+          content="Learn about Peer Research Lab's mission, vision, history, and overview. Discover our commitment to advancing research and fostering academic collaboration."
+        />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="About Us - Peer Research Lab" />
+        <meta
+          name="twitter:description"
+          content="Learn about Peer Research Lab's mission, vision, history, and overview. Discover our commitment to advancing research and fostering academic collaboration."
+        />
+      </Helmet>
       <AboutPageDesign data={overview} />
       <div className="divider divider-neutral font-bold">// \\</div>
 

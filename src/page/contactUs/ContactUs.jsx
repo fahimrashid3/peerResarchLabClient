@@ -1,4 +1,5 @@
 import React from "react";
+import { Helmet } from "react-helmet";
 // import SectionTitle from "../../components/SectionTitle";
 import ContactForm from "./ContactForm";
 import { FaFacebookF, FaMapMarkerAlt, FaPhone } from "react-icons/fa";
@@ -38,6 +39,29 @@ const ContactUs = () => {
 
   return (
     <div className="pt-10  dark:bg-dark-700 rounded-lg text-dark-900 dark:text-white ">
+      <Helmet>
+        <title>Contact Us - Peer Research Lab</title>
+        <meta
+          name="description"
+          content="Get in touch with Peer Research Lab. Contact us via phone, email, social media, or visit our office. We're here to help with your research inquiries and collaboration opportunities."
+        />
+        <meta
+          name="keywords"
+          content="contact peer research lab, research lab contact, academic research contact, research collaboration contact, peer research lab phone, research lab email"
+        />
+        <meta property="og:title" content="Contact Us - Peer Research Lab" />
+        <meta
+          property="og:description"
+          content="Get in touch with Peer Research Lab. Contact us via phone, email, social media, or visit our office. We're here to help with your research inquiries and collaboration opportunities."
+        />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Contact Us - Peer Research Lab" />
+        <meta
+          name="twitter:description"
+          content="Get in touch with Peer Research Lab. Contact us via phone, email, social media, or visit our office. We're here to help with your research inquiries and collaboration opportunities."
+        />
+      </Helmet>
       <div className="mt-6 md:mt-10">
         {/* <SectionTitle heading="Contact Form" subHeading="Send Us a Message" /> */}
         <div className="py-5 md:py-14 lg:py-20 space-y-5 md:flex md:flex-row-reverse">

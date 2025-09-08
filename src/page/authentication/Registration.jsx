@@ -3,8 +3,6 @@ import useAuth from "../../hooks/useAuth";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import { Helmet } from "react-helmet";
-import loginBg from "../../assets/others/authenticationBg.png";
-import loginImg from "../../assets/others/authentication.png";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import SocialLogin from "./SocialLogin";
 import axios from "axios";
@@ -162,7 +160,27 @@ const Registration = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 flex items-center justify-center p-4 pt-24">
       <Helmet>
-        <title>Peer Research Lab | Registration</title>
+        <title>Registration - Peer Research Lab</title>
+        <meta
+          name="description"
+          content="Join Peer Research Lab community. Create your account to access research opportunities, collaborate with experts, and contribute to cutting-edge academic research."
+        />
+        <meta
+          name="keywords"
+          content="peer research lab registration, research lab sign up, academic research account, research community join, peer research lab membership"
+        />
+        <meta property="og:title" content="Registration - Peer Research Lab" />
+        <meta
+          property="og:description"
+          content="Join Peer Research Lab community. Create your account to access research opportunities, collaborate with experts, and contribute to cutting-edge academic research."
+        />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Registration - Peer Research Lab" />
+        <meta
+          name="twitter:description"
+          content="Join Peer Research Lab community. Create your account to access research opportunities, collaborate with experts, and contribute to cutting-edge academic research."
+        />
       </Helmet>
 
       <div className="w-full max-w-6xl mx-auto">

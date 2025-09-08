@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet";
 import useFetchData from "../../hooks/useFetchData";
 
 const ResearchAres = () => {
@@ -27,6 +28,35 @@ const ResearchAres = () => {
 
   return (
     <div className="pt-24 mx-auto">
+      <Helmet>
+        <title>Research Areas - Peer Research Lab</title>
+        <meta
+          name="description"
+          content="Explore our diverse research areas and departments at Peer Research Lab. Discover cutting-edge research projects across various academic disciplines and scientific fields."
+        />
+        <meta
+          name="keywords"
+          content="research areas, academic research departments, scientific research fields, peer research lab departments, research disciplines, academic research areas"
+        />
+        <meta
+          property="og:title"
+          content="Research Areas - Peer Research Lab"
+        />
+        <meta
+          property="og:description"
+          content="Explore our diverse research areas and departments at Peer Research Lab. Discover cutting-edge research projects across various academic disciplines and scientific fields."
+        />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+          name="twitter:title"
+          content="Research Areas - Peer Research Lab"
+        />
+        <meta
+          name="twitter:description"
+          content="Explore our diverse research areas and departments at Peer Research Lab. Discover cutting-edge research projects across various academic disciplines and scientific fields."
+        />
+      </Helmet>
       {isLoading ? (
         renderSkeleton()
       ) : (
