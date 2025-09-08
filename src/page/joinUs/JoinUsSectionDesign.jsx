@@ -9,6 +9,7 @@ import useAuth from "../../hooks/useAuth";
 import useUsers from "../../hooks/useUser";
 
 const MAX_DETAILS_LENGTH = 500;
+const MAX_PDF_SIZE = 5 * 1024 * 1024; // 5MB in bytes
 
 const JoinUsSectionDesign = ({ data }) => {
   const { user } = useAuth();
@@ -26,6 +27,12 @@ const JoinUsSectionDesign = ({ data }) => {
   // State for live character count of details
   const [detailsText, setDetailsText] = useState("");
   const [detailsError, setDetailsError] = useState("");
+  const [pdfError, setPdfError] = useState("");
+  const [researchAreaError, setResearchAreaError] = useState("");
+
+  // Cloudinary config (from .env)
+  const cloud_name = import.meta.env.VITE_CLOUD_NAME;
+  const preset_key = import.meta.env.VITE_PRESET_KEY;
 
   useEffect(() => {
     axiosPublic.get("/researchArea").then((res) => {
@@ -49,36 +56,80 @@ const JoinUsSectionDesign = ({ data }) => {
     setIsModalOpen(false);
     setDetailsText(""); // reset character count on close
     setDetailsError("");
+    setPdfError("");
+    setResearchAreaError("");
   };
 
   const onSubmit = async (formData) => {
-    // Manual validation for details length
+    // Clear previous errors
+    setDetailsError("");
+    setPdfError("");
+    setResearchAreaError("");
+
+    // Validate details length
     if (detailsText.length > MAX_DETAILS_LENGTH) {
       setDetailsError(`Details cannot exceed ${MAX_DETAILS_LENGTH} characters`);
       return;
     }
-    setDetailsError("");
 
-    const formDataObj = new FormData();
-
-    for (const key in formData) {
-      if (key === "resume") {
-        formDataObj.append(key, formData[key][0]);
-      } else {
-        formDataObj.append(key, formData[key]);
-      }
+    // Validate research area selection
+    if (selectedArea === "Select Research Area") {
+      setResearchAreaError("Please select a research area");
+      return;
     }
 
-    formDataObj.append("email", user.email);
-    formDataObj.append("researchArea", selectedArea);
-    formDataObj.append("role", selectedRole);
+    // Validate PDF file
+    const pdfFile = formData.resume[0];
+
+    if (!pdfFile) {
+      setPdfError("Please select a PDF file");
+      return;
+    }
+
+    // Check file type
+    if (pdfFile.type !== "application/pdf") {
+      setPdfError("Please select a valid PDF file");
+      return;
+    }
+
+    // Check file size
+    if (pdfFile.size > MAX_PDF_SIZE) {
+      setPdfError(
+        `PDF file size must be less than ${MAX_PDF_SIZE / (1024 * 1024)}MB`
+      );
+      return;
+    }
 
     try {
-      const res = await axiosSecure.post("/submitApplication", formDataObj, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
+      // 1. Upload resume (PDF) to Cloudinary
+      const uploadData = new FormData();
+      uploadData.append("file", pdfFile);
+      uploadData.append("upload_preset", preset_key);
+
+      const uploadUrl = `https://api.cloudinary.com/v1_1/${cloud_name}/raw/upload`;
+
+      const uploadRes = await axiosPublic.post(uploadUrl, uploadData, {
+        withCredentials: false,
       });
+
+      const pdfUrl = uploadRes.data.secure_url;
+      const pdfName = uploadRes.data.original_filename + ".pdf";
+
+      // 2. Prepare application data
+      const applicationData = {
+        name: formData.name,
+        phone: formData.phone,
+        university: formData.university,
+        details: formData.details,
+        email: user.email,
+        researchArea: selectedArea,
+        role: selectedRole,
+        resumeUrl: pdfUrl,
+        resumeName: pdfName,
+      };
+
+      // 3. Send to backend
+      const res = await axiosSecure.post("/submitApplication", applicationData);
 
       if (res.status === 200) {
         Swal.fire({
@@ -88,6 +139,8 @@ const JoinUsSectionDesign = ({ data }) => {
           showConfirmButton: false,
           timer: 1500,
         });
+        reset();
+        closeModal();
       } else {
         Swal.fire({
           position: "top-end",
@@ -97,10 +150,14 @@ const JoinUsSectionDesign = ({ data }) => {
           timer: 1500,
         });
       }
-      reset();
-      closeModal();
     } catch (error) {
-      console.error("Error submitting application:", error);
+      Swal.fire({
+        position: "top-end",
+        icon: "error",
+        title: "Upload failed",
+        showConfirmButton: false,
+        timer: 1500,
+      });
     }
   };
 
@@ -214,6 +271,9 @@ const JoinUsSectionDesign = ({ data }) => {
                         </option>
                       ))}
                     </select>
+                    {researchAreaError && (
+                      <span className="text-red-500">{researchAreaError}</span>
+                    )}
                   </label>
 
                   <label className="form-control">
@@ -222,7 +282,6 @@ const JoinUsSectionDesign = ({ data }) => {
                       className="textarea input-bordered"
                       {...register("details", {
                         required: true,
-                        // no maxLength here
                         onChange: (e) => setDetailsText(e.target.value),
                       })}
                       value={detailsText}
@@ -250,6 +309,12 @@ const JoinUsSectionDesign = ({ data }) => {
                     {errors.resume && (
                       <span className="text-red-500">Resume is required</span>
                     )}
+                    {pdfError && (
+                      <span className="text-red-500">{pdfError}</span>
+                    )}
+                    <p className="text-sm text-gray-500">
+                      Maximum file size: 5MB
+                    </p>
                   </label>
 
                   <div className="flex justify-end gap-4">
