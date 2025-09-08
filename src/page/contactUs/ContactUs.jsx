@@ -7,16 +7,16 @@ import useInfo from "../../hooks/useInfo";
 import Loading from "../../components/Loading";
 import { IoLogoWhatsapp } from "react-icons/io5";
 import Swal from "sweetalert2";
+import { HiOutlineMail } from "react-icons/hi";
 
 const ContactUs = () => {
   const [info, infoLoading] = useInfo();
 
-  // ✅ Ensure info and labInformation exist before destructuring
   if (infoLoading || !info || !info) {
     return <Loading />;
   }
 
-  const { phone, socialMedia, location } = info;
+  const { phone, socialMedia, location, email } = info;
   const { facebook, linkedIn, X, whatsApp } = socialMedia;
   const handleCopy = (text) => {
     navigator.clipboard
@@ -98,15 +98,30 @@ const ContactUs = () => {
               {/* Call Section */}
               <div>
                 <h3 className="font-semibold text-lg text-dark-900 dark:text-white">
-                  Call us
+                  Contact us
                 </h3>
                 <p className="text-sm text-dark-900 dark:text-white">
-                  Call our team Mon-Fri from 8am to 5pm.
+                  Call our team Mon-Fri from 8am to 5pm or send us an email.
                 </p>
-                <div onClick={() => handleCopy(phone)} className="mt-3">
-                  <div className="flex items-center gap-2 text-blue-600 cursor-pointer hover:underline">
-                    <FaPhone />
-                    <span>{phone}</span>
+                <div className="mt-3 space-y-2">
+                  <div
+                    onClick={() => handleCopy(phone)}
+                    className="cursor-pointer"
+                  >
+                    <div className="flex items-center gap-2 text-blue-600 hover:underline">
+                      <FaPhone />
+                      <span>{phone}</span>
+                    </div>
+                  </div>
+                  <div
+                    onClick={() => handleCopy(email)}
+                    className="cursor-pointer"
+                  >
+                    <div className="flex items-center gap-2 text-blue-600 hover:underline">
+                      <HiOutlineMail />
+
+                      <span>{email}</span>
+                    </div>
                   </div>
                 </div>
               </div>
