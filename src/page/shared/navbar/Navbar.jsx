@@ -27,8 +27,6 @@ const Navbar = () => {
   const [users] = useUsers();
   const [isAdmin, isAdminLoading] = useAdmin();
   const [role, isRoleLoading] = useRole();
-  console.log(isAdmin);
-  console.log(role);
 
   // Navbar show/hide state
   const [showNavbar, setShowNavbar] = useState(true);
@@ -115,11 +113,6 @@ const Navbar = () => {
               </ul>
             </div>
             <Link to="/">
-              {/* <div className="btn btn-ghost bg-transparent hover:bg-transparent flex flex-col md:flex-row">
-                <h1 className="text-lg md:text-3xl font-bold text-white text-center sm:text-left">
-                  Peer <span className="text-primary-600">Research</span> Lab
-                </h1>
-              </div> */}
               <img
                 src={logoWhitedPng}
                 alt="Peer Research Lab Logo"
