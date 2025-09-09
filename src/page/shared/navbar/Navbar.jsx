@@ -27,6 +27,8 @@ const Navbar = () => {
   const [users] = useUsers();
   const [isAdmin, isAdminLoading] = useAdmin();
   const [role, isRoleLoading] = useRole();
+  console.log(isAdmin);
+  console.log(role);
 
   // Navbar show/hide state
   const [showNavbar, setShowNavbar] = useState(true);

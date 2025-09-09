@@ -16,12 +16,6 @@ const RecentWorks = () => {
     "recentResearchPapers"
   );
 
-  // Debug logging to help troubleshoot
-  console.log("RecentWorks - researchPapers:", researchPapers);
-  console.log("RecentWorks - isLoading:", isLoading);
-  console.log("RecentWorks - isPending:", isPending);
-  console.log("RecentWorks - researchPapers length:", researchPapers?.length);
-
   return (
     <div className="my-12">
       <SectionTitle
