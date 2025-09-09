@@ -9,7 +9,7 @@ import useAuth from "../../hooks/useAuth";
 import useUsers from "../../hooks/useUser";
 
 const MAX_DETAILS_LENGTH = 500;
-const MAX_PDF_SIZE = 5 * 1024 * 1024; // 5MB in bytes
+const MAX_PDF_SIZE = 5 * 1024 * 1024;
 
 const JoinUsSectionDesign = ({ data }) => {
   const { user } = useAuth();
@@ -54,7 +54,7 @@ const JoinUsSectionDesign = ({ data }) => {
 
   const closeModal = () => {
     setIsModalOpen(false);
-    setDetailsText(""); // reset character count on close
+    setDetailsText("");
     setDetailsError("");
     setPdfError("");
     setResearchAreaError("");
@@ -80,19 +80,14 @@ const JoinUsSectionDesign = ({ data }) => {
 
     // Validate PDF file
     const pdfFile = formData.resume[0];
-
     if (!pdfFile) {
       setPdfError("Please select a PDF file");
       return;
     }
-
-    // Check file type
     if (pdfFile.type !== "application/pdf") {
       setPdfError("Please select a valid PDF file");
       return;
     }
-
-    // Check file size
     if (pdfFile.size > MAX_PDF_SIZE) {
       setPdfError(
         `PDF file size must be less than ${MAX_PDF_SIZE / (1024 * 1024)}MB`
@@ -107,7 +102,6 @@ const JoinUsSectionDesign = ({ data }) => {
       uploadData.append("upload_preset", preset_key);
 
       const uploadUrl = `https://api.cloudinary.com/v1_1/${cloud_name}/raw/upload`;
-
       const uploadRes = await axiosPublic.post(uploadUrl, uploadData, {
         withCredentials: false,
       });
@@ -131,15 +125,25 @@ const JoinUsSectionDesign = ({ data }) => {
       // 3. Send to backend
       const res = await axiosSecure.post("/submitApplication", applicationData);
 
-      if (res.status === 200) {
+      // ✅ Handle response by status code
+      if (res.status === 201) {
         Swal.fire({
           position: "top-end",
           icon: "success",
-          title: "Your Application has been saved",
+          title: res.data?.message || "Your Application has been saved",
           showConfirmButton: false,
           timer: 1500,
         });
         reset();
+        closeModal();
+      } else if (res.status === 208) {
+        Swal.fire({
+          position: "top-end",
+          icon: "warning",
+          title: res.data?.message || "You already submitted an application",
+          text: "You cannot submit more than one application.",
+          showConfirmButton: true,
+        });
         closeModal();
       } else {
         Swal.fire({
@@ -151,13 +155,34 @@ const JoinUsSectionDesign = ({ data }) => {
         });
       }
     } catch (error) {
-      Swal.fire({
-        position: "top-end",
-        icon: "error",
-        title: "Upload failed",
-        showConfirmButton: false,
-        timer: 1500,
-      });
+      const status = error?.response?.status;
+      const msg = error?.response?.data?.error;
+
+      if (status === 400) {
+        Swal.fire({ icon: "error", title: msg || "Bad Request" });
+      } else if (status === 401) {
+        Swal.fire({
+          icon: "error",
+          title: "Unauthorized",
+          text: "Please login again",
+        });
+      } else if (status === 403) {
+        Swal.fire({ icon: "error", title: "Forbidden", text: "Access denied" });
+      } else if (status === 500) {
+        Swal.fire({
+          icon: "error",
+          title: "Server error",
+          text: "Try again later",
+        });
+      } else {
+        Swal.fire({
+          position: "top-end",
+          icon: "error",
+          title: "Upload failed",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
     }
   };
 

@@ -10,7 +10,7 @@ import PDFViewer from "../../../components/PDFViewer";
 const ManageApplication = () => {
   const [applications, setApplications] = useState([]);
   const [openPositionDetails, setOpenPositionDetails] = useState([]);
-  const [selectedRoles, setSelectedRoles] = useState({}); // holds role changes
+  const [selectedRoles, setSelectedRoles] = useState({});
 
   // For feedback modal
   const [feedbackModalOpen, setFeedbackModalOpen] = useState(false);
