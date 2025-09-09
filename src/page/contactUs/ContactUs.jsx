@@ -38,7 +38,7 @@ const ContactUs = () => {
   };
 
   return (
-    <div className="pt-10  dark:bg-dark-700 rounded-lg text-dark-900 dark:text-white ">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 pt-24 text-dark-900 dark:text-white">
       <Helmet>
         <title>Contact Us - Peer Research Lab</title>
         <meta
@@ -72,7 +72,7 @@ const ContactUs = () => {
                 <h3 className="font-semibold text-lg text-dark-900 dark:text-white">
                   Chat with us
                 </h3>
-                <p className="text-sm text-gray-600 text-justify text-dark-900 dark:text-white">
+                <p className="text-sm text-gray-600 dark:text-gray-300 text-justify">
                   Welcome to our contact page! We're delighted to connect with
                   you. Whether you have a question, feedback, or simply want to
                   say hello, this is the place to reach out. Our dedicated team
@@ -124,7 +124,7 @@ const ContactUs = () => {
                 <h3 className="font-semibold text-lg text-dark-900 dark:text-white">
                   Contact us
                 </h3>
-                <p className="text-sm text-dark-900 dark:text-white">
+                <p className="text-sm text-gray-600 dark:text-gray-300">
                   Call our team Mon-Fri from 8am to 5pm or send us an email.
                 </p>
                 <div className="mt-3 space-y-2">
@@ -155,7 +155,7 @@ const ContactUs = () => {
                 <h3 className="font-semibold text-lg text-dark-900 dark:text-white">
                   Visit us
                 </h3>
-                <p className="text-sm  text-dark-900 dark:text-white">
+                <p className="text-sm text-gray-600 dark:text-gray-300">
                   Chat to us in person at our office.
                 </p>
                 <div className="mt-3">
@@ -174,11 +174,13 @@ const ContactUs = () => {
               </div>
             </div>
           </div>
-          <div className="flex-1 bg-dark-200 rounded-lg p-5 md:bg-transparent md:rounded-none md:p-0">
-            <h1 className="font-semibold text-xl pl-5 text-dark-900 dark:text-white">
-              Sent a message
-            </h1>
-            <ContactForm />
+          <div className="flex-1">
+            <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 border border-gray-200 dark:border-gray-700">
+              <h1 className="font-semibold text-2xl mb-4 text-primary-800 dark:text-primary-200">
+                Send a message
+              </h1>
+              <ContactForm />
+            </div>
           </div>
         </div>
       </div>

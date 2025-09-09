@@ -4,11 +4,13 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useForm } from "react-hook-form";
 import { FaPaperPlane } from "react-icons/fa";
 import Swal from "sweetalert2";
+import { useState } from "react";
 
 const ContactForm = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const {
     register,
     handleSubmit,
@@ -19,6 +21,7 @@ const ContactForm = () => {
   const onSubmit = async (data) => {
     const contactSMSInfo = { data };
     try {
+      setIsSubmitting(true);
       const result = await Swal.fire({
         title: "Are you sure?",
         text: "You won't be able to revert this!",
@@ -53,6 +56,8 @@ const ContactForm = () => {
         text: errorMsg,
       });
       console.error("Full error:", error);
+    } finally {
+      setIsSubmitting(false);
     }
   };
   if (!user) {
@@ -73,7 +78,7 @@ const ContactForm = () => {
           {...register("name", { required: true })}
           type="text"
           placeholder="Name"
-          className="input input-bordered w-full "
+          className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 transition-colors"
         />
         {errors.name && <span className="text-red-500">Name is required</span>}
       </label>
@@ -85,7 +90,7 @@ const ContactForm = () => {
           {...register("phone", { required: true })}
           type="text"
           placeholder="Phone number"
-          className="input input-bordered w-full "
+          className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 transition-colors"
         />
         {errors.phone && (
           <span className="text-red-500">Phone number is required</span>
@@ -115,7 +120,7 @@ const ContactForm = () => {
           <textarea
             {...register("message", { required: true })}
             placeholder="Message"
-            className="w-full textarea textarea-bordered lg:h-60 md:h-40 h-28"
+            className="w-full lg:h-60 md:h-40 h-28 px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 transition-colors"
           ></textarea>
           {errors.message && (
             <span className="text-red-500">Message is required</span>
@@ -125,10 +130,11 @@ const ContactForm = () => {
       <div className="flex justify-center lg:px-16 md:px-10 px-5 mx-auto">
         <button
           type="submit"
-          className="btn bg-transparent border-primary-600 text-primary-600 hover:bg-primary-600 hover:text-white hover:border-primary-600 flex gap-3 md:text-xl text-lg w-full"
+          disabled={isSubmitting}
+          className="w-full bg-primary-600 hover:bg-primary-700 text-white font-semibold py-3 px-4 rounded-lg transition-colors duration-200 flex gap-3 md:text-xl text-lg justify-center"
         >
           <FaPaperPlane />
-          Sent Message
+          {isSubmitting ? "Sending..." : "Send Message"}
         </button>
       </div>
     </form>
