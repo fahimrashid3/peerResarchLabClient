@@ -136,17 +136,17 @@ const UserProfile = () => {
         },
         details: data.details,
       };
+
       const res = await axiosSecure.patch("/updateUserAndTeam", updateInfo);
-      if (res.data.modifiedCount > 0 || res.data.acknowledged) {
+
+      if (res.status === 200) {
         Swal.fire({
           position: "top-end",
           icon: "success",
-          title: "Profile updated successfully",
+          title: res.data.message || "Profile updated successfully",
           showConfirmButton: false,
           timer: 1500,
         });
-      }
-      if (res.status === 200) {
         refetch();
         setIsEditing(false);
         setPreviewImage(photoUrl);
@@ -224,6 +224,7 @@ const UserProfile = () => {
     joinedOn: teamInfo?.createdAt,
     details: teamInfo?.details,
   };
+
   return (
     <div className="max-w-4xl mx-auto p-6 bg-white dark:bg-dark-900 rounded-lg shadow-md">
       <h1 className="text-2xl font-bold text-center mb-6 text-dark-900 dark:text-white">
