@@ -9,7 +9,6 @@ import useAuth from "../../hooks/useAuth";
 import useUsers from "../../hooks/useUser";
 
 const MAX_DETAILS_LENGTH = 500;
-const MAX_PDF_SIZE = 5 * 1024 * 1024;
 
 const JoinUsSectionDesign = ({ data }) => {
   const { user } = useAuth();
@@ -24,15 +23,10 @@ const JoinUsSectionDesign = ({ data }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // State for live character count of details
   const [detailsText, setDetailsText] = useState("");
   const [detailsError, setDetailsError] = useState("");
   const [pdfError, setPdfError] = useState("");
   const [researchAreaError, setResearchAreaError] = useState("");
-
-  // Cloudinary config (from .env)
-  const cloud_name = import.meta.env.VITE_CLOUD_NAME;
-  const preset_key = import.meta.env.VITE_PRESET_KEY;
 
   useEffect(() => {
     axiosPublic.get("/researchArea").then((res) => {
@@ -61,7 +55,6 @@ const JoinUsSectionDesign = ({ data }) => {
   };
 
   const onSubmit = async (formData) => {
-    // Clear previous errors
     setDetailsError("");
     setPdfError("");
     setResearchAreaError("");
@@ -78,38 +71,19 @@ const JoinUsSectionDesign = ({ data }) => {
       return;
     }
 
-    // Validate PDF file
-    const pdfFile = formData.resume[0];
-    if (!pdfFile) {
-      setPdfError("Please select a PDF file");
+    // Validate resume URL
+    if (!formData.resume || formData.resume.trim() === "") {
+      setPdfError("Please provide your resume URL");
       return;
     }
-    if (pdfFile.type !== "application/pdf") {
-      setPdfError("Please select a valid PDF file");
-      return;
-    }
-    if (pdfFile.size > MAX_PDF_SIZE) {
-      setPdfError(
-        `PDF file size must be less than ${MAX_PDF_SIZE / (1024 * 1024)}MB`
-      );
+
+    const urlPattern = /^https?:\/\/.+/;
+    if (!urlPattern.test(formData.resume)) {
+      setPdfError("Please provide a valid URL");
       return;
     }
 
     try {
-      // 1. Upload resume (PDF) to Cloudinary
-      const uploadData = new FormData();
-      uploadData.append("file", pdfFile);
-      uploadData.append("upload_preset", preset_key);
-
-      const uploadUrl = `https://api.cloudinary.com/v1_1/${cloud_name}/raw/upload`;
-      const uploadRes = await axiosPublic.post(uploadUrl, uploadData, {
-        withCredentials: false,
-      });
-
-      const pdfUrl = uploadRes.data.secure_url;
-      const pdfName = uploadRes.data.original_filename + ".pdf";
-
-      // 2. Prepare application data
       const applicationData = {
         name: formData.name,
         phone: formData.phone,
@@ -118,19 +92,16 @@ const JoinUsSectionDesign = ({ data }) => {
         email: user.email,
         researchArea: selectedArea,
         role: selectedRole,
-        resumeUrl: pdfUrl,
-        resumeName: pdfName,
+        resume: formData.resume, // only URL
       };
 
-      // 3. Send to backend
       const res = await axiosSecure.post("/submitApplication", applicationData);
 
-      // ✅ Handle response by status code
-      if (res.status === 201) {
+      if (res.status === 200) {
         Swal.fire({
           position: "top-end",
           icon: "success",
-          title: res.data?.message || "Your Application has been saved",
+          title: res.data?.message || "Application submitted successfully!",
           showConfirmButton: false,
           timer: 1500,
         });
@@ -140,8 +111,7 @@ const JoinUsSectionDesign = ({ data }) => {
         Swal.fire({
           position: "top-end",
           icon: "warning",
-          title: res.data?.message || "You already submitted an application",
-          text: "You cannot submit more than one application.",
+          title: res.data?.message || "Application already exists!",
           showConfirmButton: true,
         });
         closeModal();
@@ -155,34 +125,12 @@ const JoinUsSectionDesign = ({ data }) => {
         });
       }
     } catch (error) {
-      const status = error?.response?.status;
-      const msg = error?.response?.data?.error;
-
-      if (status === 400) {
-        Swal.fire({ icon: "error", title: msg || "Bad Request" });
-      } else if (status === 401) {
-        Swal.fire({
-          icon: "error",
-          title: "Unauthorized",
-          text: "Please login again",
-        });
-      } else if (status === 403) {
-        Swal.fire({ icon: "error", title: "Forbidden", text: "Access denied" });
-      } else if (status === 500) {
-        Swal.fire({
-          icon: "error",
-          title: "Server error",
-          text: "Try again later",
-        });
-      } else {
-        Swal.fire({
-          position: "top-end",
-          icon: "error",
-          title: "Upload failed",
-          showConfirmButton: false,
-          timer: 1500,
-        });
-      }
+      console.error("Submit error:", error);
+      Swal.fire({
+        icon: "error",
+        title: "Submission failed",
+        text: error?.response?.data?.error || error.message || "Try again",
+      });
     }
   };
 
@@ -196,7 +144,7 @@ const JoinUsSectionDesign = ({ data }) => {
             {qualifications}
           </p>
           <p className=" text-dark-900 dark:text-white">
-            <span className="font-bold text-lg ">Experience:</span> {experience}
+            <span className="font-bold text-lg">Experience:</span> {experience}
           </p>
           <p className=" text-dark-900 dark:text-white">
             <span className="font-bold text-lg">International Exposure:</span>{" "}
@@ -206,17 +154,10 @@ const JoinUsSectionDesign = ({ data }) => {
 
         <div>
           <button
-            className="btn border-b-8 font-semibold
-                     text-primary-900 hover:text-white dark:text-primary-900
-                     hover:border-primary-600 border-primary-700  dark:border-primary-900 dark:hover:border-primary-700 
-                     bg-primary-300 hover:bg-primary-500  dark:bg-primary-400 dark:hover:bg-primary-600 
-                     transition-all duration-200"
+            className="btn border-b-8 font-semibold text-primary-900 hover:text-white dark:text-primary-900 hover:border-primary-600 border-primary-700 dark:border-primary-900 dark:hover:border-primary-700 bg-primary-300 hover:bg-primary-500 dark:bg-primary-400 dark:hover:bg-primary-600 transition-all duration-200"
             onClick={() => {
-              if (user) {
-                openModal(role);
-              } else {
-                navigate("/login", { state: { from: location } });
-              }
+              if (user) openModal(role);
+              else navigate("/login", { state: { from: location } });
             }}
           >
             {user ? `Apply to be ${role}` : "Login to apply"}
@@ -324,21 +265,24 @@ const JoinUsSectionDesign = ({ data }) => {
                   </label>
 
                   <label className="form-control">
-                    <span className="label-text">Upload Resume (PDF)</span>
+                    <span className="label-text">Resume URL</span>
                     <input
                       {...register("resume", { required: true })}
-                      type="file"
-                      accept=".pdf"
-                      className="file-input file-input-bordered w-full"
+                      type="url"
+                      placeholder="https://drive.google.com/file/d/..."
+                      className="input input-bordered w-full"
                     />
                     {errors.resume && (
-                      <span className="text-red-500">Resume is required</span>
+                      <span className="text-red-500">
+                        Resume URL is required
+                      </span>
                     )}
                     {pdfError && (
                       <span className="text-red-500">{pdfError}</span>
                     )}
                     <p className="text-sm text-gray-500">
-                      Maximum file size: 5MB
+                      Please provide a Google Drive link. Make sure it is
+                      publicly accessible.
                     </p>
                   </label>
 

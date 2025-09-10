@@ -5,7 +5,6 @@ import { MdDeleteForever } from "react-icons/md";
 import { IoMdPersonAdd } from "react-icons/io";
 import Swal from "sweetalert2";
 import { TiMessages } from "react-icons/ti";
-import PDFViewer from "../../../components/PDFViewer";
 
 const ManageApplication = () => {
   const [applications, setApplications] = useState([]);
@@ -31,12 +30,6 @@ const ManageApplication = () => {
   useEffect(() => {
     axiosSecure.get("/applications").then((res) => {
       setApplications(res.data);
-
-      // Debug: Log resume data structure
-      console.log("Applications data:", res.data);
-      res.data.forEach((app, index) => {
-        console.log(`App ${index + 1} resume data:`, app.resume);
-      });
 
       // Initialize selectedRoles with current roles
       const initialRoles = {};
@@ -120,32 +113,31 @@ const ManageApplication = () => {
       if (result.isConfirmed) {
         const res = await axiosSecure.delete(`/application/${_id}`);
 
-        if (res.data.deletedCount === 1) {
+        if (res.status === 200) {
           Swal.fire({
             position: "top-end",
             icon: "success",
-            title: "Application deleted successfully",
+            title: res.data.message,
             showConfirmButton: false,
             timer: 1500,
           });
-
-          setApplications((prev) => prev.filter((app) => app._id !== _id));
-          setSelectedRoles((prev) => {
-            const copy = { ...prev };
-            delete copy[_id];
-            return copy;
-          });
         } else {
-          throw new Error("Application not found or not deleted");
+          Swal.fire({
+            icon: "error",
+            title: "Error",
+            text: res.data.message,
+          });
         }
       }
     } catch (error) {
       Swal.fire({
         icon: "error",
         title: "Error",
-        text: "Failed to Delete",
+        text:
+          error.response?.data?.message ||
+          "Failed to delete application. Please try again.",
       });
-      console.error("Full error:", error);
+      console.error("Delete error:", error);
     }
   };
 
@@ -233,7 +225,13 @@ const ManageApplication = () => {
                 </td>
                 <td>{app.researchArea}</td>
                 <td>
-                  <PDFViewer resumeData={app.resume} />
+                  <button
+                    onClick={() => window.open(app.resume, "_blank")}
+                    className="btn btn-sm btn-primary"
+                    disabled={!app.resume}
+                  >
+                    View Resume
+                  </button>
                 </td>
                 <td>
                   <button
