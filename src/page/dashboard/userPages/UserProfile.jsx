@@ -44,23 +44,21 @@ const UserProfile = () => {
     handleSubmit,
     reset,
     watch,
-    setValue,
     formState: { errors },
-    getValues,
   } = useForm();
 
-  // Watch details field to update character count live
-  const watchedDetails = watch("details", "");
-  const watchedName = watch("name", "");
-  const watchedPhone = watch("phone", "");
-  const watchedUniversity = watch("university", "");
-  const watchedLinkedin = watch("linkedin", "");
-  const watchedTwitter = watch("twitter", "");
-  const watchedFacebook = watch("facebook", "");
-  const watchedGithub = watch("github", "");
+  // Watch form values for controlled inputs
+  const watchedName = watch("name");
+  const watchedPhone = watch("phone");
+  const watchedUniversity = watch("university");
+  const watchedLinkedin = watch("linkedin");
+  const watchedTwitter = watch("twitter");
+  const watchedFacebook = watch("facebook");
+  const watchedGithub = watch("github");
+  const watchedDetails = watch("details");
 
   useEffect(() => {
-    setDetailsCount(watchedDetails.length);
+    setDetailsCount(watchedDetails?.length || 0);
   }, [watchedDetails]);
 
   useEffect(() => {
@@ -152,7 +150,6 @@ const UserProfile = () => {
         setPreviewImage(photoUrl);
       }
     } catch (error) {
-      console.error("Error updating profile:", error);
       Swal.fire({
         position: "top-end",
         icon: "error",
