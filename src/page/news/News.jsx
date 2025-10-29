@@ -24,7 +24,7 @@ const News = () => {
   }
 
   return (
-    <div className="md:pt-24 max-w-7xl mx-auto">
+    <div className="md:pt-24 max-w-7xl mx-auto min-h-screen">
       <Helmet>
         <title>News & Updates - Peer Research Lab</title>
         <meta

@@ -4,93 +4,96 @@ import { Link } from "react-router-dom";
 import Loading from "../../components/Loading";
 
 const NewsCart = ({ singleNews }) => {
-  // If singleNews is undefined or null, return null (or a skeleton loader)
   if (!singleNews) {
     return <Loading />;
   }
 
   const { _id, authorEmail, createdAt, title, summary, image } = singleNews;
-  const dateTime = new Date(createdAt);
 
-  // Format the date (e.g., "February 15, 2025")
+  const dateTime = new Date(createdAt);
   const date = dateTime.toLocaleDateString("en-US", {
     year: "numeric",
-    month: "long",
+    month: "short",
     day: "numeric",
   });
-
-  // Format the time (e.g., "11:23:58 AM")
   const time = dateTime.toLocaleTimeString("en-US", {
     hour: "2-digit",
     minute: "2-digit",
-    second: "2-digit",
-    hour12: true, // Use 12-hour format
+    hour12: true,
   });
 
-  // Fetch author details using authorEmail
   const [author, setAuthor] = useState(null);
   const axiosPublic = useAxiosPublic();
 
   useEffect(() => {
+    let isMounted = true;
     if (authorEmail) {
       axiosPublic
         .get(`/post/${authorEmail}`)
-        .then((res) => setAuthor(res.data))
+        .then((res) => {
+          if (isMounted) setAuthor(res.data);
+        })
         .catch((err) => console.error("Error fetching author:", err));
     }
+    return () => {
+      isMounted = false;
+    };
   }, [authorEmail, axiosPublic]);
 
+  const preview = summary?.length > 180 ? `${summary.slice(0, 180)}…` : summary;
+
   return (
-    <div className="mb-24 border p-5 rounded-lg">
-      {/* Author Section */}
-      <div className="flex bg-gray-50 text-dark-900 justify-between rounded-t-lg">
-        {/* <div className="flex">
-          {author ? (
-            <>
+    <Link to={`/news/${_id}`} className="block cursor-pointer group">
+      <article className="relative rounded-2xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden">
+        <div className="flex flex-col lg:flex-row lg:items-start gap-4 lg:gap-6">
+          {/* Media - left on lg */}
+          <div className="relative w-full lg:w-72 xl:w-80 shrink-0">
+            <div className="aspect-video w-full overflow-hidden">
               <img
-                className="rounded-full w-12 h-12 mr-3 object-cover object-center"
-                src={author.photoUrl}
-                alt={author.name}
+                src={image}
+                alt={title}
+                className="h-full w-full object-cover transform transition-transform duration-500 group-hover:scale-105"
+                loading="lazy"
               />
-              <div>
-                <p className="font-semibold text-xl">{author.name}</p>
-                <div className="flex gap-5">
-                  <p>{date}</p>
-                  <p>{time}</p>
-                </div>
-              </div>
-            </>
-          ) : (
-            <div className="flex w-52 flex-col gap-4">
-              <div className="flex items-center gap-4">
-                <div className="skeleton h-12 w-12 shrink-0 rounded-full"></div>
-                <div className="flex flex-col gap-4">
-                  <div className="skeleton h-3 w-20"></div>
-                  <div className="skeleton h-3 w-28"></div>
-                </div>
+            </div>
+            <div className="absolute bottom-2 left-2 right-2 flex items-center gap-3">
+              {author ? (
+                <img
+                  className="h-9 w-9 rounded-full border-2 border-white/80 object-cover"
+                  src={author.photoUrl}
+                  alt={author.name}
+                />
+              ) : (
+                <div className="h-9 w-9 rounded-full bg-white/70 animate-pulse" />
+              )}
+              <div className="text-white drop-shadow">
+                <p className="text-xs font-semibold leading-tight">
+                  {author?.name || "Loading author…"}
+                </p>
+                <p className="text-[11px] opacity-90 leading-tight">
+                  {date} • {time}
+                </p>
               </div>
             </div>
-          )}
-        </div> */}
-      </div>
+          </div>
 
-      {/* News details Section */}
-      <div className="space-y-5 mt-5 mb-5">
-        <p className="font-bold text-2xl">{title}</p>
-        <img className="h-80 w-full object-cover" src={image} alt={title} />
-        <div className="relative">
-          <p className="text-justify mb-8">
-            {summary || "Details not available"}
-          </p>
-          <Link
-            to={`/news/${_id}`}
-            className="bottom-0 right-0 bg-primary-500 hover:bg-primary-700 text-white px-4 py-2 rounded-lg transition-colors"
-          >
-            Read more
-          </Link>
+          {/* Content - right on lg */}
+          <div className="px-5 pb-5 pt-4 lg:p-4 flex-1">
+            <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900 dark:text-white leading-snug mb-2 group-hover:text-primary-600">
+              {title}
+            </h3>
+            <p className="text-gray-700 dark:text-gray-300 text-justify line-clamp-3 lg:line-clamp-2">
+              {preview || "Details not available"}
+            </p>
+            <div className="mt-3 flex items-center gap-3">
+              <span className="inline-flex items-center rounded-full bg-primary-100 dark:bg-primary-900/40 px-2.5 py-1 text-xs font-medium text-primary-700 dark:text-primary-300">
+                News & Updates
+              </span>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
+      </article>
+    </Link>
   );
 };
 
