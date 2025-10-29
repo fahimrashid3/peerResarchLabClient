@@ -12,15 +12,13 @@ const NavLinks = () => {
       <li>
         <NavLink
           onClick={scrollToTop}
-          style={({ isActive, isTransitioning }) => {
-            return {
-              background: "transparent",
-              // textDecoration: isActive ? "underline 2px solid #B53333" : "none",
-              fontWeight: isActive ? "bold" : "",
-              color: isActive ? "#B53333" : "white",
-              viewTransitionName: isTransitioning ? "slide" : "",
-            };
-          }}
+          className={({ isActive }) =>
+            `${
+              isActive
+                ? "text-primary-600 font-bold underline underline-offset-4 decoration-2 decoration-primary-600 hover:text-primary-700"
+                : "text-gray-950 dark:text-white font-semibold"
+            } bg-transparent hover:!bg-transparent focus:!bg-transparent active:!bg-transparent`
+          }
           to="/"
         >
           Home
@@ -29,15 +27,13 @@ const NavLinks = () => {
       <li>
         <NavLink
           onClick={scrollToTop}
-          style={({ isActive, isTransitioning }) => {
-            return {
-              background: isActive ? "transparent" : "transparent",
-              // textDecoration: isActive ? "underline 2px solid #B53333" : "none",
-              fontWeight: isActive ? "bold" : "",
-              color: isActive ? "#B53333" : "white",
-              viewTransitionName: isTransitioning ? "slide" : "",
-            };
-          }}
+          className={({ isActive }) =>
+            `${
+              isActive
+                ? "text-primary-600 font-bold underline underline-offset-4 decoration-2 decoration-primary-600 hover:text-primary-700"
+                : "text-gray-950 dark:text-white font-semibold"
+            } bg-transparent hover:!bg-transparent focus:!bg-transparent active:!bg-transparent`
+          }
           to="/aboutUs"
         >
           About Us
@@ -48,15 +44,13 @@ const NavLinks = () => {
       <li>
         <NavLink
           onClick={scrollToTop}
-          style={({ isActive, isTransitioning }) => {
-            return {
-              background: isActive ? "transparent" : "transparent",
-              // textDecoration: isActive ? "underline 2px solid #B53333" : "none",
-              fontWeight: isActive ? "bold" : "",
-              color: isActive ? "#B53333" : "white",
-              viewTransitionName: isTransitioning ? "slide" : "",
-            };
-          }}
+          className={({ isActive }) =>
+            `${
+              isActive
+                ? "text-primary-600 font-bold underline underline-offset-4 decoration-2 decoration-primary-600"
+                : "text-gray-950 dark:text-white font-semibold"
+            } bg-transparent hover:!bg-transparent focus:!bg-transparent active:!bg-transparent`
+          }
           to="/researchAreas"
         >
           Research Areas
@@ -66,15 +60,13 @@ const NavLinks = () => {
       <li>
         <NavLink
           onClick={scrollToTop}
-          style={({ isActive, isTransitioning }) => {
-            return {
-              background: isActive ? "transparent" : "transparent",
-              // textDecoration: isActive ? "underline 2px solid #B53333" : "none",
-              fontWeight: isActive ? "bold" : "",
-              color: isActive ? "#B53333" : "white",
-              viewTransitionName: isTransitioning ? "slide" : "",
-            };
-          }}
+          className={({ isActive }) =>
+            `${
+              isActive
+                ? "text-primary-600 font-bold underline underline-offset-4 decoration-2 decoration-primary-600"
+                : "text-gray-950 dark:text-white font-semibold"
+            } bg-transparent hover:!bg-transparent focus:!bg-transparent active:!bg-transparent`
+          }
           to="/publications"
         >
           Publications and Resources
@@ -84,15 +76,13 @@ const NavLinks = () => {
       <li>
         <NavLink
           onClick={scrollToTop}
-          style={({ isActive, isTransitioning }) => {
-            return {
-              background: isActive ? "transparent" : "transparent",
-              // textDecoration: isActive ? "underline 2px solid #B53333" : "none",
-              fontWeight: isActive ? "bold" : "",
-              color: isActive ? "#B53333" : "white",
-              viewTransitionName: isTransitioning ? "slide" : "",
-            };
-          }}
+          className={({ isActive }) =>
+            `${
+              isActive
+                ? "text-primary-600 font-bold underline underline-offset-4 decoration-2 decoration-primary-600"
+                : "text-gray-950 dark:text-white font-semibold"
+            } bg-transparent hover:!bg-transparent focus:!bg-transparent active:!bg-transparent`
+          }
           to="/team"
         >
           Team
@@ -102,15 +92,13 @@ const NavLinks = () => {
       <li>
         <NavLink
           onClick={scrollToTop}
-          style={({ isActive, isTransitioning }) => {
-            return {
-              background: isActive ? "transparent" : "transparent",
-              // textDecoration: isActive ? "underline 2px solid #B53333" : "none",
-              fontWeight: isActive ? "bold" : "",
-              color: isActive ? "#B53333" : "white",
-              viewTransitionName: isTransitioning ? "slide" : "",
-            };
-          }}
+          className={({ isActive }) =>
+            `${
+              isActive
+                ? "text-primary-600 font-bold underline underline-offset-4 decoration-2 decoration-primary-600"
+                : "text-gray-950 dark:text-white font-semibold"
+            } bg-transparent hover:!bg-transparent focus:!bg-transparent active:!bg-transparent`
+          }
           to="/joinUs"
         >
           Join Us
@@ -119,15 +107,13 @@ const NavLinks = () => {
       <li>
         <NavLink
           onClick={scrollToTop}
-          style={({ isActive, isTransitioning }) => {
-            return {
-              background: isActive ? "transparent" : "transparent",
-              // textDecoration: isActive ? "underline 2px solid #B53333" : "none",
-              fontWeight: isActive ? "bold" : "",
-              color: isActive ? "#B53333" : "white",
-              viewTransitionName: isTransitioning ? "slide" : "",
-            };
-          }}
+          className={({ isActive }) =>
+            `${
+              isActive
+                ? "text-primary-600 font-bold underline underline-offset-4 decoration-2 decoration-primary-600"
+                : "text-gray-950 dark:text-white font-semibold"
+            } bg-transparent hover:!bg-transparent focus:!bg-transparent active:!bg-transparent`
+          }
           to="/contactUs"
         >
           Contact Us
@@ -136,15 +122,13 @@ const NavLinks = () => {
       <li>
         <NavLink
           onClick={scrollToTop}
-          style={({ isActive, isTransitioning }) => {
-            return {
-              background: isActive ? "transparent" : "transparent",
-              // textDecoration: isActive ? "underline 2px solid #B53333" : "none",
-              fontWeight: isActive ? "bold" : "",
-              color: isActive ? "#B53333" : "white",
-              viewTransitionName: isTransitioning ? "slide" : "",
-            };
-          }}
+          className={({ isActive }) =>
+            `${
+              isActive
+                ? "text-primary-600 font-bold underline underline-offset-4 decoration-2 decoration-primary-600"
+                : "text-gray-950 dark:text-white font-semibold"
+            } bg-transparent hover:!bg-transparent focus:!bg-transparent active:!bg-transparent`
+          }
           to="/news"
         >
           News and Updates

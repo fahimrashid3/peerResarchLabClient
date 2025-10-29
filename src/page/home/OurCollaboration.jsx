@@ -19,7 +19,7 @@ const OurCollaboration = () => {
         subHeading="Our Collaboration Partners"
       />
 
-      <div className="bg-dark-200 dark:bg-dark-900 rounded-xl py-5 max-w-[95%] md:max-w-[90%] lg:max-w-[85%] mx-auto">
+      <div className="bg-dark-300 dark:bg-dark-900 rounded-xl py-5 max-w-[95%] md:max-w-[90%] lg:max-w-[85%] mx-auto">
         {isLoading ? (
           <div className="flex justify-center items-center h-24">
             <p className="text-gray-500">Loading collaborators...</p>
