@@ -1,7 +1,7 @@
 import React from "react";
 import { Helmet } from "react-helmet";
 import useResearchPapers from "../../hooks/useResearchPapers";
-import Loading from "../../components/Loading";
+import PunlicationSkeliton from "../../skeliton/punlicationSkeliton";
 import PublicationsCard from "./PublicationCard";
 import ScrollToTop from "../../components/ScrollToTop";
 import useInfo from "../../hooks/useInfo";
@@ -14,7 +14,7 @@ const Publications = () => {
   const [info] = useInfo();
 
   if (researchPaperLoading) {
-    return <Loading />;
+    return <PunlicationSkeliton />;
   }
 
   const [firstPaper, ...otherPapers] = researchPaper || [];

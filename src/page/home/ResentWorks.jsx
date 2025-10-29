@@ -2,6 +2,7 @@ import SectionTitle from "../../components/SectionTitle";
 import { Link } from "react-router-dom";
 import ShortCard from "../../components/ShortCard";
 import useFetchData from "../../hooks/useFetchData";
+import RecentWorksSkeleton from "../../skeliton/RecentWorksSkeleton";
 
 const RecentWorks = () => {
   const scrollToTop = () => {
@@ -24,12 +25,7 @@ const RecentWorks = () => {
       ></SectionTitle>
 
       {/* Loading State */}
-      {(isLoading || isPending) && (
-        <div className="text-center py-10">
-          <div className="loading loading-spinner loading-lg text-primary"></div>
-          <p className="text-gray-500 mt-4">Loading recent works...</p>
-        </div>
-      )}
+      {(isLoading || isPending) && <RecentWorksSkeleton />}
 
       {/* Data Display */}
       {!isLoading &&
