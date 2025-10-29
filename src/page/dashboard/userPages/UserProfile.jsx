@@ -534,44 +534,44 @@ const UserProfile = () => {
               </div>
             </div>
 
-            {/* Action Buttons */}
-            <div className="flex flex-col sm:flex-row justify-center gap-4 pt-6 border-t border-gray-200 dark:border-gray-700">
-              {isEditing ? (
-                <>
-                  <button
-                    type="submit"
-                    className="btn btn-primary text-white px-8 shadow-lg hover:shadow-xl transition-all"
-                  >
-                    Save Changes
-                  </button>
-                  <button
-                    type="button"
-                    onClick={handleCancel}
-                    className="btn btn-outline px-8"
-                  >
-                    Cancel
-                  </button>
-                </>
-              ) : (
-                <>
-                  <button
-                    type="button"
-                    onClick={handleEditClick}
-                    className="btn btn-primary text-white px-8 shadow-lg hover:shadow-xl transition-all"
-                  >
-                    Edit Profile
-                  </button>
-                  <button
-                    type="button"
-                    onClick={handelLogout}
-                    className="btn btn-error text-white px-8"
-                  >
-                    Logout
-                  </button>
-                </>
-              )}
-            </div>
+            {/* Action Buttons - only show Save/Cancel inside the form while editing */}
+            {isEditing && (
+              <div className="flex flex-col sm:flex-row justify-center gap-4 pt-6 border-t border-gray-200 dark:border-gray-700">
+                <button
+                  type="submit"
+                  className="btn btn-primary text-white px-8 shadow-lg hover:shadow-xl transition-all"
+                >
+                  Save Changes
+                </button>
+                <button
+                  type="button"
+                  onClick={handleCancel}
+                  className="btn btn-outline px-8"
+                >
+                  Cancel
+                </button>
+              </div>
+            )}
           </form>
+          {/* Non-editing actions outside the form to avoid unintended submissions */}
+          {!isEditing && (
+            <div className="flex flex-col sm:flex-row justify-center gap-4 pt-6 border-t border-gray-200 dark:border-gray-700">
+              <button
+                type="button"
+                onClick={handleEditClick}
+                className="btn btn-primary text-white px-8 shadow-lg hover:shadow-xl transition-all"
+              >
+                Edit Profile
+              </button>
+              <button
+                type="button"
+                onClick={handelLogout}
+                className="btn btn-error text-white px-8"
+              >
+                Logout
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </div>
