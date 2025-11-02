@@ -135,7 +135,7 @@ const JoinUsSectionDesign = ({ data }) => {
   };
 
   return (
-    <div className="border p-10 m-10 rounded-lg shadow-md">
+    <div className="border border-primary-300 p-10 m-10 rounded-lg shadow-md">
       <div className="flex flex-col lg:flex-row justify-between gap-10 items-center">
         <div className="space-y-4">
           <p className="italic font-bold text-xl text-primary-700">{role}</p>

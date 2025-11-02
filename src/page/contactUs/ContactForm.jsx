@@ -69,7 +69,7 @@ const ContactForm = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <label className="form-control w-full lg:px-16 md:px-10 px-5 mx-auto">
+      <label className="form-control w-full px-5 mx-auto">
         <div className="label">
           <span className="label-text">Name</span>
         </div>
@@ -81,7 +81,7 @@ const ContactForm = () => {
         />
         {errors.name && <span className="text-red-500">Name is required</span>}
       </label>
-      <label className="form-control w-full lg:px-16 md:px-10 px-5 mx-auto">
+      <label className="form-control w-full px-5 mx-auto">
         <div className="label">
           <span className="label-text">Phone number</span>
         </div>
@@ -95,7 +95,7 @@ const ContactForm = () => {
           <span className="text-red-500">Phone number is required</span>
         )}
       </label>
-      <label className="form-control w-full lg:px-16 md:px-10 px-5 mx-auto">
+      <label className="form-control w-full px-5 mx-auto">
         <div className="label">
           <span className="label-text">Email address</span>
         </div>
@@ -111,22 +111,20 @@ const ContactForm = () => {
           <span className="text-red-500">Email address is required</span>
         )}
       </label>
-      <div className="lg:px-16 md:px-10 px-5 mx-auto">
-        <label>
-          <div className="label">
-            <span className="label-text">Type Your Message</span>
-          </div>
-          <textarea
-            {...register("message", { required: true })}
-            placeholder="Message"
-            className="w-full lg:h-60 md:h-40 h-28 px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 transition-colors"
-          ></textarea>
-          {errors.message && (
-            <span className="text-red-500">Message is required</span>
-          )}
-        </label>
-      </div>
-      <div className="flex justify-center lg:px-16 md:px-10 px-5 mx-auto">
+      <label className="form-control w-full px-5 mx-auto">
+        <div className="label">
+          <span className="label-text">Type Your Message</span>
+        </div>
+        <textarea
+          {...register("message", { required: true })}
+          placeholder="Message"
+          className="w-full lg:h-60 md:h-40 h-28 px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 transition-colors"
+        ></textarea>
+        {errors.message && (
+          <span className="text-red-500">Message is required</span>
+        )}
+      </label>
+      <div className="flex justify-center w-full px-5 pt-5 mx-auto">
         <button
           type="submit"
           disabled={isSubmitting}

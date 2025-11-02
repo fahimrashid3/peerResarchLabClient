@@ -14,7 +14,7 @@ const JoinUs = () => {
   }, [axiosPublic]);
 
   return (
-    <div className="pt-20">
+    <div className="pt-20 max-w-7xl mx-auto">
       <Helmet>
         <title>Join Us - Peer Research Lab</title>
         <meta

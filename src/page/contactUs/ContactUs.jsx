@@ -62,7 +62,7 @@ const ContactUs = () => {
           content="Get in touch with Peer Research Lab. Contact us via phone, email, social media, or visit our office. We're here to help with your research inquiries and collaboration opportunities."
         />
       </Helmet>
-      <div className="mt-6 md:mt-10">
+      <div className="mt-6 md:mt-10 max-w-7xl mx-auto justify-center">
         {/* <SectionTitle heading="Contact Form" subHeading="Send Us a Message" /> */}
         <div className="py-5 md:py-14 lg:py-20 space-y-5 md:flex md:flex-row-reverse">
           <div className="flex-1 pl-10">
@@ -175,7 +175,7 @@ const ContactUs = () => {
             </div>
           </div>
           <div className="flex-1">
-            <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 border border-gray-200 dark:border-gray-700">
+            <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-5 border border-gray-200 dark:border-gray-700">
               <h1 className="font-semibold text-2xl mb-4 text-primary-800 dark:text-primary-200">
                 Send a message
               </h1>
