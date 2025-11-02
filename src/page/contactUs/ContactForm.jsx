@@ -1,22 +1,28 @@
 import { useNavigate } from "react-router-dom";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 import useAuth from "../../hooks/useAuth";
-import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useForm } from "react-hook-form";
 import { FaPaperPlane } from "react-icons/fa";
 import Swal from "sweetalert2";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const ContactForm = () => {
   const { user } = useAuth();
-  const axiosSecure = useAxiosSecure();
+  const axiosPublic = useAxiosPublic();
   const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const {
     register,
     handleSubmit,
-    // watch,
+    setValue,
     formState: { errors },
   } = useForm();
+
+  useEffect(() => {
+    if (user?.email) {
+      setValue("email", user.email);
+    }
+  }, [user, setValue]);
   // TODO: save the data in the data base
   const onSubmit = async (data) => {
     const contactSMSInfo = { data };
@@ -33,7 +39,7 @@ const ContactForm = () => {
       });
 
       if (result.isConfirmed) {
-        const res = await axiosSecure.post("/contacts", contactSMSInfo);
+        const res = await axiosPublic.post("/contacts", contactSMSInfo);
         if (res.data.insertedId) {
           Swal.fire({
             position: "top-end",
@@ -60,13 +66,6 @@ const ContactForm = () => {
       setIsSubmitting(false);
     }
   };
-  if (!user) {
-    return (
-      <div>
-        <Loading></Loading>
-      </div>
-    );
-  }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -96,22 +95,22 @@ const ContactForm = () => {
           <span className="text-red-500">Phone number is required</span>
         )}
       </label>
-      {/* <label className="form-control w-full lg:px-16 md:px-10 px-5 mx-auto">
+      <label className="form-control w-full lg:px-16 md:px-10 px-5 mx-auto">
         <div className="label">
           <span className="label-text">Email address</span>
         </div>
         <input
-          disabled
-          {...register("email")}
+          {...register("email", { required: !user?.email })}
           type="email"
           placeholder="Email address"
-          value={user.email}
-          className="input input-bordered w-full "
+          defaultValue={user?.email || ""}
+          disabled={!!user?.email}
+          className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 transition-colors disabled:bg-gray-100 dark:disabled:bg-gray-800 disabled:cursor-not-allowed"
         />
         {errors.email && (
           <span className="text-red-500">Email address is required</span>
         )}
-      </label> */}
+      </label>
       <div className="lg:px-16 md:px-10 px-5 mx-auto">
         <label>
           <div className="label">

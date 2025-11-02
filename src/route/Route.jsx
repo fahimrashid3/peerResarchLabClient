@@ -95,11 +95,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/contactUs",
-        element: (
-          <PrivetRoute>
-            <ContactUs />
-          </PrivetRoute>
-        ),
+        element: <ContactUs />,
       },
       {
         path: "/registration",
