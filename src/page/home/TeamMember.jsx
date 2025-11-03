@@ -27,11 +27,15 @@ const TeamMember = () => {
         heading={"Team Members"}
         subHeading={"Brains behind it"}
       ></SectionTitle>
-      <div className="bg-dark-200 dark:bg-dark-900 max-w-7xl mx-auto p-5 rounded-xl">
+      <div className="bg-gray-100 dark:bg-gray-900 max-w-7xl mx-auto p-5 rounded-xl">
         {teamLoading ? (
-          <p className="text-center mt-10 text-gray-500">Loading team...</p>
+          <p className="text-center mt-10 text-gray-500 dark:text-gray-300">
+            Loading team...
+          </p>
         ) : members.length === 0 ? (
-          <p className="text-center mt-10 text-gray-500">No advisors found.</p>
+          <p className="text-center mt-10 text-gray-500 dark:text-gray-300">
+            No advisors found.
+          </p>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 max-w-7xl mx-auto gap-5 ">
             {members.map((member) => (

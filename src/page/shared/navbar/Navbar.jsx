@@ -21,8 +21,11 @@ import {
   MdOutlinePendingActions,
 } from "react-icons/md";
 import { FaUserGroup } from "react-icons/fa6";
+import { BsMoonStars, BsSun } from "react-icons/bs";
+import useTheme from "../../../hooks/useTheme";
 
 const Navbar = () => {
+  const { theme, toggleTheme } = useTheme();
   const { user, logOut } = useAuth();
   const [users] = useUsers();
   const [isAdmin, isAdminLoading] = useAdmin();
@@ -131,6 +134,14 @@ const Navbar = () => {
             </ul>
           </div>
           <div className="navbar-end">
+            {/* Theme toggle */}
+            <button
+              aria-label="Toggle theme"
+              onClick={toggleTheme}
+              className="btn btn-ghost text-xl mr-2 text-gray-950 dark:text-white"
+            >
+              {theme === "dark" ? <BsSun /> : <BsMoonStars />}
+            </button>
             {user ? (
               <div className="dropdown dropdown-end">
                 <div

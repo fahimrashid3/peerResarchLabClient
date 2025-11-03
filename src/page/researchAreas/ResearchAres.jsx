@@ -27,7 +27,7 @@ const ResearchAres = () => {
   );
 
   return (
-    <div className="pt-24 mx-auto">
+    <div className="py-24 mx-auto ">
       <Helmet>
         <title>Research Areas - Peer Research Lab</title>
         <meta
@@ -60,9 +60,12 @@ const ResearchAres = () => {
       {isLoading ? (
         renderSkeleton()
       ) : (
-        <div className="grid lg:grid-cols-2 grid-cols-1 gap-5 rounded-lg max-w-[95%] md:max-w-[90%] lg:max-w-[85%] mx-auto">
+        <div className="grid bg-gray-900 p-2 md:p-5 lg:p-10 lg:grid-cols-2 grid-cols-1 gap-5 rounded-lg max-w-[95%] md:max-w-[90%] lg:max-w-[85%] mx-auto">
           {researchArea.map((area) => (
-            <div key={area._id} className="hero bg-base-200 rounded-lg">
+            <div
+              key={area._id}
+              className="hero rounded-lg bg-gray-200 dark:bg-gray-950 text-gray-200"
+            >
               <div className="hero-content flex-col md:flex-row ">
                 <img
                   src={area.image}

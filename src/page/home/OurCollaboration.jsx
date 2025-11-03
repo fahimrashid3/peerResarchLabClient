@@ -19,7 +19,7 @@ const OurCollaboration = () => {
         subHeading="Our Collaboration Partners"
       />
 
-      <div className="bg-dark-300 dark:bg-dark-900 rounded-xl py-5 max-w-[95%] md:max-w-[90%] lg:max-w-[85%] mx-auto">
+      <div className="bg-dark-300 dark:bg-gray-900 rounded-xl py-5 max-w-[95%] md:max-w-[90%] lg:max-w-[85%] mx-auto">
         {isLoading ? (
           <div className="flex justify-center items-center h-24">
             <p className="text-gray-500">Loading collaborators...</p>
@@ -39,7 +39,7 @@ const OurCollaboration = () => {
           >
             {collaborators.map((item, index) => (
               <SwiperSlide key={index}>
-                <div className="bg-dark-200 dark:bg-dark-800 rounded-xl h-24 flex items-center justify-center p-4 shadow-md">
+                <div className="bg-gray-100 dark:bg-gray-950 rounded-xl h-24 flex items-center justify-center p-4 shadow-md">
                   <img
                     src={item.logo}
                     alt={item.name}
@@ -56,7 +56,9 @@ const OurCollaboration = () => {
           </Swiper>
         ) : (
           <div className="flex justify-center items-center h-24">
-            <p className="text-gray-500">No collaborators found.</p>
+            <p className="text-gray-500 dark:text-gray-300">
+              No collaborators found.
+            </p>
           </div>
         )}
       </div>

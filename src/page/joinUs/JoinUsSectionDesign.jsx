@@ -135,18 +135,18 @@ const JoinUsSectionDesign = ({ data }) => {
   };
 
   return (
-    <div className="border border-primary-300 p-10 m-10 rounded-lg shadow-md">
+    <div className="p-10 m-10 rounded-lg shadow-md bg-white dark:bg-gray-950">
       <div className="flex flex-col lg:flex-row justify-between gap-10 items-center">
         <div className="space-y-4">
           <p className="italic font-bold text-xl text-primary-700">{role}</p>
-          <p className=" text-dark-900 dark:text-white">
+          <p className=" text-gray-800 dark:text-gray-100">
             <span className="font-bold text-lg">Qualifications:</span>{" "}
             {qualifications}
           </p>
-          <p className=" text-dark-900 dark:text-white">
+          <p className=" text-gray-800 dark:text-gray-100">
             <span className="font-bold text-lg">Experience:</span> {experience}
           </p>
-          <p className=" text-dark-900 dark:text-white">
+          <p className=" text-gray-800 dark:text-gray-100">
             <span className="font-bold text-lg">International Exposure:</span>{" "}
             {internationalExposure}
           </p>

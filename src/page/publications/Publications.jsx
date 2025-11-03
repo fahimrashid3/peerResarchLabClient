@@ -89,7 +89,7 @@ const Publications = () => {
         </div>
       )}
 
-      <div className="max-w-7xl mx-auto bg-dark-200 rounded-lg dark:bg-dark-900">
+      <div className="max-w-7xl mx-auto bg-dark-200 rounded-lg dark:bg-gray-900">
         {/* Other Papers */}
         <div className="grid grid-cols-[repeat(auto-fit,minmax(400px,1fr))] gap-5 pt-5">
           {otherPapers && otherPapers.length > 0 ? (

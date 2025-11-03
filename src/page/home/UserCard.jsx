@@ -20,7 +20,7 @@ const UserCard = ({ member = {} }) => {
   return (
     <div
       onClick={viewDetails}
-      className="bg-base-100 dark:bg-dark-800 shadow-sm h-36 w-96 border border-white dark:border-dark-700 flex items-center gap-3 p-2 cursor-pointer hover:shadow-primary-500 dark:hover:shadow-primary-600 transition duration-300"
+      className="bg-white dark:bg-gray-950 shadow-sm h-36 w-96 rounded-lg flex items-center gap-3 p-2 cursor-pointer hover:shadow-primary-500 dark:hover:shadow-primary-600 transition duration-300"
     >
       <figure className="w-28 h-full overflow-hidden flex-shrink-0">
         <img
@@ -35,7 +35,7 @@ const UserCard = ({ member = {} }) => {
         />
       </figure>
       <div className="flex flex-col justify-center w-full pr-2 overflow-hidden">
-        <h2 className="text-lg font-semibold leading-snug text-dark-900 dark:text-white">
+        <h2 className="text-lg font-semibold leading-snug text-gray-800 dark:text-gray-100">
           {name}
         </h2>
         <p className="text-sm text-gray-700 leading-tight line-clamp-2 dark:text-gray-300">

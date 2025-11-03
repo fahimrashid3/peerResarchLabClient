@@ -68,8 +68,11 @@ const ContactForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <label className="form-control w-full px-5 mx-auto">
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="bg-white dark:bg-gray-950"
+    >
+      <label className="form-control w-full px-5 mx-auto ">
         <div className="label">
           <span className="label-text">Name</span>
         </div>

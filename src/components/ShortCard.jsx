@@ -22,7 +22,7 @@ const ShortCard = ({ researchPaper }) => {
     >
       <div
         className="
-      flex items-center md:p-5 p-3 my-3 md:my-0 bg-white text-dark-900 dark:bg-dark-800 dark:text-white shadow-xl rounded-lg h-48 "
+      flex items-center md:p-5 p-3 my-3 md:my-0 bg-white text-dark-900 dark:bg-gray-950 dark:text-gray-100 shadow-xl rounded-lg h-48 "
       >
         {/* Fixed height */}
         <figure className="flex-shrink-0 border-2 rounded-lg">

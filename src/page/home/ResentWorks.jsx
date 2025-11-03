@@ -32,7 +32,10 @@ const RecentWorks = () => {
         !isPending &&
         researchPapers &&
         researchPapers.length > 0 && (
-          <div className="md:grid lg:grid-cols-2 gap-5 max-w-[95%] md:max-w-[90%] lg:max-w-[85%] mx-auto bg-dark-200 dark:bg-dark-900 p-10 rounded-2xl">
+          <div
+            className="
+          md:grid lg:grid-cols-2 gap-5 max-w-[95%] dark:bg-gray-900 bg-gray-100 md:max-w-[90%] lg:max-w-[85%] mx-auto p-10 rounded-2xl"
+          >
             {researchPapers.map((researchPaper) => (
               <ShortCard
                 key={researchPaper._id}
@@ -47,7 +50,9 @@ const RecentWorks = () => {
         !isPending &&
         (!researchPapers || researchPapers.length === 0) && (
           <div className="text-center py-10">
-            <p className="text-gray-500 mb-4">No recent works found.</p>
+            <p className="text-gray-500 dark:text-gray-300 mb-4">
+              No recent works found.
+            </p>
             <button
               onClick={() => refetch()}
               className="btn btn-sm btn-primary"

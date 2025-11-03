@@ -39,8 +39,8 @@ const PublicationsCard = ({ paper }) => {
   return (
     <Link to={`/paper/${_id}`} className="block">
       <div
-        className="mb-10 border border-white dark:border-dark-700 space-y-5 p-5 rounded-lg w-96 h-[500px] card 
-      bg-base-100 dark:bg-dark-800 shadow-sm hover:shadow-primary-500 dark:hover:shadow-primary-600 hover:shadow-2xl transition duration-300 cursor-pointer overflow-hidden"
+        className="mb-10 border border-white dark:border-gray-700 space-y-5 p-5 rounded-lg w-96 h-[500px] card 
+      bg-white dark:bg-gray-950 shadow-sm hover:shadow-primary-500 dark:hover:shadow-primary-600 hover:shadow-2xl transition duration-300 cursor-pointer overflow-hidden"
       >
         <figure className="h-72 w-[345px]">
           <img

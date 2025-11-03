@@ -38,7 +38,7 @@ const ContactUs = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 pt-24 text-dark-900 dark:text-white">
+    <div className="min-h-screen bg-gray-100 dark:bg-gray-950 p-2 md:p-5 lg:p-10 text-gray-800 dark:text-gray-100">
       <Helmet>
         <title>Contact Us - Peer Research Lab</title>
         <meta
@@ -62,14 +62,14 @@ const ContactUs = () => {
           content="Get in touch with Peer Research Lab. Contact us via phone, email, social media, or visit our office. We're here to help with your research inquiries and collaboration opportunities."
         />
       </Helmet>
-      <div className="mt-6 md:mt-10 max-w-7xl mx-auto justify-center">
+      <div className="mt-6 md:mt-10 bg-gray-200 dark:bg-gray-900 p-2 md:p-5 lg:p-10 max-w-7xl mx-auto justify-center">
         {/* <SectionTitle heading="Contact Form" subHeading="Send Us a Message" /> */}
         <div className="py-5 md:py-14 lg:py-20 space-y-5 md:flex md:flex-row-reverse">
           <div className="flex-1 pl-10">
             <div className="max-w-md space-y-6 text-gray-800">
               {/* Chat Section */}
               <div>
-                <h3 className="font-semibold text-lg text-dark-900 dark:text-white">
+                <h3 className="font-semibold text-lg text-gray-800 dark:text-gray-100">
                   Chat with us
                 </h3>
                 <p className="text-sm text-gray-600 dark:text-gray-300 text-justify">
@@ -121,7 +121,7 @@ const ContactUs = () => {
 
               {/* Call Section */}
               <div>
-                <h3 className="font-semibold text-lg text-dark-900 dark:text-white">
+                <h3 className="font-semibold text-lg text-gray-800 dark:text-gray-100">
                   Contact us
                 </h3>
                 <p className="text-sm text-gray-600 dark:text-gray-300">
@@ -152,7 +152,7 @@ const ContactUs = () => {
 
               {/* Visit Section */}
               <div>
-                <h3 className="font-semibold text-lg text-dark-900 dark:text-white">
+                <h3 className="font-semibold text-lg text-gray-800 dark:text-gray-100">
                   Visit us
                 </h3>
                 <p className="text-sm text-gray-600 dark:text-gray-300">
@@ -175,7 +175,7 @@ const ContactUs = () => {
             </div>
           </div>
           <div className="flex-1">
-            <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-5 border border-gray-200 dark:border-gray-700">
+            <div className="bg-white dark:bg-gray-950 rounded-2xl shadow-xl p-5 border border-gray-200 dark:border-gray-700">
               <h1 className="font-semibold text-2xl mb-4 text-primary-800 dark:text-primary-200">
                 Send a message
               </h1>
