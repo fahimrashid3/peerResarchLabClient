@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 
 const Bar = ({ className = "" }) => (
@@ -6,17 +7,17 @@ const Bar = ({ className = "" }) => (
   />
 );
 
-const CardSkeleton = () => (
-  <div className="rounded-2xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 overflow-hidden shadow-sm">
-    <div className="aspect-video w-full animate-pulse bg-gray-200 dark:bg-gray-700" />
-    <div className="p-4 space-y-3">
-      <Bar className="h-6 w-3/4" />
+const WorkCardSkeleton = () => (
+  <div className="flex gap-4 p-4 bg-gray-100 dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 animate-pulse">
+    {/* Thumbnail */}
+    <div className="w-24 h-24 md:w-28 md:h-28 rounded-lg bg-gray-300 dark:bg-gray-700 flex-shrink-0" />
+
+    {/* Text part */}
+    <div className="flex-1 space-y-3">
+      <Bar className="h-5 w-3/4" />
       <Bar className="h-4 w-full" />
       <Bar className="h-4 w-5/6" />
-      <div className="flex gap-2 pt-2">
-        <Bar className="h-6 w-20 rounded-full" />
-        <Bar className="h-6 w-24 rounded-full" />
-      </div>
+      <Bar className="h-3 w-1/2 mt-3" />
     </div>
   </div>
 );
@@ -24,8 +25,8 @@ const CardSkeleton = () => (
 const RecentWorksSkeleton = () => {
   return (
     <div className="md:grid lg:grid-cols-2 gap-5 max-w-[95%] md:max-w-[90%] lg:max-w-[85%] mx-auto bg-dark-200 dark:bg-dark-900 p-10 rounded-2xl">
-      {Array.from({ length: 4 }).map((_, idx) => (
-        <CardSkeleton key={idx} />
+      {Array.from({ length: 6 }).map((_, idx) => (
+        <WorkCardSkeleton key={idx} />
       ))}
     </div>
   );
