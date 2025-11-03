@@ -15,7 +15,7 @@ const News = () => {
   }
 
   // Show a message if no news is found
-  if (news.length === 0) {
+  if (!Array.isArray(news) || news.length === 0) {
     return (
       <div className="text-center pt-20 text-xl text-gray-500">
         No news found.
@@ -55,9 +55,10 @@ const News = () => {
         />
       </Helmet>
       <div className="px-5 space-y-5">
-        {news.map((singleNews) => (
-          <NewsCart key={singleNews._id} singleNews={singleNews} />
-        ))}
+        {Array.isArray(news) &&
+          news.map((singleNews) => (
+            <NewsCart key={singleNews._id} singleNews={singleNews} />
+          ))}
       </div>
       <ScrollToTop />
     </div>
