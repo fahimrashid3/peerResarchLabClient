@@ -10,8 +10,10 @@ import {
   updateProfile,
   sendEmailVerification,
 } from "firebase/auth";
-import { app } from "../firebase/firebase.config";
+
 import useAxiosPublic from "../hooks/useAxiosPublic";
+import { app } from "../firebase/firebase.config";
+
 export const authContext = createContext(null);
 
 const AuthProvider = ({ children }) => {
