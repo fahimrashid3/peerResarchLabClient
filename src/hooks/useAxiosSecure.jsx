@@ -53,14 +53,24 @@ const setupInterceptors = (logOut, navigate) => {
         const url = error.config?.url || "unknown endpoint";
 
         // Handle 401 Unauthorized - token expired or invalid
+        // Only logout if it's not a JWT token generation request (which uses axiosPublic anyway)
+        // and if the user is actually logged out or token is truly invalid
         if (status === 401) {
-          localStorage.removeItem("access-token");
-          if (logOut) {
-            logOut();
+          const token = localStorage.getItem("access-token");
+          // Check if token exists - if it does but we got 401, it might be expired
+          // If no token exists, don't logout - user might be in the process of getting one
+          if (token) {
+            // Token exists but invalid - likely expired
+            localStorage.removeItem("access-token");
+            // Only logout if we're not already on login page
+            if (navigate && window.location.pathname !== "/login") {
+              if (logOut) {
+                logOut();
+              }
+              navigate("/login");
+            }
           }
-          if (navigate) {
-            navigate("/login");
-          }
+          // If no token exists, don't logout - might be getting token
         }
 
         // Only log actual HTTP errors, not network errors

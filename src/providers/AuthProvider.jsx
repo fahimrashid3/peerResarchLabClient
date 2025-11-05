@@ -72,20 +72,30 @@ const AuthProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       setUser(currentUser);
       if (currentUser) {
         //  get token and store in client side
-        const userInfo = { email: currentUser.email };
-        axiosPublic.post("/jwt", userInfo).then((res) => {
+        try {
+          setLoading(true); // Keep loading true while fetching token
+          const userInfo = { email: currentUser.email };
+          const res = await axiosPublic.post("/jwt", userInfo);
           if (res.data.token) {
             localStorage.setItem("access-token", res.data.token);
+          } else {
+            console.error("JWT token not received from server");
           }
-        });
+        } catch (error) {
+          console.error("Error getting JWT token:", error);
+          // Don't logout user if JWT endpoint fails - they're still authenticated with Firebase
+          // Only log the error and continue
+        } finally {
+          setLoading(false);
+        }
       } else {
         localStorage.removeItem("access-token");
+        setLoading(false);
       }
-      setLoading(false);
     });
     return () => {
       return unsubscribe;
