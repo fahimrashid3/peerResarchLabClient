@@ -7,35 +7,23 @@ const NavLinks = () => {
       behavior: "smooth",
     });
   };
+
+  const getLinkClass = ({ isActive }) =>
+    [
+      "font-semibold transition-colors duration-150 bg-transparent hover:bg-transparent focus:bg-transparent active:bg-transparent",
+      isActive
+        ? "text-primary-600 dark:text-primary-400 underline underline-offset-4 decoration-2 decoration-primary-600 hover:text-primary-700 focus:text-primary-700"
+        : "text-gray-950 dark:text-white hover:text-primary-700 focus:text-primary-700",
+    ].join(" ");
   return (
     <>
       <li>
-        <NavLink
-          onClick={scrollToTop}
-          className={({ isActive }) =>
-            `${
-              isActive
-                ? "text-primary-600 font-bold underline underline-offset-4 decoration-2 decoration-primary-600 hover:text-primary-700"
-                : "text-gray-950 dark:text-white font-semibold"
-            } bg-transparent hover:!bg-transparent focus:!bg-transparent active:!bg-transparent`
-          }
-          to="/"
-        >
+        <NavLink onClick={scrollToTop} className={getLinkClass} to="/">
           Home
         </NavLink>
       </li>
       <li>
-        <NavLink
-          onClick={scrollToTop}
-          className={({ isActive }) =>
-            `${
-              isActive
-                ? "text-primary-600 font-bold underline underline-offset-4 decoration-2 decoration-primary-600 hover:text-primary-700"
-                : "text-gray-950 dark:text-white font-semibold"
-            } bg-transparent hover:!bg-transparent focus:!bg-transparent active:!bg-transparent`
-          }
-          to="/aboutUs"
-        >
+        <NavLink onClick={scrollToTop} className={getLinkClass} to="/aboutUs">
           About Us
         </NavLink>
       </li>
@@ -44,13 +32,7 @@ const NavLinks = () => {
       <li>
         <NavLink
           onClick={scrollToTop}
-          className={({ isActive }) =>
-            `${
-              isActive
-                ? "text-primary-600 font-bold underline underline-offset-4 decoration-2 decoration-primary-600"
-                : "text-gray-950 dark:text-white font-semibold"
-            } bg-transparent hover:!bg-transparent focus:!bg-transparent active:!bg-transparent`
-          }
+          className={getLinkClass}
           to="/researchAreas"
         >
           Research Areas
@@ -60,13 +42,7 @@ const NavLinks = () => {
       <li>
         <NavLink
           onClick={scrollToTop}
-          className={({ isActive }) =>
-            `${
-              isActive
-                ? "text-primary-600 font-bold underline underline-offset-4 decoration-2 decoration-primary-600"
-                : "text-gray-950 dark:text-white font-semibold"
-            } bg-transparent hover:!bg-transparent focus:!bg-transparent active:!bg-transparent`
-          }
+          className={getLinkClass}
           to="/publications"
         >
           Publications and Resources
@@ -74,63 +50,23 @@ const NavLinks = () => {
       </li>
 
       <li>
-        <NavLink
-          onClick={scrollToTop}
-          className={({ isActive }) =>
-            `${
-              isActive
-                ? "text-primary-600 font-bold underline underline-offset-4 decoration-2 decoration-primary-600"
-                : "text-gray-950 dark:text-white font-semibold"
-            } bg-transparent hover:!bg-transparent focus:!bg-transparent active:!bg-transparent`
-          }
-          to="/team"
-        >
+        <NavLink onClick={scrollToTop} className={getLinkClass} to="/team">
           Team
         </NavLink>
       </li>
 
       <li>
-        <NavLink
-          onClick={scrollToTop}
-          className={({ isActive }) =>
-            `${
-              isActive
-                ? "text-primary-600 font-bold underline underline-offset-4 decoration-2 decoration-primary-600"
-                : "text-gray-950 dark:text-white font-semibold"
-            } bg-transparent hover:!bg-transparent focus:!bg-transparent active:!bg-transparent`
-          }
-          to="/joinUs"
-        >
+        <NavLink onClick={scrollToTop} className={getLinkClass} to="/joinUs">
           Join Us
         </NavLink>
       </li>
       <li>
-        <NavLink
-          onClick={scrollToTop}
-          className={({ isActive }) =>
-            `${
-              isActive
-                ? "text-primary-600 font-bold underline underline-offset-4 decoration-2 decoration-primary-600"
-                : "text-gray-950 dark:text-white font-semibold"
-            } bg-transparent hover:!bg-transparent focus:!bg-transparent active:!bg-transparent`
-          }
-          to="/contactUs"
-        >
+        <NavLink onClick={scrollToTop} className={getLinkClass} to="/contactUs">
           Contact Us
         </NavLink>
       </li>
       <li>
-        <NavLink
-          onClick={scrollToTop}
-          className={({ isActive }) =>
-            `${
-              isActive
-                ? "text-primary-600 font-bold underline underline-offset-4 decoration-2 decoration-primary-600"
-                : "text-gray-950 dark:text-white font-semibold"
-            } bg-transparent hover:!bg-transparent focus:!bg-transparent active:!bg-transparent`
-          }
-          to="/news"
-        >
+        <NavLink onClick={scrollToTop} className={getLinkClass} to="/news">
           News and Updates
         </NavLink>
       </li>

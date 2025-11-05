@@ -60,11 +60,11 @@ const ResearchAres = () => {
       {isLoading ? (
         renderSkeleton()
       ) : (
-        <div className="grid bg-gray-900 p-2 md:p-5 lg:p-10 lg:grid-cols-2 grid-cols-1 gap-5 rounded-lg max-w-[95%] md:max-w-[90%] lg:max-w-[85%] mx-auto">
+        <div className="grid bg-gray-100 dark:bg-gray-900 p-2 md:p-5 lg:p-10 lg:grid-cols-2 grid-cols-1 gap-5 rounded-lg max-w-[95%] md:max-w-[90%] lg:max-w-[85%] mx-auto">
           {researchArea.map((area) => (
             <div
               key={area._id}
-              className="hero rounded-lg bg-gray-200 dark:bg-gray-950 text-gray-200"
+              className="hero rounded-lg bg-gray-200 dark:bg-gray-950 dark:text-gray-200 text-gray-950"
             >
               <div className="hero-content flex-col md:flex-row ">
                 <img

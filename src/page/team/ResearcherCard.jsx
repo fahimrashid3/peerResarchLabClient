@@ -23,7 +23,7 @@ const ResearcherCard = ({ user = {} }) => {
     <div
       onClick={viewDetails}
       className="w-72 h-80 rounded-lg overflow-hidden 
-      bg-base-100 dark:bg-dark-800 border border-white dark:border-dark-700 
+      bg-gray-200 dark:bg-gray-900 border border-white dark:border-dark-700 
       shadow-sm hover:shadow-primary-500 dark:hover:shadow-primary-600 hover:shadow-2xl 
       transition duration-300 cursor-pointer"
     >

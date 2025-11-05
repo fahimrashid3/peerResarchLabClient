@@ -3,11 +3,10 @@ import { useNavigate } from "react-router-dom";
 import useAuth from "./useAuth";
 
 const axiosSecure = axios.create({
-  baseURL: "http://localhost:8000",
-  // withCredentials is not needed for Bearer tokens; removing avoids CORS preflights
+  // baseURL: "http://localhost:8000",
+  baseURL: "https://api.peerresearchlab.com",
 });
 
-// Track network errors to avoid console spam
 let networkErrorCount = 0;
 let lastNetworkErrorTime = 0;
 const NETWORK_ERROR_THROTTLE_MS = 5000; // Only log network errors every 5 seconds

@@ -10,7 +10,7 @@ const AdvisorCard = ({ advisor = {} }) => {
   } = advisor;
 
   return (
-    <div className="card bg-base-100 dark:bg-gray-900 border border-white dark:border-dark-700 rounded-xl shadow-sm hover:shadow-primary-500 dark:hover:shadow-primary-600 hover:shadow-2xl transition duration-300 p-5">
+    <div className="card bg-gray-200 dark:bg-gray-900 border border-white dark:border-dark-700 rounded-xl shadow-sm hover:shadow-primary-500 dark:hover:shadow-primary-600 hover:shadow-2xl transition duration-300 p-5">
       <div className="flex flex-col md:flex-row gap-6 items-center">
         {/* Advisor Image */}
         <div className="h-80 w-72 overflow-hidden rounded-lg">

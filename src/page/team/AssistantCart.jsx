@@ -22,7 +22,7 @@ const AssistantCart = ({ researchAssistant }) => {
   return (
     <div
       onClick={viewDetails}
-      className="card card-side bg-base-100 dark:bg-dark-800 border border-white dark:border-dark-700 rounded-lg shadow-sm hover:shadow-primary-500 dark:hover:shadow-primary-600 hover:shadow-2xl transition duration-300 p-3 gap-5 cursor-pointer w-full max-w-md mx-auto"
+      className="card card-side bg-gray-200 dark:bg-gray-900 border border-white dark:border-dark-700 rounded-lg shadow-sm hover:shadow-primary-500 dark:hover:shadow-primary-600 hover:shadow-2xl transition duration-300 p-3 gap-5 cursor-pointer w-full max-w-md mx-auto"
     >
       <figure className="h-28 w-32 flex-shrink-0 overflow-hidden rounded-lg">
         <img
