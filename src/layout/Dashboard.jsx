@@ -1,4 +1,6 @@
 import { NavLink, Outlet } from "react-router-dom";
+import { BsMoonStars, BsSun } from "react-icons/bs";
+import useTheme from "../hooks/useTheme";
 import { Helmet } from "react-helmet";
 import {
   FaEdit,
@@ -27,12 +29,20 @@ import useAuth from "../hooks/useAuth";
 import { GiStabbedNote } from "react-icons/gi";
 
 const DashBoard = () => {
+  const { theme, toggleTheme } = useTheme();
   const [isAdmin, isAdminLoading] = useAdmin();
   const [role, isRoleLoading] = useRole();
   const { user, logOut } = useAuth();
 
+  const baseLinkClass =
+    "rounded-md focus:outline-none focus:bg-primary-500 focus:text-white dark:focus:text-gray-950";
+  const navLinkClass = ({ isActive }) =>
+    isActive
+      ? `${baseLinkClass} bg-primary-600 text-white dark:text-gray-950`
+      : baseLinkClass;
+
   return (
-    <div className="drawer lg:drawer-open">
+    <div className="drawer lg:drawer-open min-h-screen bg-white text-gray-950 dark:bg-gray-950 dark:text-white">
       <Helmet>
         <title>Dashboard - Peer Research Lab</title>
         <meta
@@ -57,7 +67,7 @@ const DashBoard = () => {
         />
       </Helmet>
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-      <div className="drawer-content flex flex-col">
+      <div className="drawer-content flex flex-col bg-white dark:bg-gray-950">
         {/* Button for small screens */}
         <label htmlFor="my-drawer-2">
           <div
@@ -82,7 +92,7 @@ const DashBoard = () => {
           </div>
         </label>
         {/* Main Content */}
-        <div className="flex-grow p-10 overflow-y-auto h-screen">
+        <div className="flex-grow p-10 overflow-y-auto">
           <Outlet></Outlet>
         </div>
       </div>
@@ -92,12 +102,31 @@ const DashBoard = () => {
           aria-label="close sidebar"
           className="drawer-overlay"
         ></label>
-        <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
+        <ul className="menu bg-gray-200 dark:bg-gray-800  text-gray-950 dark:text-white min-h-full w-80 p-4">
+          {/* Sidebar Header with Theme Switch */}
+          <li className="mb-2">
+            <div className="flex items-center justify-between">
+              <span className="text-lg font-semibold">Dashboard</span>
+              <button
+                type="button"
+                onClick={toggleTheme}
+                className="btn btn-ghost btn-sm"
+                aria-label="Toggle theme"
+                title={
+                  theme === "dark"
+                    ? "Switch to light mode"
+                    : "Switch to dark mode"
+                }
+              >
+                {theme === "dark" ? <BsSun /> : <BsMoonStars />}
+              </button>
+            </div>
+          </li>
           {/* Conditional Navigation */}
           {user && (
             <>
               <li>
-                <NavLink to="userProfile">
+                <NavLink to="userProfile" className={navLinkClass}>
                   <span className="text-xl">
                     <CgProfile />
                   </span>
@@ -105,7 +134,7 @@ const DashBoard = () => {
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/dashboard/pendingPaper">
+                <NavLink to="/dashboard/pendingPaper" className={navLinkClass}>
                   <span className="text-xl">
                     <MdOutlinePendingActions />
                   </span>
@@ -113,7 +142,7 @@ const DashBoard = () => {
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/dashboard/myContacts">
+                <NavLink to="/dashboard/myContacts" className={navLinkClass}>
                   <span className="text-xl">
                     <FaEnvelope />
                   </span>
@@ -126,7 +155,7 @@ const DashBoard = () => {
           {user && !role && (
             <>
               <li>
-                <NavLink to="/dashboard/myApplication">
+                <NavLink to="/dashboard/myApplication" className={navLinkClass}>
                   <span className="text-xl">
                     <GiStabbedNote />
                   </span>
@@ -138,45 +167,51 @@ const DashBoard = () => {
           {!isAdminLoading && isAdmin && (
             <>
               <li>
-                <NavLink to="/dashboard/updateInfo">
+                <NavLink to="/dashboard/updateInfo" className={navLinkClass}>
                   <TbEyeEdit />
                   Update info
                 </NavLink>
               </li>
               <li>
-                <NavLink to="allUsers">
+                <NavLink to="allUsers" className={navLinkClass}>
                   <FaUsers /> All Users
                 </NavLink>
               </li>
               <li>
-                <NavLink to="applications">
+                <NavLink to="applications" className={navLinkClass}>
                   <FaUsers /> Manage Applications
                 </NavLink>
               </li>
               <li>
-                <NavLink to="reviewResearch">
+                <NavLink to="reviewResearch" className={navLinkClass}>
                   <VscOpenPreview /> Review Research Paper
                 </NavLink>
               </li>
               <li>
-                <NavLink to="addNews">
+                <NavLink to="addNews" className={navLinkClass}>
                   <FaRegNewspaper /> News and Update
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/dashboard/addArea">
+                <NavLink to="/dashboard/addArea" className={navLinkClass}>
                   <TbCategoryPlus />
                   Add new Research Area
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/dashboard/addCollaborators">
+                <NavLink
+                  to="/dashboard/addCollaborators"
+                  className={navLinkClass}
+                >
                   <FaUserGroup />
                   Add Collaborators
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/dashboard/manageContacts">
+                <NavLink
+                  to="/dashboard/manageContacts"
+                  className={navLinkClass}
+                >
                   <MdConnectWithoutContact />
                   Manage Contacts
                 </NavLink>
@@ -186,7 +221,7 @@ const DashBoard = () => {
           {!isRoleLoading && role && (
             <>
               <li>
-                <NavLink to="writeResearch">
+                <NavLink to="writeResearch" className={navLinkClass}>
                   <span className="text-xl">
                     <FaEdit />
                   </span>
@@ -200,43 +235,43 @@ const DashBoard = () => {
 
           {/* Shared Nav - Always displayed */}
           <li>
-            <NavLink to="/">
+            <NavLink to="/" className={navLinkClass}>
               <FaHome /> Home
             </NavLink>
           </li>
           <li>
-            <NavLink to="/aboutUs">
+            <NavLink to="/aboutUs" className={navLinkClass}>
               <FaSchoolCircleExclamation /> About us
             </NavLink>
           </li>
           <li>
-            <NavLink to="/researchAreas">
+            <NavLink to="/researchAreas" className={navLinkClass}>
               <MdSubject />
               Research Aries
             </NavLink>
           </li>
           <li>
-            <NavLink to="/publications">
+            <NavLink to="/publications" className={navLinkClass}>
               <IoNewspaperOutline /> Research and Publication
             </NavLink>
           </li>
           <li>
-            <NavLink to="/team">
+            <NavLink to="/team" className={navLinkClass}>
               <HiMiniUserGroup /> Team
             </NavLink>
           </li>
           <li>
-            <NavLink to="/joinUs">
+            <NavLink to="/joinUs" className={navLinkClass}>
               <MdOutlineGroupAdd /> Join us
             </NavLink>
           </li>
           <li>
-            <NavLink to="/contactUs">
+            <NavLink to="/contactUs" className={navLinkClass}>
               <FaPhone /> Contact Us
             </NavLink>
           </li>
           <li>
-            <NavLink to="/news">
+            <NavLink to="/news" className={navLinkClass}>
               <BsEnvelopePaper /> News and Updates
             </NavLink>
           </li>

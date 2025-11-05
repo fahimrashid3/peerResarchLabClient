@@ -1,7 +1,7 @@
 import { useForm, useFieldArray } from "react-hook-form";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 
 const AddArea = () => {
@@ -12,6 +12,7 @@ const AddArea = () => {
 
   const [isUploading, setIsUploading] = useState(false);
   const [imageFile, setImageFile] = useState(null);
+  const [previewUrl, setPreviewUrl] = useState(null);
   const [uploadError, setUploadError] = useState(null);
 
   const {
@@ -42,6 +43,16 @@ const AddArea = () => {
       setUploadError(null);
     }
   };
+
+  useEffect(() => {
+    if (!imageFile) {
+      setPreviewUrl(null);
+      return;
+    }
+    const url = URL.createObjectURL(imageFile);
+    setPreviewUrl(url);
+    return () => URL.revokeObjectURL(url);
+  }, [imageFile]);
 
   const uploadToCloudinary = async () => {
     const formData = new FormData();
@@ -100,9 +111,13 @@ const AddArea = () => {
   };
 
   return (
-    <div className="max-w-3xl mx-auto p-5">
+    <div className="max-w-3xl mx-auto p-6 bg-white dark:bg-gray-950 text-gray-950 dark:text-white rounded-lg shadow border border-gray-200 dark:border-gray-800">
       <h2 className="text-2xl font-bold mb-4">Add Research Area</h2>
-      <form onSubmit={handleSubmit(onSubmit)} encType="multipart/form-data">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        encType="multipart/form-data"
+        className="space-y-4"
+      >
         {/* Department Name */}
         <div className="mb-4">
           <label className="block font-semibold text-lg">Department Name</label>
@@ -111,7 +126,7 @@ const AddArea = () => {
             {...register("departmentName", {
               required: "Department name is required",
             })}
-            className="w-full p-2 mt-2 border rounded-md"
+            className="w-full p-2 mt-2 border rounded-md bg-white dark:bg-gray-900 text-gray-950 dark:text-white border-gray-300 dark:border-gray-700"
             placeholder="Enter department name"
             disabled={isSubmitting || isUploading}
           />
@@ -128,7 +143,7 @@ const AddArea = () => {
           <textarea
             {...register("details", { required: "Description is required" })}
             rows="6"
-            className="w-full p-2 mt-2 border rounded-md"
+            className="w-full p-2 mt-2 border rounded-md bg-white dark:bg-gray-900 text-gray-950 dark:text-white border-gray-300 dark:border-gray-700"
             placeholder="Describe the research area"
             disabled={isSubmitting || isUploading}
           />
@@ -145,14 +160,14 @@ const AddArea = () => {
           {subFields.map((field, index) => (
             <div
               key={field.id}
-              className="mb-4 border p-4 rounded-md bg-gray-50"
+              className="mb-4 border p-4 rounded-md bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-800"
             >
               <input
                 {...register(`subDepartments.${index}.name`, {
                   required: "Name is required",
                 })}
                 placeholder="Sub-department Name"
-                className="input input-bordered w-full mb-2"
+                className="input input-bordered w-full mb-2 bg-white dark:bg-gray-900 text-gray-950 dark:text-white border-gray-300 dark:border-gray-700"
               />
               <textarea
                 {...register(`subDepartments.${index}.description`, {
@@ -160,7 +175,7 @@ const AddArea = () => {
                 })}
                 placeholder="Sub-department Description"
                 rows="3"
-                className="textarea textarea-bordered w-full"
+                className="textarea textarea-bordered w-full bg-white dark:bg-gray-900 text-gray-950 dark:text-white border-gray-300 dark:border-gray-700"
               />
               <button
                 type="button"
@@ -185,13 +200,42 @@ const AddArea = () => {
           <label className="block font-semibold text-lg">
             Department Image
           </label>
-          <input
-            type="file"
-            accept="image/*"
-            onChange={handleImageChange}
-            className="w-full mt-2"
-            disabled={isSubmitting || isUploading}
-          />
+          <div className="mt-2 flex items-center gap-4">
+            <button
+              type="button"
+              onClick={() =>
+                document.getElementById("area_image_input")?.click()
+              }
+              className="btn btn-outline btn-square"
+              aria-label="Add image"
+              title="Add image"
+              disabled={isSubmitting || isUploading}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                className="w-5 h-5"
+              >
+                <path d="M12 5.25a.75.75 0 01.75.75v5.25H18a.75.75 0 010 1.5h-5.25V18a.75.75 0 01-1.5 0v-5.25H6a.75.75 0 010-1.5h5.25V6a.75.75 0 01.75-.75z" />
+              </svg>
+            </button>
+            <input
+              id="area_image_input"
+              type="file"
+              accept="image/*"
+              onChange={handleImageChange}
+              className="hidden"
+              disabled={isSubmitting || isUploading}
+            />
+            {previewUrl && (
+              <img
+                src={previewUrl}
+                alt="Department preview"
+                className="h-28 w-auto rounded-md border"
+              />
+            )}
+          </div>
           {uploadError && <p className="text-red-500">{uploadError}</p>}
         </div>
 

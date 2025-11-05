@@ -499,7 +499,7 @@ const UserProfile = () => {
               <div className="relative">
                 {isEditing ? (
                   <textarea
-                    className="w-full textarea textarea-bordered min-h-[200px] dark:bg-gray-800 dark:text-white"
+                    className="w-full textarea textarea-bordered min-h-[200px] bg-white dark:bg-gray-800 text-gray-950 dark:text-white border-gray-300 dark:border-gray-700"
                     {...register("details", {
                       maxLength: {
                         value: MAX_DETAILS_LENGTH,
@@ -605,7 +605,7 @@ const InfoField = ({
           {...register(name, {
             required: required ? `${label} is required` : false,
           })}
-          className="input input-bordered w-full dark:bg-gray-800 dark:text-white"
+          className="input input-bordered w-full bg-white dark:bg-gray-800 text-gray-950 dark:text-white border-gray-300 dark:border-gray-700"
           value={value || ""}
         />
         {errors && errors[name] && (
@@ -644,7 +644,7 @@ const SocialMediaField = ({
       <>
         <input
           {...register(name)}
-          className="input input-bordered w-full dark:bg-gray-800 dark:text-white"
+          className="input input-bordered w-full bg-white dark:bg-gray-800 text-gray-950 dark:text-white border-gray-300 dark:border-gray-700"
           placeholder={`https://${label.toLowerCase()}.com/username`}
           value={value || ""}
         />

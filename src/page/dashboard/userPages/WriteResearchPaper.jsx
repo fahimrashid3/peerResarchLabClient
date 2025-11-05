@@ -9,6 +9,52 @@ import Loading from "../../../components/Loading";
 import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import Swal from "sweetalert2";
 
+// Visually hidden native date input to open system date picker
+const HiddenDatePicker = ({ value, onChange, disabled }) => {
+  return (
+    <input
+      id="_hidden_publication_date_input"
+      type="date"
+      value={value}
+      onChange={(e) => onChange(e.target.value)}
+      className="absolute opacity-0 w-0 h-0 -z-10"
+      aria-hidden="true"
+      disabled={disabled}
+      onKeyDown={(e) => e.preventDefault()}
+      onPaste={(e) => e.preventDefault()}
+      inputMode="none"
+    />
+  );
+};
+
+// Button that triggers the hidden date input's picker
+const CalendarTrigger = ({ disabled, onOpenPicker }) => {
+  return (
+    <button
+      type="button"
+      onClick={onOpenPicker}
+      disabled={disabled}
+      className="btn btn-outline btn-square"
+      aria-label="Open date picker"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        strokeWidth={1.5}
+        stroke="currentColor"
+        className="w-5 h-5"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M6.75 3v2.25M17.25 3v2.25M3.75 8.25h16.5M4.5 7.5h15a1.5 1.5 0 011.5 1.5v9a1.5 1.5 0 01-1.5 1.5h-15A1.5 1.5 0 013 18V9a1.5 1.5 0 011.5-1.5z"
+        />
+      </svg>
+    </button>
+  );
+};
+
 const WriteResearchPaper = () => {
   const [users, loading] = useUsers();
   const axiosSecure = useAxiosSecure();
@@ -22,10 +68,12 @@ const WriteResearchPaper = () => {
     handleSubmit,
     setValue,
     control,
+    watch,
     formState: { errors, isSubmitting },
   } = useForm();
 
   const [image, setImage] = useState(null);
+  const [previewUrl, setPreviewUrl] = useState(null);
   const [error, setError] = useState(null);
   const [researchArea, setResearchArea] = useState([]);
   const [isUploading, setIsUploading] = useState(false);
@@ -44,6 +92,16 @@ const WriteResearchPaper = () => {
         setError("Failed to load research areas");
       });
   }, [axiosPublic]);
+
+  useEffect(() => {
+    if (!image) {
+      setPreviewUrl(null);
+      return;
+    }
+    const url = URL.createObjectURL(image);
+    setPreviewUrl(url);
+    return () => URL.revokeObjectURL(url);
+  }, [image]);
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -142,16 +200,20 @@ const WriteResearchPaper = () => {
   if (loading) return <Loading />;
 
   return (
-    <div className="mx-auto p-5">
-      <h2 className="text-2xl font-bold mb-4">Research Paper</h2>
-      <form onSubmit={handleSubmit(onSubmit)} encType="multipart/form-data">
+    <div className="max-w-4xl mx-auto p-6 bg-white dark:bg-gray-950 text-gray-950 dark:text-white rounded-lg">
+      <h2 className="text-3xl font-semibold mb-6">Write Research Paper</h2>
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        encType="multipart/form-data"
+        className=" rounded-lg shadow p-6 space-y-6"
+      >
         {/* Title */}
         <div className="mb-4">
           <label className="block font-semibold text-lg">Research Title</label>
           <input
             type="text"
             {...register("title", { required: "Title is required" })}
-            className="w-full p-2 mt-2 border rounded-md"
+            className="w-full p-2 mt-2 border rounded-md bg-white dark:bg-gray-900 text-gray-950 dark:text-white border-gray-300 dark:border-gray-700"
             placeholder="Enter Research title"
             disabled={isSubmitting || isUploading}
           />
@@ -161,13 +223,13 @@ const WriteResearchPaper = () => {
         </div>
 
         {/* Publisher & DOI */}
-        <div className="md:flex gap-4">
+        <div className="md:flex gap-6">
           <div className="mb-4 w-full">
             <label className="block font-semibold text-lg">Publisher</label>
             <input
               type="text"
               {...register("publisher", { required: "Publisher is required" })}
-              className="w-full p-2 mt-2 border rounded-md"
+              className="w-full p-2 mt-2 border rounded-md bg-white dark:bg-gray-900 text-gray-950 dark:text-white border-gray-300 dark:border-gray-700"
               placeholder="Enter Publisher"
               disabled={isSubmitting || isUploading}
             />
@@ -181,7 +243,7 @@ const WriteResearchPaper = () => {
             <input
               type="text"
               {...register("doi", { required: "DOI is required" })}
-              className="w-full p-2 mt-2 border rounded-md"
+              className="w-full p-2 mt-2 border rounded-md bg-white dark:bg-gray-900 text-gray-950 dark:text-white border-gray-300 dark:border-gray-700"
               placeholder="Enter DOI"
               disabled={isSubmitting || isUploading}
             />
@@ -189,29 +251,15 @@ const WriteResearchPaper = () => {
           </div>
         </div>
 
-        {/* Publication Date & Category */}
+        {/* Publication Date, Image & Category */}
         <div className="md:flex gap-4">
-          <div className="mb-4 w-full">
-            <label className="block font-semibold text-lg">
-              Date of Publication
-            </label>
-            <input
-              type="date"
-              {...register("publicationDate", { required: "Date is required" })}
-              className="w-full p-2 mt-2 border rounded-md"
-              disabled={isSubmitting || isUploading}
-            />
-            {errors.publicationDate && (
-              <p className="text-red-500">{errors.publicationDate.message}</p>
-            )}
-          </div>
-
+          {/* Left: Research Area */}
           <div className="mb-4 w-full">
             <label className="block font-semibold text-lg">Research Area</label>
             <select
               defaultValue="default"
               {...register("category", { required: true })}
-              className="select select-bordered w-full"
+              className="select select-bordered w-full bg-white dark:bg-gray-900 text-gray-950 dark:text-white border-gray-300 dark:border-gray-700"
               disabled={isSubmitting || isUploading}
             >
               <option disabled value="default">
@@ -228,6 +276,96 @@ const WriteResearchPaper = () => {
             )}
           </div>
         </div>
+        {/* Right: Date + Image Upload */}
+        <div className="mb-4 w-full">
+          <label className="block font-semibold text-lg">
+            Date of Publication
+          </label>
+          {/* Hidden form field for react-hook-form value/validation */}
+          <input
+            type="hidden"
+            {...register("publicationDate", { required: "Date is required" })}
+          />
+          {/* Visually hidden date input just to open native picker */}
+          <HiddenDatePicker
+            disabled={isSubmitting || isUploading}
+            value={watch("publicationDate") || ""}
+            onChange={(value) =>
+              setValue("publicationDate", value, { shouldValidate: true })
+            }
+          />
+          {/* Controls row */}
+          <div className="mt-3 flex items-center justify-between gap-6">
+            <div className="flex items-center gap-3">
+              <CalendarTrigger
+                disabled={isSubmitting || isUploading}
+                onOpenPicker={() => {
+                  const el = document.getElementById(
+                    "_hidden_publication_date_input"
+                  );
+                  if (el && typeof el.showPicker === "function") {
+                    el.showPicker();
+                  } else if (el) {
+                    el.focus();
+                    el.click();
+                  }
+                }}
+              />
+              <span className="text-sm text-gray-700 dark:text-gray-300">
+                {(watch("publicationDate") &&
+                  new Date(watch("publicationDate")).toLocaleDateString()) ||
+                  "Select a date"}
+              </span>
+            </div>
+            <div className="w-full max-w-sm">
+              <label className="block font-semibold text-lg">
+                Research Image
+              </label>
+              <div className="mt-2 flex items-center gap-4">
+                <button
+                  type="button"
+                  onClick={() =>
+                    document.getElementById("research_image_input")?.click()
+                  }
+                  className="btn btn-outline btn-square"
+                  disabled={isSubmitting || isUploading}
+                  aria-label="Add image"
+                  title="Add image"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    className="w-5 h-5"
+                  >
+                    <path d="M12 5.25a.75.75 0 01.75.75v5.25H18a.75.75 0 010 1.5h-5.25V18a.75.75 0 01-1.5 0v-5.25H6a.75.75 0 010-1.5h5.25V6a.75.75 0 01.75-.75z" />
+                  </svg>
+                </button>
+                <input
+                  id="research_image_input"
+                  type="file"
+                  onChange={handleImageChange}
+                  accept="image/*"
+                  className="hidden"
+                  disabled={isSubmitting || isUploading}
+                />
+                {previewUrl && (
+                  <img
+                    src={previewUrl}
+                    alt="Research preview"
+                    className="h-28 w-auto rounded-md border"
+                  />
+                )}
+              </div>
+            </div>
+          </div>
+          {error && <p className="text-red-500 mt-2">{error}</p>}
+          {errors.publicationDate && (
+            <p className="text-red-500 mt-2">
+              {errors.publicationDate.message}
+            </p>
+          )}
+        </div>
 
         {/* Authors */}
         <div className="mb-4">
@@ -235,7 +373,7 @@ const WriteResearchPaper = () => {
           {AuthorFields.map((field, index) => (
             <input
               key={field.id}
-              className="input input-bordered w-full my-2"
+              className="input input-bordered w-full my-2 bg-white dark:bg-gray-900 text-gray-950 dark:text-white border-gray-300 dark:border-gray-700"
               placeholder="author"
               {...register(`author.${index}`)}
             />
@@ -257,7 +395,7 @@ const WriteResearchPaper = () => {
           <textarea
             {...register("details", { required: "Details are required" })}
             rows="6"
-            className="w-full p-2 mt-2 border rounded-md"
+            className="w-full p-2 mt-2 border rounded-md bg-white dark:bg-gray-900 text-gray-950 dark:text-white border-gray-300 dark:border-gray-700"
             placeholder="Describe your research Abstract"
             disabled={isSubmitting || isUploading}
           />
@@ -266,18 +404,7 @@ const WriteResearchPaper = () => {
           )}
         </div>
 
-        {/* Image Upload */}
-        <div className="mb-4">
-          <label className="block font-semibold text-lg">Research Image</label>
-          <input
-            type="file"
-            onChange={handleImageChange}
-            accept="image/*"
-            className="w-full mt-2"
-            disabled={isSubmitting || isUploading}
-          />
-          {error && <p className="text-red-500">{error}</p>}
-        </div>
+        {/* Image Upload moved alongside Date of Publication */}
 
         {/* Submit */}
         <button

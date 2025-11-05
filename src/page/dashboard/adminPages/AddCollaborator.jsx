@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import Resizer from "react-image-file-resizer";
@@ -12,6 +12,7 @@ const AddCollaborator = () => {
 
   const [uploading, setUploading] = useState(false);
   const [image, setImage] = useState(null);
+  const [previewUrl, setPreviewUrl] = useState(null);
   const [error, setError] = useState(null);
 
   const {
@@ -48,6 +49,17 @@ const AddCollaborator = () => {
       setError(null);
     }
   };
+
+  // preview url
+  useEffect(() => {
+    if (!image) {
+      setPreviewUrl(null);
+      return;
+    }
+    const url = URL.createObjectURL(image);
+    setPreviewUrl(url);
+    return () => URL.revokeObjectURL(url);
+  }, [image]);
 
   const onSubmit = async (data) => {
     if (!image) {
@@ -94,7 +106,7 @@ const AddCollaborator = () => {
   };
 
   return (
-    <div className="max-w-xl mx-auto p-6 bg-white dark:bg-dark-900 rounded-xl shadow">
+    <div className="max-w-xl mx-auto p-6 bg-white dark:bg-gray-950 text-gray-950 dark:text-white rounded-xl shadow border border-gray-200 dark:border-gray-800">
       <h2 className="text-2xl font-semibold mb-6">Add Collaborator</h2>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
@@ -102,7 +114,7 @@ const AddCollaborator = () => {
           <label className="block mb-1 font-medium">University Name</label>
           <input
             {...register("name", { required: "Name is required" })}
-            className="input input-bordered w-full"
+            className="input input-bordered w-full bg-white dark:bg-gray-900 text-gray-950 dark:text-white border-gray-300 dark:border-gray-700"
             placeholder="e.g., Bangladesh University of Business and Technology"
           />
           {errors.name && (
@@ -112,18 +124,46 @@ const AddCollaborator = () => {
 
         <div>
           <label className="block mb-1 font-medium">University Logo</label>
-          <input type="file" accept="image/*" onChange={handleImageChange} />
+          <div className="mt-2 flex items-center gap-4">
+            <button
+              type="button"
+              onClick={() =>
+                document.getElementById("collab_logo_input")?.click()
+              }
+              className="btn btn-outline btn-square"
+              aria-label="Add image"
+              title="Add image"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                className="w-5 h-5"
+              >
+                <path d="M12 5.25a.75.75 0 01.75.75v5.25H18a.75.75 0 010 1.5h-5.25V18a.75.75 0 01-1.5 0v-5.25H6a.75.75 0 010-1.5h5.25V6a.75.75 0 01.75-.75z" />
+              </svg>
+            </button>
+            <input
+              id="collab_logo_input"
+              type="file"
+              accept="image/*"
+              onChange={handleImageChange}
+              className="hidden"
+            />
+            {previewUrl && (
+              <img
+                src={previewUrl}
+                alt="Logo preview"
+                className="h-20 w-auto rounded-md border"
+              />
+            )}
+          </div>
           {error && <p className="text-red-500 text-sm">{error}</p>}
         </div>
 
         <button
           type="submit"
-          className="
-          btn border-b-8 font-semibold
-           text-primary-900 hover:text-white dark:text-primary-900
-           hover:border-primary-600 border-primary-700  dark:border-primary-900 dark:hover:border-primary-700 
-           bg-primary-300 hover:bg-primary-500  dark:bg-primary-400 dark:hover:bg-primary-600 
-           transition-all duration-200"
+          className="btn w-full bg-primary-600 hover:bg-primary-700 text-white border-none"
           disabled={uploading}
         >
           {uploading ? "Uploading..." : "Add Collaborator"}

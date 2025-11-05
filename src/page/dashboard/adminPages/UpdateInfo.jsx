@@ -53,22 +53,22 @@ const UpdateInfo = () => {
   };
 
   return (
-    <div className="border rounded-lg max-w-4xl mx-auto space-y-10 md:space-y-24 pt-10 min-h-screen">
+    <div className="max-w-4xl mx-auto p-6 md:p-10 space-y-10 md:space-y-16 bg-white dark:bg-gray-950 text-gray-950 dark:text-white rounded-lg shadow border border-gray-200 dark:border-gray-800">
       {/* Basic Info */}
-      <div className="text-center space-y-2 md:space-y-3">
+      <div className="text-center space-y-4">
         <form onSubmit={handleSubmit(handleBasicInfoEdit)}>
           {!basicInfoEdit ? (
             <div className="space-y-5">
-              <h1 className="text-lg md:text-3xl font-bold text-primary-700">
+              <h1 className="text-2xl md:text-3xl font-bold text-primary-700">
                 {name}
               </h1>
-              <p className="text-lg md:text-xl">{phone}</p>
-              <p className="text-lg md:text-xl">{email}</p>
-              <p className="text-lg md:text-xl">{location}</p>
+              <p className="text-base md:text-lg">{phone}</p>
+              <p className="text-base md:text-lg">{email}</p>
+              <p className="text-base md:text-lg">{location}</p>
               <button
                 type="button"
                 onClick={() => setBasicInfoEdit(true)}
-                className="btn btn-outline border-1 border-b-8"
+                className="btn bg-primary-600 hover:bg-primary-700 text-white border-none"
               >
                 Edit
               </button>
@@ -78,34 +78,34 @@ const UpdateInfo = () => {
               <input
                 {...register("name", { required: true })}
                 defaultValue={name}
-                className="input block w-[80%] md:w-[70%] mx-auto"
+                className="input input-bordered block w-[80%] md:w-[70%] mx-auto bg-white dark:bg-gray-900 text-gray-950 dark:text-white border-gray-300 dark:border-gray-700"
               />
               <input
                 {...register("phone", { required: true })}
                 defaultValue={phone}
-                className="input block w-[80%] md:w-[70%] mx-auto"
+                className="input input-bordered block w-[80%] md:w-[70%] mx-auto bg-white dark:bg-gray-900 text-gray-950 dark:text-white border-gray-300 dark:border-gray-700"
               />
               <input
                 {...register("email", { required: true })}
                 defaultValue={email}
-                className="input block w-[80%] md:w-[70%] mx-auto"
+                className="input input-bordered block w-[80%] md:w-[70%] mx-auto bg-white dark:bg-gray-900 text-gray-950 dark:text-white border-gray-300 dark:border-gray-700"
               />
               <input
                 {...register("location", { required: true })}
                 defaultValue={location}
-                className="input block w-[80%] md:w-[70%] mx-auto"
+                className="input input-bordered block w-[80%] md:w-[70%] mx-auto bg-white dark:bg-gray-900 text-gray-950 dark:text-white border-gray-300 dark:border-gray-700"
               />
               <div className="space-x-2">
                 <button
                   type="button"
                   onClick={() => setBasicInfoEdit(false)}
-                  className="btn btn-outline border-1 border-b-8"
+                  className="btn btn-ghost"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="btn btn-outline border-1 border-b-8"
+                  className="btn bg-primary-600 hover:bg-primary-700 text-white border-none"
                 >
                   Save
                 </button>
@@ -116,8 +116,8 @@ const UpdateInfo = () => {
       </div>
 
       {/* Social Media */}
-      <div className="mt-3 space-y-2 text-center">
-        <p className="text-lg md:text-xl">Social Media Links</p>
+      <div className="mt-3 space-y-4 text-center">
+        <p className="text-lg md:text-xl font-semibold">Social Media Links</p>
         <form onSubmit={handleSubmit(handleSocialMediaEdit)}>
           {!socialMediaEdit ? (
             <div className="space-y-5">
@@ -126,7 +126,7 @@ const UpdateInfo = () => {
                 href={`${whatsApp}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex justify-center items-center gap-2 text-blue-600 hover:underline"
+                className="flex justify-center items-center gap-2 text-blue-600 dark:text-blue-400 hover:underline"
               >
                 <IoLogoWhatsapp /> <span>{whatsApp}</span>
               </a>
@@ -134,7 +134,7 @@ const UpdateInfo = () => {
                 href={facebook}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex justify-center items-center gap-2 text-blue-600 hover:underline"
+                className="flex justify-center items-center gap-2 text-blue-600 dark:text-blue-400 hover:underline"
               >
                 <FaFacebookF /> <span>{facebook}</span>
               </a>
@@ -142,7 +142,7 @@ const UpdateInfo = () => {
                 href={X}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex justify-center items-center gap-2 text-blue-600 hover:underline"
+                className="flex justify-center items-center gap-2 text-blue-600 dark:text-blue-400 hover:underline"
               >
                 <FaXTwitter /> <span>{X}</span>
               </a>
@@ -150,7 +150,7 @@ const UpdateInfo = () => {
                 href={linkedIn}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex justify-center items-center gap-2 text-blue-600 hover:underline"
+                className="flex justify-center items-center gap-2 text-blue-600 dark:text-blue-400 hover:underline"
               >
                 <FaLinkedinIn /> <span>{linkedIn}</span>
               </a>
@@ -158,7 +158,7 @@ const UpdateInfo = () => {
                 <button
                   type="button"
                   onClick={() => setSocialMediaEdit(true)}
-                  className="btn btn-outline border-1 border-b-8"
+                  className="btn bg-primary-600 hover:bg-primary-700 text-white border-none"
                 >
                   Edit
                 </button>
@@ -172,7 +172,7 @@ const UpdateInfo = () => {
                   {...register("socialMedia.whatsApp")}
                   defaultValue={whatsApp}
                   placeholder="https://wa.me/+8801405819175"
-                  className="input w-[80%] md:w-[70%]"
+                  className="input input-bordered w-[80%] md:w-[70%] bg-white dark:bg-gray-900 text-gray-950 dark:text-white border-gray-300 dark:border-gray-700"
                 />
               </div>
               <div className="flex items-center gap-2 justify-center">
@@ -180,7 +180,7 @@ const UpdateInfo = () => {
                 <input
                   {...register("socialMedia.facebook")}
                   defaultValue={facebook}
-                  className="input w-[80%] md:w-[70%]"
+                  className="input input-bordered w-[80%] md:w-[70%] bg-white dark:bg-gray-900 text-gray-950 dark:text-white border-gray-300 dark:border-gray-700"
                 />
               </div>
               <div className="flex items-center gap-2 justify-center">
@@ -188,7 +188,7 @@ const UpdateInfo = () => {
                 <input
                   {...register("socialMedia.X")}
                   defaultValue={X}
-                  className="input w-[80%] md:w-[70%]"
+                  className="input input-bordered w-[80%] md:w-[70%] bg-white dark:bg-gray-900 text-gray-950 dark:text-white border-gray-300 dark:border-gray-700"
                 />
               </div>
               <div className="flex items-center gap-2 justify-center">
@@ -196,20 +196,20 @@ const UpdateInfo = () => {
                 <input
                   {...register("socialMedia.linkedIn")}
                   defaultValue={linkedIn}
-                  className="input w-[80%] md:w-[70%]"
+                  className="input input-bordered w-[80%] md:w-[70%] bg-white dark:bg-gray-900 text-gray-950 dark:text-white border-gray-300 dark:border-gray-700"
                 />
               </div>
               <div className="flex justify-center space-x-2">
                 <button
                   type="button"
                   onClick={() => setSocialMediaEdit(false)}
-                  className="btn btn-outline border-1 border-b-8"
+                  className="btn btn-ghost"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="btn btn-outline border-1 border-b-8"
+                  className="btn bg-primary-600 hover:bg-primary-700 text-white border-none"
                 >
                   Save
                 </button>
