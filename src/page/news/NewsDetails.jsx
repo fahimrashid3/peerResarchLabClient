@@ -79,7 +79,7 @@ const NewsDetails = () => {
         </div>
 
         <h2 className="text-2xl font-bold">{title}</h2>
-        <p className="text-lg text-justify">{details}</p>
+        <p className="text-lg text-justify whitespace-pre-line">{details}</p>
 
         <Link
           to={"/publications"}
