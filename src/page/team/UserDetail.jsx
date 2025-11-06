@@ -19,7 +19,7 @@ const UserDetail = () => {
 
   return (
     <div className="flex items-center justify-center min-h-screen px-4">
-      <div className="max-w-7xl w-full mx-auto card bg-base-100 dark:bg-dark-800 border border-white dark:border-dark-700 rounded-xl shadow-sm hover:shadow-primary-500 dark:hover:shadow-primary-600 hover:shadow-2xl transition duration-300 p-5">
+      <div className="max-w-7xl w-full mx-auto card bg-gray-100 dark:bg-gray-800 border border-white dark:border-dark-700 rounded-xl shadow-sm hover:shadow-primary-500 dark:hover:shadow-primary-600 hover:shadow-2xl transition duration-300 p-5">
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Image + Basic Info */}
           <div className="lg:w-[35%] flex flex-col items-center">
