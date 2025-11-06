@@ -22,7 +22,7 @@ const ResearcherCard = ({ user = {} }) => {
   return (
     <div
       onClick={viewDetails}
-      className="w-72 h-80 rounded-lg overflow-hidden 
+      className="w-full sm:w-80 md:w-96 lg:w-96 h-[500px] rounded-lg overflow-hidden 
       bg-gray-200 dark:bg-gray-900 border border-white dark:border-dark-700 
       shadow-sm hover:shadow-primary-500 dark:hover:shadow-primary-600 hover:shadow-2xl 
       transition duration-300 cursor-pointer"

@@ -27,7 +27,7 @@ const ShortCard = ({ researchPaper }) => {
         {/* Fixed height */}
         <figure className="flex-shrink-0 border-2 rounded-lg">
           <img
-            className="h-36 w-32 rounded-lg object-cover"
+            className="h-24 w-20 md:h-36 md:w-32 rounded-lg object-cover"
             src={image}
             alt={title}
             onError={(e) => {
@@ -39,12 +39,12 @@ const ShortCard = ({ researchPaper }) => {
         </figure>
         <div className="ml-4 flex flex-col justify-center">
           <h2
-            className="lg:text-xl text-lg  font-bold line-clamp-1 text-justify"
+            className="lg:text-xl md:text-lg text-md  font-bold md:line-clamp-1 line-clamp-2 md:text-justify"
             title={title}
           >
             {title}
           </h2>
-          <p className="mt-2 text-sm line-clamp-3 text-justify">{details}</p>
+          <p className="mt-2 text-sm line-clamp-3 md:text-justify">{details}</p>
         </div>
       </div>
     </Link>

@@ -27,7 +27,15 @@ const OurCollaboration = () => {
         ) : collaborators?.length > 0 ? (
           <Swiper
             spaceBetween={30}
-            slidesPerView={4}
+            slidesPerView={2}
+            breakpoints={{
+              640: {
+                slidesPerView: 3,
+              },
+              768: {
+                slidesPerView: 4,
+              },
+            }}
             slidesPerGroup={1}
             autoplay={{
               delay: 3000,

@@ -65,8 +65,8 @@ const PaperDetails = () => {
 
   return (
     <div className="lg:pt-24 lg:max-w-[90%] max-w-[95%] mx-auto min-h-screen">
-      <div className="grid grid-cols-4 gap-5">
-        <div className="col-span-3">
+      <div className="grid grid-cols-1 lg:grid-cols-4 gap-5">
+        <div className="col-span-1 lg:col-span-3">
           <div className="border p-4 space-y-5">
             <img
               className="lg:h-96 mx-auto w-full object-cover rounded-md"
@@ -128,7 +128,7 @@ const PaperDetails = () => {
           </div>
         </div>
 
-        <div className="col-span-1 mt-5 space-y-5">
+        <div className="col-span-1 lg:col-span-1 mt-5 space-y-5">
           <h1 className="font-semibold text-xl mb-2">
             More Research from {author?.name || "Author"}
           </h1>

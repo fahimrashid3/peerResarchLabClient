@@ -34,7 +34,7 @@ const RecentWorks = () => {
         researchPapers.length > 0 && (
           <div
             className="
-          md:grid lg:grid-cols-2 gap-5 max-w-[95%] dark:bg-gray-900 bg-gray-100 md:max-w-[90%] lg:max-w-[85%] mx-auto p-10 rounded-2xl"
+          md:grid lg:grid-cols-2 gap-5 max-w-[99%] dark:bg-gray-900 bg-gray-100 md:max-w-[90%] lg:max-w-[85%] mx-auto lg:p-10 md:p-8 p-2 rounded-2xl"
           >
             {researchPapers.map((researchPaper) => (
               <ShortCard
