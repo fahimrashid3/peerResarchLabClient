@@ -135,7 +135,7 @@ const JoinUsSectionDesign = ({ data }) => {
   };
 
   return (
-    <div className="p-10 m-10 rounded-lg shadow-md bg-white dark:bg-gray-950">
+    <div className="md:p-10 md:m-10 p-2 m-2 rounded-lg shadow-md bg-white dark:bg-gray-950">
       <div className="flex flex-col lg:flex-row justify-between gap-10 items-center">
         <div className="space-y-4">
           <p className="italic font-bold text-xl text-primary-700">{role}</p>
