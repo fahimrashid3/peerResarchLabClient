@@ -351,7 +351,7 @@ const UserProfile = () => {
         </div>
 
         {/* Main Content Card */}
-        <div className="bg-white dark:bg-gray-800 rounded-b-2xl shadow-xl p-6 md:p-8 -mt-4">
+        <div className="bg-white dark:bg-gray-800 rounded-b-2xl shadow-xl p-2 md:p-6 -mt-4">
           {/* Profile Picture Section */}
           <div className="flex flex-col md:flex-row items-center md:items-start gap-6 mb-8 pb-8 border-b border-gray-200 dark:border-gray-700">
             <div className="relative">
@@ -412,7 +412,7 @@ const UserProfile = () => {
 
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
             {/* Basic Information */}
-            <div className="bg-gray-50 dark:bg-gray-700/50 rounded-lg p-6 mb-6">
+            <div className="bg-gray-50 dark:bg-gray-700/50 rounded-lg p-2 md:p-4 mb-6">
               <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
                 <FaUser className="text-primary-600" />
                 Basic Information
@@ -466,7 +466,7 @@ const UserProfile = () => {
             </div>
 
             {/* Social Media Links */}
-            <div className="bg-gray-50 dark:bg-gray-700/50 rounded-lg p-6 mb-6">
+            <div className="bg-gray-50 dark:bg-gray-700/50 rounded-lg p-2 md:p-4 mb-6">
               <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
                 <span className="text-primary-600">🔗</span>
                 Social Media
@@ -492,7 +492,7 @@ const UserProfile = () => {
             </div>
 
             {/* Details Section */}
-            <div className="bg-gray-50 dark:bg-gray-700/50 rounded-lg p-6 mb-6">
+            <div className="bg-gray-50 dark:bg-gray-700/50 rounded-lg p-2 md:p-4 mb-6">
               <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
                 About Me
               </h3>

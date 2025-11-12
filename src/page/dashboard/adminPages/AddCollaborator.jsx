@@ -106,7 +106,7 @@ const AddCollaborator = () => {
   };
 
   return (
-    <div className="max-w-xl mx-auto p-6 bg-white dark:bg-gray-950 text-gray-950 dark:text-white rounded-xl shadow border border-gray-200 dark:border-gray-800">
+    <div className="max-w-xl mx-auto md:p-6 p-2 bg-white dark:bg-gray-950 text-gray-950 dark:text-white rounded-xl shadow border border-gray-200 dark:border-gray-800">
       <h2 className="text-2xl font-semibold mb-6">Add Collaborator</h2>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">

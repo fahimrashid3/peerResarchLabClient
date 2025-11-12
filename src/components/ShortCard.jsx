@@ -18,16 +18,13 @@ const ShortCard = ({ researchPaper }) => {
     <Link
       to={`/paper/${researchPaper._id}`}
       onClick={scrollToTop}
-      className="block"
+      className="block w-full"
     >
-      <div
-        className="
-      flex items-center md:p-5 p-3 my-3 md:my-0 bg-white text-dark-900 dark:bg-gray-950 dark:text-gray-100 shadow-xl rounded-lg h-48 "
-      >
+      <div className="flex items-center w-full md:p-4 p-3 my-3 md:my-0 bg-white text-dark-900 dark:bg-gray-950 dark:text-gray-100 shadow-xl rounded-lg lg:h-48 md:h-36 h-auto min-h-[120px]">
         {/* Fixed height */}
         <figure className="flex-shrink-0 border-2 rounded-lg">
           <img
-            className="h-24 w-20 md:h-36 md:w-32 rounded-lg object-cover"
+            className="h-20 w-16 sm:h-24 sm:w-20 md:h-28 md:w-24 lg:h-32 lg:w-28 rounded-lg object-cover"
             src={image}
             alt={title}
             onError={(e) => {
@@ -37,14 +34,16 @@ const ShortCard = ({ researchPaper }) => {
             }}
           />
         </figure>
-        <div className="ml-4 flex flex-col justify-center">
+        <div className="ml-3 md:ml-4 flex flex-col justify-center flex-1 min-w-0">
           <h2
-            className="lg:text-xl md:text-lg text-md  font-bold md:line-clamp-1 line-clamp-2 md:text-justify"
+            className="text-sm sm:text-base md:text-lg lg:text-xl font-bold line-clamp-2 md:line-clamp-1 text-left"
             title={title}
           >
             {title}
           </h2>
-          <p className="mt-2 text-sm line-clamp-3 md:text-justify">{details}</p>
+          <p className="mt-1 md:mt-2 text-xs sm:text-sm md:text-sm line-clamp-2 md:line-clamp-3 text-left">
+            {details}
+          </p>
         </div>
       </div>
     </Link>

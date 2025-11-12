@@ -116,7 +116,7 @@ const AddNews = () => {
   }
 
   return (
-    <div className="max-w-4xl mx-auto p-6 bg-white dark:bg-gray-950 text-gray-950 dark:text-white rounded-lg shadow border border-gray-200 dark:border-gray-800">
+    <div className="max-w-4xl mx-auto md:p-6 p-2 bg-white dark:bg-gray-950 text-gray-950 dark:text-white rounded-lg shadow border border-gray-200 dark:border-gray-800">
       <h2 className="text-2xl font-bold mb-4">Post New Updates or News</h2>
       <form
         onSubmit={handleSubmit(onSubmit)}

@@ -72,7 +72,7 @@ const ContactForm = () => {
       onSubmit={handleSubmit(onSubmit)}
       className="bg-white dark:bg-gray-950"
     >
-      <label className="form-control w-full px-5 mx-auto ">
+      <label className="form-control w-full px-2 md:px-5 mx-auto">
         <div className="label">
           <span className="label-text">Name</span>
         </div>
@@ -84,7 +84,7 @@ const ContactForm = () => {
         />
         {errors.name && <span className="text-red-500">Name is required</span>}
       </label>
-      <label className="form-control w-full px-5 mx-auto">
+      <label className="form-control w-full px-2 md:px-5 mx-auto">
         <div className="label">
           <span className="label-text">Phone number</span>
         </div>
@@ -98,7 +98,7 @@ const ContactForm = () => {
           <span className="text-red-500">Phone number is required</span>
         )}
       </label>
-      <label className="form-control w-full px-5 mx-auto">
+      <label className="form-control w-full px-2 md:px-5 mx-auto">
         <div className="label">
           <span className="label-text">Email address</span>
         </div>
@@ -114,7 +114,7 @@ const ContactForm = () => {
           <span className="text-red-500">Email address is required</span>
         )}
       </label>
-      <label className="form-control w-full px-5 mx-auto">
+      <label className="form-control w-full px-2 md:px-5 mx-auto">
         <div className="label">
           <span className="label-text">Type Your Message</span>
         </div>
@@ -127,7 +127,7 @@ const ContactForm = () => {
           <span className="text-red-500">Message is required</span>
         )}
       </label>
-      <div className="flex justify-center w-full px-5 pt-5 mx-auto">
+      <div className="flex justify-center w-full px-2 md:px-5 pt-5 mx-auto">
         <button
           type="submit"
           disabled={isSubmitting}

@@ -27,12 +27,14 @@ import useRole from "../hooks/useRole";
 import { CgProfile } from "react-icons/cg";
 import useAuth from "../hooks/useAuth";
 import { GiStabbedNote } from "react-icons/gi";
+import { useRef } from "react";
 
 const DashBoard = () => {
   const { theme, toggleTheme } = useTheme();
   const [isAdmin, isAdminLoading] = useAdmin();
   const [role, isRoleLoading] = useRole();
   const { user, logOut } = useAuth();
+  const drawerCheckboxRef = useRef(null);
 
   const baseLinkClass =
     "rounded-md focus:outline-none focus:bg-primary-500 focus:text-white dark:focus:text-gray-950";
@@ -40,6 +42,13 @@ const DashBoard = () => {
     isActive
       ? `${baseLinkClass} bg-primary-600 text-white dark:text-gray-950`
       : baseLinkClass;
+
+  // Function to close drawer on small devices when a link is clicked
+  const closeDrawer = () => {
+    if (drawerCheckboxRef.current && window.innerWidth < 1024) {
+      drawerCheckboxRef.current.checked = false;
+    }
+  };
 
   return (
     <div className="drawer lg:drawer-open min-h-screen bg-white text-gray-950 dark:bg-gray-950 dark:text-white">
@@ -66,7 +75,12 @@ const DashBoard = () => {
           content="Access your Peer Research Lab dashboard. Manage your research papers, applications, contacts, and collaborate with our research community."
         />
       </Helmet>
-      <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
+      <input
+        id="my-drawer-2"
+        type="checkbox"
+        className="drawer-toggle"
+        ref={drawerCheckboxRef}
+      />
       <div className="drawer-content flex flex-col bg-white dark:bg-gray-950">
         {/* Button for small screens */}
         <label htmlFor="my-drawer-2">
@@ -92,7 +106,7 @@ const DashBoard = () => {
           </div>
         </label>
         {/* Main Content */}
-        <div className="flex-grow p-10 overflow-y-auto">
+        <div className="flex-grow p-1 md:p-10 overflow-y-auto">
           <Outlet></Outlet>
         </div>
       </div>
@@ -126,7 +140,11 @@ const DashBoard = () => {
           {user && (
             <>
               <li>
-                <NavLink to="userProfile" className={navLinkClass}>
+                <NavLink
+                  to="userProfile"
+                  className={navLinkClass}
+                  onClick={closeDrawer}
+                >
                   <span className="text-xl">
                     <CgProfile />
                   </span>
@@ -134,7 +152,11 @@ const DashBoard = () => {
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/dashboard/pendingPaper" className={navLinkClass}>
+                <NavLink
+                  to="/dashboard/pendingPaper"
+                  className={navLinkClass}
+                  onClick={closeDrawer}
+                >
                   <span className="text-xl">
                     <MdOutlinePendingActions />
                   </span>
@@ -142,7 +164,11 @@ const DashBoard = () => {
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/dashboard/myContacts" className={navLinkClass}>
+                <NavLink
+                  to="/dashboard/myContacts"
+                  className={navLinkClass}
+                  onClick={closeDrawer}
+                >
                   <span className="text-xl">
                     <FaEnvelope />
                   </span>
@@ -155,7 +181,11 @@ const DashBoard = () => {
           {user && !role && (
             <>
               <li>
-                <NavLink to="/dashboard/myApplication" className={navLinkClass}>
+                <NavLink
+                  to="/dashboard/myApplication"
+                  className={navLinkClass}
+                  onClick={closeDrawer}
+                >
                   <span className="text-xl">
                     <GiStabbedNote />
                   </span>
@@ -167,33 +197,57 @@ const DashBoard = () => {
           {!isAdminLoading && isAdmin && (
             <>
               <li>
-                <NavLink to="/dashboard/updateInfo" className={navLinkClass}>
+                <NavLink
+                  to="/dashboard/updateInfo"
+                  className={navLinkClass}
+                  onClick={closeDrawer}
+                >
                   <TbEyeEdit />
                   Update info
                 </NavLink>
               </li>
               <li>
-                <NavLink to="allUsers" className={navLinkClass}>
+                <NavLink
+                  to="allUsers"
+                  className={navLinkClass}
+                  onClick={closeDrawer}
+                >
                   <FaUsers /> All Users
                 </NavLink>
               </li>
               <li>
-                <NavLink to="applications" className={navLinkClass}>
+                <NavLink
+                  to="applications"
+                  className={navLinkClass}
+                  onClick={closeDrawer}
+                >
                   <FaUsers /> Manage Applications
                 </NavLink>
               </li>
               <li>
-                <NavLink to="reviewResearch" className={navLinkClass}>
+                <NavLink
+                  to="reviewResearch"
+                  className={navLinkClass}
+                  onClick={closeDrawer}
+                >
                   <VscOpenPreview /> Review Research Paper
                 </NavLink>
               </li>
               <li>
-                <NavLink to="addNews" className={navLinkClass}>
+                <NavLink
+                  to="addNews"
+                  className={navLinkClass}
+                  onClick={closeDrawer}
+                >
                   <FaRegNewspaper /> News and Update
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/dashboard/addArea" className={navLinkClass}>
+                <NavLink
+                  to="/dashboard/addArea"
+                  className={navLinkClass}
+                  onClick={closeDrawer}
+                >
                   <TbCategoryPlus />
                   Add new Research Area
                 </NavLink>
@@ -202,6 +256,7 @@ const DashBoard = () => {
                 <NavLink
                   to="/dashboard/addCollaborators"
                   className={navLinkClass}
+                  onClick={closeDrawer}
                 >
                   <FaUserGroup />
                   Add Collaborators
@@ -211,6 +266,7 @@ const DashBoard = () => {
                 <NavLink
                   to="/dashboard/manageContacts"
                   className={navLinkClass}
+                  onClick={closeDrawer}
                 >
                   <MdConnectWithoutContact />
                   Manage Contacts
@@ -221,7 +277,11 @@ const DashBoard = () => {
           {!isRoleLoading && role && (
             <>
               <li>
-                <NavLink to="writeResearch" className={navLinkClass}>
+                <NavLink
+                  to="writeResearch"
+                  className={navLinkClass}
+                  onClick={closeDrawer}
+                >
                   <span className="text-xl">
                     <FaEdit />
                   </span>
@@ -235,43 +295,63 @@ const DashBoard = () => {
 
           {/* Shared Nav - Always displayed */}
           <li>
-            <NavLink to="/" className={navLinkClass}>
+            <NavLink to="/" className={navLinkClass} onClick={closeDrawer}>
               <FaHome /> Home
             </NavLink>
           </li>
           <li>
-            <NavLink to="/aboutUs" className={navLinkClass}>
+            <NavLink
+              to="/aboutUs"
+              className={navLinkClass}
+              onClick={closeDrawer}
+            >
               <FaSchoolCircleExclamation /> About us
             </NavLink>
           </li>
           <li>
-            <NavLink to="/researchAreas" className={navLinkClass}>
+            <NavLink
+              to="/researchAreas"
+              className={navLinkClass}
+              onClick={closeDrawer}
+            >
               <MdSubject />
               Research Aries
             </NavLink>
           </li>
           <li>
-            <NavLink to="/publications" className={navLinkClass}>
+            <NavLink
+              to="/publications"
+              className={navLinkClass}
+              onClick={closeDrawer}
+            >
               <IoNewspaperOutline /> Research and Publication
             </NavLink>
           </li>
           <li>
-            <NavLink to="/team" className={navLinkClass}>
+            <NavLink to="/team" className={navLinkClass} onClick={closeDrawer}>
               <HiMiniUserGroup /> Team
             </NavLink>
           </li>
           <li>
-            <NavLink to="/joinUs" className={navLinkClass}>
+            <NavLink
+              to="/joinUs"
+              className={navLinkClass}
+              onClick={closeDrawer}
+            >
               <MdOutlineGroupAdd /> Join us
             </NavLink>
           </li>
           <li>
-            <NavLink to="/contactUs" className={navLinkClass}>
+            <NavLink
+              to="/contactUs"
+              className={navLinkClass}
+              onClick={closeDrawer}
+            >
               <FaPhone /> Contact Us
             </NavLink>
           </li>
           <li>
-            <NavLink to="/news" className={navLinkClass}>
+            <NavLink to="/news" className={navLinkClass} onClick={closeDrawer}>
               <BsEnvelopePaper /> News and Updates
             </NavLink>
           </li>

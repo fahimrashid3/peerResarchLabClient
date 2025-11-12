@@ -64,9 +64,9 @@ const ContactUs = () => {
       </Helmet>
       <div className="mt-6 md:mt-10 bg-gray-200 dark:bg-gray-900 p-2 md:p-5 lg:p-10 max-w-7xl mx-auto justify-center">
         {/* <SectionTitle heading="Contact Form" subHeading="Send Us a Message" /> */}
-        <div className="py-5 md:py-14 lg:py-20 space-y-5 md:flex md:flex-row-reverse">
-          <div className="flex-1 pl-10">
-            <div className="max-w-md space-y-6 text-gray-800">
+        <div className="py-5 md:py-14 lg:py-20 space-y-5 flex flex-col-reverse md:flex-row-reverse">
+          <div className="flex-1 md:pl-10 mt-2 md:mt-0 dark:bg-gray-950 bg-gray-100 rounded-2xl shadow-xl p-2 md:p-5 border border-gray-200 dark:border-gray-700  ">
+            <div className="max-w-md space-y-6 text-gray-900">
               {/* Chat Section */}
               <div>
                 <h3 className="font-semibold text-lg text-gray-800 dark:text-gray-100">
@@ -175,7 +175,7 @@ const ContactUs = () => {
             </div>
           </div>
           <div className="flex-1">
-            <div className="bg-white dark:bg-gray-950 rounded-2xl shadow-xl p-5 border border-gray-200 dark:border-gray-700">
+            <div className="bg-white dark:bg-gray-950 rounded-2xl shadow-xl p-2 md:p-5 border border-gray-200 dark:border-gray-700">
               <h1 className="font-semibold text-2xl mb-4 text-primary-800 dark:text-primary-200">
                 Send a message
               </h1>

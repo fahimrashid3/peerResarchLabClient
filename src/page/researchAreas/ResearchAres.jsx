@@ -70,17 +70,17 @@ const ResearchAres = () => {
                 <img
                   src={area.image}
                   alt={area.departmentName}
-                  className="md:max-w-[40%] rounded-lg shadow-2xl"
+                  className="w-full md:max-w-[40%] rounded-lg shadow-2xl"
                 />
-                <div className="space-y-3 md:max-w-[60%]">
+                <div className="space-y-3 w-full md:max-w-[60%]">
                   <h1
-                    className="text-2xl md:text-3xl font-bold line-clamp-1 cursor-default"
+                    className="text-lg md:text-xl lg:text-2xl font-bold line-clamp-1 cursor-default"
                     title={area.departmentName}
                   >
                     {area.departmentName}
                   </h1>
                   <p
-                    className="text-justify line-clamp-3 cursor-default"
+                    className="text-justify line-clamp-3 cursor-default text-sm md:text-lg lg:text-xl"
                     title={area.details}
                   >
                     {area.details}
@@ -89,7 +89,7 @@ const ResearchAres = () => {
                     to={`/researchAreaDetails/${area._id}`}
                     state={{ researchArea: area }}
                     className="
-                    btn border-b-8 font-semibold
+                    btn border-b-4 md:border-b-8 font-semibold text-sm md:text-base px-4 md:px-8 py-1 md:py-3
                      text-primary-900 hover:text-white dark:text-primary-900
                      hover:border-primary-600 border-primary-700  dark:border-primary-900 dark:hover:border-primary-700 
                      bg-primary-300 hover:bg-primary-500  dark:bg-primary-400 dark:hover:bg-primary-600 

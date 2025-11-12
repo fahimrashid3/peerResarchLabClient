@@ -79,7 +79,7 @@ const Navbar = () => {
 
   return (
     <div
-      className={`bg-white/70 dark:bg-gray-950/70 md:py-3 w-full z-[50] fixed transition-transform duration-300 ${
+      className={`bg-white/70 dark:bg-gray-950/70 py-2 md:py-3 w-full z-[50] fixed transition-transform duration-300 ${
         showNavbar ? "translate-y-0" : "-translate-y-full"
       } text-gray-950 dark:text-white`}
       style={{ willChange: "transform" }}
@@ -87,6 +87,7 @@ const Navbar = () => {
       <div className="mx-auto">
         <div className="navbar w-full">
           <div className="navbar-start">
+            {/* Dropdown menu for sm and md devices */}
             <div className="dropdown">
               <div
                 tabIndex={0}
@@ -124,10 +125,11 @@ const Navbar = () => {
               <img
                 src={logoColoredWithoutText}
                 alt="Peer Research Lab Logo"
-                className="h-12 text-primary-700 md:hidden"
+                className="h-8 text-primary-700 md:hidden"
               />
             </Link>
           </div>
+          {/* Horizontal menu for lg and above devices */}
           <div className="navbar-center hidden lg:flex">
             <ul className="menu menu-horizontal px-1 text-base">
               <NavLinks />
@@ -147,11 +149,11 @@ const Navbar = () => {
                 <div
                   tabIndex={0}
                   role="button"
-                  className="pr-5 text-4xl text-gray-950 hover:text-gray-700 dark:text-white dark:hover:text-gray-300"
+                  className="md:pr-5 text-3xl md:text-4xl text-gray-950 hover:text-gray-700 dark:text-white dark:hover:text-gray-300"
                 >
                   {users?.photoUrl ? (
                     <div className="avatar">
-                      <div className="w-10 rounded-full ring-primary-700 ring-offset-primary-500 ring ring-offset-1">
+                      <div className="w-8 md:w-10 rounded-full ring-primary-700 ring-offset-primary-500 ring ring-offset-1">
                         <img src={users?.photoUrl} alt="Profile" />
                       </div>
                     </div>

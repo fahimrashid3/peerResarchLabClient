@@ -200,12 +200,12 @@ const WriteResearchPaper = () => {
   if (loading) return <Loading />;
 
   return (
-    <div className="max-w-4xl mx-auto p-6 bg-white dark:bg-gray-950 text-gray-950 dark:text-white rounded-lg">
+    <div className="max-w-4xl mx-auto p-2 md:p-6 bg-white dark:bg-gray-950 text-gray-950 dark:text-white rounded-lg">
       <h2 className="text-3xl font-semibold mb-6">Write Research Paper</h2>
       <form
         onSubmit={handleSubmit(onSubmit)}
         encType="multipart/form-data"
-        className=" rounded-lg shadow p-6 space-y-6"
+        className="rounded-lg shadow md:p-6 p-2 space-y-6"
       >
         {/* Title */}
         <div className="mb-4">

@@ -22,35 +22,35 @@ const TeamMember = () => {
   };
 
   return (
-    <div>
+    <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <SectionTitle
         heading={"Team Members"}
         subHeading={"Brains behind it"}
       ></SectionTitle>
-      <div className="bg-gray-100 dark:bg-gray-900 max-w-7xl mx-auto p-5 rounded-xl">
+      <div className="bg-gray-100 dark:bg-gray-900 w-full mx-auto p-2  md:p-8 rounded-xl mt-6 md:mt-8">
         {teamLoading ? (
-          <p className="text-center mt-10 text-gray-500 dark:text-gray-300">
+          <p className="text-center py-10 md:py-12 text-gray-500 dark:text-gray-300 text-sm md:text-base">
             Loading team...
           </p>
         ) : members.length === 0 ? (
-          <p className="text-center mt-10 text-gray-500 dark:text-gray-300">
+          <p className="text-center py-10 md:py-12 text-gray-500 dark:text-gray-300 text-sm md:text-base">
             No advisors found.
           </p>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 max-w-7xl mx-auto gap-5 ">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 md:gap-6">
             {members.map((member) => (
-              <div className="mx-auto" key={member._id}>
+              <div className="w-full flex justify-center" key={member._id}>
                 <UserCard member={member} />
               </div>
             ))}
           </div>
         )}
       </div>
-      <div className="flex items-center justify-center my-5 md:my-10">
+      <div className="flex items-center justify-center mt-6 md:mt-8 mb-4 md:mb-6">
         <Link
           onClick={scrollToTop}
           to={"/team"}
-          className="btn border-b-8 font-semibold text-primary-900 hover:text-white hover:border-primary-600 border-primary-700 bg-primary-100 hover:bg-primary-500 dark:text-white dark:bg-primary-700 dark:border-primary-900 dark:hover:bg-primary-600 dark:hover:border-primary-700 transition-all duration-200"
+          className="btn border-b-4 md:border-b-8 font-semibold text-sm md:text-base px-6 md:px-8 py-2 md:py-3 text-primary-900 hover:text-white hover:border-primary-600 border-primary-700 bg-primary-100 hover:bg-primary-500 dark:text-white dark:bg-primary-700 dark:border-primary-900 dark:hover:bg-primary-600 dark:hover:border-primary-700 transition-all duration-200 rounded-lg"
         >
           Show more
         </Link>

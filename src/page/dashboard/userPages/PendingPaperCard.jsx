@@ -32,7 +32,7 @@ const PendingPaperCard = ({ researchPaper }) => {
     <div className="flex items-center md:p-5 p-3 my-3 md:my-0 bg-dark-200 text-dark-900 dark:bg-dark-800 dark:text-white shadow-xl rounded-lg h-48 border border-dark-500">
       <figure className="flex-shrink-0 border-2 rounded-lg">
         <img
-          className="h-36 w-32 rounded-lg object-cover"
+          className="md:h-36 h-24 md:w-32 w-20 rounded-lg object-cover"
           src={image}
           alt={title}
           loading="lazy"
@@ -64,7 +64,7 @@ const PendingPaperCard = ({ researchPaper }) => {
             {/* Open the modal using document.getElementById('ID').showModal() method */}
             {message ? (
               <button
-                className="btn w-16 text-xl border-b-4 font-semibold text-primary-900 hover:text-white hover:border-primary-600 border-primary-700 bg-primary-100 hover:bg-primary-500 transition-all duration-200"
+                className="btn md:w-16 w-10 text-xl border-b-4 font-semibold text-primary-900 hover:text-white hover:border-primary-600 border-primary-700 bg-primary-100 hover:bg-primary-500 transition-all duration-200"
                 onClick={() =>
                   document.getElementById("my_modal_5").showModal()
                 }
