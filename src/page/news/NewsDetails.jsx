@@ -82,11 +82,11 @@ const NewsDetails = () => {
         <p className="text-lg text-justify whitespace-pre-line">{details}</p>
 
         <Link
-          to={"/publications"}
+          to={"/news"}
           className="btn bg-transparent border-1 border-b-4 mx-auto border-primary-600 text-primary-600 hover:bg-primary-600 hover:text-white hover:border-primary-600"
         >
           <IoMdArrowRoundBack />
-          Back to Publication
+          Back to News
         </Link>
       </div>
     </div>

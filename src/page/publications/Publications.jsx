@@ -20,7 +20,7 @@ const Publications = () => {
   const [firstPaper, ...otherPapers] = researchPaper || [];
 
   return (
-    <div className="pt-24 ">
+    <div className="pt-24 mb-5 md:mb-10">
       <Helmet>
         <title>Publications - Peer Research Lab</title>
         <meta

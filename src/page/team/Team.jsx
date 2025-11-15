@@ -27,7 +27,7 @@ const Team = () => {
   }
 
   return (
-    <div className="pt-10 max-w-[95%] md:max-w-[90%] lg:max-w-[85%] mx-auto">
+    <div className="pt-10 max-w-[95%] md:max-w-[90%] lg:max-w-[85%] mx-auto mb-5 md:mb-10">
       <Helmet>
         <title>Our Team - Peer Research Lab</title>
         <meta

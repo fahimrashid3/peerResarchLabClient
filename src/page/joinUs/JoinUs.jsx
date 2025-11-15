@@ -14,7 +14,7 @@ const JoinUs = () => {
   }, [axiosPublic]);
 
   return (
-    <div className="pt-20 max-w-7xl mx-auto bg-gray-100 dark:bg-gray-900 p-2 md:p-5 lg:p-10">
+    <div className="pt-20 max-w-7xl mx-auto bg-gray-100 dark:bg-gray-900 p-2 md:p-5 rounded-xl mb-5 md:mb-10">
       <Helmet>
         <title>Join Us - Peer Research Lab</title>
         <meta

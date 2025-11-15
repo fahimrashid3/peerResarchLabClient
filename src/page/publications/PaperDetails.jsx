@@ -64,10 +64,10 @@ const PaperDetails = () => {
   });
 
   return (
-    <div className="lg:pt-24 lg:max-w-[90%] max-w-[95%] mx-auto min-h-screen">
+    <div className="lg:pt-24 lg:max-w-[90%] max-w-[95%] mx-auto min-h-screen md:mb-10 mb-5">
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-5">
         <div className="col-span-1 lg:col-span-3">
-          <div className="border p-4 space-y-5">
+          <div className="border border-gray-300 dark:border-gray-700 p-4 space-y-5 rounded-xl">
             <img
               className="lg:h-96 mx-auto w-full object-cover rounded-md"
               src={image}
@@ -141,7 +141,7 @@ const PaperDetails = () => {
                   key={morePaper._id}
                   onClick={scrollToTop}
                 >
-                  <div className="flex items-center p-3 bg-dark-200 text-dark-900 dark:bg-dark-800 dark:text-white shadow-xl rounded-lg border border-dark-500">
+                  <div className="flex items-center p-3 bg-dark-200 text-dark-900 dark:bg-dark-800 dark:text-white shadow-xl rounded-lg border border-dark-200 dark:border-gray-700">
                     <figure className="flex-shrink-0 border-2 rounded-lg">
                       <img
                         className="h-32 w-24 rounded-lg object-cover"

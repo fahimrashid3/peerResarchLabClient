@@ -27,7 +27,7 @@ const ResearchAres = () => {
   );
 
   return (
-    <div className="py-24 mx-auto ">
+    <div className="pt-24 mx-auto mb-5 md:mb-10">
       <Helmet>
         <title>Research Areas - Peer Research Lab</title>
         <meta

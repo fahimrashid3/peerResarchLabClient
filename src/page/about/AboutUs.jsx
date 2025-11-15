@@ -38,7 +38,7 @@ const AboutUs = () => {
   };
 
   return (
-    <div className="space-y-20 pt-24">
+    <div className="space-y-20 pt-24 mb-5 md:mb-10">
       <Helmet>
         <title>About Us - Peer Research Lab</title>
         <meta
